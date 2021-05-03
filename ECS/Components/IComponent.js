@@ -12,6 +12,9 @@ var Engine;
         }
         ;
         update(dt) { }
+        ;
+        render() { }
+        ;
     }
     Engine.TComponent = TComponent;
     ;
