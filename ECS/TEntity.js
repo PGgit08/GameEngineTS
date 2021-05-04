@@ -16,6 +16,13 @@ var Engine;
             ;
         }
         ;
+        render() {
+            for (let c of this.components) {
+                c.render();
+            }
+            ;
+        }
+        ;
     }
     Engine.TEntity = TEntity;
     ;

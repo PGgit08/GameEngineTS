@@ -13,9 +13,6 @@ namespace Engine{
     export abstract class TComponent implements IComponent{
         owner: TEntity;
 
-        constructor(){
-        };
-
         setOwner(o: TEntity){
             this.owner = o;
         };
