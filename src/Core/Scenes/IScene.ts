@@ -7,6 +7,9 @@ namespace Engine{
         /* To add later */
         // cameras: TEntity[];
         // lights: TEntity[];
+    
+        /* RenderView that this scene is part of */
+        readonly renderView;
 
         // scene id/name
         readonly id: number;
@@ -23,8 +26,17 @@ namespace Engine{
     export abstract class TScene implements IScene{
         entities: TEntity[];
 
+        // names of scene
         readonly id: number;
         name: string;
+
+        // renderview 
+        readonly renderView;
+
+        // set the renderview in the constructor
+        constructor(renderView){
+            this.renderView =  renderView;
+        };
 
         update(): void{
             for(let entity of this.entities){

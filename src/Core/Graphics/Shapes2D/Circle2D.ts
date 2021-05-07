@@ -1,5 +1,5 @@
 namespace Engine{
-    export class Circle2D implements IShape2D{
+    export class Circle2D extends TShape2D{
         // position that defaults to forward(0, 1)
         position = Vector2.forward;
 
@@ -12,17 +12,11 @@ namespace Engine{
         radius: number;
 
         constructor(){
-            this.offset = this.calculate_offset();
+            super();
         };
 
         intersects(){
             /* Later on code for Circle/Rectangle collision */
         };
-
-        calculate_offset(): Vector2{
-            /* Calculate the offset */
-            return new Vector2(this.position.x - this.origin.x, this.position.y - this.origin.y);
-        };
-
     };
 };
