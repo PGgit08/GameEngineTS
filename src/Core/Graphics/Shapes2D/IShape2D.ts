@@ -13,4 +13,8 @@ namespace Engine{
         /* For calculating the offset of a shape */
         calculate_offset: () => Vector2;
     };
+
+    export abstract class TShape2D{
+          
+    };
 };
