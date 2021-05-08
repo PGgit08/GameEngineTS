@@ -9,8 +9,10 @@
     "tsc": "./node_modules/.bin/tsc",
     "babel": "./node_modules/.bin/babel build-tsc --out-dir build-babel --source-maps",
     "webpack": "webpack && copy public dist",
-    "clean-build-steps": "rmdir /S build-tsc build-babel",
-    "build": "npm run clean && npm run tsc && npm run babel && npm run webpack && npm run clean-build-steps"
+    "clean-tsc-build": "rmdir /S build-tsc",
+    "clean-babel-build": "rmdir /S babel-build",
+    "build": "npm run clean && npm run tsc && npm run babel && npm run webpack && npm run clean-tsc-build",
+    "start": "http-server dist"
   },
   "keywords": [],
   "author": "",
