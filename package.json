@@ -1,16 +1,27 @@
 {
-  "name": "TypeScript1",
+  "name": "GameEngineTS",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
+    "clean": "rmdir /S dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc"
+    "tsc": "./node_modules/.bin/tsc",
+    "babel": "./node_modules/.bin/babel build-tsc --out-dir build-babel --source-maps",
+    "webpack": "webpack && copy public dist",
+    "clean-build-steps": "rmdir /S build-tsc build-babel",
+    "build": "npm run clean && npm run tsc && npm run babel && npm run webpack && npm run clean-build-steps"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "webpack-cli": "^4.7.0"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^5.36.2"
   }
 }
