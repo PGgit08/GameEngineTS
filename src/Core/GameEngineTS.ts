@@ -1,2 +1,1 @@
-declare namespace Engine{};
-
+export default Engine;
