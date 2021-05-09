@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://GameEngineTS/./build-babel/Game/main.js"],"names":[],"mappings":";;;;;;AAAa;;AAEb;AACA;AACA,gC","file":"bundle.js","sourcesContent":["\"use strict\";\n\n/// <reference path=\"../Core/GameEngineTS.ts\"/>\nconsole.log(Engine.Vector2.forward);\n//# sourceMappingURL=main.js.map"],"sourceRoot":""}
