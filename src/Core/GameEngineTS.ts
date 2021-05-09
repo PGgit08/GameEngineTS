@@ -1,1 +1,2 @@
-namespace Engine{};
+declare namespace Engine{};
+

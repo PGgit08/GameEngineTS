@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "strict": true,
+    "composite": true,
+    "incremental": true,
+    "outFile": "../public/script.js"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["**/*.m.ts"]
+}
