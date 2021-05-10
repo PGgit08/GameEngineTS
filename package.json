@@ -11,7 +11,8 @@
     "webpack": "webpack && copy public dist",
     "clean-build": "node delete-builds.js",
     "build": "npm run clean && npm run tsc && npm run babel && npm run webpack && npm run clean-build",
-    "start": "http-server dist"
+    "start": "http-server dist",
+    "watch": "watch npm run build"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "watch": "^1.0.2",
     "webpack": "^5.36.2"
   }
 }

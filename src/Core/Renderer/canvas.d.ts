@@ -1,0 +1,1 @@
+declare var CTX: CanvasRenderingContext2D;
