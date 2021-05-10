@@ -1,22 +1,23 @@
-namespace Engine{
-    export class Circle2D extends TShape2D{
-        // position that defaults to forward(0, 1)
-        position = Vector2.forward;
+import Vector2 from '@physics/Vector';
+import TShape2D from '@graphics/Shapes2D/Shape2D';
 
-        // shape properties
-        origin: Vector2;
+export default class Circle2D extends TShape2D{
+    // position that defaults to forward(0, 1)
+    position = Vector2.forward;
 
-        offset: Vector2;
+    // shape properties
+    origin: Vector2;
 
-        // circle properties(radius, etc.)
-        radius: number;
+    offset: Vector2;
 
-        constructor(){
-            super();
-        };
+    // circle properties(radius, etc.)
+    radius: number;
 
-        intersects(){
-            /* Later on code for Circle/Rectangle collision */
-        };
+    constructor(){
+        super();
+    };
+
+    intersects(){
+        /* Later on code for Circle/Rectangle collision */
     };
 };

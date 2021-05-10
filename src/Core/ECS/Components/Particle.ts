@@ -1,23 +1,25 @@
-namespace Engine{
-    export class Particle extends TComponent{
-        // a simple shape item(circle)
-        // that runs on RigidBody physics
+import { TComponent } from '@ecs/Components/IComponent';
+import Circle2D from '@graphics/Shapes2D/Circle2D';
 
-        private renderItem = new Circle2D();
-        
-        constructor(){
-            super();
 
-            // set renderItem's position to owner's position
-            this.renderItem.position = this.owner.transform.position;
-        };
+export class Particle extends TComponent{
+    // a simple shape item(circle)
+    // that runs on RigidBody physics
 
-        update(){
-            /* This can later on be used for Circle2D.intersects */
-        };
+    private renderItem = new Circle2D();
+    
+    constructor(){
+        super();
 
-        render(){
-            
-        };  
+        // set renderItem's position to owner's position
+        this.renderItem.position = this.owner.transform.position;
     };
+
+    update(){
+        /* This can later on be used for Circle2D.intersects */
+    };
+
+    render(){
+        
+    };  
 };
