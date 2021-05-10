@@ -4,12 +4,12 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "clean": "rmdir /S dist && npm run clean-build",
+    "clean": "node delete-dist.js && npm run clean-build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "./node_modules/.bin/tsc",
     "babel": "./node_modules/.bin/babel build-tsc --out-dir build-babel --source-maps",
     "webpack": "webpack && copy public dist",
-    "clean-build": "node build.js",
+    "clean-build": "node delete-builds.js",
     "build": "npm run clean && npm run tsc && npm run babel && npm run webpack && npm run clean-build",
     "start": "http-server dist"
   },
