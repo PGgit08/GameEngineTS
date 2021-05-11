@@ -10,6 +10,7 @@ class MyGame implements IGame{
     };
 
     Start(){
+        /* NOTE: CTX HASN'T BEEN DEFINED YET */
         var SampleScene: Scene = new Scene("SampleScene");
         SceneManager.setCurrentScene("SampleScene");
         console.log(SceneManager.CURRENT_SCENE);
@@ -24,7 +25,7 @@ class MyGame implements IGame{
     };
 
     Render(deltaTime: number){
-
+        
     };
 };
 
