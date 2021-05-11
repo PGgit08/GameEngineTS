@@ -2,21 +2,29 @@ import TGameObject from '@ecs/TGameObject';
 import IComponent from '@ecs/Components/IComponent';
 
 import Transform from '@physics/Transform';
+import { RendererProps } from '@renderer/IViewProps';
 
 export default class TEntity extends TGameObject{
     // entity properties
+    name: string;
+
     children: TEntity[] = [];
     components: IComponent[] = [];
     
     transform: Transform = new Transform();
 
-    constructor(){
+    constructor(name: string){
         super();
+        this.name = name;
     };
 
-    update(): void {
+    addChild(child: TEntity){
+        this.children.push(child);
+    };
+
+    update(dt: number): void {
         for(let c of this.components){
-            c.update();
+            c.update(dt);
         };
     };
 
@@ -24,9 +32,9 @@ export default class TEntity extends TGameObject{
         which isn't great preformance wise, but that can be fixed in 
         later development.
     */
-    render(): void {
+    render(renderProps: RendererProps): void {
         for(let c of this.components){
-            c.render();
+            c.render(renderProps);
         };
     };
 }; 

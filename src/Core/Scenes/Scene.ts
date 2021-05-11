@@ -1,6 +1,7 @@
 import TEntity from '@ecs/TEntity';
 import { RendererProps } from '@renderer/IViewProps';
 import TGameObject from '@ecs/TGameObject';
+import SceneManager from '@scenes/SceneManager';
 
 /* Really basic scene interface for now */
 export interface IScene{
@@ -13,46 +14,49 @@ export interface IScene{
     // cameras: TEntity[];
     // lights: TEntity[];
 
-    /* RenderView that this scene is part of */
-    // NOTE: not a physical render view
-    // but a renderview's data
-    readonly renderView: RendererProps;
-
     // scene id/name
     readonly id: number;
     name: string;
 
+    addObject(entity: TEntity): void;
+
     // update and rendering functions
-    update(): void;
-    render(): void;
+    update(dt: number): void;
+    render(renderProps: RendererProps): void;
 };
 
 // if a scene needs to be created, this class 
 // can be called, and this scene can get pushed into
 // the game loop
-export abstract class TScene extends TGameObject implements IScene{
+export default class Scene extends TGameObject implements IScene{
     root_entity: TEntity;
 
     // names of scene
     readonly id: number;
     name: string;
 
-    // renderview 
-    readonly renderView: RendererProps;
 
     // set the renderview in the constructor
-    constructor(renderView: RendererProps){
+    constructor(name: string){
         // setting this scene's id to the 
         // global id in the engine
         super();
-        this.renderView = renderView;
+        this.name = name;
+        this.root_entity = new TEntity('ROOT');
+        SceneManager.addScene(this);
     };
 
-    update(): void{
-        this.root_entity.update();
+    addObject(entity: TEntity){
+        this.root_entity.addChild(entity);
     };
 
-    render(): void{
-        this.root_entity.render();
+    update(dt: number): void{
+        this.root_entity.update(dt);
     };
+
+    render(renderProps: RendererProps): void{
+        this.root_entity.render(renderProps);
+    };
+
+    /* TODO: add entity adding */
 };

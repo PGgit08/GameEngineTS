@@ -1,9 +1,10 @@
 import TEntity from '@ecs/TEntity'; 
+import { RendererProps } from '@renderer/IViewProps';
 
 export default interface IComponent{
-    update(): void;
+    update(dt: number): void;
 
-    render(): void;
+    render(renderProps: RendererProps): void;
 
     owner: TEntity;
     setOwner(owner: TEntity): void;
@@ -18,7 +19,7 @@ export abstract class TComponent implements IComponent{
         this.owner = o;
     };
 
-    update(){/* Is abstract, just a template */};
+    update(dt: number){/* Is abstract, just a template */};
 
-    render(){};
+    render(renderProps: RendererProps){};
 };

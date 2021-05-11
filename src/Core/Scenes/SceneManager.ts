@@ -1,4 +1,4 @@
-import { IScene } from "@scenes/IScene";
+import Scene, { IScene }  from "@scenes/Scene";
 
 // a scene manager class for the games scenes
 // this is created so that scenes can be accessed
@@ -10,4 +10,16 @@ export default class SceneManager{
     
     // the current scene
     public static CURRENT_SCENE: IScene;
+
+    public static addScene(scene: Scene): void{
+        this.GAME_SCENES[scene.name] = scene;
+    };
+
+    public static setCurrentScene(name: string): void{
+        this.CURRENT_SCENE = this.GAME_SCENES[name];
+    };
+
+    public static getScene(name: string): Scene{
+        return this.GAME_SCENES[name];
+    };
 };

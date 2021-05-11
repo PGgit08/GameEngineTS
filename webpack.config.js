@@ -8,7 +8,7 @@ module.exports = {
   },
   devtool: "source-map",
   mode: "development",
-  entry: './build-babel/Game/main.js',
+  entry: './build-babel/main.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')

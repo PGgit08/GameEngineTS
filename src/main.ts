@@ -1,14 +1,32 @@
-import Renderer from "@renderer/Renderer";
-import { RendererProps, RenderViewProps } from "@renderer/IViewProps";
+import TEntity from '@ecs/TEntity';
+import Engine from '@engine';
+import IGame from '@game/IGame';
+import Scene from '@scenes/Scene';
+import SceneManager from '@scenes/SceneManager';
 
-let viewProps: RenderViewProps= {
-    width: "800px",
-    height: "600px"
+class MyGame implements IGame{
+    constructor(){
+
+    };
+
+    Start(){
+        var SampleScene: Scene = new Scene("SampleScene");
+        SceneManager.setCurrentScene("SampleScene");
+        console.log(SceneManager.CURRENT_SCENE);
+        
+        let Particle: TEntity = new TEntity("Particle");
+
+        SampleScene.addObject(Particle);
+    };
+
+    Update(deltaTime: number): void{
+
+    };
+
+    Render(deltaTime: number){
+
+    };
 };
 
-let renderProps: RendererProps = {
-    deltaTime: 1
-};
-
-const Render: Renderer = new Renderer(viewProps, renderProps);
-console.log("Hello World!");
+var GameEngine: Engine = new Engine(new MyGame());
+GameEngine.start();

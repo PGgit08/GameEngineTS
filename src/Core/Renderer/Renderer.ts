@@ -15,7 +15,7 @@ export default class Renderer{
     };
 
     renderWorld(game:IGame): void{
-        SceneManager.CURRENT_SCENE.render();
+        SceneManager.CURRENT_SCENE.render(this.renderProps);
         game.Render(this.renderProps.deltaTime);
     };
 };
