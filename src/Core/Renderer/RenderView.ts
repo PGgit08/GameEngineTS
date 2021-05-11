@@ -1,9 +1,10 @@
-import IViewProps from '@renderer/IViewProps';
+import { RenderViewProps } from '@renderer/IViewProps';
 
 export default class RenderView{
     private ctx: CanvasRenderingContext2D;
+    private canvasId: string;
 
-    constructor(canvasId:string, canvasProps:IViewProps){
+    constructor(canvasId:string, canvasProps:RenderViewProps){
         const searchElement = document.getElementById(canvasId);
         if(searchElement){
             console.log(searchElement);
@@ -25,8 +26,9 @@ export default class RenderView{
                 // get canvas context
                 const gameCtx = gameCanvas.getContext('2d');
                 
-                // set this context(private)
+                // set this context(private) and canvasId(private)
                 this.ctx = gameCtx;
+                this.canvasId = canvasId;
 
                 // set global context
                 window.CTX = this.ctx;

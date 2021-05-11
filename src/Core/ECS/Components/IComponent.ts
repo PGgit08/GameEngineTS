@@ -1,7 +1,7 @@
 import TEntity from '@ecs/TEntity'; 
 
 export default interface IComponent{
-    update(dt:number): void;
+    update(): void;
 
     render(): void;
 
@@ -18,7 +18,7 @@ export abstract class TComponent implements IComponent{
         this.owner = o;
     };
 
-    update(dt:number){/* Is abstract, just a template */};
+    update(){/* Is abstract, just a template */};
 
     render(){};
 };

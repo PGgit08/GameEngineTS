@@ -1,15 +1,11 @@
-/* 
-Properties of a RenderView
-DeltaTime,
-Width,
-Height,
-etc.
-*/
-export default interface IViewProps{
+// these are physical properties of a renderview
+export interface RenderViewProps{
     // basic physical css properties
     width: string,
     height: string,
+};
 
-    // game engine properties
-    deltaTime: number
+// these are game engine properties of a renderer
+export interface RendererProps{
+    deltaTime: number;
 };

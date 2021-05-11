@@ -14,9 +14,9 @@ export default class TEntity extends TGameObject{
         super();
     };
 
-    update(dt:number): void {
+    update(): void {
         for(let c of this.components){
-            c.update(dt);
+            c.update();
         };
     };
 

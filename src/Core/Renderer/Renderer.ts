@@ -1,12 +1,21 @@
-import IViewProps from "@renderer/IViewProps";
+import IGame from "@game/IGame";
+import { RenderViewProps, RendererProps } from "@renderer/IViewProps";
 import RenderView from "@renderer/RenderView";
+import SceneManager from "@scenes/SceneManager";
 
 export default class Renderer{
     renderView: RenderView;
-    viewProps: IViewProps;
+    viewProps: RenderViewProps;
+    renderProps: RendererProps;
 
-    constructor(viewProps:IViewProps, canvasId:string="gCanvas"){
+    constructor(viewProps:RenderViewProps, renderProps: RendererProps, canvasId:string="gCanvas"){
         this.renderView = new RenderView(canvasId, viewProps);
         this.viewProps = viewProps;
+        this.renderProps = renderProps;
+    };
+
+    renderWorld(game:IGame): void{
+        SceneManager.CURRENT_SCENE.render();
+        game.Render(this.renderProps.deltaTime);
     };
 };

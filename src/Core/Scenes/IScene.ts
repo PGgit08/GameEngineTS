@@ -1,17 +1,22 @@
 import TEntity from '@ecs/TEntity';
-
+import { RendererProps } from '@renderer/IViewProps';
+import TGameObject from '@ecs/TGameObject';
 
 /* Really basic scene interface for now */
 export interface IScene{
-    // entities in this scene
-    entities: TEntity[];
+    // create main "parent" entity
+    // which holds all the children entities 
+    // in the scene
+    root_entity: TEntity;
 
     /* To add later */
     // cameras: TEntity[];
     // lights: TEntity[];
 
     /* RenderView that this scene is part of */
-    readonly renderView;
+    // NOTE: not a physical render view
+    // but a renderview's data
+    readonly renderView: RendererProps;
 
     // scene id/name
     readonly id: number;
@@ -25,32 +30,29 @@ export interface IScene{
 // if a scene needs to be created, this class 
 // can be called, and this scene can get pushed into
 // the game loop
-export abstract class TScene implements IScene{
-    entities: TEntity[];
+export abstract class TScene extends TGameObject implements IScene{
+    root_entity: TEntity;
 
     // names of scene
     readonly id: number;
     name: string;
 
     // renderview 
-    readonly renderView;
+    readonly renderView: RendererProps;
 
     // set the renderview in the constructor
-    constructor(renderView){
-        this.renderView =  renderView;
+    constructor(renderView: RendererProps){
+        // setting this scene's id to the 
+        // global id in the engine
+        super();
+        this.renderView = renderView;
     };
 
     update(): void{
-        for(let entity of this.entities){
-            /* pre-rendering operations can be done here */
-        };
+        this.root_entity.update();
     };
 
     render(): void{
-        /* For now calling each items "render" function, 
-        but later rendering system will get more advanced */
-        for(let entity of this.entities){
-            /* render entity here */
-        };
+        this.root_entity.render();
     };
 };
