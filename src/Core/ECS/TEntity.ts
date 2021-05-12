@@ -22,6 +22,25 @@ export default class TEntity extends TGameObject{
         this.children.push(child);
     };
 
+    /**
+    * Recursively attempts to retrieve a child entity with the given name from this entity or its children.
+    * @param name The name of the entity to retrieve.
+    */
+    getEntityByName( name: string ): TEntity {
+        if ( this.name === name ) {
+            return this;
+        }
+
+        for ( let child of this.children ) {
+            let result = child.getEntityByName( name );
+            if ( result !== undefined ) {
+                return result;
+            }
+        }
+
+        return undefined;
+    };
+
     update(dt: number): void {
         for(let c of this.components){
             c.update(dt);

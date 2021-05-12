@@ -19,6 +19,7 @@ export interface IScene{
     name: string;
 
     addObject(entity: TEntity): void;
+    getEntityByName(name: string): TEntity;
 
     // update and rendering functions
     update(dt: number): void;
@@ -44,6 +45,10 @@ export default class Scene extends TGameObject implements IScene{
         this.name = name;
         this.root_entity = new TEntity('ROOT');
         SceneManager.addScene(this);
+    };
+
+    getEntityByName(name: string){
+        return this.root_entity.getEntityByName(name);
     };
 
     addObject(entity: TEntity){
