@@ -3,6 +3,7 @@ import Engine from '@engine';
 import IGame from '@game/IGame';
 import Scene from '@scenes/Scene';
 import SceneManager from '@scenes/SceneManager';
+import Particle from '@ecs/Components/Particle';
 
 /* Game Class */
 class SampleGame implements IGame{
@@ -28,8 +29,9 @@ class SampleGame implements IGame{
         SampleScene.addObject(Particles);
 
         // add a sample particle
-        let Particle: TEntity = new TEntity("Particle " + this.particleCount.toString());
-        Particles.addChild(Particle);
+        let particle: TEntity = new TEntity("Particle " + this.particleCount.toString());
+        particle.addComponent(new Particle());
+        Particles.addChild(particle);
         this.particleCount ++;
     };
 

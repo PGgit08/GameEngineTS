@@ -1,5 +1,5 @@
 import TGameObject from '@ecs/TGameObject';
-import IComponent from '@ecs/Components/IComponent';
+import IComponent, { TComponent } from '@ecs/Components/IComponent';
 
 import Transform from '@physics/Transform';
 import { RendererProps } from '@renderer/IViewProps';
@@ -16,6 +16,11 @@ export default class TEntity extends TGameObject{
     constructor(name: string){
         super();
         this.name = name;
+    };
+
+    addComponent(component: TComponent){
+        component.setOwner(this);
+        this.components.push(component);
     };
 
     addChild(child: TEntity){
