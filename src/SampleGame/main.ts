@@ -28,7 +28,7 @@ class SampleGame implements IGame{
 
         SampleScene.addObject(Particles);
 
-        // console.log(SceneManager.getScene("SampleScene").root_entity.children);
+        
     };
 
     Update(deltaTime: number): void{
