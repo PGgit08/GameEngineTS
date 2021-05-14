@@ -26,6 +26,7 @@ export default class Engine{
         this.renderer.renderProps.deltaTime -= this.previousTime;
 
         this.game.Start();
+        this.loop();
     };
 
     public loop(){

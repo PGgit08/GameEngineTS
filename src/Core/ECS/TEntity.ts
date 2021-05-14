@@ -1,5 +1,5 @@
 import TGameObject from '@ecs/TGameObject';
-import IComponent, { TComponent } from '@ecs/Components/IComponent';
+import { TComponent } from '@ecs/Components/IComponent';
 
 import Transform from '@physics/Transform';
 import { RendererProps } from '@renderer/IViewProps';
@@ -9,7 +9,7 @@ export default class TEntity extends TGameObject{
     name: string;
 
     children: TEntity[] = [];
-    components: IComponent[] = [];
+    components: TComponent[] = [];
     
     transform: Transform = new Transform();
 
@@ -19,6 +19,7 @@ export default class TEntity extends TGameObject{
     };
 
     addComponent(component: TComponent){
+        console.log(component);
         component.setOwner(this);
         this.components.push(component);
     };
@@ -50,6 +51,10 @@ export default class TEntity extends TGameObject{
         for(let c of this.components){
             c.update(dt);
         };
+
+        for(let c of this.children){
+            c.update(dt);
+        };
     };
 
     /* NOTE: For now rendering just passes the context as a param,
@@ -58,6 +63,10 @@ export default class TEntity extends TGameObject{
     */
     render(renderProps: RendererProps): void {
         for(let c of this.components){
+            c.render(renderProps);
+        };
+
+        for(let c of this.children){
             c.render(renderProps);
         };
     };

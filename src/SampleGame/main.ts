@@ -24,15 +24,11 @@ class SampleGame implements IGame{
 
         // create a "Particles" parent entity for particles in game
         let Particles: TEntity = new TEntity("Particles");
-        
-        // add the parent into the scene
+        Particles.addComponent(new Particle());
+
         SampleScene.addObject(Particles);
 
-        // add a sample particle
-        let particle: TEntity = new TEntity("Particle " + this.particleCount.toString());
-        particle.addComponent(new Particle());
-        Particles.addChild(particle);
-        this.particleCount ++;
+        // console.log(SceneManager.getScene("SampleScene").root_entity.children);
     };
 
     Update(deltaTime: number): void{
