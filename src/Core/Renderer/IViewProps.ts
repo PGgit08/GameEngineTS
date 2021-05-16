@@ -1,8 +1,8 @@
 // these are physical properties of a renderview
 export interface RenderViewProps{
     // basic physical css properties
-    width: string,
-    height: string,
+    width: number,
+    height: number,
 };
 
 // these are game engine properties of a renderer

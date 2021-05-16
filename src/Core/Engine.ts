@@ -1,6 +1,7 @@
 import Renderer from "@renderer/Renderer";
 import IGame from "@game/IGame";
 import SceneManager from "@scenes/SceneManager";
+import { RenderViewProps } from "@renderer/IViewProps";
 
 // main engine class
 export default class Engine{
@@ -9,11 +10,11 @@ export default class Engine{
 
     private previousTime: number;
 
-    constructor(game:IGame){
+    constructor(game:IGame, viewConfig: RenderViewProps){
         // basic constructor called
         // when engine created
         this.renderer = new Renderer(
-            {width:"100%", height:"100%"},
+            viewConfig,
             {deltaTime: 0}
         );
 

@@ -6,18 +6,20 @@ import { RendererProps } from '@renderer/IViewProps';
 
 export default class Particle extends TComponent{
     renderItem: Circle2D;
+    position: Vector2;
 
     constructor(){
-        super();
-        this.renderItem = new Circle2D(10, Vector2.forward);
+        super("Particle");
+        this.renderItem = new Circle2D(100, new Vector2(200, 100));
     };
 
     update(dt: number){
-        /* This can later on be used for Circle2D.intersects */
-        this.renderItem.center = this.owner.transform.position;
+
     };
 
     render(renderProps: RendererProps){
+        // in later rendering renderProps
+        // can be used for buffering and etc.
         this.renderItem.draw();
     };  
 };

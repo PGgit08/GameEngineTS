@@ -16,19 +16,30 @@ class SampleGame implements IGame{
     /* Preform Pre-loop operations */
     Start(){
         /* NOTE: CTX HASN'T BEEN DEFINED YET */
-        // create a new scene called "SampleScene"
-        var SampleScene: Scene = new Scene("SampleScene");
+
+        /* 
+        NOTE: This game data will be loaded from an asset,
+        in the Engine's start() method,
+        however for now it is loaded here
+        */
+    
+        // make a scene with the name "SampleScene"
+        const SampleScene: Scene = new Scene("SampleScene");
         
-        // set the current scene
-        SceneManager.setCurrentScene("SampleScene");
-
         // create a "Particles" parent entity for particles in game
-        let Particles: TEntity = new TEntity("Particles");
-        Particles.addComponent(new Particle());
+        const Particles: TEntity = new TEntity("Particles");
 
+        // create a new "Particle" entity, give it components, and add it to Particles parent
+        const MainParticle: TEntity = new TEntity("Particle");
+        MainParticle.addComponent(new Particle());
+
+        Particles.addChild(MainParticle);
+
+        // add all needed objects into the scene
         SampleScene.addObject(Particles);
 
-        
+        // set the current scene
+        SceneManager.setCurrentScene("SampleScene");
     };
 
     Update(deltaTime: number): void{
@@ -41,7 +52,10 @@ class SampleGame implements IGame{
 };
 
 /* Make a new engine with this game */
-var GameEngine: Engine = new Engine(new SampleGame());
+var GameEngine: Engine = new Engine(new SampleGame(), {
+    height: 600,
+    width: 800
+});
 
 // start engine
 GameEngine.start();

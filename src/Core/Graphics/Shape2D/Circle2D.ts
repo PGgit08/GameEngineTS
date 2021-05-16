@@ -17,6 +17,6 @@ export default class Circle2D{
         CTX.beginPath();
         CTX.arc(this.center.x, this.center.y, this.radius, 0, 2 * Math.PI);
         CTX.stroke();
-        CTX.closePath();
+        // CTX.closePath();
     };
 };

@@ -10,6 +10,7 @@ export default class Vector2{
     static back: Vector2 = new Vector2(0, 1);
     static left: Vector2 = new Vector2(-1, 0);
     static right: Vector2 = new Vector2(1, 0);
+    static origin: Vector2 = new Vector2(0, 0);
 
     constructor(x:number, y:number){
         this.x = x;

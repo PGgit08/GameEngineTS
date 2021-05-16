@@ -16,8 +16,8 @@ export default class RenderView{
                 const gameCanvas = document.createElement("canvas") as HTMLCanvasElement;
                 gameCanvas.id = canvasId;
 
-                gameCanvas.style.width = canvasProps.width;
-                gameCanvas.style.height = canvasProps.height;
+                gameCanvas.width = canvasProps.width;
+                gameCanvas.height = canvasProps.height;
                 gameCanvas.style.border = "thick solid #0000FF"; // hardcoded for now
 
                 // add canvas into the DOM

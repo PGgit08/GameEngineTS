@@ -1,18 +1,19 @@
-import TEntity from '@ecs/TEntity'; 
-import { RendererProps } from '@renderer/IViewProps';
+import TEntity from "@ecs/TEntity";
 
-export default interface IComponent{
+/*
+Basically the same thing as a Component,
+however doesn't contain a render method,
+and focuses more on pre-render update operations
+like movement for example
+*/
+export default interface IBehavior{
     update(dt: number): void;
-
-    render(renderProps: RendererProps): void;
 
     owner: TEntity;
     setOwner(owner: TEntity): void;
 };
 
-// create an abstract class where setOwner sets the owner
-// in the interface
-export abstract class TComponent implements IComponent{
+export abstract class TBehavior implements IBehavior{
     private name: string
 
     owner: TEntity;
@@ -30,6 +31,4 @@ export abstract class TComponent implements IComponent{
     };
 
     update(dt: number){/* Is abstract, just a template */};
-
-    render(renderProps: RendererProps){};
 };

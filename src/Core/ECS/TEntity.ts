@@ -9,6 +9,8 @@ export default class TEntity extends TGameObject{
     name: string;
 
     children: TEntity[] = [];
+    parent: TEntity;
+
     components: TComponent[] = [];
     
     transform: Transform = new Transform();
@@ -25,6 +27,7 @@ export default class TEntity extends TGameObject{
     };
 
     addChild(child: TEntity){
+        child.parent = this;
         this.children.push(child);
     };
 
