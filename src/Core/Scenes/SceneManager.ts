@@ -6,10 +6,10 @@ import Scene, { IScene }  from "@scenes/Scene";
 
 export default class SceneManager{
     // an object of registers scenes in the game
-    public static GAME_SCENES: {[name: string]: IScene} = {};
+    public static GAME_SCENES: {[name: string]: Scene} = {};
     
     // the current scene
-    public static CURRENT_SCENE: IScene;
+    public static CURRENT_SCENE: Scene;
 
     public static addScene(scene: Scene): void{
         this.GAME_SCENES[scene.name] = scene;

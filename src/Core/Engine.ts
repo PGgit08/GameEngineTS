@@ -26,7 +26,9 @@ export default class Engine{
         this.previousTime = performance.now();
         this.renderer.renderProps.deltaTime -= this.previousTime;
 
+        // run pre-loop start methods
         this.game.Start();
+        SceneManager.CURRENT_SCENE.start();
         this.loop();
     };
 

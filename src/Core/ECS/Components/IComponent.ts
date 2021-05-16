@@ -2,6 +2,8 @@ import TEntity from '@ecs/TEntity';
 import { RendererProps } from '@renderer/IViewProps';
 
 export default interface IComponent{
+    start(): void;
+
     update(dt: number): void;
 
     render(renderProps: RendererProps): void;
@@ -13,7 +15,7 @@ export default interface IComponent{
 // create an abstract class where setOwner sets the owner
 // in the interface
 export abstract class TComponent implements IComponent{
-    private name: string
+    name: string
 
     owner: TEntity;
 
@@ -28,6 +30,8 @@ export abstract class TComponent implements IComponent{
     setOwner(o: TEntity){
         this.owner = o;
     };
+
+    start(){};
 
     update(dt: number){/* Is abstract, just a template */};
 

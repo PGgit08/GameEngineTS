@@ -20,20 +20,25 @@ export default class Vector2{
     };
 
     // vector arithmetic
-    add(v: Vector2){
-        return new Vector2(this.x + v.x, this.y + v.y);
+    static add(v1: Vector2, v2:Vector2){
+        return new Vector2(v1.x + v2.x, v1.y + v2.y);
     };
 
-    subtract(v: Vector2){
-        return new Vector2(this.x - v.x, this.y - v.y);
+    static subtract(v1: Vector2, v2:Vector2){
+        return new Vector2(v1.x - v2.x, v1.y - v2.y);
     };
 
-    multiply(v: Vector2){
-        return new Vector2(this.x * v.x, this.y * v.y);
+    static multiply(v1: Vector2, v2:Vector2){
+        return new Vector2(v1.x * v2.x, v1.y * v2.y);
     };
 
-    divide(v: Vector2){
-        return new Vector2(this.x / v.y, this.y / v.y);
+    static divide(v1: Vector2, v2:Vector2){
+        return new Vector2(v1.x / v2.y, v1.y / v2.y);
+    };
+
+    static fromDeltaTime(dt: number){
+        // converts delta time to vector
+        return new Vector2(dt, dt);
     };
 
     // for scaling the vector

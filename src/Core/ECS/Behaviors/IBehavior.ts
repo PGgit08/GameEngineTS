@@ -7,6 +7,8 @@ and focuses more on pre-render update operations
 like movement for example
 */
 export default interface IBehavior{
+    start(): void;
+
     update(dt: number): void;
 
     owner: TEntity;
@@ -14,7 +16,7 @@ export default interface IBehavior{
 };
 
 export abstract class TBehavior implements IBehavior{
-    private name: string
+    name: string
 
     owner: TEntity;
 
@@ -29,6 +31,8 @@ export abstract class TBehavior implements IBehavior{
     setOwner(o: TEntity){
         this.owner = o;
     };
+
+    start(){};
 
     update(dt: number){/* Is abstract, just a template */};
 };

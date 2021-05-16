@@ -55,6 +55,10 @@ export default class Scene extends TGameObject implements IScene{
         this.root_entity.addChild(entity);
     };
 
+    start(): void{
+        this.root_entity.start();
+    };
+
     update(dt: number): void{
         this.root_entity.update(dt);
     };

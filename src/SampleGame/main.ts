@@ -3,7 +3,8 @@ import Engine from '@engine';
 import IGame from '@game/IGame';
 import Scene from '@scenes/Scene';
 import SceneManager from '@scenes/SceneManager';
-import Particle from '@ecs/Components/Particle';
+import ParticleComponent from '@ecs/Components/ParticleComponent';
+import ParticleBehavior from '@ecs/Behaviors/ParticleBehavior';
 
 /* Game Class */
 class SampleGame implements IGame{
@@ -29,9 +30,11 @@ class SampleGame implements IGame{
         // create a "Particles" parent entity for particles in game
         const Particles: TEntity = new TEntity("Particles");
 
-        // create a new "Particle" entity, give it components, and add it to Particles parent
+        // create a new "Particle" entity, give it components + behaviors, and add it to Particles parent
         const MainParticle: TEntity = new TEntity("Particle");
-        MainParticle.addComponent(new Particle());
+
+        MainParticle.addComponent(new ParticleComponent());
+        MainParticle.addBehavior(new ParticleBehavior());
 
         Particles.addChild(MainParticle);
 

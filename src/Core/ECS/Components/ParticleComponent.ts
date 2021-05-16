@@ -4,17 +4,18 @@ import Vector2 from '@physics/Vector';
 import { RendererProps } from '@renderer/IViewProps';
 
 
-export default class Particle extends TComponent{
+export default class ParticleComponent extends TComponent{
     renderItem: Circle2D;
-    position: Vector2;
+    position: Vector2 = new Vector2(600, 300);
 
     constructor(){
         super("Particle");
-        this.renderItem = new Circle2D(100, new Vector2(200, 100));
+        this.renderItem = new Circle2D(100, this.position);
     };
 
     update(dt: number){
-
+        // console.log(this.position);
+        this.renderItem.center = this.position;
     };
 
     render(renderProps: RendererProps){

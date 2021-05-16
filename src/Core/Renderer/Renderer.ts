@@ -15,6 +15,9 @@ export default class Renderer{
     };
 
     renderWorld(game:IGame): void{
+        // clear the background first
+        CTX.clearRect(0, 0, this.viewProps.width, this.viewProps.height);
+
         SceneManager.CURRENT_SCENE.render(this.renderProps);
         game.Render(this.renderProps.deltaTime);
     };
