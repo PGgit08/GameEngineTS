@@ -6,7 +6,7 @@ import { RendererProps } from '@renderer/IViewProps';
 
 export default class ParticleComponent extends TComponent{
     renderItem: Circle2D;
-    position: Vector2 = new Vector2(600, 300);
+    position: Vector2 = Vector2.origin;
 
     constructor(){
         super("Particle");

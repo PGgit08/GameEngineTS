@@ -1,8 +1,8 @@
 import Vector2 from '@physics/Vector';
 // really basic tranform class
 export default class Transform{
-    // position vector(defaults to 0,1)
-    position: Vector2 = new Vector2(10, 100);
+    // position vector(defaults to origin)
+    position: Vector2 = Vector2.origin;
     
     // no rotation yet
     // rotation: Vector2;

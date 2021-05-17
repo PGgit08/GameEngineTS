@@ -3,8 +3,10 @@ import Engine from '@engine';
 import IGame from '@game/IGame';
 import Scene from '@scenes/Scene';
 import SceneManager from '@scenes/SceneManager';
-import ParticleComponent from '@ecs/Components/ParticleComponent';
-import ParticleBehavior from '@ecs/Behaviors/ParticleBehavior';
+
+// get premade particles
+import ParticleComponent from '@premade/Particle/ParticleComponent';
+import ParticleBehavior from '@premade/Particle/ParticleBehavior';
 
 /* Game Class */
 class SampleGame implements IGame{

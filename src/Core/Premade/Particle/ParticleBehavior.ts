@@ -1,6 +1,6 @@
 import { TBehavior } from "@ecs/Behaviors/IBehavior";
 import { TComponent } from "@ecs/Components/IComponent";
-import ParticleComponent from "@ecs/Components/ParticleComponent";
+import ParticleComponent from "@premade/Particle/ParticleComponent";
 import Vector2 from "@physics/Vector";
 
 // Particle movement behavior
@@ -15,6 +15,9 @@ export default class ParticleBehavior extends TBehavior{
     start(){
         // get the component from the sprite owner
         this.particleSprite = this.owner.getComponentByName("Particle") as ParticleComponent;
+
+        // set the owner's default position to something else
+        this.owner.transform.position = new Vector2(100, 100);
     };
 
     update(dt:number){
