@@ -4,9 +4,8 @@ import IGame from '@game/IGame';
 import Scene from '@scenes/Scene';
 import SceneManager from '@scenes/SceneManager';
 
-// get premade particles
-import ParticleComponent from '@premade/Particle/ParticleComponent';
-import ParticleBehavior from '@premade/Particle/ParticleBehavior';
+// get premade particle entity
+import Particle from '@premade/Particle/Particle';
 
 /* Game Class */
 class SampleGame implements IGame{
@@ -33,10 +32,7 @@ class SampleGame implements IGame{
         const Particles: TEntity = new TEntity("Particles");
 
         // create a new "Particle" entity, give it components + behaviors, and add it to Particles parent
-        const MainParticle: TEntity = new TEntity("Particle");
-
-        MainParticle.addComponent(new ParticleComponent());
-        MainParticle.addBehavior(new ParticleBehavior());
+        const MainParticle: Particle = new Particle();
 
         Particles.addChild(MainParticle);
 
