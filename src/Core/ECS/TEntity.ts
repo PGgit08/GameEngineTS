@@ -6,7 +6,6 @@ import { RendererProps } from '@renderer/IViewProps';
 import { TBehavior } from '@ecs/Behaviors/IBehavior';
 
 export default class TEntity extends TGameObject{
-    // entity properties
     name: string;
 
     children: TEntity[] = [];
@@ -17,21 +16,37 @@ export default class TEntity extends TGameObject{
     
     transform: Transform = new Transform();
 
+    /**
+     * Creates a new entity.
+     * @param name The name of the entity.
+     */
     constructor(name: string){
         super();
         this.name = name;
     };
 
-    addComponent(component: TComponent){
-        component.setOwner(this);
-        this.components.push(component);
-    };
-
+    /**
+     * Adds a behavior to this entity.
+     * @param behavior The behavior that needs to be added to the entity.
+     */
     addBehavior(behavior: TBehavior){
         behavior.setOwner(this);
         this.behaviors.push(behavior);
     };
 
+    /**
+     * Adds a component to this entity.
+     * @param component The component that needs to be added to the entity.
+     */
+    addComponent(component: TComponent){
+        component.setOwner(this);
+        this.components.push(component);
+    };
+
+    /**
+     * Adds a child to the entity.
+     * @param child The child entity that needs to be added to this entity.
+     */
     addChild(child: TEntity){
         child.parent = this;
         this.children.push(child);
@@ -80,6 +95,7 @@ export default class TEntity extends TGameObject{
     /**
      * Recursively attempts to retrieve a component with the given name from this entity or its children.
      * @param name The name of the component to retrieve.
+     *
      */
     public getComponentByName( name: string ): TComponent {
         for ( let component of this.components ) {
@@ -98,35 +114,46 @@ export default class TEntity extends TGameObject{
         return undefined;
     };
 
+    /* 
+    * Calls start method of children, behaviors, and components before game loop.
+    */
     start(): void{
-        for(let c of this.components){
-            c.start();
-        };
-
         for(let b of this.behaviors){
             b.start();
         };
 
+        for(let c of this.components){
+            c.start();
+        };
+
         for(let c of this.children){
             c.start();
         };
     };
 
+    /**
+     * Called on every frame.
+     * @param dt The amount of time since the last update call.
+     */ 
     update(dt: number): void {
+        for(let b of this.behaviors){
+            b.update(dt);
+        }; 
+
         for(let c of this.components){
             c.update(dt);
         };
-
-        for(let b of this.behaviors){
-            b.update(dt);
-        };  
 
         for(let c of this.children){
             c.update(dt);
         };
     };
 
- 
+
+    /**
+     * Renders this entity's components and children.
+     * @param renderProps The engine properties of the renderer.
+     */
     render(renderProps: RendererProps): void {
         for(let c of this.components){
             c.render(renderProps);

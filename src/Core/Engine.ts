@@ -3,13 +3,24 @@ import IGame from "@game/IGame";
 import SceneManager from "@scenes/SceneManager";
 import { RenderViewProps } from "@renderer/IViewProps";
 
-// main engine class
+/**
+ * Main Engine class
+ * Handles RenderView
+ * Loops
+ * Rendering
+ * And ETC.
+ */
 export default class Engine{
     private renderer: Renderer;
     private game: IGame;
 
     private previousTime: number;
 
+    /**
+     * Creates new Engine instance.
+     * @param game The IGame for the engine to work with.
+     * @param viewConfig RenderView physical properties
+     */
     constructor(game:IGame, viewConfig: RenderViewProps){
         // basic constructor called
         // when engine created
@@ -21,6 +32,9 @@ export default class Engine{
         this.game = game;
     };
 
+    /**
+     * Pre-loop operation
+     */
     public start(){
         // first thing called before loop
         this.previousTime = performance.now();
@@ -32,6 +46,9 @@ export default class Engine{
         this.loop();
     };
 
+    /**
+     * Game loop operation
+     */
     public loop(){
         // main game loop
         this.renderer.renderProps.deltaTime -= this.previousTime;
@@ -45,12 +62,19 @@ export default class Engine{
         requestAnimationFrame(this.loop.bind(this));
     };
 
+    /**
+     * Updates current scene and Game.
+     * @param delta Time since last frame update!
+     */
     public update(delta:number){
         // update function
         SceneManager.CURRENT_SCENE.update(delta);
         this.game.Update(delta);
     };
 
+    /**
+     * Renders current scene and game(@class Renderer.renderWorld)
+     */
     public render(){
         // rendering function
         this.renderer.renderWorld(this.game);

@@ -1,12 +1,22 @@
-// an interface that can be implemented by the developer
-// which contains all the game logic
+/**
+ * @description Incase game creator wants to do game logic, 
+ * in game loop, they can do so in an IGame.
+ */
 export default interface IGame{
-    // called at the beggining of the game flow
+    /**
+     * Called at the beggining of the game, before game loop.
+     */
     Start: () => void;
 
-    // called before each render
+    /**
+     * Called on every frame update.
+     * @param deltaTime Time since last frame update call.
+     */
     Update: (deltaTime: number) => void;
     
-    // called each frame-update after each Update call
+    /**
+     * Called on every frame update.
+     * @param deltaTime Time since last frame render call.
+     */
     Render: (deltaTime: number) => void;
 };

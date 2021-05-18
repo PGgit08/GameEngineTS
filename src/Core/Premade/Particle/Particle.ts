@@ -2,10 +2,10 @@ import TEntity from "@ecs/TEntity";
 import ParticleBehavior from "@premade/Particle/ParticleBehavior";
 import { RendererProps } from "@renderer/IViewProps";
 
-/* 
-A simple circular particle
-that follows a physics pattern
-*/
+/**
+ * @description A circular "particle" that follows a physics pattern.
+ * @author Peter Gutkovich
+ */
 export default class Particle extends TEntity{
     // ParticleBehavior
     // Focuses on movement and physics of a particle
@@ -14,6 +14,10 @@ export default class Particle extends TEntity{
     // the radius of this particle
     particleSize: number = 5;
 
+    /**
+     * Creates a new particle entity,
+     * With the name of "Particle".
+     */
     constructor(){
         // create a new entity with the name Particle
         super("Particle");
@@ -24,6 +28,9 @@ export default class Particle extends TEntity{
     };
 
 
+    /**
+     * @deprecated Sprite component will do this already.
+     */
     render(renderProps: RendererProps){
         /* 
             NOTE: 

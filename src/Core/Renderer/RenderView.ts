@@ -1,9 +1,18 @@
 import { RenderViewProps } from '@renderer/IViewProps';
 
+/**
+ * The physical RenderView for the game.
+ */
 export default class RenderView{
     private ctx: CanvasRenderingContext2D;
     private canvasId: string;
 
+    /**
+     * Creates a new canvas view off of config.
+     * @param canvasId The DOM id of the canvas.
+     * @param canvasProps The physical properties for the canvas.
+     * @returns null if error.
+     */
     constructor(canvasId:string, canvasProps:RenderViewProps){
         const searchElement = document.getElementById(canvasId);
         if(searchElement){
