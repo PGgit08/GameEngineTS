@@ -121,6 +121,22 @@ export default class TEntity extends TGameObject{
         return undefined;
     };
 
+    // TODO: Add the code to methods below
+
+    /**
+     * Get component of this entity by its type.
+     */
+    public getComponent(){
+
+    };
+
+    /**
+     * Get behavior of this entity by its type.
+     */
+    public getBehavior(){
+
+    };
+
     /* 
     * Calls start method of children, behaviors, and components before game loop.
     */
