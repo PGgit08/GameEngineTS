@@ -1,6 +1,7 @@
+import Drawable from '@graphics/Drawable';
 import Vector2 from '@physics/Vector';
 
-export default class Circle2D{
+export default class Circle2D extends Drawable{
     // position of the circle
     center: Vector2;
 
@@ -8,6 +9,7 @@ export default class Circle2D{
     radius: number;
 
     constructor(r: number, c: Vector2){
+        super() // must call super even if abstract class
         this.radius = r;
         this.center = c;
     };

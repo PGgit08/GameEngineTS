@@ -1,5 +1,5 @@
 import TEntity from "@ecs/TEntity";
-import ParticleBehavior from "@premade/Particle/ParticleBehavior";
+import ParticleBehavior from "Core/Particle/ParticleBehavior";
 import { RendererProps } from "@renderer/IViewProps";
 
 /**

@@ -1,4 +1,4 @@
-import { TBehavior } from "@ecs/Behaviors/IBehavior";
+import { TBehavior } from "@ecs/Behavior/IBehavior";
 // import { TComponent } from "@ecs/Components/IComponent";
 import Vector2 from "@physics/Vector";
 

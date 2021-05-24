@@ -2,6 +2,7 @@ import Renderer from "@renderer/Renderer";
 import IGame from "@game/IGame";
 import SceneManager from "@scenes/SceneManager";
 import { RenderViewProps } from "@renderer/IViewProps";
+import TEntity from "@ecs/TEntity";
 
 /**
  * Main Engine class
@@ -30,6 +31,14 @@ export default class Engine{
         );
 
         this.game = game;
+    };
+
+    /**
+     * Same thing as SceneManager.CURRENT_SCENE.addObject(o)
+     * @param o The Entity to be added to the Current scene
+     */
+    public addObject(o: TEntity){
+        SceneManager.CURRENT_SCENE.addObject(o);
     };
 
     /**

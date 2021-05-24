@@ -5,7 +5,7 @@ import Scene from '@scenes/Scene';
 import SceneManager from '@scenes/SceneManager';
 
 // get premade particle entity
-import Particle from '@premade/Particle/Particle';
+import Particle from 'Core/Particle/Particle';
 
 /* Game Class */
 class SampleGame implements IGame{

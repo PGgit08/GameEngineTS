@@ -2,7 +2,7 @@ import Vector2 from "@physics/Vector";
 
 /**
  * Low-Level abstract class, that items which get drawn to the screen can inherit.
- * @example Sprite Component  
+ * @example Sprite   
  */
 export default abstract class Drawable{
     // point of rotation for drawable item
@@ -34,7 +34,7 @@ export default abstract class Drawable{
     };
 
     /**
-     * Classes inheriting IDrawable override this abstract method.
+     * Classes inheriting Drawable override this abstract method.
      */
     protected abstract draw(x: number, y: number): void;
 };
