@@ -1,6 +1,9 @@
 import TEntity from "@ecs/TEntity";
 import ParticleBehavior from "Core/Particle/ParticleBehavior";
 import { RendererProps } from "@renderer/IViewProps";
+import DrawComponent from "@graphics/DrawComponent";
+import Circle2D from "@graphics/Shape2D/Circle2D";
+import Vector2 from "@physics/Vector";
 
 /**
  * @description A circular "particle" that follows a physics pattern.
@@ -14,33 +17,22 @@ export default class Particle extends TEntity{
     // the radius of this particle
     particleSize: number = 5;
 
+    // the graphics component?
+    graphics: DrawComponent;
+
     /**
      * Creates a new particle entity,
      * With the name of "Particle".
      */
     constructor(){
         // create a new entity with the name Particle
-        super("Particle");
+        super("Particle", [new DrawComponent()]);
 
         // create a new ParticleBehavior for this particle
         this.behavior = new ParticleBehavior();
         this.addBehavior(this.behavior);
-    };
 
-
-    /**
-     * @deprecated Sprite component will do this already.
-     */
-    render(renderProps: RendererProps){
-        /* 
-            NOTE: 
-            This entity will have a Sprite 
-            component which has the shape of a 
-            circle, but for now access CTX here and
-            render here.
-        */
-        CTX.beginPath();
-        CTX.arc(this.transform.position.x, this.transform.position.y, this.particleSize, 0, 2 * Math.PI);
-        CTX.stroke();
+        this.graphics = this.getComponentByName("DrawComponent") as DrawComponent;
+        this.graphics.setCurrentDrawing(new Circle2D(this.particleSize));
     };
 };

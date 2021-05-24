@@ -19,10 +19,17 @@ export default class TEntity extends TGameObject{
     /**
      * Creates a new entity.
      * @param name The name of the entity.
+     * @param components An optional parameter for adding a list of components to this Entity.
      */
-    constructor(name: string){
+    constructor(name: string, components?: TComponent[]){
         super();
         this.name = name;
+        
+        if(components){
+            for(const component of components){
+                this.addComponent(component);
+            };
+        };
     };
 
     /**
