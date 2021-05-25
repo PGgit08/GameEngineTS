@@ -102,39 +102,64 @@ export default class TEntity extends TGameObject{
     /**
      * Recursively attempts to retrieve a component with the given name from this entity or its children.
      * @param name The name of the component to retrieve.
-     *
      */
-    public getComponentByName( name: string ): TComponent {
-        for ( let component of this.components ) {
-            if ( component.name === name ) {
+    public getComponentByName(name: string): TComponent{
+        for (let component of this.components){
+            if(component.name === name){
                 return component;
-            }
-        }
+            };
+        };
 
-        for ( let child of this.children ) {
+        for (let child of this.children){
             let component = child.getComponentByName( name );
-            if ( component !== undefined ) {
+            if(component !== undefined){
                 return component;
-            }
-        }
+            };
+        };
 
         return undefined;
     };
 
-    // TODO: Add the code to methods below
-
     /**
-     * Get component of this entity by its type.
+     * Recursively attempts to retrieve a behavior with the given type from this entity or its children.
+     * @param type The typeof behavior that needs to be retrieved.
      */
-    public getComponent(){
+    public getBehavior<T extends TComponent>(type: T): T{
+        for(let behavior of this.behaviors){
+            if(typeof behavior === typeof type){
+                return behavior as T;
+            };
+        };
 
+        for(let child of this.children){
+            let behavior = child.getBehavior(type);
+            if(behavior !== undefined){
+                return behavior;
+            };
+        };
+
+        return undefined;
     };
 
     /**
-     * Get behavior of this entity by its type.
+     * Recursively attempts to retrieve a component with the given type from this entity or its children.
+     * @param type The typeof component that needs to be retrieved.
      */
-    public getBehavior(){
+    public getComponent<T extends TComponent>(type: new () => T): T{
+        for(let component of this.components){
+            if(component instanceof type){
+                return component as T;
+            };
+        };
 
+        for(let child of this.children){
+            let component = child.getComponent(type);
+            if(component !== undefined){
+                return component;
+            };
+        };
+
+        return undefined;
     };
 
     /* 

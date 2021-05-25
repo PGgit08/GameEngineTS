@@ -32,7 +32,7 @@ export default class Particle extends TEntity{
         this.behavior = new ParticleBehavior();
         this.addBehavior(this.behavior);
 
-        this.graphics = this.getComponentByName("DrawComponent") as DrawComponent;
+        this.graphics = this.getComponent(DrawComponent);
         this.graphics.setCurrentDrawing(new Circle2D(this.particleSize));
     };
 };
