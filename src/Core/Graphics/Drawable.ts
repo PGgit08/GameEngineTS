@@ -28,6 +28,9 @@ export default abstract class Drawable{
     };
 
     
+    public scale: Vector2;
+    public rotation: number;
+
     /**
      * A pre-drawing method for a graphic in which to preform transforms.
      * @param pos The position vector at which to preform transforms.

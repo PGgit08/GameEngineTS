@@ -1,6 +1,7 @@
 import TEntity from '@ecs/TEntity';
 import Engine from '@engine';
 import IGame from '@game/IGame';
+import Vector2 from '@physics/Vector';
 import Scene from '@scenes/Scene';
 import SceneManager from '@scenes/SceneManager';
 
@@ -33,8 +34,14 @@ class SampleGame implements IGame{
 
         // create a new "Particle" entity, give it components + behaviors, and add it to Particles parent
         const MainParticle: Particle = new Particle();
+        const OtherParticle: Particle = new Particle();
+
+        OtherParticle.transform.position.subtract(new Vector2(0, 100));
 
         Particles.addChild(MainParticle);
+        Particles.addChild(OtherParticle);
+
+        console.log(Particles.children);
 
         // add all needed objects into the scene
         SampleScene.addObject(Particles);

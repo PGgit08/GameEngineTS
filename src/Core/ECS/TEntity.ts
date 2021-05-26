@@ -124,7 +124,7 @@ export default class TEntity extends TGameObject{
      * Recursively attempts to retrieve a behavior with the given type from this entity or its children.
      * @param type The typeof behavior that needs to be retrieved.
      */
-    public getBehavior<T extends TComponent>(type: T): T{
+    public getBehavior<T extends TComponent>(type: new () => T): T{
         for(let behavior of this.behaviors){
             if(typeof behavior === typeof type){
                 return behavior as T;
