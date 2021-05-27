@@ -10,7 +10,7 @@ import Particle from 'Core/Particle/Particle';
 
 /* Game Class */
 class SampleGame implements IGame{
-    particleCount: number = 0;
+    // sceneCounter: number = 0;
 
     constructor(){
 
@@ -36,7 +36,8 @@ class SampleGame implements IGame{
         const MainParticle: Particle = new Particle();
         const OtherParticle: Particle = new Particle();
 
-        OtherParticle.transform.position.subtract(new Vector2(0, 100));
+        MainParticle.transform.position = new Vector2(100, 200);
+        OtherParticle.transform.position = new Vector2(300, 400);
 
         Particles.addChild(MainParticle);
         Particles.addChild(OtherParticle);
@@ -51,7 +52,7 @@ class SampleGame implements IGame{
     };
 
     Update(deltaTime: number): void{
-
+        
     };
 
     Render(deltaTime: number){

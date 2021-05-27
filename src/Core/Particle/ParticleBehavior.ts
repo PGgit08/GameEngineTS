@@ -10,7 +10,6 @@ export default class ParticleBehavior extends TBehavior{
 
     start(){
         // called at the begginning of the game loop
-        this.owner.transform.position = new Vector2(100, 200);
     };
 
     update(dt:number){
