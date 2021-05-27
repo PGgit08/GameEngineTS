@@ -14,6 +14,15 @@ export default class TEntity extends TGameObject{
     components: TComponent[] = [];
     behaviors: TBehavior[] = []
     
+
+    /* 
+        TODO: Next thing to do:
+        Work on Transform.
+        More specifically, give each entity these:
+        
+        localTransform(or matrix?): This entity's Transform relative to it's parent
+        worldTransform(or matrix?): This entity's Transform relative to the scene
+    */    
     transform: Transform = new Transform();
 
     /**

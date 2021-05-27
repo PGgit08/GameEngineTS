@@ -42,7 +42,7 @@ export default class Engine{
     };
 
     /**
-     * Pre-loop operation
+     * Pre-loop
      */
     public start(){
         // first thing called before loop
@@ -56,7 +56,7 @@ export default class Engine{
     };
 
     /**
-     * Game loop operation
+     * Game loop
      */
     public loop(){
         // main game loop
