@@ -15,9 +15,7 @@ export default class Transform{
     };
 
     /*
-    * NOTE: Tranform properties are gotten/set like
-    * this for now, but later a matrix will most likely
-    * be used.  
+    * NOTE: Matricies for preforming transformations will be used later.
     */
     
     public get position(): Vector2{
