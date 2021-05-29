@@ -3,7 +3,7 @@ import { RenderViewProps } from '@renderer/IViewProps';
 /**
  * The physical RenderView for the game.
  */
-export default class RenderView{
+export class RenderView{
     private ctx: CanvasRenderingContext2D;
     private canvasId: string;
 

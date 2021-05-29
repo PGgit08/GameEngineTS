@@ -1,7 +1,7 @@
-import IGame from "@game/IGame";
+import { IGame } from "@game/IGame";
 import { RenderViewProps, RendererProps } from "@renderer/IViewProps";
-import RenderView from "@renderer/RenderView";
-import SceneManager from "@scenes/SceneManager";
+import { RenderView } from "@renderer/RenderView";
+import { SceneManager } from "@scenes/SceneManager";
 
 /**
  * A full Renderer for the game.

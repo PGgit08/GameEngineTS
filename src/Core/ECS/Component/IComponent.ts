@@ -1,4 +1,4 @@
-import TEntity from '@ecs/TEntity'; 
+import { TEntity } from '@ecs/TEntity'; 
 import { RendererProps } from '@renderer/IViewProps';
 
 export default interface IComponent{

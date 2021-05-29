@@ -1,8 +1,8 @@
 /**
- * @description Incase game creator wants to do game logic, 
+ * @description In case game creator wants to do game logic, 
  * in game loop, they can do so in an IGame.
  */
-export default interface IGame{
+export interface IGame{
     /**
      * Called at the beggining of the game, before game loop.
      */

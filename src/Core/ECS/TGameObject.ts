@@ -2,7 +2,7 @@
  * Any object(Entity) in the game.
  * Each object has a GLOBAL_ID.
  */
-export default class TGameObject{
+export class TGameObject{
     // current GLOBAL_ID(static)
     public static GLOBAL_ID: number = 0;
 

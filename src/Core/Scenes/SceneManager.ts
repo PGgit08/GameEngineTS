@@ -1,9 +1,9 @@
-import Scene, { IScene }  from "@scenes/Scene";
+import { Scene,  IScene }  from "@scenes/Scene";
 
 // a scene manager class for the games scenes
 // this is created so that scenes can be accessed
 // anywhere globally through this class's static
-export default class SceneManager{
+export class SceneManager{
     // an object of registered scenes in the game
     public static GAME_SCENES: {[name: string]: Scene} = {};
     

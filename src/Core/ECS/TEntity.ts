@@ -1,11 +1,11 @@
-import TGameObject from '@ecs/TGameObject';
+import { TGameObject } from '@ecs/TGameObject';
 import { TComponent } from '@ecs/Component/IComponent';
 
-import Transform from '@physics/Transform';
+import { Transform } from '@physics/Transform';
 import { RendererProps } from '@renderer/IViewProps';
 import { TBehavior } from '@ecs/Behavior/IBehavior';
 
-export default class TEntity extends TGameObject{
+export class TEntity extends TGameObject{
     name: string;
 
     children: TEntity[] = [];

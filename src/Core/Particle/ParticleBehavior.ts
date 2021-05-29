@@ -1,6 +1,6 @@
 import { TBehavior } from "@ecs/Behavior/IBehavior";
 // import { TComponent } from "@ecs/Components/IComponent";
-import Vector2 from "@physics/Vector";
+import { Vector2 } from "@physics/Vector";
 
 // Particle movement behavior
 export default class ParticleBehavior extends TBehavior{

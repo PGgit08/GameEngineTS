@@ -1,7 +1,7 @@
-import Drawable from '@graphics/Drawable';
-import Vector2 from '@physics/Vector';
+import { Drawable } from '@graphics/Drawable';
+import { Vector2 } from '@physics/Vector';
 
-export default class Circle2D extends Drawable{
+export class Circle2D extends Drawable{
     // radius of the circle  
     private _radius: number;
 

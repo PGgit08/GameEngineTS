@@ -1,7 +1,7 @@
-import TEntity from '@ecs/TEntity';
+import { TEntity } from '@ecs/TEntity';
 import { RendererProps } from '@renderer/IViewProps';
-import TGameObject from '@ecs/TGameObject';
-import SceneManager from '@scenes/SceneManager';
+import { TGameObject } from '@ecs/TGameObject';
+import { SceneManager } from '@scenes/SceneManager';
 
 /* Really basic scene interface for now */
 export interface IScene{
@@ -25,7 +25,7 @@ export interface IScene{
 // if a scene needs to be created, this class 
 // can be called, and this scene can get pushed into
 // the game loop
-export default class Scene implements IScene{
+export class Scene implements IScene{
     root_entity: TEntity;
 
     // names of scene

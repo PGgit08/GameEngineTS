@@ -1,7 +1,7 @@
 /**
  * Mathematical 2D Vector
  */
-export default class Vector2{
+export class Vector2{
     // items are public by default
     // x and y and magnitude for vector
     x: number;

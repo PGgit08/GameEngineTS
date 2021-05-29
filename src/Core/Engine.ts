@@ -1,8 +1,8 @@
 import Renderer from "@renderer/Renderer";
-import IGame from "@game/IGame";
-import SceneManager from "@scenes/SceneManager";
+import { IGame }from "@game/IGame";
+import { SceneManager } from "@scenes/SceneManager";
 import { RenderViewProps } from "@renderer/IViewProps";
-import TEntity from "@ecs/TEntity";
+import { TEntity } from "@ecs/TEntity";
 
 /**
  * Main Engine class
@@ -11,7 +11,7 @@ import TEntity from "@ecs/TEntity";
  * Rendering
  * And ETC.
  */
-export default class Engine{
+export class Engine{
     private renderer: Renderer;
     private game: IGame;
 
@@ -23,6 +23,7 @@ export default class Engine{
      * @param viewConfig RenderView physical properties
      */
     constructor(game:IGame, viewConfig: RenderViewProps){
+        console.log("CON");
         // basic constructor called
         // when engine created
         this.renderer = new Renderer(

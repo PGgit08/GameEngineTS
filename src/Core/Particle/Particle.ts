@@ -1,15 +1,15 @@
-import TEntity from "@ecs/TEntity";
+import { TEntity } from "@ecs/TEntity";
 import ParticleBehavior from "Core/Particle/ParticleBehavior";
 import { RendererProps } from "@renderer/IViewProps";
-import DrawComponent from "@graphics/DrawComponent";
-import Circle2D from "@graphics/Shape2D/Circle2D";
-import Vector2 from "@physics/Vector";
+import { DrawComponent } from "@graphics/DrawComponent";
+import { Circle2D } from "@graphics/Shape2D/Circle2D";
+import { Vector2 } from "@physics/Vector";
 
 /**
  * @description A circular "particle" that follows a physics pattern.
  * @author Peter Gutkovich
  */
-export default class Particle extends TEntity{
+export class Particle extends TEntity{
     // ParticleBehavior
     // Focuses on movement and physics of a particle
     behavior: ParticleBehavior;

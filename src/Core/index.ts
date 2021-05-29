@@ -1,7 +1,7 @@
 // it was a pain doing this
 // NOTE: A lot of these exports are unnessacry for the 
-// actual game dev so the garbage code will be removed
 
+// actual game dev so the garbage code will be removed
 export * from '@ecs/Behavior/IBehavior';
 export * from '@ecs/Component/IComponent';
 export * from '@ecs/TEntity';
@@ -23,6 +23,8 @@ export * from '@renderer/RenderView';
 
 export * from '@scenes/Scene';
 export * from '@scenes/SceneManager';
+
+export * from '../Core/Particle/Particle';
 
 export * from '@engine';
 

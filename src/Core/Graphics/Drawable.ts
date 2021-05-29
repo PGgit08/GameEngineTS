@@ -1,10 +1,10 @@
-import Vector2 from "@physics/Vector";
+import { Vector2 } from "@physics/Vector";
 
 /**
  * Low-Level abstract class, that items which get drawn to the screen can inherit.
  * @example Sprite   
  */
-export default abstract class Drawable{
+export abstract class Drawable{
     // point of rotation for drawable item
     public origin: Vector2;
 
