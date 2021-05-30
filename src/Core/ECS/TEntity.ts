@@ -12,7 +12,7 @@ export class TEntity extends TGameObject{
     parent: TEntity;
 
     components: TComponent[] = [];
-    behaviors: TBehavior[] = []
+    behaviors: TBehavior[] = [];
        
     transform: Transform = new Transform();
 

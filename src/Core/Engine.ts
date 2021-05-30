@@ -1,4 +1,4 @@
-import Renderer from "@renderer/Renderer";
+import { Renderer } from "@renderer/Renderer";
 import { IGame }from "@game/IGame";
 import { SceneManager } from "@scenes/SceneManager";
 import { RenderViewProps } from "@renderer/IViewProps";
@@ -23,7 +23,6 @@ export class Engine{
      * @param viewConfig RenderView physical properties
      */
     constructor(game:IGame, viewConfig: RenderViewProps){
-        console.log("CON");
         // basic constructor called
         // when engine created
         this.renderer = new Renderer(

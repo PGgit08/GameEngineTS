@@ -6,7 +6,7 @@ import { SceneManager } from "@scenes/SceneManager";
 /**
  * A full Renderer for the game.
  */
-export default class Renderer{
+export class Renderer{
     renderView: RenderView;
     viewProps: RenderViewProps;
     renderProps: RendererProps;

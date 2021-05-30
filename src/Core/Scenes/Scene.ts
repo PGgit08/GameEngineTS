@@ -2,6 +2,7 @@ import { TEntity } from '@ecs/TEntity';
 import { RendererProps } from '@renderer/IViewProps';
 import { TGameObject } from '@ecs/TGameObject';
 import { SceneManager } from '@scenes/SceneManager';
+import { Physics } from '@physics/Physics';
 
 /* Really basic scene interface for now */
 export interface IScene{
@@ -17,7 +18,8 @@ export interface IScene{
     addObject(entity: TEntity): void;
     getEntityByName(name: string): TEntity;
 
-    // update and rendering functions
+    // game loop functions
+    start(): void;
     update(dt: number): void;
     render(renderProps: RendererProps): void;
 };
@@ -32,6 +34,7 @@ export class Scene implements IScene{
     readonly id: number;
     name: string;
 
+    private _physics: Physics;
 
     /**
      * Creates a new scene which is added to the SceneManager.
@@ -40,6 +43,10 @@ export class Scene implements IScene{
     constructor(name: string){
         this.name = name;
         this.root_entity = new TEntity('ROOT');
+
+        // add physics parts
+        this._physics = new Physics();
+
         SceneManager.addScene(this);
     };
 

@@ -1,5 +1,4 @@
-// export everything from index.ts as
-// namespace called "gets"(game.engine.type.script)
+// export everything from index.ts
 
 export * from './index';
-export as namespace GETS;
+// export as namespace GETS;

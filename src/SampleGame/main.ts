@@ -1,7 +1,17 @@
-import * as gts from '@GETS';
+// importing from namespace not
+// really working now
+import {
+    Scene,
+    TEntity,
+    Particle,
+    SceneManager,
+    Vector2,
+    IGame,
+    Engine
+} from '@GETS';
 
 /* Game Class */
-class SampleGame implements GETS.IGame{
+class SampleGame implements IGame{
     // sceneCounter: number = 0;
 
     constructor(){
@@ -19,26 +29,26 @@ class SampleGame implements GETS.IGame{
         */
     
         // make a scene with the name "SampleScene"
-        const SampleScene: gts.Scene = new gts.Scene("SampleScene");
+        const SampleScene: Scene = new Scene("SampleScene");
         
         // create a "Particles" parent entity for particles in game
-        const Particles: gts.TEntity = new gts.TEntity("Particles");
+        const Particles: TEntity = new TEntity("Particles");
 
         // create a new "Particle" entity, give it components + behaviors, and add it to Particles parent
-        const MainParticle: gts.Particle = new gts.Particle();
-        const OtherParticle: gts.Particle = new gts.Particle();
+        const MainParticle: Particle = new Particle();
+        // const OtherParticle: Particle = new Particle();
 
-        MainParticle.transform.position = new gts.Vector2(100, 200);
-        OtherParticle.transform.position = new gts.Vector2(300, 400);
+        MainParticle.transform.position = new Vector2(100, 200);
+        // OtherParticle.transform.position = new Vector2(300, 400);
 
         Particles.addChild(MainParticle);
-        Particles.addChild(OtherParticle);
+        // Particles.addChild(OtherParticle);
 
         // add all needed objects into the scene
         SampleScene.addObject(Particles);
 
         // set the current scene
-        gts.SceneManager.setCurrentScene("SampleScene");
+        SceneManager.setCurrentScene("SampleScene");
     };
 
     Update(deltaTime: number): void{
@@ -51,7 +61,7 @@ class SampleGame implements GETS.IGame{
 };
 
 /* Make a new engine with this game */
-var GameEngine: gts.Engine = new gts.Engine(new SampleGame(), {
+var GameEngine: Engine = new Engine(new SampleGame(), {
     height: 600,
     width: 800
 });
