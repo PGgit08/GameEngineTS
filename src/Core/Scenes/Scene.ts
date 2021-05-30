@@ -11,6 +11,8 @@ export interface IScene{
     // in the scene
     root_entity: TEntity;
 
+    physics: Physics;
+
     // scene id/name
     readonly id: number;
     name: string;
@@ -34,7 +36,7 @@ export class Scene implements IScene{
     readonly id: number;
     name: string;
 
-    private _physics: Physics;
+    protected _physics: Physics;
 
     /**
      * Creates a new scene which is added to the SceneManager.
@@ -44,11 +46,16 @@ export class Scene implements IScene{
         this.name = name;
         this.root_entity = new TEntity('ROOT');
 
-        // add physics parts
-        this._physics = new Physics();
+        // add physics
+        this._physics = new Physics(this);
 
         SceneManager.addScene(this);
     };
+
+    public get physics(): Physics{
+        return this._physics;
+    };
+
 
     /**
      * Recursivly attempts to find an Entity in this scene.

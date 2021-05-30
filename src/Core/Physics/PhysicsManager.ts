@@ -5,7 +5,7 @@ import { Physics } from "@physics/Physics";
  */
 export class PhysicsManager{
     // an object of all registered physics in the game
-    public static GAME_PHYSICS: {[name: string]: Physics} = {};
+    public static GAME_PHYSICS: {[scene: string]: Physics} = {};
 
     // the current physics
     public static CURRENT_PHYSICS: Physics;
@@ -15,7 +15,7 @@ export class PhysicsManager{
      * @param physics The physics to add.
      */
     public static addPhysics(physics: Physics){
-        this.GAME_PHYSICS[physics.name] = physics;
+        this.GAME_PHYSICS[physics.scene.name] = physics;
     };
 
     /**
@@ -24,14 +24,14 @@ export class PhysicsManager{
      * @returns Physics.
      */
     public static getPhysics(physics: Physics){
-        return this.GAME_PHYSICS[physics.name];
+        return this.GAME_PHYSICS[physics.scene.name];
     };
 
     /**
      * Sets the current Physics.
-     * @param name The name of the Physics to set.
+     * @param physics The Physics to set.
      */
-    public static setCurrentPhysics(name: string){
-        this.CURRENT_PHYSICS = this.GAME_PHYSICS[name];
+    public static setCurrentPhysics(physics: Physics){
+        this.CURRENT_PHYSICS = this.GAME_PHYSICS[physics.scene.name];
     };
 };

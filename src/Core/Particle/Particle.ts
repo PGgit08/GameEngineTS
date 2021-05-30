@@ -4,6 +4,7 @@ import { RendererProps } from "@renderer/IViewProps";
 import { DrawComponent } from "@graphics/DrawComponent";
 import { Circle2D } from "@graphics/Shape2D/Circle2D";
 import { Vector2 } from "@physics/Vector";
+import { RigidBody } from "@physics/RigidBody";
 
 /**
  * @description A circular "particle" that follows a physics pattern.
@@ -26,7 +27,7 @@ export class Particle extends TEntity{
      */
     constructor(){
         // create a new entity with the name Particle
-        super("Particle", [new DrawComponent()]);
+        super("Particle", [new DrawComponent()], [new RigidBody()]);
 
         // create a new ParticleBehavior for this particle
         this.behavior = new ParticleBehavior();

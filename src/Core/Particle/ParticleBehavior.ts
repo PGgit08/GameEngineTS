@@ -14,6 +14,6 @@ export default class ParticleBehavior extends TBehavior{
 
     update(dt:number){
         // move up by default for now
-        this.owner.transform.position.add(Vector2.forward);
+        // this.owner.transform.position.add(Vector2.forward);
     };
 };

@@ -21,13 +21,19 @@ export class TEntity extends TGameObject{
      * @param name The name of the entity.
      * @param components An optional parameter for adding a list of components to this Entity.
      */
-    constructor(name: string, components?: TComponent[]){
+    constructor(name: string, components?: TComponent[], behaviors?: TBehavior[]){
         super();
         this.name = name;
         
         if(components){
             for(const component of components){
                 this.addComponent(component);
+            };
+        };
+
+        if(behaviors){
+            for(const behavior of behaviors){
+                this.addBehavior(behavior);
             };
         };
     };
