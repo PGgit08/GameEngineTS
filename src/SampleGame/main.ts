@@ -33,16 +33,17 @@ class SampleGame implements IGame{
         
         // create a "Particles" parent entity for particles in game
         const Particles: TEntity = new TEntity("Particles");
+        Particles.visible = false;
 
         // create a new "Particle" entity, give it components + behaviors, and add it to Particles parent
         const MainParticle: Particle = new Particle();
-        // const OtherParticle: Particle = new Particle();
+        const OtherParticle: Particle = new Particle();
 
         MainParticle.worldTransform.position = new Vector2(100, 200);
-        // OtherParticle.transform.position = new Vector2(300, 400);
+        OtherParticle.localTransform.position = new Vector2(100, 0);
 
         Particles.addChild(MainParticle);
-        // Particles.addChild(OtherParticle);
+        MainParticle.addChild(OtherParticle);
 
         // add all needed objects into the scene
         SampleScene.addObject(Particles);

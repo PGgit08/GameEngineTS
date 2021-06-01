@@ -49,6 +49,7 @@ export abstract class Drawable{
         // translate to the position's x and y 
         // so that items drawn at 0,0 will be in the correct
         // location on the screen
+        // console.log(mat[TransformPos.Y]);
         CTX.save();
         CTX.transform(
             mat[TransformPos.SX],

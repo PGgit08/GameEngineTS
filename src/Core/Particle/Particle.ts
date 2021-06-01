@@ -12,7 +12,7 @@ import { RigidBody } from "@physics/RigidBody";
  */
 export class Particle extends TEntity{
     // the radius of this particle
-    particleSize: number = 5;
+    particleSize: number = 100;
 
     // the graphics component?
     graphics: DrawComponent;

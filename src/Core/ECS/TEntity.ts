@@ -16,6 +16,8 @@ export class TEntity extends TGameObject{
     components: TComponent[] = [];
     behaviors: TBehavior[] = [];
     
+    protected _visible: boolean = true;
+
     // will probably remove one transform later
     // just doing it with world/local transform for now
     public worldTransform: Transform = new Transform();
@@ -24,6 +26,14 @@ export class TEntity extends TGameObject{
     // same for the matricies
     protected _worldMatrix: mat2d = mat2d.create();
     protected _localMatrix: mat2d = mat2d.create();
+
+    public get visible(): boolean{
+        return this._visible;
+    };
+
+    public set visible(v: boolean){
+        this._visible = v;
+    };
 
     public get worldMatrix(): mat2d{
         return this._worldMatrix;
@@ -189,12 +199,6 @@ export class TEntity extends TGameObject{
     * Calls start method of children, behaviors, and components before game loop.(recursive)
     */
     start(): void{
-        // console.log(this.name);
-        // this.worldTransform.position.add(new Vector2(100, 100));
-        // this.worldTransform.scale.add(Vector2.one);
-        // this.worldTransform.rotation += 2;
-        // this.getWorldMatrix();
-        // console.log(this._worldMatrix);
         for(let b of this.behaviors){
             b.start();
         };
@@ -250,7 +254,7 @@ export class TEntity extends TGameObject{
         this._worldMatrix = this.worldTransform.toMatrix();
         this._localMatrix = this.localTransform.toMatrix();
 
-        if(this.parent){
+        if(this.parent && this.parent.visible){
             mat2d.multiply(
                 this._worldMatrix,
                 this.parent.worldMatrix,
