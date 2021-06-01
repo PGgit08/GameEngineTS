@@ -11,10 +11,6 @@ import { RigidBody } from "@physics/RigidBody";
  * @author Peter Gutkovich
  */
 export class Particle extends TEntity{
-    // ParticleBehavior
-    // Focuses on movement and physics of a particle
-    behavior: ParticleBehavior;
-
     // the radius of this particle
     particleSize: number = 5;
 
@@ -26,12 +22,8 @@ export class Particle extends TEntity{
      * With the name of "Particle".
      */
     constructor(){
-        // create a new entity with the name Particle
-        super("Particle", [new DrawComponent()], [new RigidBody()]);
-
-        // create a new ParticleBehavior for this particle
-        this.behavior = new ParticleBehavior();
-        this.addBehavior(this.behavior);
+        // create a new entity with the name Particle and add needed components+behaviors
+        super("Particle", [new DrawComponent()], [new ParticleBehavior()]);
 
         this.graphics = this.getComponent(DrawComponent);
         this.graphics.setCurrentDrawing(new Circle2D(this.particleSize));

@@ -38,7 +38,7 @@ class SampleGame implements IGame{
         const MainParticle: Particle = new Particle();
         // const OtherParticle: Particle = new Particle();
 
-        MainParticle.transform.position = new Vector2(100, 200);
+        MainParticle.worldTransform.position = new Vector2(100, 200);
         // OtherParticle.transform.position = new Vector2(300, 400);
 
         Particles.addChild(MainParticle);

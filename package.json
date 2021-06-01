@@ -23,9 +23,10 @@
     "webpack-cli": "^4.7.0"
   },
   "dependencies": {
+    "@types/mathjs": "^9.3.2",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "mathjs": "^9.4.1",
+    "gl-matrix": "^3.3.0",
     "watch": "^1.0.2",
     "webpack": "^5.36.2"
   }

@@ -14,6 +14,7 @@ export class Vector2{
     static left: Vector2 = new Vector2(-1, 0);
     static right: Vector2 = new Vector2(1, 0);
     static origin: Vector2 = new Vector2(0, 0);
+    static one: Vector2 = new Vector2(1, 1);
 
     /**
      * Creates a new 2D vector.

@@ -17,9 +17,6 @@ export class DrawComponent extends TComponent{
     };
 
     update(dt: number){
-        /* sets drawing's transform properties to owner's NOTE: this will change with matricies */
-        this._currentDrawing.scale = this.owner.transform.scale;
-        this._currentDrawing.rotation = this.owner.transform.rotation;
     };
 
     /**
@@ -32,6 +29,6 @@ export class DrawComponent extends TComponent{
         transform, unlike an entity's child,
         which is RELATIVE to it's owner.
         */
-        this._currentDrawing.draw(this.owner.transform.position);
+        this._currentDrawing.draw(this.owner.worldMatrix);
     };
 };

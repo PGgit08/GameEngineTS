@@ -14,6 +14,6 @@ export class RigidBody extends TBehavior{
 
     update(){
         this.velocity.add(PhysicsManager.CURRENT_PHYSICS.GRAVITY);
-        this.owner.transform.position.add(this.velocity);
+        this.owner.worldTransform.position.add(this.velocity);
     };
 };

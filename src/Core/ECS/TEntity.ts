@@ -4,6 +4,8 @@ import { TComponent } from '@ecs/Component/IComponent';
 import { Transform } from '@physics/Transform';
 import { RendererProps } from '@renderer/IViewProps';
 import { TBehavior } from '@ecs/Behavior/IBehavior';
+import { mat2d } from 'gl-matrix';
+import { Vector2 } from '@physics/Vector';
 
 export class TEntity extends TGameObject{
     name: string;
@@ -13,8 +15,23 @@ export class TEntity extends TGameObject{
 
     components: TComponent[] = [];
     behaviors: TBehavior[] = [];
-       
-    transform: Transform = new Transform();
+    
+    // will probably remove one transform later
+    // just doing it with world/local transform for now
+    public worldTransform: Transform = new Transform();
+    public localTransform: Transform = new Transform();
+
+    // same for the matricies
+    protected _worldMatrix: mat2d = mat2d.create();
+    protected _localMatrix: mat2d = mat2d.create();
+
+    public get worldMatrix(): mat2d{
+        return this._worldMatrix;
+    };
+
+    public get localMatrix(): mat2d{
+        return this._localMatrix;
+    };
 
     /**
      * Creates a new entity.
@@ -169,9 +186,15 @@ export class TEntity extends TGameObject{
     };
 
     /* 
-    * Calls start method of children, behaviors, and components before game loop.
+    * Calls start method of children, behaviors, and components before game loop.(recursive)
     */
     start(): void{
+        // console.log(this.name);
+        // this.worldTransform.position.add(new Vector2(100, 100));
+        // this.worldTransform.scale.add(Vector2.one);
+        // this.worldTransform.rotation += 2;
+        // this.getWorldMatrix();
+        // console.log(this._worldMatrix);
         for(let b of this.behaviors){
             b.start();
         };
@@ -186,10 +209,12 @@ export class TEntity extends TGameObject{
     };
 
     /**
-     * Called on every frame.
-     * @param dt The amount of time since the last update call.
+     * Called on every frame.(recursive)
+     * @param dt The amount of time since the last update call(deltaTime).
      */ 
     update(dt: number): void {
+        this.getWorldMatrix();
+
         for(let b of this.behaviors){
             b.update(dt);
         }; 
@@ -205,7 +230,7 @@ export class TEntity extends TGameObject{
 
 
     /**
-     * Renders this entity's components and children.
+     * Renders this entity's components and children.(recursive)
      * @param renderProps The engine properties of the renderer.
      */
     render(renderProps: RendererProps): void {
@@ -215,6 +240,22 @@ export class TEntity extends TGameObject{
 
         for(let c of this.children){
             c.render(renderProps);
+        };
+    };
+
+    /**
+     * Gets worldMatrix of this Entity based on parents
+     */
+    public getWorldMatrix(){
+        this._worldMatrix = this.worldTransform.toMatrix();
+        this._localMatrix = this.localTransform.toMatrix();
+
+        if(this.parent){
+            mat2d.multiply(
+                this._worldMatrix,
+                this.parent.worldMatrix,
+                this._localMatrix
+            );
         };
     };
 }; 

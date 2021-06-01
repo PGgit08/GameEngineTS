@@ -2,7 +2,9 @@ import { TBehavior } from "@ecs/Behavior/IBehavior";
 // import { TComponent } from "@ecs/Components/IComponent";
 import { Vector2 } from "@physics/Vector";
 
-// Particle movement behavior
+/**
+ * A testing behavior for particles
+ */
 export default class ParticleBehavior extends TBehavior{
     constructor(){
         super("ParticleBehavior");
@@ -13,7 +15,9 @@ export default class ParticleBehavior extends TBehavior{
     };
 
     update(dt:number){
-        // move up by default for now
-        // this.owner.transform.position.add(Vector2.forward);
+        // testing transformations
+        // this.owner.worldTransform.scale.subtract(new Vector2(0.01, 0));
+        this.owner.worldTransform.position.add(Vector2.forward);
+        // this.owner.worldTransform.rotation += 1;
     };
 };
