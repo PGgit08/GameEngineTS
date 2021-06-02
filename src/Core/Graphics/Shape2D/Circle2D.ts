@@ -11,10 +11,10 @@ export class Circle2D extends Drawable{
 
     public set radius(r: number){
         this._radius = r;
-        this.setDimensions();
+        this._setDimensions();
     };
 
-    private setDimensions(){
+    private _setDimensions(){
         this.width = this._radius * 2;
         this.height = this._radius * 2;
     };
@@ -22,7 +22,7 @@ export class Circle2D extends Drawable{
     constructor(r: number){
         super() // must call super even if abstract class
         this._radius = r;
-        this.setDimensions();
+        this._setDimensions();
     };
 
     // call the draw method of Drawable

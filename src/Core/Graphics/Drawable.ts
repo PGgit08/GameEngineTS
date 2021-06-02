@@ -15,8 +15,8 @@ export enum TransformPos{
 };
 
 export abstract class Drawable{
-    // point of rotation for drawable item
-    public origin: Vector2;
+    // point of rotation for drawable item(defaults to half)
+    public origin: Vector2 = new Vector2(0.5, 0.5);
 
     private _width: number = 0;
     private _height: number = 0;
@@ -46,15 +46,13 @@ export abstract class Drawable{
      * @param pos The position vector at which to preform transforms.
      */
     protected _preDraw(mat: mat2d): void{
-        // translate to the position's x and y 
-        // so that items drawn at 0,0 will be in the correct
-        // location on the screen
-        // console.log(mat[TransformPos.Y]);
+        // prefrom translate to origin
+        // and transformations based on matrix
         CTX.save();
         CTX.transform(
             mat[TransformPos.SX],
-            mat[TransformPos.RX],
-            mat[TransformPos.RY],
+            0,
+            0,
             mat[TransformPos.SY],
             mat[TransformPos.X],
             mat[TransformPos.Y]

@@ -18,6 +18,6 @@ export default class ParticleBehavior extends TBehavior{
         // testing transformations
         // this.owner.worldTransform.scale.subtract(new Vector2(0.01, 0));
         // this.owner.worldTransform.position.add(Vector2.forward);
-        this.owner.worldTransform.rotation += 1;
+        // this.owner.worldTransform.rotation += 1;
     };
 };

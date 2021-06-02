@@ -5,6 +5,7 @@ import { DrawComponent } from "@graphics/DrawComponent";
 import { Circle2D } from "@graphics/Shape2D/Circle2D";
 import { Vector2 } from "@physics/Vector";
 import { RigidBody } from "@physics/RigidBody";
+import { Rectangle2D } from "@graphics/Shape2D/Rectangle2D";
 
 /**
  * @description A circular "particle" that follows a physics pattern.
@@ -12,7 +13,7 @@ import { RigidBody } from "@physics/RigidBody";
  */
 export class Particle extends TEntity{
     // the radius of this particle
-    particleSize: number = 100;
+    particleSize: number = 10;
 
     // the graphics component?
     graphics: DrawComponent;
@@ -26,6 +27,7 @@ export class Particle extends TEntity{
         super("Particle", [new DrawComponent()], [new ParticleBehavior()]);
 
         this.graphics = this.getComponent(DrawComponent);
-        this.graphics.setCurrentDrawing(new Circle2D(this.particleSize));
+        // this.graphics.setCurrentDrawing(new Circle2D(this.particleSize));
+        this.graphics.setCurrentDrawing(new Rectangle2D(this.particleSize, this.particleSize));
     };
 };
