@@ -58,8 +58,8 @@ export class Transform{
         let scale = mat2d.fromScaling(mat2d.create(), sVector);
 
 
-        // multiply all transformation matricies to create one big matrix function
-        return mat2d.multiply(mat2d.create(), mat2d.multiply(mat2d.create(), translate, scale), rotation);
+        // multiply all transformation matricies to create one big matrix funvction
+        return mat2d.multiply(mat2d.create(), mat2d.multiply(mat2d.create(), translate, rotation), scale);
     };
 
 };

@@ -49,6 +49,8 @@ export abstract class Drawable{
         // prefrom translate to origin
         // and transformations based on matrix
         CTX.save();
+        // CTX.translate(mat[TransformPos.X], mat[TransformPos.Y]);
+        // CTX.scale(mat[TransformPos.SX], mat[TransformPos.SY]);
         CTX.transform(
             mat[TransformPos.SX],
             0,
@@ -63,6 +65,8 @@ export abstract class Drawable{
      * A post-drawing method for a graphic.
      */
     protected _postDraw(): void{
+        CTX.stroke();
+        // CTX.fill();
         CTX.restore();
     };
 

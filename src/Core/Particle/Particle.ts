@@ -13,7 +13,7 @@ import { Rectangle2D } from "@graphics/Shape2D/Rectangle2D";
  */
 export class Particle extends TEntity{
     // the radius of this particle
-    particleSize: number = 10;
+    particleSize: number = 100;
 
     // the graphics component?
     graphics: DrawComponent;
@@ -27,7 +27,7 @@ export class Particle extends TEntity{
         super("Particle", [new DrawComponent()], [new ParticleBehavior()]);
 
         this.graphics = this.getComponent(DrawComponent);
-        // this.graphics.setCurrentDrawing(new Circle2D(this.particleSize));
-        this.graphics.setCurrentDrawing(new Rectangle2D(this.particleSize, this.particleSize));
+        this.graphics.setCurrentDrawing(new Circle2D(this.particleSize));
+        // this.graphics.setCurrentDrawing(new Rectangle2D(this.particleSize, this.particleSize));
     };
 };

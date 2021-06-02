@@ -16,8 +16,9 @@ export default class ParticleBehavior extends TBehavior{
 
     update(dt:number){
         // testing transformations
+        // console.log(this.owner.worldMatrix);
         // this.owner.worldTransform.scale.subtract(new Vector2(0.01, 0));
         // this.owner.worldTransform.position.add(Vector2.forward);
-        // this.owner.worldTransform.rotation += 1;
+        this.owner.worldTransform.rotation += 1;
     };
 };
