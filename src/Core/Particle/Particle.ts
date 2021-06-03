@@ -27,7 +27,7 @@ export class Particle extends TEntity{
         super("Particle", [new DrawComponent()], [new ParticleBehavior()]);
 
         this.graphics = this.getComponent(DrawComponent);
-        // this.graphics.setCurrentDrawing(new Circle2D(this.particleSize));
-        this.graphics.setCurrentDrawing(new Rectangle2D(this.particleSize, this.particleSize));
+        this.graphics.setCurrentDrawing(new Circle2D(this.particleSize));
+        // this.graphics.setCurrentDrawing(new Rectangle2D(this.particleSize, this.particleSize));
     };
 };
