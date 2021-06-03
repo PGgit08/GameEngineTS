@@ -1,5 +1,5 @@
 import { Vector2 } from "@physics/Vector";
-import { mat2d } from "gl-matrix";
+import { mat2d, vec2 } from "gl-matrix";
 
 /**
  * Low-Level abstract class, that items which get drawn to the screen can inherit.
@@ -49,16 +49,8 @@ export abstract class Drawable{
         // prefrom translate to origin
         // and transformations based on matrix
         CTX.save();
-        // CTX.translate(mat[TransformPos.X], mat[TransformPos.Y]);
+        CTX.translate(mat[TransformPos.X], mat[TransformPos.Y]);
         // CTX.scale(mat[TransformPos.SX], mat[TransformPos.SY]);
-        CTX.transform(
-            mat[TransformPos.SX],
-            0,
-            0,
-            mat[TransformPos.SY],
-            mat[TransformPos.X],
-            mat[TransformPos.Y]
-        );
     };  
 
     /**
