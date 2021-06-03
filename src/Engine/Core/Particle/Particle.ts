@@ -1,11 +1,11 @@
-import { TEntity } from "@ecs/TEntity";
-import ParticleBehavior from "Core/Particle/ParticleBehavior";
-import { RendererProps } from "@renderer/IViewProps";
-import { DrawComponent } from "@graphics/DrawComponent";
-import { Circle2D } from "@graphics/Shape2D/Circle2D";
-import { Vector2 } from "@physics/Vector";
-import { RigidBody } from "@physics/RigidBody";
-import { Rectangle2D } from "@graphics/Shape2D/Rectangle2D";
+import { TEntity } from "Engine/Core/ECS/TEntity";
+import ParticleBehavior from "Engine/Core/Particle/ParticleBehavior";
+import { RendererProps } from "Engine/Core/Renderer/IViewProps";
+import { DrawComponent } from "Engine/Core/Graphics/DrawComponent";
+import { Circle2D } from "Engine/Core/Graphics/Shape2D/Circle2D";
+import { Vector2 } from "Engine/Core/Physics/Vector";
+import { RigidBody } from "Engine/Core/Physics/RigidBody";
+import { Rectangle2D } from "Engine/Core/Graphics/Shape2D/Rectangle2D";
 
 /**
  * @description A circular "particle" that follows a physics pattern.
