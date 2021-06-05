@@ -1,123 +1,108 @@
 <canvas id="glCanvas">
     This Browser Does not Support WebGL :(
 </canvas>
+
 <!-- import gl-matrix -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
-integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
-crossorigin="anonymous" defer>
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+
 <script>
-    /* 
-    Interested In WebGL as it may be used in the engine later
-    */
-    const glCanvas = document.getElementById("glCanvas");
-    const gl = glCanvas.getContext('experimental-webgl');
+// copied from: https://www.tutorialspoint.com/webgl/webgl_sample_application.htm
 
-    glCanvas.width = 800;
-    glCanvas.height = 600
+/* Step1: Prepare the canvas and get WebGL context */
 
-    const vsSource = 
-        `
-        attribute vec4 VertexPos;
+var canvas = document.getElementById('glCanvas');
+var gl = canvas.getContext('experimental-webgl');
 
-        void main() {
-            gl_Position = VertexPos;
-        }
-        `;
+/* Step2: Define the geometry and store it in buffer objects */
 
-    const fsSource = 
-        `
-        void main() {
-            gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-        }
-        `;
+var vertices = [-0.5, 0.5, -0.5, -0.5, 0.0, -0.5,];
 
-    // Initialize a shader program, so WebGL knows how to draw our data
-    function initShaderProgram(vsSource, fsSource) {
-        // load the shader, compile it
-        const vertexShader = loadShader(gl.VERTEX_SHADER, vsSource);
-        const fragmentShader = loadShader(gl.FRAGMENT_SHADER, fsSource);
+// Create a new buffer object
+var vertex_buffer = gl.createBuffer();
 
-        // Create the shader program
-        const shaderProgram = gl.createProgram();
-        gl.attachShader(shaderProgram, vertexShader);
-        gl.attachShader(shaderProgram, fragmentShader);
-        
-        // add the shader program to WebGL
-        gl.linkProgram(shaderProgram);
+// Bind an empty array buffer to it
+// NOTE: pretty sure bind buffer says that this is the current buffer
+gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
 
-        // If creating the shader program failed, alert
-        if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-            alert('Unable to initialize the shader program: ' + gl.getProgramInfoLog(shaderProgram));
-            return null;
-        }
+// Pass the vertices data to the buffer
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 
-        return shaderProgram;
-    }
+// Unbind the buffer
+gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
-    
-    // creates a shader of the given type, uploads the source and
-    // compiles it.
-    //
-    function loadShader(type, source) {
-        // create a new WebGL shader with the correct type
-        const shader = gl.createShader(type);
+/* Step3: Create and compile Shader programs */
 
-        // Send the source to the shader object
-        gl.shaderSource(shader, source);
+// Vertex shader source code
+var vertCode =
+  'attribute vec2 coordinates;' + 
+  'void main(void) {' + ' gl_Position = vec4(coordinates, 0.0, 1.0);' + '}';
 
-        // Compile the shader program
-        gl.compileShader(shader);
+//Create a vertex shader object
+var vertShader = gl.createShader(gl.VERTEX_SHADER);
 
-        // See if it compiled successfully
-        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            alert('An error occurred compiling the shaders: ' + gl.getShaderInfoLog(shader));
-            gl.deleteShader(shader);
-            return;
-        }
+//Attach vertex shader source code
+gl.shaderSource(vertShader, vertCode);
 
-        return shader;
-    };
+//Compile the vertex shader
+gl.compileShader(vertShader);
 
-    // for making buffers
-    function initBuffers(){
-        // create a new webgl buffer
-        const positionBuffer = gl.createBuffer();
+//Fragment shader source code
+var fragCode = 'void main(void) {' + 'gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);' + '}';
 
-        // Select the positionBuffer as the one to apply buffer
-        // operations to from here out.
-        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+// Create fragment shader object
+var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
 
-        // create positions for a square
-        const positions = [
-            -1.0,  1.0,
-            1.0,  1.0,
-            -1.0, -1.0,
-            1.0, -1.0,
-        ];
+// Attach fragment shader source code
+gl.shaderSource(fragShader, fragCode);
 
-        // Now pass the list of positions into WebGL to build the
-        // shape. We do this by creating a Float32Array from the
-        // JavaScript array, then use it to fill the current buffer.
+// Compile the fragment shader
+gl.compileShader(fragShader);
 
-        gl.bufferData(gl.ARRAY_BUFFER,
-                        new Float32Array(positions),
-                        gl.STATIC_DRAW);
-    };
+// Create a shader program object to store combined shader program
+var shaderProgram = gl.createProgram();
 
-    function main(){
-        // Set clear color to black, fully opaque
-        gl.clearColor(0.0, 0.0, 0.0, 1.0);
-        // Clear the color buffer with specified clear color
-        gl.clear(gl.COLOR_BUFFER_BIT);
+// Attach a vertex shader
+gl.attachShader(shaderProgram, vertShader); 
 
-        // load needed shaders
-        const shaderProgram = initShaderProgram(vsSource, fsSource);
+// Attach a fragment shader
+gl.attachShader(shaderProgram, fragShader);
 
-        // get variables from shader
-        let vertexPosition = gl.getAttribLocation(shaderProgram, 'VertexPos');
-    };
+// Link both programs
+gl.linkProgram(shaderProgram);
 
-    window.onload = main;
+// Use the combined shader program object
+gl.useProgram(shaderProgram);
+
+/* Step 4: Associate the shader programs to buffer objects */
+
+//Bind vertex buffer object
+gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+
+//Get the attribute location
+var coord = gl.getAttribLocation(shaderProgram, "coordinates");
+
+//point an attribute to the currently bound VBO
+gl.vertexAttribPointer(coord, 2, gl.FLOAT, false, 0, 0);
+
+
+//Enable the attribute
+gl.enableVertexAttribArray(coord);
+
+/* Step5: Drawing the required object (triangle) */
+
+// Clear the canvas
+gl.clearColor(0.5, 0.5, 0.5, 0.9);
+
+// Enable the depth test
+gl.enable(gl.DEPTH_TEST); 
+
+// Clear the color buffer bit
+gl.clear(gl.COLOR_BUFFER_BIT);
+
+// Set the view port
+gl.viewport(0,0,canvas.width,canvas.height);
+
+// Draw the triangle
+gl.drawArrays(gl.TRIANGLES, 0, 3);
 
 </script>
