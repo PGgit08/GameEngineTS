@@ -13,9 +13,12 @@
 var canvas = document.getElementById('glCanvas');
 var gl = canvas.getContext('experimental-webgl');
 
-/* Step2: Define the geometry and store it in buffer objects */
+canvas.width = 800;
+canvas.height = 600;
 
-var vertices = [-0.5, 0.5, -0.5, -0.5, 0.0, -0.5,];
+
+/* Step2: Define the geometry and store it in buffer objects */
+var vertices = [-0.5, 0.5, -0.5, -0.5, 0.0, -0.5];
 
 // Create a new buffer object
 var vertex_buffer = gl.createBuffer();
@@ -34,7 +37,7 @@ gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
 // Vertex shader source code
 var vertCode =
-  'attribute vec2 coordinates;' + 
+  'attribute vec2 coordinates;' +
   'void main(void) {' + ' gl_Position = vec4(coordinates, 0.0, 1.0);' + '}';
 
 //Create a vertex shader object
@@ -87,6 +90,7 @@ gl.vertexAttribPointer(coord, 2, gl.FLOAT, false, 0, 0);
 
 //Enable the attribute
 gl.enableVertexAttribArray(coord);
+
 
 /* Step5: Drawing the required object (triangle) */
 
