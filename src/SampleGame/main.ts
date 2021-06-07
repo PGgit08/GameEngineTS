@@ -8,7 +8,7 @@ import {
     Vector2,
     IGame,
     Engine
-} from 'Engine/Core';
+} from '@GETS';
 
 /* Game Class */
 class SampleGame implements IGame{
