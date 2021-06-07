@@ -34,32 +34,7 @@ mat4.fromZRotation(rMat, 10 * Math.PI / 180);
 mat4.mul(modelMat, tMat, rMat);
 
 /* Step2: Define the geometry and store it in buffer objects */
-var vertices = 
-[
-  // left column
-  0, 0,
-  30, 0,
-  0, 150,
-  0, 150,
-  30, 0,
-  30, 150,
-
-  // top rung
-  30, 0,
-  100, 0,
-  30, 30,
-  30, 30,
-  100, 0,
-  100, 30,
-
-  // middle rung
-  30, 60,
-  67, 60,
-  30, 90,
-  30, 90,
-  67, 60,
-  67, 90
-]
+var vertices = [-0.5, 0.5, -0.5, -0.5, 0.0, -0.5];
 
 // Create a new buffer object
 var vertex_buffer = gl.createBuffer();
@@ -77,17 +52,9 @@ gl.bindBuffer(gl.ARRAY_BUFFER, null);
 /* Step3: Create and compile Shader programs */
 
 // Vertex shader source code
-var vertCode = `
-  attribute vec2 coordinates;
-  
-  uniform mat4 pMat;
-  uniform mat4 vMat;
-  uniform mat4 mMat;
-
-  void main(void){
-    gl_Position = pMat * vMat * mMat * vec4(coordinates, 0, 1.0);
-  }
-`
+var vertCode =
+  'attribute vec2 coordinates;' +
+  'void main(void) {' + ' gl_Position = vec4(coordinates, 0.0, 1.0);' + '}';
 
 //Create a vertex shader object
 var vertShader = gl.createShader(gl.VERTEX_SHADER);
@@ -99,11 +66,7 @@ gl.shaderSource(vertShader, vertCode);
 gl.compileShader(vertShader);
 
 //Fragment shader source code
-var fragCode = `
-  void main(void){
-    gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);
-  }
-`;
+var fragCode = 'void main(void) {' + 'gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);' + '}';
 
 // Create fragment shader object
 var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
@@ -145,24 +108,6 @@ gl.vertexAttribPointer(coord, 2, gl.FLOAT, false, 0, 0);
 gl.enableVertexAttribArray(coord);
 
 
-gl.uniformMatrix4fv(
-  gl.getUniformLocation(shaderProgram, 'pMat'),
-  false,
-  projectionMat
-);
-
-gl.uniformMatrix4fv(
-  gl.getUniformLocation(shaderProgram, 'vMat'),
-  false,
-  viewMat
-);
-
-gl.uniformMatrix4fv(
-  gl.getUniformLocation(shaderProgram, 'mMat'),
-  false,
-  modelMat
-);
-
 /* Step5: Drawing the required object (triangle) */
 
 // Clear the canvas
@@ -178,6 +123,6 @@ gl.clear(gl.COLOR_BUFFER_BIT);
 gl.viewport(0,0,canvas.width,canvas.height);
 
 // Draw the triangle
-gl.drawArrays(gl.TRIANGLES, 0, 18);
+gl.drawArrays(gl.TRIANGLES, 0, 3);
 
 </script>

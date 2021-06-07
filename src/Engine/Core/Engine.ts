@@ -1,5 +1,5 @@
 import { Renderer } from "Engine/Core/Renderer/Renderer";
-import { IGame }from "Engine/Core/Game/IGame";
+import { IGame }from "Engine/Game/IGame";
 import { SceneManager } from "Engine/Core/Scenes/SceneManager";
 import { RenderViewProps } from "Engine/Core/Renderer/IViewProps";
 import { TEntity } from "Engine/Core/ECS/TEntity";

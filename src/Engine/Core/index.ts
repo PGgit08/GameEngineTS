@@ -28,4 +28,4 @@ export * from './Particle/Particle';
 
 export * from 'Engine/Core/Engine';
 
-export * from 'Engine/Core/Game/IGame';
+export * from 'Engine/Game/IGame';
