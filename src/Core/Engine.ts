@@ -3,6 +3,7 @@ import { IGame }from "@game/IGame";
 import { SceneManager } from "@scenes/SceneManager";
 import { RenderViewProps } from "@renderer/IViewProps";
 import { TEntity } from "@ecs/TEntity";
+import { GLMatrix4 } from "@gl/GLMatrix4";
 
 /**
  * Main Engine class
@@ -12,7 +13,7 @@ import { TEntity } from "@ecs/TEntity";
  * And ETC.
  */
 export class Engine{
-    private renderer: Renderer;
+    private _renderer: Renderer;
     private game: IGame;
 
     private previousTime: number;
@@ -25,9 +26,13 @@ export class Engine{
     constructor(game:IGame, viewConfig: RenderViewProps){
         // basic constructor called
         // when engine created
-        this.renderer = new Renderer(
+        this._renderer = new Renderer(
             viewConfig,
-            {deltaTime: 0}
+            {
+                deltaTime: 0,
+                vMatrix: GLMatrix4.identity(),
+                pMatrix: GLMatrix4.projection(viewConfig.width, viewConfig.height)
+            }
         );
 
         this.game = game;
@@ -47,7 +52,7 @@ export class Engine{
     public start(){
         // first thing called before loop
         this.previousTime = performance.now();
-        this.renderer.renderProps.deltaTime -= this.previousTime;
+        Renderer.renderProps.deltaTime -= this.previousTime;
 
         // run pre-loop start methods
         this.game.Start();
@@ -60,8 +65,8 @@ export class Engine{
      */
     public loop(){
         // main game loop
-        this.renderer.renderProps.deltaTime -= this.previousTime;
-        let deltaTime: number = this.renderer.renderProps.deltaTime;
+        Renderer.renderProps.deltaTime -= this.previousTime;
+        let deltaTime: number = Renderer.renderProps.deltaTime;
 
         this.update(deltaTime);
         this.render();
@@ -86,6 +91,6 @@ export class Engine{
      */
     public render(){
         // rendering function
-        this.renderer.renderWorld(this.game);
+        this._renderer.renderWorld(this.game);
     };
 };

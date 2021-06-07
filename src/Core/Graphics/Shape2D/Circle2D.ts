@@ -27,8 +27,8 @@ export class Circle2D extends Drawable{
 
     // call the draw method of Drawable
     execute(){
-        CTX.beginPath();
-        CTX.arc(this._radius, this._radius, this._radius, 0, 2 * Math.PI);
-        CTX.stroke();
+        // CTX.beginPath();
+        // CTX.arc(this._radius, this._radius, this._radius, 0, 2 * Math.PI);
+        // CTX.stroke();
     };
 };

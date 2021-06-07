@@ -2,9 +2,10 @@ import { RenderViewProps } from '@renderer/IViewProps';
 
 /**
  * The physical RenderView for the game.
+ * Creates WebGL context.
  */
 export class RenderView{
-    private ctx: CanvasRenderingContext2D;
+    private gl: WebGLRenderingContext;
     private canvasId: string;
 
     /**
@@ -13,7 +14,7 @@ export class RenderView{
      * @param canvasProps The physical properties for the canvas.
      * @returns null if error.
      */
-    constructor(canvasId:string, canvasProps:RenderViewProps){
+    constructor(canvasId: string, canvasProps: RenderViewProps){
         const searchElement = document.getElementById(canvasId);
         if(searchElement){
             console.log(searchElement);
@@ -32,15 +33,15 @@ export class RenderView{
                 // add canvas into the DOM
                 document.body.appendChild(gameCanvas);
 
-                // get canvas context
-                const gameCtx = gameCanvas.getContext('2d');
+                // get canvas context(webgl)
+                const gameCtx = gameCanvas.getContext('experimental-webgl');
                 
                 // set this context(private) and canvasId(private)
-                this.ctx = gameCtx;
+                this.gl = gameCtx as WebGLRenderingContext;
                 this.canvasId = canvasId;
 
                 // set global context
-                window.CTX = this.ctx;
+                window.GL = this.gl;
             }
             catch(err){
                 console.log("Problem creating Canvas")

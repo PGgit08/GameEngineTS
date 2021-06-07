@@ -34,11 +34,11 @@ export class Rectangle2D extends Drawable{
     };
 
     execute(): void{
-        CTX.rect(
-            0,
-            0,
-            this._w,
-            this._h
-        )
+        // CTX.rect(
+        //     0,
+        //     0,
+        //     this._w,
+        //     this._h
+        // )
     };
 };

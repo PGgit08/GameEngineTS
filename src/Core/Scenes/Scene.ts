@@ -1,5 +1,5 @@
 import { TEntity } from '@ecs/TEntity';
-import { RendererProps } from '@renderer/IViewProps';
+import { RenderProps } from '@renderer/IViewProps';
 import { TGameObject } from '@ecs/TGameObject';
 import { SceneManager } from '@scenes/SceneManager';
 import { Physics } from '@physics/Physics';
@@ -23,7 +23,7 @@ export interface IScene{
     // game loop functions
     start(): void;
     update(dt: number): void;
-    render(renderProps: RendererProps): void;
+    render(renderProps: RenderProps): void;
 };
 
 // if a scene needs to be created, this class 
@@ -93,8 +93,8 @@ export class Scene implements IScene{
      * Renders all Entities in this scene.
      * @param renderProps The game-engine properties of the renderer.
      */
-    render(renderProps: RendererProps): void{
-        this.root_entity.render(renderProps);
+    render(): void{
+        this.root_entity.render();
     };
 
     /* TODO: add entity adding */

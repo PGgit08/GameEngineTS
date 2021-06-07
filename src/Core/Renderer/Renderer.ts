@@ -1,5 +1,5 @@
 import { IGame } from "@game/IGame";
-import { RenderViewProps, RendererProps } from "@renderer/IViewProps";
+import { RenderViewProps, RenderProps } from "@renderer/IViewProps";
 import { RenderView } from "@renderer/RenderView";
 import { SceneManager } from "@scenes/SceneManager";
 
@@ -8,8 +8,8 @@ import { SceneManager } from "@scenes/SceneManager";
  */
 export class Renderer{
     renderView: RenderView;
-    viewProps: RenderViewProps;
-    renderProps: RendererProps;
+    public static viewProps: RenderViewProps;
+    public static renderProps: RenderProps;
 
     /**
      * Creates a new physical RenderView and gives it properties.
@@ -17,10 +17,10 @@ export class Renderer{
      * @param renderProps Engine properties of Renderer.
      * @param canvasId DOM id of the canvas. @default "gCanvas"
      */
-    constructor(viewProps:RenderViewProps, renderProps: RendererProps, canvasId:string="gCanvas"){
+    constructor(viewProps: RenderViewProps, renderProps: RenderProps, canvasId: string="gCanvas"){
         this.renderView = new RenderView(canvasId, viewProps);
-        this.viewProps = viewProps;
-        this.renderProps = renderProps;
+        Renderer.viewProps = viewProps;
+        Renderer.renderProps = renderProps;
     };
 
     /**
@@ -28,11 +28,7 @@ export class Renderer{
      * @param game The user's IGame.
      */
     renderWorld(game:IGame): void{
-        // clear the background first
-        CTX.clearRect(0, 0, this.viewProps.width, this.viewProps.height);
-        CTX.beginPath();
-
-        SceneManager.CURRENT_SCENE.render(this.renderProps);
-        game.Render(this.renderProps.deltaTime);
+        SceneManager.CURRENT_SCENE.render();
+        game.Render(Renderer.renderProps.deltaTime);
     };
 };

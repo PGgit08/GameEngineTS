@@ -1,6 +1,6 @@
 import { TComponent } from "@ecs/Component/IComponent";
 import { Drawable } from "@graphics/Drawable";
-import { RendererProps } from "@renderer/IViewProps";
+import { RenderProps } from "@renderer/IViewProps";
 
 /**
  * A Graphics Component for managing the Drawing/Graphics of an Entity.
@@ -23,12 +23,12 @@ export class DrawComponent extends TComponent{
      * Draws the current drawing.
      * @param renderProps The Engine RendererProps.
      */
-    render(renderProps: RendererProps){
+    render(){
         /*
         Drawable item is equal to it's owners
         transform, unlike an entity's child,
         which is RELATIVE to it's owner.
         */
-        this._currentDrawing.draw(this.owner.worldMatrix);
+        this._currentDrawing.draw();
     };
 };

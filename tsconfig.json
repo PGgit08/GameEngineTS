@@ -50,6 +50,7 @@
       "@physics/*": ["Core/Physics/*"],
       "@ecs/*": ["Core/ECS/*"],
       "@graphics/*": ["Core/Graphics/*"],
+      "@gl/*": ["Core/GL/*"],
       "@renderer/*": ["Core/Renderer/*"],
       "@scenes/*": ["Core/Scenes/*"],
       "@premade/*": ["Core/Premade/*"],

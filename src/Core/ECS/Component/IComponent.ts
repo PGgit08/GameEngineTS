@@ -1,12 +1,12 @@
 import { TEntity } from '@ecs/TEntity'; 
-import { RendererProps } from '@renderer/IViewProps';
+import { RenderProps } from '@renderer/IViewProps';
 
 export default interface IComponent{
     start(): void;
 
     update(dt: number): void;
 
-    render(renderProps: RendererProps): void;
+    render(): void;
 
     owner: TEntity;
     setOwner(owner: TEntity): void;
@@ -60,5 +60,5 @@ export abstract class TComponent implements IComponent{
      * The render operations of this component.
      * @param renderProps Render properties.
      */
-    render(renderProps: RendererProps){};
+    render(){};
 };

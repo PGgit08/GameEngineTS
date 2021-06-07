@@ -2,7 +2,7 @@ import { TGameObject } from '@ecs/TGameObject';
 import { TComponent } from '@ecs/Component/IComponent';
 
 import { Transform } from '@physics/Transform';
-import { RendererProps } from '@renderer/IViewProps';
+import { RenderProps } from '@renderer/IViewProps';
 import { TBehavior } from '@ecs/Behavior/IBehavior';
 import { mat2d } from 'gl-matrix';
 import { Vector2 } from '@physics/Vector';
@@ -237,13 +237,13 @@ export class TEntity extends TGameObject{
      * Renders this entity's components and children.(recursive)
      * @param renderProps The engine properties of the renderer.
      */
-    render(renderProps: RendererProps): void {
+    render(): void {
         for(let c of this.components){
-            c.render(renderProps);
+            c.render();
         };
 
         for(let c of this.children){
-            c.render(renderProps);
+            c.render();
         };
     };
 
