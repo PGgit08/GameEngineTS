@@ -12,6 +12,9 @@ export abstract class Drawable{
     private _width: number = 0;
     private _height: number = 0;
 
+    private _buffer
+    private _shader
+
     public get width(): number{
         return this._width;
     };
