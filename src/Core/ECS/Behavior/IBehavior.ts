@@ -1,4 +1,4 @@
-import { TEntity } from "Engine/Core/ECS/TEntity";
+import { TEntity } from "@ecs/TEntity";
 
 /*
 Basically the same thing as a Component,

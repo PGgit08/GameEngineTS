@@ -1,8 +1,8 @@
-import { Renderer } from "Engine/Core/Renderer/Renderer";
-import { IGame }from "Engine/Game/IGame";
-import { SceneManager } from "Engine/Core/Scenes/SceneManager";
-import { RenderViewProps } from "Engine/Core/Renderer/IViewProps";
-import { TEntity } from "Engine/Core/ECS/TEntity";
+import { Renderer } from "@renderer/Renderer";
+import { IGame }from "@game/IGame";
+import { SceneManager } from "@scenes/SceneManager";
+import { RenderViewProps } from "@renderer/IViewProps";
+import { TEntity } from "@ecs/TEntity";
 
 /**
  * Main Engine class

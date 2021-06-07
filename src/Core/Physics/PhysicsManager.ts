@@ -1,4 +1,4 @@
-import { Physics } from "Engine/Core/Physics/Physics";
+import { Physics } from "@physics/Physics";
 
 /**
  * Manages all physics and current physics used in scene.

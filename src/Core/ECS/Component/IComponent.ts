@@ -1,5 +1,5 @@
-import { TEntity } from 'Engine/Core/ECS/TEntity'; 
-import { RendererProps } from 'Engine/Core/Renderer/IViewProps';
+import { TEntity } from '@ecs/TEntity'; 
+import { RendererProps } from '@renderer/IViewProps';
 
 export default interface IComponent{
     start(): void;

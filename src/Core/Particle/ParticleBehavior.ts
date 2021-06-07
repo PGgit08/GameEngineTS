@@ -1,6 +1,6 @@
-import { TBehavior } from "Engine/Core/ECS/Behavior/IBehavior";
+import { TBehavior } from "@ecs/Behavior/IBehavior";
 // import { TComponent } from "@ecs/Components/IComponent";
-import { Vector2 } from "Engine/Core/Physics/Vector";
+import { Vector2 } from "@physics/Vector";
 
 /**
  * A testing behavior for particles

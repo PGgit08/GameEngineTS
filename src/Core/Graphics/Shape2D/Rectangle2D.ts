@@ -1,4 +1,4 @@
-import { Drawable } from "Engine/Core/Graphics/Drawable";
+import { Drawable } from "@graphics/Drawable";
 
 export class Rectangle2D extends Drawable{
     _w: number;

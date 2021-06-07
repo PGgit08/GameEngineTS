@@ -1,4 +1,4 @@
-import { RenderViewProps } from 'Engine/Core/Renderer/IViewProps';
+import { RenderViewProps } from '@renderer/IViewProps';
 
 /**
  * The physical RenderView for the game.

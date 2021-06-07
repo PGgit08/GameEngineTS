@@ -1,4 +1,4 @@
-import { Vector2 } from 'Engine/Core/Physics/Vector';
+import { Vector2 } from '@physics/Vector';
 import { mat2d, vec2 } from 'gl-matrix';
 
 /**

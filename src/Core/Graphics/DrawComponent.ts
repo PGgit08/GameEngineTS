@@ -1,6 +1,6 @@
-import { TComponent } from "Engine/Core/ECS/Component/IComponent";
-import { Drawable } from "Engine/Core/Graphics/Drawable";
-import { RendererProps } from "Engine/Core/Renderer/IViewProps";
+import { TComponent } from "@ecs/Component/IComponent";
+import { Drawable } from "@graphics/Drawable";
+import { RendererProps } from "@renderer/IViewProps";
 
 /**
  * A Graphics Component for managing the Drawing/Graphics of an Entity.

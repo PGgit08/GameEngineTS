@@ -1,5 +1,5 @@
-import { Drawable } from 'Engine/Core/Graphics/Drawable';
-import { Vector2 } from 'Engine/Core/Physics/Vector';
+import { Drawable } from '@graphics/Drawable';
+import { Vector2 } from '@physics/Vector';
 
 export class Circle2D extends Drawable{
     // radius of the circle  

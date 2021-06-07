@@ -1,7 +1,7 @@
-import { IGame } from "Engine/Game/IGame";
-import { RenderViewProps, RendererProps } from "Engine/Core/Renderer/IViewProps";
-import { RenderView } from "Engine/Core/Renderer/RenderView";
-import { SceneManager } from "Engine/Core/Scenes/SceneManager";
+import { IGame } from "@game/IGame";
+import { RenderViewProps, RendererProps } from "@renderer/IViewProps";
+import { RenderView } from "@renderer/RenderView";
+import { SceneManager } from "@scenes/SceneManager";
 
 /**
  * A full Renderer for the game.

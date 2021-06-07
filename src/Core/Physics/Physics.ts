@@ -1,5 +1,5 @@
-import { PhysicsManager } from "Engine/Core/Physics/PhysicsManager";
-import { Scene } from "Engine/Core/Scenes/Scene";
+import { PhysicsManager } from "@physics/PhysicsManager";
+import { Scene } from "@scenes/Scene";
 import { Vector2 } from "./Vector";
 
 /**

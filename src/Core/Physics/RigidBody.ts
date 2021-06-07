@@ -1,4 +1,4 @@
-import { TBehavior } from "Engine/Core/ECS/Behavior/IBehavior";
+import { TBehavior } from "@ecs/Behavior/IBehavior";
 import { PhysicsManager } from "./PhysicsManager";
 import { Vector2 } from "./Vector";
 

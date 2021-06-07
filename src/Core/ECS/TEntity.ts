@@ -1,11 +1,11 @@
-import { TGameObject } from 'Engine/Core/ECS/TGameObject';
-import { TComponent } from 'Engine/Core/ECS/Component/IComponent';
+import { TGameObject } from '@ecs/TGameObject';
+import { TComponent } from '@ecs/Component/IComponent';
 
-import { Transform } from 'Engine/Core/Physics/Transform';
-import { RendererProps } from 'Engine/Core/Renderer/IViewProps';
-import { TBehavior } from 'Engine/Core/ECS/Behavior/IBehavior';
+import { Transform } from '@physics/Transform';
+import { RendererProps } from '@renderer/IViewProps';
+import { TBehavior } from '@ecs/Behavior/IBehavior';
 import { mat2d } from 'gl-matrix';
-import { Vector2 } from 'Engine/Core/Physics/Vector';
+import { Vector2 } from '@physics/Vector';
 
 export class TEntity extends TGameObject{
     name: string;

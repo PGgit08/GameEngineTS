@@ -1,5 +1,5 @@
-import { PhysicsManager } from "Engine/Core/Physics/PhysicsManager";
-import { Scene }  from "Engine/Core/Scenes/Scene";
+import { PhysicsManager } from "@physics/PhysicsManager";
+import { Scene }  from "@scenes/Scene";
 
 // a scene manager class for the games scenes
 // this is created so that scenes can be accessed

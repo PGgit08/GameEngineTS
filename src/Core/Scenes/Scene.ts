@@ -1,8 +1,8 @@
-import { TEntity } from 'Engine/Core/ECS/TEntity';
-import { RendererProps } from 'Engine/Core/Renderer/IViewProps';
-import { TGameObject } from 'Engine/Core/ECS/TGameObject';
-import { SceneManager } from 'Engine/Core/Scenes/SceneManager';
-import { Physics } from 'Engine/Core/Physics/Physics';
+import { TEntity } from '@ecs/TEntity';
+import { RendererProps } from '@renderer/IViewProps';
+import { TGameObject } from '@ecs/TGameObject';
+import { SceneManager } from '@scenes/SceneManager';
+import { Physics } from '@physics/Physics';
 
 /* Really basic scene interface for now */
 export interface IScene{
