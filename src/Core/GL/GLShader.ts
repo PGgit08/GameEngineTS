@@ -64,6 +64,14 @@ export abstract class GLShader{
     };
 
     /**
+     * Apply standard uniforms to this shader.
+     * @param model The model matrix.
+     * @param projection The projection matrix.
+     * @param view The view matrix.
+     */
+    public abstract ApplyStandardUniforms(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void;
+
+    /**
      * Loads the shaders and makes shader programs
      * @param vSource Vertex shader source(string).
      * @param fSource Fragment shader source(string).

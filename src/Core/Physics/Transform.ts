@@ -1,5 +1,5 @@
+import { GLMatrix4 } from '@gl/GLMatrix4';
 import { Vector2 } from '@physics/Vector';
-import { mat2d, vec2 } from 'gl-matrix';
 
 /**
  * Basic tranfrom of an entity.
@@ -48,18 +48,14 @@ export class Transform{
      * @returns glMatrix mat2d item
      */
     public toMatrix(){
-        // convert GETS vector into glMatrix vector
-        const tVector = vec2.fromValues(this._position.x, this._position.y);
-        const sVector = vec2.fromValues(this._scale.x, this._scale.y);
-
         // turn translation/rotation/scale into matricies
-        let translate = mat2d.fromTranslation(mat2d.create(), tVector);
-        let rotation = mat2d.fromRotation(mat2d.create(), this._rotation * Math.PI / 180);
-        let scale = mat2d.fromScaling(mat2d.create(), sVector);
+        let translate = GLMatrix4.translation(this._position);
+        let rotation = GLMatrix4.rotation(this._rotation * Math.PI / 180);
+        let scale = GLMatrix4.scale(this._scale);
 
 
         // multiply all transformation matricies to create one big matrix funvction
-        return mat2d.multiply(mat2d.create(), mat2d.multiply(mat2d.create(), translate, rotation), scale);
+        return GLMatrix4.mul(GLMatrix4.mul(translate, rotation), scale);
     };
 
 };

@@ -1,4 +1,6 @@
+import { GLBuffer } from "@gl/GLBuffer";
 import { GLMatrix4 } from "@gl/GLMatrix4";
+import { GLShader } from "@gl/GLShader";
 import { Vector2 } from "@physics/Vector";
 
 /**
@@ -9,11 +11,12 @@ export abstract class Drawable{
     // point of rotation for drawable item(defaults to half)
     public origin: Vector2 = new Vector2(0.5, 0.5);
 
-    private _width: number = 0;
-    private _height: number = 0;
+    protected _width: number = 0;
+    protected _height: number = 0;
 
-    private _buffer
-    private _shader
+    // the WebGL buffer and shaders for this Drawable item
+    protected _buffer: GLBuffer = new GLBuffer();
+    protected _shader: GLShader;
 
     public get width(): number{
         return this._width;
@@ -35,7 +38,7 @@ export abstract class Drawable{
      * A pre-drawing method for a graphic in which to preform transforms.
      * @param pos The position vector at which to preform transforms.
      */
-    protected _preDraw(): void{
+    protected _preDraw(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
         // prefrom translate to origin
         // and transformations based on matrix
     };  
@@ -50,15 +53,8 @@ export abstract class Drawable{
      * A draw method to preform tranforming and rendering.
      * @param pos The position to the transforming/rendering.
      */
-    public draw(): void{
-        this._preDraw();
-        this.execute();
+    public draw(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
+        this._preDraw(model, projection, view);
         this._postDraw();
     };
-
-    /**
-     * Classes inheriting Drawable override this abstract method.
-     * @param pos The position to render at.
-     */
-    abstract execute(): void;
 };

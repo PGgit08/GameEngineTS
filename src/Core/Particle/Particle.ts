@@ -1,10 +1,8 @@
 import { TEntity } from "@ecs/TEntity";
 import ParticleBehavior from "Core/Particle/ParticleBehavior";
 import { DrawComponent } from "@graphics/DrawComponent";
-import { Circle2D } from "@graphics/Shape2D/Circle2D";
 import { Vector2 } from "@physics/Vector";
 import { RigidBody } from "@physics/RigidBody";
-import { Rectangle2D } from "@graphics/Shape2D/Rectangle2D";
 
 /**
  * @description A circular "particle" that follows a physics pattern.
@@ -27,6 +25,6 @@ export class Particle extends TEntity{
 
         this.graphics = this.getComponent(DrawComponent);
         // this.graphics.setCurrentDrawing(new Circle2D(this.particleSize));
-        this.graphics.setCurrentDrawing(new Rectangle2D(this.particleSize, this.particleSize));
+        // this.graphics.setCurrentDrawing(new Rectangle2D(this.particleSize, this.particleSize));
     };
 };

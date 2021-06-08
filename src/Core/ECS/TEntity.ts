@@ -6,6 +6,7 @@ import { RenderProps } from '@renderer/IViewProps';
 import { TBehavior } from '@ecs/Behavior/IBehavior';
 import { mat2d } from 'gl-matrix';
 import { Vector2 } from '@physics/Vector';
+import { GLMatrix4 } from '@gl/GLMatrix4';
 
 export class TEntity extends TGameObject{
     name: string;
@@ -24,8 +25,8 @@ export class TEntity extends TGameObject{
     public localTransform: Transform = new Transform();
 
     // same for the matricies
-    protected _worldMatrix: mat2d = mat2d.create();
-    protected _localMatrix: mat2d = mat2d.create();
+    protected _worldMatrix: GLMatrix4 = GLMatrix4.identity();
+    protected _localMatrix: GLMatrix4 = GLMatrix4.identity();
 
     public get visible(): boolean{
         return this._visible;
@@ -35,11 +36,11 @@ export class TEntity extends TGameObject{
         this._visible = v;
     };
 
-    public get worldMatrix(): mat2d{
+    public get worldMatrix(): GLMatrix4{
         return this._worldMatrix;
     };
 
-    public get localMatrix(): mat2d{
+    public get localMatrix(): GLMatrix4{
         return this._localMatrix;
     };
 
@@ -255,10 +256,9 @@ export class TEntity extends TGameObject{
         this._localMatrix = this.localTransform.toMatrix();
 
         if(this.parent && this.parent.visible){
-            mat2d.multiply(
-                this._worldMatrix,
+            this._worldMatrix = GLMatrix4.mul(
                 this.parent.worldMatrix,
-                this._localMatrix
+                this.localMatrix
             );
         };
     };
