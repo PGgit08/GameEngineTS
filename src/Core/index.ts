@@ -7,8 +7,7 @@ export * from '@ecs/Component/IComponent';
 export * from '@ecs/TEntity';
 export * from '@ecs/TGameObject';
 
-export * from '@graphics/Shape2D/Circle2D';
-export * from '@graphics/Shape2D/Rectangle2D';
+export * from '@graphics/Shape2D/Triangle2D';
 
 export * from '@graphics/Drawable';
 export * from '@graphics/DrawComponent';
