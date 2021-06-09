@@ -35,4 +35,8 @@ export class ShaderManager{
     public static AddShader(shader: GLShader){
         this.REGISTERED_SHADERS[shader.name] = shader;
     };
+
+    public static SetShader(name: string){
+        this.ACTIVE_SHADER = this.REGISTERED_SHADERS[name];
+    };
 };

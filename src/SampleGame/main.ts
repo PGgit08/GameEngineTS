@@ -6,7 +6,9 @@ import {
     SceneManager,
     Vector2,
     IGame,
-    Engine
+    Engine,
+    DrawComponent,
+    Triangle2D
 } from '@GETS';
 
 /* Game Class */
@@ -36,6 +38,10 @@ class SampleGame implements IGame{
 
         // create a new "Particle" entity, give it components + behaviors, and add it to Particles parent
         const MainParticle: TEntity = new TEntity("t");
+        const drawcomponent: DrawComponent = new DrawComponent();
+
+        drawcomponent.setCurrentDrawing(new Triangle2D(10, 10));
+        MainParticle.addComponent(drawcomponent);
         // const OtherParticle: Particle = new Particle();
 
         MainParticle.worldTransform.position = new Vector2(100, 200);

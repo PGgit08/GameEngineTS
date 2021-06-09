@@ -41,12 +41,16 @@ export abstract class Drawable{
     protected _preDraw(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
         // prefrom translate to origin
         // and transformations based on matrix
+        this._shader.ApplyStandardUniforms(model, projection, view);
+        this._buffer.bind();
+    
     };  
 
     /**
      * A post-drawing method for a graphic.
      */
     protected _postDraw(): void{
+        this._buffer.draw();
     };
 
     /**
@@ -55,6 +59,19 @@ export abstract class Drawable{
      */
     public draw(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
         this._preDraw(model, projection, view);
+        this.uploadBuffer();
         this._postDraw();
     };
+
+    /**
+     * Must be overwritten by drawables.
+     * Method sets attributes for buffer.
+     */
+    public abstract loadBuffer(): void;
+
+    /**
+     * Must by overwritten by drawables.
+     * Method sets buffer and uploads it.
+     */
+    protected abstract uploadBuffer(): void;
 };

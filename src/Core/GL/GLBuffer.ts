@@ -107,12 +107,14 @@ export class GLBuffer{
      * @param info The attribute info.
      */
     public addAttribute(info: AttributeInfo){
+        // console.log(info.size);
         this._hasAttributeLocation = true;
         info.offset = this._elementSize;
         this._attributes.push(info);
 
         // increases the size of a position element in this buffer to the size of the attribute
         this._elementSize += info.size;
+        console.log(this._elementSize);
         this._stride = this._elementSize * this._typeSize;
     };
     
@@ -173,6 +175,7 @@ export class GLBuffer{
     public draw(): void{
         if(this._bufferType === GL.ARRAY_BUFFER){
             // sticking to this one for now
+            console.log(this._elementSize);
             GL.drawArrays(
                 this._mode,
                 0,
