@@ -7,8 +7,8 @@ export abstract class GLShader{
     private _name: string;
     private _program: WebGLProgram;
 
-    private _attributes: {[name: string]: number};
-    private _uniforms: {[name: string]: WebGLUniformLocation};
+    private _attributes: {[name: string]: number} = {};
+    private _uniforms: {[name: string]: WebGLUniformLocation} = {};
 
     public constructor(name: string){
         this._name = name;
@@ -71,14 +71,27 @@ export abstract class GLShader{
      */
     public abstract ApplyStandardUniforms(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void;
 
+
+    /**
+     * Get the vertex shader source.
+     * @returns String.
+     */
+    protected abstract get vSource(): string;
+    
+    /**
+     * Get the fragment shader source.
+     * @returns String.
+     */
+    protected abstract get fSource(): string;
+
     /**
      * Loads the shaders and makes shader programs
      * @param vSource Vertex shader source(string).
      * @param fSource Fragment shader source(string).
      */
-    protected load(vSource: string, fSource: string){
-        let vertexShader = this.loadShader(vSource, GL.VERTEX_SHADER);
-        let fragmentShader = this.loadShader(fSource, GL.FRAGMENT_SHADER);
+    public load(){
+        let vertexShader = this.loadShader(this.vSource, GL.VERTEX_SHADER);
+        let fragmentShader = this.loadShader(this.fSource, GL.FRAGMENT_SHADER);
 
         this.createProgram(vertexShader, fragmentShader);
 

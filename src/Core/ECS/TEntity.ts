@@ -2,10 +2,7 @@ import { TGameObject } from '@ecs/TGameObject';
 import { TComponent } from '@ecs/Component/IComponent';
 
 import { Transform } from '@physics/Transform';
-import { RenderProps } from '@renderer/IViewProps';
 import { TBehavior } from '@ecs/Behavior/IBehavior';
-import { mat2d } from 'gl-matrix';
-import { Vector2 } from '@physics/Vector';
 import { GLMatrix4 } from '@gl/GLMatrix4';
 
 export class TEntity extends TGameObject{
@@ -28,6 +25,8 @@ export class TEntity extends TGameObject{
     protected _worldMatrix: GLMatrix4 = GLMatrix4.identity();
     protected _localMatrix: GLMatrix4 = GLMatrix4.identity();
 
+    protected _isLoaded: boolean = false;
+
     public get visible(): boolean{
         return this._visible;
     };
@@ -42,6 +41,10 @@ export class TEntity extends TGameObject{
 
     public get localMatrix(): GLMatrix4{
         return this._localMatrix;
+    };
+
+    public get isLoaded(): boolean{
+        return this._isLoaded;
     };
 
     /**
@@ -211,6 +214,21 @@ export class TEntity extends TGameObject{
         for(let c of this.children){
             c.start();
         };
+    };
+
+    /**
+     * Calls load method of children and components, sets this entity to LOADED.(recursive)
+     */
+    load(){
+        for(let c of this.children){
+            c.load();
+        };
+
+        for(let c of this.components){
+            c.load();
+        };
+
+        this._isLoaded = true;
     };
 
     /**

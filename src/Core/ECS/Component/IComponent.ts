@@ -4,6 +4,8 @@ import { RenderProps } from '@renderer/IViewProps';
 export default interface IComponent{
     start(): void;
 
+    load(): void;
+
     update(dt: number): void;
 
     render(): void;
@@ -41,24 +43,28 @@ export abstract class TComponent implements IComponent{
      * Set's the owner of this component.
      * @param o The owner Entity.
      */
-    setOwner(o: TEntity){
+    setOwner(o: TEntity): void{
         this.owner = o;
     };
 
     /**
      * The pre-loop operations of this component.
      */
-    start(){};
+    start(): void{};
+
+    /**
+     * Loads this components for webgl(buffers+shaders).
+     */
+    load(): void{};
 
     /**
      * The loop operations of this component, called on each frame update.
      * @param dt The delta time since the last update call.
      */
-    update(dt: number){};
+    update(dt: number): void{};
 
     /**
      * The render operations of this component.
-     * @param renderProps Render properties.
      */
-    render(){};
+    render(): void{};
 };

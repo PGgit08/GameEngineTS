@@ -8,7 +8,7 @@ export class Shader2D extends GLShader{
     constructor(){
         super("Shader2D");
 
-        this.load(this.vSource(), this.fSource());
+        // this.load()
     };
 
     public ApplyStandardUniforms(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4){
@@ -19,7 +19,7 @@ export class Shader2D extends GLShader{
         this.setUniformMatrix('view', view);
     };
 
-    private vSource(): string{
+    protected get vSource(): string{
         return `
             attribute vec2 coords;
 
@@ -33,7 +33,7 @@ export class Shader2D extends GLShader{
         `;
     };
 
-    private fSource(): string{
+    protected get fSource(): string{
         // sets color to white
         return `
             void main(void){

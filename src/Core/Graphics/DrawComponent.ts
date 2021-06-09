@@ -17,6 +17,10 @@ export class DrawComponent extends TComponent{
         this._currentDrawing = d;
     };
 
+    load(){
+
+    };
+
     update(dt: number){
     };
 

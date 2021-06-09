@@ -21,9 +21,10 @@ export class RenderView{
         }
         else{
             // no canvas has been found
+            let gameCanvas: HTMLCanvasElement;
             try{
                 // make a canvas and set attributes
-                const gameCanvas = document.createElement("canvas") as HTMLCanvasElement;
+                gameCanvas = document.createElement("canvas") as HTMLCanvasElement;
                 gameCanvas.id = canvasId;
 
                 gameCanvas.width = canvasProps.width;
@@ -48,6 +49,13 @@ export class RenderView{
                 console.log(err);
                 return;
             };
+
+            // Set clear color to black, fully opaque
+            GL.clearColor(0.0, 0.0, 0.0, 1.0);
+            // Clear the color buffer with specified clear color
+            GL.clear(GL.COLOR_BUFFER_BIT);
+
+            GL.viewport(0, 0, gameCanvas.width, gameCanvas.height);
         };
     };
 };

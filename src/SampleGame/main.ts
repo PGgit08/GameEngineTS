@@ -3,7 +3,6 @@
 import {
     Scene,
     TEntity,
-    Particle,
     SceneManager,
     Vector2,
     IGame,
@@ -36,7 +35,7 @@ class SampleGame implements IGame{
         Particles.visible = false;
 
         // create a new "Particle" entity, give it components + behaviors, and add it to Particles parent
-        const MainParticle: Particle = new Particle();
+        const MainParticle: TEntity = new TEntity("t");
         // const OtherParticle: Particle = new Particle();
 
         MainParticle.worldTransform.position = new Vector2(100, 200);

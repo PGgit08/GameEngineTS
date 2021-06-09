@@ -4,6 +4,7 @@ import { SceneManager } from "@scenes/SceneManager";
 import { RenderViewProps } from "@renderer/IViewProps";
 import { TEntity } from "@ecs/TEntity";
 import { GLMatrix4 } from "@gl/GLMatrix4";
+import { ShaderManager } from "@gl/ShaderManager";
 
 /**
  * Main Engine class
@@ -54,16 +55,52 @@ export class Engine{
         this.previousTime = performance.now();
         Renderer.renderProps.deltaTime -= this.previousTime;
 
-        // run pre-loop start methods
+        // load that shader manager
+        ShaderManager.Init();
+
+        /**
+         * Because asset loading does not exist yet,
+         * game Start() is for debugging, and all entities
+         * are created there, therefore game start is called here
+         */
         this.game.Start();
+
+        // load everything in scenes
+        SceneManager.CURRENT_SCENE.load();
+
+        // and wait for it to finish loading
+        this.loading();
+
+        // done loading, start needed things
+        // start the current scene
         SceneManager.CURRENT_SCENE.start();
+
+        // start of game loop after loading and starting procedures
         this.loop();
+    };
+
+    /**
+     * Wait for everything to finish loading.
+     */
+    private loading(){
+        if(!SceneManager.CURRENT_SCENE.loaded){
+            // start a recursive loop with requestAnimFrame
+            requestAnimationFrame(this.loading.bind(this));
+        };
+
+        if(!ShaderManager.loaded){
+            // same recursion
+            requestAnimationFrame(this.loading.bind(this));
+        };
+
+        // means that everything has loaded, can kill recursive loop
+        return;
     };
 
     /**
      * Game loop
      */
-    public loop(){
+    private loop(){
         // main game loop
         Renderer.renderProps.deltaTime -= this.previousTime;
         let deltaTime: number = Renderer.renderProps.deltaTime;
@@ -80,7 +117,7 @@ export class Engine{
      * Updates current scene and Game.
      * @param delta Time since last frame update!
      */
-    public update(delta:number){
+    private update(delta:number){
         // update function
         SceneManager.CURRENT_SCENE.update(delta);
         this.game.Update(delta);
@@ -89,7 +126,7 @@ export class Engine{
     /**
      * Renders current scene and game(@class Renderer.renderWorld)
      */
-    public render(){
+    private render(){
         // rendering function
         this._renderer.renderWorld(this.game);
     };

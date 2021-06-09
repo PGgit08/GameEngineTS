@@ -2,7 +2,6 @@ import { TEntity } from '@ecs/TEntity';
 import { RenderProps } from '@renderer/IViewProps';
 import { TGameObject } from '@ecs/TGameObject';
 import { SceneManager } from '@scenes/SceneManager';
-import { Physics } from '@physics/Physics';
 
 /* Really basic scene interface for now */
 export interface IScene{
@@ -10,8 +9,6 @@ export interface IScene{
     // which holds all the children entities 
     // in the scene
     root_entity: TEntity;
-
-    physics: Physics;
 
     // scene id/name
     readonly id: number;
@@ -22,8 +19,9 @@ export interface IScene{
 
     // game loop functions
     start(): void;
+    load(): void;
     update(dt: number): void;
-    render(renderProps: RenderProps): void;
+    render(): void;
 };
 
 // if a scene needs to be created, this class 
@@ -36,8 +34,6 @@ export class Scene implements IScene{
     readonly id: number;
     name: string;
 
-    protected _physics: Physics;
-
     /**
      * Creates a new scene which is added to the SceneManager.
      * @param name The Name of this scene.
@@ -46,16 +42,13 @@ export class Scene implements IScene{
         this.name = name;
         this.root_entity = new TEntity('ROOT');
 
-        // add physics
-        this._physics = new Physics(this);
-
         SceneManager.addScene(this);
     };
 
-    public get physics(): Physics{
-        return this._physics;
-    };
 
+    public get loaded(): boolean{
+        return this.root_entity.isLoaded;
+    };
 
     /**
      * Recursivly attempts to find an Entity in this scene.
@@ -82,6 +75,14 @@ export class Scene implements IScene{
     };
 
     /**
+     * Preforms loading operations on all entities, called after start, before loop.
+     * Mainly used for WebGL buffer loading for components.
+     */
+    load(): void{
+        this.root_entity.load();
+    };
+
+    /**
      * Preforms update procedures on each frame on the Entities in this Scene.
      * @param dt The time since the last frame update.
      */
@@ -91,7 +92,6 @@ export class Scene implements IScene{
 
     /**
      * Renders all Entities in this scene.
-     * @param renderProps The game-engine properties of the renderer.
      */
     render(): void{
         this.root_entity.render();

@@ -1,4 +1,3 @@
-import { PhysicsManager } from "@physics/PhysicsManager";
 import { Scene }  from "@scenes/Scene";
 
 // a scene manager class for the games scenes
@@ -34,7 +33,6 @@ export class SceneManager{
      */
     public static setCurrentScene(name: string): void{
         // NOTE: This also sets current's of different managers
-        PhysicsManager.setCurrentPhysics(this.GAME_SCENES[name].physics);
         this.CURRENT_SCENE = this.GAME_SCENES[name];
     };
 };

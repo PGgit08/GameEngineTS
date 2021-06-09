@@ -13,7 +13,6 @@ export * from '@graphics/Drawable';
 export * from '@graphics/DrawComponent';
 export * from '@graphics/Sprite';
 
-export * from '@physics/RigidBody';
 export * from '@physics/Transform';
 export * from '@physics/Vector';
 
@@ -22,8 +21,6 @@ export * from '@renderer/RenderView';
 
 export * from '@scenes/Scene';
 export * from '@scenes/SceneManager';
-
-export * from '../Core/Particle/Particle';
 
 export * from '@engine';
 
