@@ -15,7 +15,7 @@ export abstract class Drawable{
     protected _height: number = 0;
 
     // the WebGL buffer and shaders for this Drawable item
-    protected _buffer: GLBuffer = new GLBuffer();
+    protected _buffer: GLBuffer;
     protected _shader: GLShader;
 
     public get width(): number{

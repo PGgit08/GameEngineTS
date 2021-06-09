@@ -14,6 +14,8 @@ export class Triangle2D extends Drawable{
         ShaderManager.SetShader('Shader2D');
         this._shader = ShaderManager.ACTIVE_SHADER;
 
+        this._buffer = new GLBuffer();
+
         let posAttribute: AttributeInfo = new AttributeInfo();
 
         posAttribute.location = this._shader.getAttributeLocation('coords');
