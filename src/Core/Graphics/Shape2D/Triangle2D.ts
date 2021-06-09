@@ -19,13 +19,16 @@ export class Triangle2D extends Drawable{
         posAttribute.location = this._shader.getAttributeLocation('coords');
         posAttribute.size = 2;
 
+        console.log(posAttribute);
+        console.log(this._shader);
+
         this._buffer.addAttribute(posAttribute);
 
         this._buffer.setData(
             [
                 0, 0,
-                0, this._width,
-                this._height, this._width
+                0, 10,
+                10, 10
             ]
         );
 

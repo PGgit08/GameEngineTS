@@ -40,7 +40,7 @@ export class GLBuffer{
     private _hasAttributeLocation: boolean = false;
 
     // the size of a position element in this buffer(example: Vector2 = 2)
-    private _elementSize: number;
+    private _elementSize: number = 0;
 
     // the size of the dataType(example: GL.FLOAT = 4)
     private _typeSize: number;
@@ -114,7 +114,7 @@ export class GLBuffer{
 
         // increases the size of a position element in this buffer to the size of the attribute
         this._elementSize += info.size;
-        console.log(this._elementSize);
+        // console.log(this._elementSize);
         this._stride = this._elementSize * this._typeSize;
     };
     
@@ -149,7 +149,7 @@ export class GLBuffer{
      * Sends this buffer to the GPU.
      */
     public upload(): void{
-        // make sure to bind
+        // make sure to bind first
         this.bind();
 
         // create the bufferData variable as a binary array
@@ -158,7 +158,8 @@ export class GLBuffer{
         // check what type upload array should be
         switch(this._dataType){
             case GL.FLOAT:
-                bufferData = new Float32Array();
+                bufferData = new Float32Array(this._data);
+                break;
         };
 
         // upload buffer to GPU
@@ -175,7 +176,7 @@ export class GLBuffer{
     public draw(): void{
         if(this._bufferType === GL.ARRAY_BUFFER){
             // sticking to this one for now
-            console.log(this._elementSize);
+            // console.log(this._elementSize);
             GL.drawArrays(
                 this._mode,
                 0,

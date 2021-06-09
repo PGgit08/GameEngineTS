@@ -42,7 +42,6 @@ export abstract class Drawable{
         // prefrom translate to origin
         // and transformations based on matrix
         this._shader.ApplyStandardUniforms(model, projection, view);
-        this._buffer.bind();
     
     };  
 
@@ -50,6 +49,7 @@ export abstract class Drawable{
      * A post-drawing method for a graphic.
      */
     protected _postDraw(): void{
+        this._buffer.bind();
         this._buffer.draw();
     };
 

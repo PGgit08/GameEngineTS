@@ -56,6 +56,8 @@ export class RenderView{
             GL.clear(GL.COLOR_BUFFER_BIT);
 
             GL.viewport(0, 0, gameCanvas.width, gameCanvas.height);
+
+            GL.enable(GL.DEPTH_TEST);
         };
     };
 };

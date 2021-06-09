@@ -94,6 +94,7 @@ export class Engine{
         };
 
         // means that everything has loaded, can kill recursive loop
+        console.log("done loading");
         return;
     };
 

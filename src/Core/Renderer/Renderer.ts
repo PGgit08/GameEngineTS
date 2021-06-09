@@ -28,6 +28,8 @@ export class Renderer{
      * @param game The user's IGame.
      */
     renderWorld(game:IGame): void{
+        GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
+
         SceneManager.CURRENT_SCENE.render();
         game.Render(Renderer.renderProps.deltaTime);
     };

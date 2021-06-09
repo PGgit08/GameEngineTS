@@ -18,6 +18,7 @@ export class DrawComponent extends TComponent{
     };
 
     load(){
+        console.log(this._currentDrawing);
         this._currentDrawing.loadBuffer();
     };
 
@@ -34,6 +35,6 @@ export class DrawComponent extends TComponent{
         transform, unlike an entity's child,
         which is RELATIVE to it's owner.
         */
-        this._currentDrawing.draw(Renderer.renderProps.vMatrix, Renderer.renderProps.vMatrix, Renderer.renderProps.vMatrix);
+        this._currentDrawing.draw(Renderer.renderProps.vMatrix, Renderer.renderProps.pMatrix, Renderer.renderProps.vMatrix);
     };
 };
