@@ -65,6 +65,9 @@ export class Engine{
          */
         this.game.Start();
 
+        // call start method of 
+        SceneManager.CURRENT_SCENE.start();
+
         // load everything in scenes
         SceneManager.CURRENT_SCENE.load();
 
@@ -72,8 +75,7 @@ export class Engine{
         this.loading();
 
         // done loading, start needed things
-        // start the current scene
-        SceneManager.CURRENT_SCENE.start();
+
 
         // start of game loop after loading and starting procedures
         this.loop();
