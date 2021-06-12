@@ -41,6 +41,7 @@ export class Scene implements IScene{
     constructor(name: string){
         this.name = name;
         this.root_entity = new TEntity('ROOT');
+        this.root_entity.visible = false;
 
         SceneManager.addScene(this);
     };

@@ -2,7 +2,7 @@ import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
 import { ShaderManager } from "@gl/ShaderManager";
 import { Drawable } from "@graphics/Drawable";
 
-export class Triangle2D extends Drawable{ 
+export class Square2D extends Drawable{ 
     constructor(w:number, h:number){
         super();
 
@@ -14,7 +14,7 @@ export class Triangle2D extends Drawable{
         ShaderManager.SetShader('Shader2D');
         this._shader = ShaderManager.ACTIVE_SHADER;
 
-        this._buffer = new GLBuffer();
+        this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.TRIANGLE_FAN);
 
         let posAttribute: AttributeInfo = new AttributeInfo();
 
@@ -30,7 +30,8 @@ export class Triangle2D extends Drawable{
             [
                 0, 0,
                 0, this._width,
-                this._height, this._width
+                this._height, this._width,
+                0, this._height
             ]
         );
 

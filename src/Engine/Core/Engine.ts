@@ -17,7 +17,7 @@ export class Engine{
     private _renderer: Renderer;
     private game: IGame;
 
-    private previousTime: number;
+    private previousTime: number = 0;
 
     /**
      * Creates new Engine instance.
@@ -51,22 +51,16 @@ export class Engine{
      * Pre-loop
      */
     public start(){
-        // first thing called before loop
-        this.previousTime = performance.now();
-        Renderer.renderProps.deltaTime -= this.previousTime;
-
-        // load that shader manager
+        // load the shader manager
         ShaderManager.Init();
 
         /**
          * Because asset loading does not exist yet,
          * game Start() is for debugging, and all entities
          * are created there, therefore game start is called here
+         * (this can be seen as AssetManager.load)
          */
         this.game.Start();
-
-        // call start method of 
-        SceneManager.CURRENT_SCENE.start();
 
         // load everything in scenes
         SceneManager.CURRENT_SCENE.load();
@@ -75,7 +69,7 @@ export class Engine{
         this.loading();
 
         // done loading, start needed things
-
+        SceneManager.CURRENT_SCENE.start();
 
         // start of game loop after loading and starting procedures
         this.loop();
@@ -105,13 +99,13 @@ export class Engine{
      */
     private loop(){
         // main game loop
-        Renderer.renderProps.deltaTime -= this.previousTime;
-        let deltaTime: number = Renderer.renderProps.deltaTime;
-
-        this.update(deltaTime);
-        this.render();
 
         this.previousTime = performance.now();
+
+        this.update(Renderer.renderProps.deltaTime);
+        this.render();
+
+        Renderer.renderProps.deltaTime = performance.now() - this.previousTime;
 
         requestAnimationFrame(this.loop.bind(this));
     };

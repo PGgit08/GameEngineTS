@@ -35,6 +35,6 @@ export class DrawComponent extends TComponent{
         transform, unlike an entity's child,
         which is RELATIVE to it's owner.
         */
-        this._currentDrawing.draw(Renderer.renderProps.vMatrix, Renderer.renderProps.pMatrix, Renderer.renderProps.vMatrix);
+        this._currentDrawing.draw(this.owner.worldMatrix, Renderer.renderProps.pMatrix, Renderer.renderProps.vMatrix);
     };
 };

@@ -8,7 +8,7 @@ import {
     IGame,
     Engine,
     DrawComponent,
-    Triangle2D
+    Square2D
 } from '@GETS';
 
 /* Game Class */
@@ -39,16 +39,24 @@ class SampleGame implements IGame{
         // create a new "Particle" entity, give it components + behaviors, and add it to Particles parent
         const MainParticle: TEntity = new TEntity("t");
         const drawcomponent: DrawComponent = new DrawComponent();
-
-        drawcomponent.setCurrentDrawing(new Triangle2D(10, 10));
+        drawcomponent.setCurrentDrawing(new Square2D(100, 100));
         MainParticle.addComponent(drawcomponent);
-        // const OtherParticle: Particle = new Particle();
+        
 
         MainParticle.worldTransform.position = new Vector2(100, 200);
-        // OtherParticle.localTransform.position = new Vector2(100, 0);
+        MainParticle.worldTransform.rotation = 10;
+        
+
+        const OtherParticle: TEntity = new TEntity("o");
+        const drawcomponent2: DrawComponent = new DrawComponent();
+        drawcomponent2.setCurrentDrawing(new Square2D(100, 100));
+        OtherParticle.addComponent(drawcomponent2);
+
+
+        OtherParticle.localTransform.position = new Vector2(20, 0);
 
         Particles.addChild(MainParticle);
-        // MainParticle.addChild(OtherParticle);
+        MainParticle.addChild(OtherParticle);
 
         // add all needed objects into the scene
         SampleScene.addObject(Particles);

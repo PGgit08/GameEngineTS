@@ -8,6 +8,7 @@ export * from '@ecs/TEntity';
 export * from '@ecs/TGameObject';
 
 export * from '@graphics/Shape2D/Triangle2D';
+export * from '@graphics/Shape2D/Square2D';
 
 export * from '@graphics/Drawable';
 export * from '@graphics/DrawComponent';

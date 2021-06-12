@@ -48,7 +48,7 @@ export class GLMatrix4{
     static projection(w: number, h: number): GLMatrix4{
         // make an orthogonic matrix for scaling pixel coordinates(near + far clip is 0 since 2d)
         let glMat: mat4 = mat4.create();
-        mat4.ortho(glMat, 0, w, h, 0, 0, 0);
+        mat4.ortho(glMat, 0, w, h, 0, 400, -400);
 
         // create a new 4x4 identity matrix
         const projectionMat = new GLMatrix4(glMat);
