@@ -220,11 +220,11 @@ export class TEntity extends TGameObject{
      * Calls load method of children and components, sets this entity to LOADED.(recursive)
      */
     load(){
-        for(let c of this.children){
+        for(let c of this.components){
             c.load();
         };
 
-        for(let c of this.components){
+        for(let c of this.children){
             c.load();
         };
 

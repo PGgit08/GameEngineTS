@@ -31,18 +31,19 @@ export class Rect2D extends Drawable{
 
         this._buffer.addAttribute(posAttribute);
 
+
         /**
          * WebGL has some weird drawing order,
          * so this took like an hour to complete
          */
         this._buffer.setData(
             [
-                0, 0,
-                0, this._height,
-                this.width, this._height,
-                0, 0,
-                this._width, 0,
-                this._width, this._height
+                this._minX, this._minY,
+                this._minX, this._maxY,
+                this._maxX, this._maxY,
+                this._minX, this._minY,
+                this._maxX, this._minY,
+                this._maxX, this._maxY
             ]
         );
     };

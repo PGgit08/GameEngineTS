@@ -11,28 +11,21 @@ export abstract class Drawable{
     // point of rotation for drawable item(defaults to half)
     public origin: Vector2 = new Vector2(0.5, 0.5);
 
-    protected _width: number = 0;
-    protected _height: number = 0;
+    // the width and height of this Drawable
+    protected _width: number = 100;
+    protected _height: number = 100;
 
     // the WebGL buffer and shaders for this Drawable item
     protected _buffer: GLBuffer;
     protected _shader: GLShader;
 
-    public get width(): number{
-        return this._width;
-    };
-
-    public set width(w: number){
-        this._width = w;
-    };
-
-    public get height(): number{
-        return this._height;
-    };
-
-    public set height(h: number){
-        this._height = h;
-    };
+    // the min/max X calculated with origin and width(can be useful for AABB)
+    protected _minX: number = -(this._width * this.origin.x);
+    protected _maxX: number = this._width * this.origin.y;
+    
+    // the min/max Y calculated with origin and height(can be useful for AABB)
+    protected _minY: number = -(this._height * this.origin.y);
+    protected _maxY: number = this._height * this.origin.y;
 
     /**
      * A pre-drawing method for a graphic in which to preform transforms.
@@ -59,7 +52,6 @@ export abstract class Drawable{
      */
     public draw(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
         this._preDraw(model, projection, view);
-        this.uploadBuffer();
         this._postDraw();
     };
 
