@@ -16,6 +16,8 @@ export class Triangle2D extends Drawable{
 
         this._width = w;
         this._height = h;
+
+        this.calcBox();
     };
 
     makeBuffer(): void{
@@ -33,9 +35,12 @@ export class Triangle2D extends Drawable{
 
         this._buffer.setData(
             [
-                0, 0,
-                0, this._height,
-                this._width, this._height
+                this._minX, this._minY,
+                this._minX, this._maxY,
+                this._maxX, this._maxY
+                // 0, 0,
+                // 0, 100,
+                // 100, 100
             ]
         );
     };

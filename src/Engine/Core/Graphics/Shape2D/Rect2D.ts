@@ -16,6 +16,8 @@ export class Rect2D extends Drawable{
 
         this._width = w;
         this._height = h;
+
+        this.calcBox();
     };
 
     makeBuffer(): void{
@@ -31,6 +33,7 @@ export class Rect2D extends Drawable{
 
         this._buffer.addAttribute(posAttribute);
 
+        console.log(this._minX, this._minY, this._maxX, this._maxY);
 
         /**
          * WebGL has some weird drawing order,
@@ -41,9 +44,9 @@ export class Rect2D extends Drawable{
                 this._minX, this._minY,
                 this._minX, this._maxY,
                 this._maxX, this._maxY,
-                this._minX, this._minY,
-                this._maxX, this._minY,
-                this._maxX, this._maxY
+                // this._minX, this._minY,
+                // this._maxX, this._minY,
+                // this._maxX, this._maxY
             ]
         );
     };

@@ -27,6 +27,17 @@ export abstract class Drawable{
     protected _minY: number = -(this._height * this.origin.y);
     protected _maxY: number = this._height * this.origin.y;
 
+
+    /**
+     * Find min/max X/Y and make a box
+     */
+    protected calcBox(): void{
+        this._minX = -(this._width * this.origin.x);
+        this._maxX = this._width * this.origin.y;
+        this._minY = -(this._height * this.origin.y);
+        this._maxY = this._height * this.origin.y;
+    };
+
     /**
      * A pre-drawing method for a graphic in which to preform transforms.
      * @param pos The position vector at which to preform transforms.
