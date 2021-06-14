@@ -9,7 +9,7 @@ import {
     Engine,
     DrawComponent,
     Triangle2D,
-    Square2D,
+    Rect2D,
     RotationBehavior
 } from '@GETS';
 
@@ -39,31 +39,42 @@ class SampleGame implements IGame{
         const Particles: TEntity = new TEntity("Particles");
         Particles.visible = false;
 
-        // create a new "Particle" entity, give it components + behaviors, and add it to Particles parent
-        const MainParticle: TEntity = new TEntity("t");
-        const drawcomponent: DrawComponent = new DrawComponent();
-
+        // create a single particle snippet
+        const MainParticle: TEntity = new TEntity("mp");
         
-        drawcomponent.setCurrentDrawing(new Square2D(100));
-        MainParticle.addComponent(drawcomponent);
-
+        const dc: DrawComponent = new DrawComponent();
+        dc.setCurrentDrawing(new Rect2D(50, 50));
+        
+        MainParticle.addComponent(dc);
         MainParticle.addBehavior(new RotationBehavior());
         
-
-        MainParticle.worldTransform.position = new Vector2(100, 100);
-        // MainParticle.worldTransform.rotation = -10;
         
+        // more particles
+        const Particle1: TEntity = new TEntity("p1");
 
-        const OtherParticle: TEntity = new TEntity("o");
-        const drawcomponent2: DrawComponent = new DrawComponent();
-        drawcomponent2.setCurrentDrawing(new Triangle2D(100, 100));
-        OtherParticle.addComponent(drawcomponent2);
+        const dc1: DrawComponent = new DrawComponent();
+        dc1.setCurrentDrawing(new Rect2D(50, 50));
 
 
-        OtherParticle.localTransform.position = new Vector2(200, 0);
+        Particle1.addComponent(dc1);
+        Particle1.addBehavior(new RotationBehavior());
 
+
+        const Particle2: TEntity = new TEntity("p2");
+
+        const dc2: DrawComponent = new DrawComponent();
+        dc2.setCurrentDrawing(new Rect2D(50, 50));
+
+        Particle2.addComponent(dc2);
+
+
+        MainParticle.worldTransform.position = new Vector2(300, 300);
+        Particle1.localTransform.position = new Vector2(100, 0);
+        Particle2.localTransform.position = new Vector2(100, 0);
+
+        Particle1.addChild(Particle2);
+        MainParticle.addChild(Particle1);
         Particles.addChild(MainParticle);
-        MainParticle.addChild(OtherParticle);
 
         // add all needed objects into the scene
         SampleScene.addObject(Particles);

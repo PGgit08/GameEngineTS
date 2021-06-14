@@ -274,9 +274,20 @@ export class TEntity extends TGameObject{
         this._localMatrix = this.localTransform.toMatrix();
 
         if(this.parent && this.parent.visible){
+            // incase this entity has a visible entity 
+            // multiply the parent's world matrix by this entity's local matrix
             this._worldMatrix = GLMatrix4.mul(
                 this.parent.worldMatrix,
                 this.localMatrix
+            );
+        }
+
+        else{
+            // incase this entity does not have a visible parent entity
+            // multiply it's local matrix by it's world matrix
+            this._worldMatrix = GLMatrix4.mul(
+                this._worldMatrix,
+                this._localMatrix
             );
         };
     };

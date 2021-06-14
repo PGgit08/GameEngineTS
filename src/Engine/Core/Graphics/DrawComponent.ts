@@ -18,8 +18,7 @@ export class DrawComponent extends TComponent{
     };
 
     load(){
-        console.log(this._currentDrawing);
-        this._currentDrawing.loadBuffer();
+        this._currentDrawing.uploadBuffer();
     };
 
     update(dt: number){

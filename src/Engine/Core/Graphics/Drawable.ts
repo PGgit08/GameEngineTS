@@ -64,14 +64,19 @@ export abstract class Drawable{
     };
 
     /**
-     * Must be overwritten by drawables.
-     * Method sets attributes for buffer.
+     * Must by overwritten by drawables.
+     * Method creates/sets buffer and returns it.
      */
-    public abstract loadBuffer(): void;
+    protected abstract makeBuffer(): void;
 
     /**
      * Must by overwritten by drawables.
      * Method sets buffer and uploads it.
      */
-    protected abstract uploadBuffer(): void;
+    public uploadBuffer(): void{
+        this.makeBuffer();
+
+        this._buffer.upload();
+        this._buffer.unbind();
+    };
 };

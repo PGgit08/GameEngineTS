@@ -2,15 +2,23 @@ import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
 import { ShaderManager } from "@gl/ShaderManager";
 import { Drawable } from "@graphics/Drawable";
 
-export class Square2D extends Drawable{ 
-    constructor(s: number){
+/**
+ * A Drawable for a 2D Rectangle
+ */
+export class Rect2D extends Drawable{ 
+    /**
+     * Creates a new Drawable 2D Rectangle 
+     * @param w The width of the rectangle
+     * @param h The height of the rectangle
+     */
+    constructor(w: number, h: number){
         super();
 
-        this._width = s;
-        this._height = s;
+        this._width = w;
+        this._height = h;
     };
 
-    loadBuffer(): void{
+    makeBuffer(): void{
         ShaderManager.SetShader('Shader2D');
         this._shader = ShaderManager.ACTIVE_SHADER;
 
@@ -20,9 +28,6 @@ export class Square2D extends Drawable{
 
         posAttribute.location = this._shader.getAttributeLocation('coords');
         posAttribute.size = 2;
-
-        console.log(posAttribute);
-        console.log(this._shader);
 
         this._buffer.addAttribute(posAttribute);
 
@@ -40,12 +45,5 @@ export class Square2D extends Drawable{
                 this._width, this._height
             ]
         );
-
-        this._buffer.upload();
-        this._buffer.unbind();
-    };
-
-    uploadBuffer(): void{
-
     };
 };

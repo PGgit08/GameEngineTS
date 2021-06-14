@@ -11,6 +11,6 @@ export class RotationBehavior extends TBehavior{
     update(dt: number){
         super.update(dt);
 
-        this.owner.worldTransform.rotation += 1;
+        this.owner.localTransform.rotation += 1;
     };
 };
