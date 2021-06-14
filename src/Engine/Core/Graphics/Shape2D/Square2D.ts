@@ -3,18 +3,18 @@ import { ShaderManager } from "@gl/ShaderManager";
 import { Drawable } from "@graphics/Drawable";
 
 export class Square2D extends Drawable{ 
-    constructor(w:number, h:number){
+    constructor(s: number){
         super();
 
-        this._width = w;
-        this._height = h;
+        this._width = s;
+        this._height = s;
     };
 
     loadBuffer(): void{
         ShaderManager.SetShader('Shader2D');
         this._shader = ShaderManager.ACTIVE_SHADER;
 
-        this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.TRIANGLE_FAN);
+        this._buffer = new GLBuffer();
 
         let posAttribute: AttributeInfo = new AttributeInfo();
 
@@ -26,12 +26,18 @@ export class Square2D extends Drawable{
 
         this._buffer.addAttribute(posAttribute);
 
+        /**
+         * WebGL has some weird drawing order,
+         * so this took like an hour to complete
+         */
         this._buffer.setData(
             [
                 0, 0,
-                0, this._width,
-                this._height, this._width,
-                0, this._height
+                0, this._height,
+                this.width, this._height,
+                0, 0,
+                this._width, 0,
+                this._width, this._height
             ]
         );
 

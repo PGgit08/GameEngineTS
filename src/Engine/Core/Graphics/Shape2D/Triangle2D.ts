@@ -29,8 +29,8 @@ export class Triangle2D extends Drawable{
         this._buffer.setData(
             [
                 0, 0,
-                0, this._width,
-                this._height, this._width
+                0, this._height,
+                this._width, this._height
             ]
         );
 

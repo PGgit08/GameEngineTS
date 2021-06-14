@@ -16,6 +16,7 @@ export * from '@graphics/Sprite';
 
 export * from '@physics/Transform';
 export * from '@physics/Vector';
+export * from '@physics/RotationBehavior';
 
 export * from '@renderer/IViewProps';
 export * from '@renderer/RenderView';

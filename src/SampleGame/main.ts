@@ -8,8 +8,11 @@ import {
     IGame,
     Engine,
     DrawComponent,
-    Square2D
+    Triangle2D,
+    Square2D,
+    RotationBehavior
 } from '@GETS';
+
 
 /* Game Class */
 class SampleGame implements IGame{
@@ -39,21 +42,25 @@ class SampleGame implements IGame{
         // create a new "Particle" entity, give it components + behaviors, and add it to Particles parent
         const MainParticle: TEntity = new TEntity("t");
         const drawcomponent: DrawComponent = new DrawComponent();
-        drawcomponent.setCurrentDrawing(new Square2D(100, 100));
+
+        
+        drawcomponent.setCurrentDrawing(new Square2D(100));
         MainParticle.addComponent(drawcomponent);
+
+        MainParticle.addBehavior(new RotationBehavior());
         
 
-        MainParticle.worldTransform.position = new Vector2(100, 200);
-        MainParticle.worldTransform.rotation = 10;
+        MainParticle.worldTransform.position = new Vector2(100, 100);
+        // MainParticle.worldTransform.rotation = -10;
         
 
         const OtherParticle: TEntity = new TEntity("o");
         const drawcomponent2: DrawComponent = new DrawComponent();
-        drawcomponent2.setCurrentDrawing(new Square2D(100, 100));
+        drawcomponent2.setCurrentDrawing(new Triangle2D(100, 100));
         OtherParticle.addComponent(drawcomponent2);
 
 
-        OtherParticle.localTransform.position = new Vector2(20, 0);
+        OtherParticle.localTransform.position = new Vector2(200, 0);
 
         Particles.addChild(MainParticle);
         MainParticle.addChild(OtherParticle);
