@@ -43,7 +43,7 @@ class SampleGame implements IGame{
         const MainParticle: TEntity = new TEntity("mp");
         
         const dc: DrawComponent = new DrawComponent();
-        dc.setCurrentDrawing(new Triangle2D(50, 50));
+        dc.setCurrentDrawing(new Rect2D(50, 50));
         
         MainParticle.addComponent(dc);
         // MainParticle.addBehavior(new RotationBehavior());
@@ -72,8 +72,8 @@ class SampleGame implements IGame{
         Particle1.localTransform.position = new Vector2(100, 0);
         Particle2.localTransform.position = new Vector2(150, 0);
 
-        Particle1.addChild(Particle2);
-        MainParticle.addChild(Particle1);
+        // Particle1.addChild(Particle2);
+        // MainParticle.addChild(Particle1);
         Particles.addChild(MainParticle);
 
         // add all needed objects into the scene

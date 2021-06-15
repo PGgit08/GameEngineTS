@@ -41,9 +41,15 @@ export class Rect2D extends Drawable{
          */
         this._buffer.setData(
             [
-                this._minX, this._minY,
-                this._minX, this._maxY,
-                this._maxX, this._maxY,
+                0, 0,
+                0, 100,
+                100, 100,
+                0, 0,
+                100, 0,
+                100, 100
+                // this._minX, this._minY,
+                // this._minX, this._maxY,
+                // this._maxX, this._maxY,
                 // this._minX, this._minY,
                 // this._maxX, this._minY,
                 // this._maxX, this._maxY
