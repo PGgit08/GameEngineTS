@@ -5,6 +5,7 @@ import { RenderViewProps } from "@renderer/IViewProps";
 import { TEntity } from "@ecs/TEntity";
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { ShaderManager } from "@gl/ShaderManager";
+import { GLStack } from "@gl/GLStack";
 
 /**
  * Main Engine class
@@ -32,7 +33,8 @@ export class Engine{
             {
                 deltaTime: 0,
                 vMatrix: GLMatrix4.identity(),
-                pMatrix: GLMatrix4.projection(viewConfig.width, viewConfig.height)
+                pMatrix: GLMatrix4.projection(viewConfig.width, viewConfig.height),
+                modelStack: new GLStack()
             }
         );
 

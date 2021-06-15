@@ -6,47 +6,19 @@ import { Vector2 } from "@physics/Vector";
  * Similar to HTML5 Canvas save/restore stack
  */
 export class GLStack{
-    private _stack: GLMatrix4[] = [];
+    private _stack: GLMatrix4[] = [GLMatrix4.identity()];
 
-    /**
-     * Remove the current matrix from the stack.
-     */
-    restore(){
+    public push(m: GLMatrix4){
+        this._stack.push(m);
+    };
+
+    public pop(){
         this._stack.pop();
 
-        this._stack[0] = GLMatrix4.identity();
-    };
-
-    /**
-     * Push the current matrix into the stack.
-     */
-    save(){
-        this._stack.push(this.currentMatrix);
-    };
-
-    /**
-     * Rotate the current matrix
-     * @param r Angle in radians
-     */
-    rotate(r: number): void{
-        GLMatrix4.rotation(r);
-    };
-
-    /**
-     * Translate the current matrix
-     * @param t Vector2 translation vector
-     */
-    translate(t: Vector2): void{
-        GLMatrix4.translation(t);
-    };
-
-    /**
-     * Scale the current matrix
-     * @param s Vector2 scaling vector
-     */
-    scale(s: Vector2): void{
-        GLMatrix4.scale(s);
-    };
+        if(this._stack.length === 0){
+            this.push(GLMatrix4.identity());
+        };
+    };    
 
     /**
      * The current matrix(top of the stack)
@@ -54,9 +26,5 @@ export class GLStack{
      */
     public get currentMatrix(): GLMatrix4{
         return this._stack[this._stack.length - 1];
-    };
-
-    private set setCurrentMatrix(m: GLMatrix4){
-        this._stack[this._stack.length - 1] = m;
     };
 }; 
