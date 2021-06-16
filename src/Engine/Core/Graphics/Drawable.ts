@@ -32,10 +32,13 @@ export abstract class Drawable{
      * Find min/max X/Y and make a box
      */
     protected calcBox(): void{
+        
         this._minX = -(this._width * this.origin.x);
-        this._maxX = this._width * this.origin.y;
+        this._maxX = this._width * (1.0 - this.origin.y);
+        
         this._minY = -(this._height * this.origin.y);
-        this._maxY = this._height * this.origin.y;
+        this._maxY = this._height * (1.0 - this.origin.y);
+        
     };
 
     /**

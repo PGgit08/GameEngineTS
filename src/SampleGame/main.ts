@@ -68,7 +68,7 @@ class SampleGame implements IGame{
         Particle2.addComponent(dc2);
 
 
-        MainParticle.worldTransform.position = new Vector2(300, 300);
+        MainParticle.worldTransform.position = new Vector2(5, 5);
         Particle1.localTransform.position = new Vector2(100, 0);
         Particle2.localTransform.position = new Vector2(150, 0);
 

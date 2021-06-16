@@ -24,7 +24,7 @@ export class Rect2D extends Drawable{
         ShaderManager.SetShader('Shader2D');
         this._shader = ShaderManager.ACTIVE_SHADER;
 
-        this._buffer = new GLBuffer();
+        this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.POINTS);
 
         let posAttribute: AttributeInfo = new AttributeInfo();
 
@@ -41,12 +41,14 @@ export class Rect2D extends Drawable{
          */
         this._buffer.setData(
             [
-                0, 0,
-                0, 100,
-                100, 100,
-                0, 0,
-                100, 0,
-                100, 100
+                -10, -10,
+                -10, 50,
+                50, 50,
+                // 100, 0,
+                // 100, 100
+                // this._minX, this._minY,
+                // this._minX, this._maxY,
+                // this._maxX, this._maxY
                 // this._minX, this._minY,
                 // this._minX, this._maxY,
                 // this._maxX, this._maxY,
