@@ -83,9 +83,7 @@ export class GLBuffer{
         if(this._hasAttributeLocation){
             for(let att of this._attributes){
                 // kind of confused on this line(86)
-                // GL.vertexAttribPointer(att.location, att.size, this._dataType, normalize, this._stride, att.offset * this._typeSize);
-                // console.log(att);
-                GL.vertexAttribPointer(att.location, att.size, this._dataType, normalize, 0, 8);
+                GL.vertexAttribPointer(att.location, att.size, this._dataType, normalize, this._stride, att.offset * this._typeSize);
                 GL.enableVertexAttribArray(att.location);
             };
         };

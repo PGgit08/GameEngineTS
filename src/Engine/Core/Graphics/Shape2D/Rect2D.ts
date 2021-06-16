@@ -24,7 +24,7 @@ export class Rect2D extends Drawable{
         ShaderManager.SetShader('Shader2D');
         this._shader = ShaderManager.ACTIVE_SHADER;
 
-        this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.POINTS);
+        this._buffer = new GLBuffer();
 
         let posAttribute: AttributeInfo = new AttributeInfo();
 
@@ -33,28 +33,21 @@ export class Rect2D extends Drawable{
 
         this._buffer.addAttribute(posAttribute);
 
-        console.log(this._minX, this._minY, this._maxX, this._maxY);
-
         /**
          * WebGL has some weird drawing order,
          * so this took like an hour to complete
          */
         this._buffer.setData(
             [
-                -10, -10,
-                -10, 50,
-                50, 50,
-                // 100, 0,
-                // 100, 100
-                // this._minX, this._minY,
-                // this._minX, this._maxY,
-                // this._maxX, this._maxY
-                // this._minX, this._minY,
-                // this._minX, this._maxY,
-                // this._maxX, this._maxY,
-                // this._minX, this._minY,
-                // this._maxX, this._minY,
-                // this._maxX, this._maxY
+                this._minX, this._minY,
+                this._minX, this._maxY,
+                this._maxX, this._maxY,
+                this._minX, this._minY,
+                this._minX, this._maxY,
+                this._maxX, this._maxY,
+                this._minX, this._minY,
+                this._maxX, this._minY,
+                this._maxX, this._maxY
             ]
         );
     };
