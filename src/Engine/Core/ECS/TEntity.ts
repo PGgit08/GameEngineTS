@@ -5,6 +5,9 @@ import { Transform } from '@physics/Transform';
 import { TBehavior } from '@ecs/Behavior/IBehavior';
 import { GLMatrix4 } from '@gl/GLMatrix4';
 
+/**
+ * The base of any object in the game
+ */
 export class TEntity extends TGameObject{
     name: string;
 
@@ -199,6 +202,21 @@ export class TEntity extends TGameObject{
         return undefined;
     };
 
+    /**
+     * Calls load method of children and components, sets this entity to LOADED.(recursive)
+     */
+     load(){
+        for(let c of this.components){
+            c.load();
+        };
+
+        for(let c of this.children){
+            c.load();
+        };
+
+        this._isLoaded = true;
+    };
+
     /* 
     * Calls start method of children, behaviors, and components before game loop.(recursive)
     */
@@ -216,20 +234,6 @@ export class TEntity extends TGameObject{
         };
     };
 
-    /**
-     * Calls load method of children and components, sets this entity to LOADED.(recursive)
-     */
-    load(){
-        for(let c of this.components){
-            c.load();
-        };
-
-        for(let c of this.children){
-            c.load();
-        };
-
-        this._isLoaded = true;
-    };
 
     /**
      * Called on every frame.(recursive)

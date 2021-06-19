@@ -2,36 +2,20 @@ import { TEntity } from '@ecs/TEntity';
 import { RenderProps } from '@renderer/IViewProps';
 import { TGameObject } from '@ecs/TGameObject';
 import { SceneManager } from '@scenes/SceneManager';
+import { Camera } from 'Core/World/Camera/Camera';
+import { ShaderManager } from '@gl/ShaderManager';
 
-/* Really basic scene interface for now */
-export interface IScene{
-    // create main "parent" entity
-    // which holds all the children entities 
-    // in the scene
-    root_entity: TEntity;
-
-    // scene id/name
-    readonly id: number;
-    name: string;
-
-    addObject(entity: TEntity): void;
-    getEntityByName(name: string): TEntity;
-
-    // game loop functions
-    start(): void;
-    load(): void;
-    update(dt: number): void;
-    render(): void;
-};
 
 // if a scene needs to be created, this class 
 // can be called, and this scene can get pushed into
 // the game loop
-export class Scene implements IScene{
-    root_entity: TEntity;
+export class Scene {
+    private registeredCameras: Camera[] = [];
+    public activeCamera: Camera;
+
+    private root_entity: TEntity;
 
     // names of scene
-    readonly id: number;
     name: string;
 
     /**
@@ -51,6 +35,7 @@ export class Scene implements IScene{
         return this.root_entity.isLoaded;
     };
 
+
     /**
      * Recursivly attempts to find an Entity in this scene.
      * @param name The name of the entity.
@@ -69,6 +54,16 @@ export class Scene implements IScene{
     };
 
     /**
+     * Preforms loading operations on all entities, called before start.
+     * Mainly used for WebGL buffer loading for components, and assets.
+     */
+    load(): void{
+        // create a default camera
+        this.activeCamera = new Camera("DefaultCamera");
+        this.root_entity.load();
+    };
+
+    /**
      * Preforms pre-update procedures on the Entities in this Scene.
      */
     start(): void{
@@ -76,18 +71,12 @@ export class Scene implements IScene{
     };
 
     /**
-     * Preforms loading operations on all entities, called after start, before loop.
-     * Mainly used for WebGL buffer loading for components.
-     */
-    load(): void{
-        this.root_entity.load();
-    };
-
-    /**
      * Preforms update procedures on each frame on the Entities in this Scene.
      * @param dt The time since the last frame update.
      */
     update(dt: number): void{
+        // set the view matrix to camera view matrix
+        ShaderManager.ACTIVE_SHADER.setUniformMatrix('view', this.activeCamera.view);
         this.root_entity.update(dt);
     };
 
@@ -97,6 +86,4 @@ export class Scene implements IScene{
     render(): void{
         this.root_entity.render();
     };
-
-    /* TODO: add entity adding */
 };

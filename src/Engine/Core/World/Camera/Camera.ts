@@ -6,7 +6,12 @@ export class Camera extends TEntity{
         super(name);
     };
 
+    /**
+     * Calculates the view matrix based on camera movement.
+     */
     public get view(): GLMatrix4{
+        // so far just return normal world transform
+        // but later add matrix inverse
         return this.worldTransform.toMatrix();
     };
 };

@@ -2,9 +2,9 @@ import { TEntity } from '@ecs/TEntity';
 import { RenderProps } from '@renderer/IViewProps';
 
 export default interface IComponent{
-    start(): void;
-
     load(): void;
+    
+    start(): void;
 
     update(dt: number): void;
 
@@ -48,14 +48,14 @@ export abstract class TComponent implements IComponent{
     };
 
     /**
+     * Loads this components for webgl(buffers+shaders) and more.
+     */
+    load(): void{};
+
+    /**
      * The pre-loop operations of this component.
      */
     start(): void{};
-
-    /**
-     * Loads this components for webgl(buffers+shaders).
-     */
-    load(): void{};
 
     /**
      * The loop operations of this component, called on each frame update.
