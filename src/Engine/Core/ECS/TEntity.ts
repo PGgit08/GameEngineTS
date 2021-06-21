@@ -19,8 +19,7 @@ export class TEntity extends TGameObject{
     
     protected _visible: boolean = true;
 
-    // will probably remove one transform later
-    // just doing it with world/local transform for now
+    // the world/local transforms of the entity
     public worldTransform: Transform = new Transform();
     public localTransform: Transform = new Transform();
 

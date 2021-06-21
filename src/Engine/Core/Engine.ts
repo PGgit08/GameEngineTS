@@ -102,7 +102,7 @@ export class Engine{
     private loop(){
         // main game loop
 
-        let delta = (performance.now() - this._previousTime) / 100;
+        let delta = (performance.now() - this._previousTime) / 1000;
 
         this.update(delta);
         this.render();

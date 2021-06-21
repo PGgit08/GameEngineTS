@@ -24,7 +24,7 @@ export class Rect2D extends Drawable{
         ShaderManager.SetShader('Shader2D');
         this._shader = ShaderManager.ACTIVE_SHADER;
 
-        this._buffer = new GLBuffer();
+        this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.LINE_LOOP);
 
         let posAttribute: AttributeInfo = new AttributeInfo();
 

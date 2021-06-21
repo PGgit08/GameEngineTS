@@ -11,6 +11,7 @@ export class RotationBehavior extends TBehavior{
     update(dt: number){
         super.update(dt);
 
-        this.owner.localTransform.rotation += 10 * dt;
+        // no deltaTime implement cuz confused 🤔
+        this.owner.localTransform.rotation += 1;
     };
 };
