@@ -29,7 +29,6 @@ export class Shader2D extends GLShader{
 
             void main(){
                 gl_Position = projection * view * model * vec4(coords, 0, 1.0);
-                gl_PointSize = 10.0;
             }
         `;
     };

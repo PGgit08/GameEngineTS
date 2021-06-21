@@ -38,35 +38,35 @@ mat4.mul(modelMat, tMat, rMat);
 /* Step2: Define the geometry and store it in buffer objects */
 var vertices = 
 [
-// // left column
-// 0, 0,
-// 30, 0,
-// 0, 150,
-// 0, 150,
-// 30, 0,
-// 30, 150,
+    // // left column
+    // 0, 0,
+    // 30, 0,
+    // 0, 150,
+    // 0, 150,
+    // 30, 0,
+    // 30, 150,
 
-// // top rung
-// 30, 0,
-// 100, 0,
-// 30, 30,
-// 30, 30,
-// 100, 0,
-// 100, 30,
+    // // top rung
+    // 30, 0,
+    // 100, 0,
+    // 30, 30,
+    // 30, 30,
+    // 100, 0,
+    // 100, 30,
 
-// // middle rung
-// 30, 60,
-// 67, 60,
-// 30, 90,
-// 30, 90,
-// 67, 60,
-// 67, 90
-0, 0,
-0, 100,
-100, 100,
-0, 0,
-100, 0,
-100, 100
+    // // middle rung
+    // 30, 60,
+    // 67, 60,
+    // 30, 90,
+    // 30, 90,
+    // 67, 60,
+    // 67, 90
+    0, 0,
+    0, 100,
+    100, 100,
+    0, 0,
+    100, 0,
+    100, 100
 ]
 
 // Create a new buffer object
@@ -94,7 +94,7 @@ var vertCode = `
     uniform mat4 mMat;
 
     // the varying value that is sent to the fragment shader
-    varying vec2 v_texcoord;
+    varying highp vec2 v_texcoord;
 
     void main(void){
         gl_Position = pMat * vMat * mMat * vec4(coordinates, 0, 1.0);
@@ -115,13 +115,13 @@ gl.compileShader(vertShader);
 //Fragment shader source code
 var fragCode = `
     // get the texture coordinates from the fragment shader
-    varying vec2 v_texcoord;
+    varying highp vec2 v_texcoord;
 
     // the actual texture
     uniform sampler2D u_texture;
 
     void main(void){
-        gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1) * texture2D(u_texture, v_texcoord);
+        gl_FragColor = texture2D(u_texture, v_texcoord);
     }
 `;
 
@@ -154,15 +154,17 @@ gl.useProgram(shaderProgram);
 //Bind vertex buffer object
 gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
 
-//Get the attribute location
+//Get the attribute location(s)
 var coord = gl.getAttribLocation(shaderProgram, "coordinates");
+var texture = gl.getAttribLocation(shaderProgram, "a_texcoords");
 
-//point an attribute to the currently bound VBO
+//point attribute(s) to the currently bound VBO
 gl.vertexAttribPointer(coord, 2, gl.FLOAT, false, 0, 0);
+gl.vertexAttribPointer(texture, 2, gl.FLOAT, false, 0, 0);
 
-
-//Enable the attribute
+//Enable the attribute(s)
 gl.enableVertexAttribArray(coord);
+gl.enableVertexAttribArray(texture);
 
 
 gl.uniformMatrix4fv(

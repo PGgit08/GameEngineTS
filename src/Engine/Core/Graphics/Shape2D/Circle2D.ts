@@ -1,0 +1,50 @@
+import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
+import { ShaderManager } from "@gl/ShaderManager";
+import { Drawable } from "@graphics/Drawable";
+
+/**
+ * A Drawable for a 2D Circle
+ */
+export class Circle2D extends Drawable{ 
+    /**
+     * Creates a new Drawable 2D Circle
+     * @param r The radius of the circle.
+     */
+    constructor(r: number){
+        super();
+
+        this.calcSize(r);
+        this.calcBox();
+    };
+
+    // calculates the width and height based on radius
+    private calcSize(r: number){
+        this._width = r * 2;
+        this._height = r * 2;
+    };
+
+    makeBuffer(): void{
+        ShaderManager.SetShader('Shader2D');
+        this._shader = ShaderManager.ACTIVE_SHADER;
+
+        // triangle fan so that all triangles can be drawn around a center vertex
+        this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.TRIANGLE_FAN);
+
+        let posAttribute: AttributeInfo = new AttributeInfo();
+
+        posAttribute.location = this._shader.getAttributeLocation('coords');
+        posAttribute.size = 2;
+
+        this._buffer.addAttribute(posAttribute);
+
+        this._buffer.setData(
+            [
+                this.center.x, this.center.y
+            ]
+        );  
+
+        for(let d = 0; d <= 360; d++){
+            
+        };
+    };
+};

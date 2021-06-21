@@ -8,8 +8,12 @@ import { Vector2 } from "@physics/Vector";
  * @example Sprite   
  */
 export abstract class Drawable{
-    // point of rotation for drawable item(defaults to half)
+    // the anchor point for a drawable, used for rotation and tranformations(defaults to half)
     public origin: Vector2 = new Vector2(0.5, 0.5);
+
+    // the center point of the shape pre-transformation(defaults to 0,0 since origin default)
+    public center: Vector2 = Vector2.origin;
+
 
     // the width and height of this Drawable
     protected _width: number = 100;
@@ -29,16 +33,19 @@ export abstract class Drawable{
 
 
     /**
-     * Find min/max X/Y and make a box
+     * Find min/max X/Y as well as center vector and make box dimensions out of it
      */
     protected calcBox(): void{
         
         this._minX = -(this._width * this.origin.x);
-        this._maxX = this._width * (1.0 - this.origin.y);
+        this._maxX = this._width * (1.0 - this.origin.x);
         
         this._minY = -(this._height * this.origin.y);
         this._maxY = this._height * (1.0 - this.origin.y);
         
+        // make sure to also get center
+        this.center.x = this._minX + (this._width * this.origin.x);   
+        this.center.y = this._minY + (this._height * this.origin.y);
     };
 
     /**

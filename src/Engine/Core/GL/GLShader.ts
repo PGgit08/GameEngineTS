@@ -31,7 +31,7 @@ export abstract class GLShader{
      * @param mat4 The matrix to the unifrom to.
      */
     public setUniformMatrix(uniformName: string, mat4: GLMatrix4): void{
-        let location = this.getUniformLocation(uniformName);
+        let location: WebGLUniformLocation = this.getUniformLocation(uniformName);
         GL.uniformMatrix4fv(
             location,
             false,
