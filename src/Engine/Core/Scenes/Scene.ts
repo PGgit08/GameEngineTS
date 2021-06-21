@@ -76,7 +76,6 @@ export class Scene {
      */
     update(dt: number): void{
         // set the view matrix to camera view matrix
-        ShaderManager.ACTIVE_SHADER.setUniformMatrix('view', this.activeCamera.view);
         this.root_entity.update(dt);
     };
 

@@ -47,7 +47,7 @@ class SampleGame implements IGame{
         dc.setCurrentDrawing(new Circle2D(50));
         
         MainParticle.addComponent(dc);
-        // MainParticle.addBehavior(new RotationBehavior());
+        MainParticle.addBehavior(new RotationBehavior());
         
         
         // more particles
@@ -74,7 +74,7 @@ class SampleGame implements IGame{
         Particle2.localTransform.position = new Vector2(150, 0);
 
         // Particle1.addChild(Particle2);
-        // MainParticle.addChild(Particle1);
+        MainParticle.addChild(Particle1);
         Particles.addChild(MainParticle);
 
         // add all needed objects into the scene

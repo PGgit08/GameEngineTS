@@ -18,7 +18,7 @@ export class Engine{
     private _renderer: Renderer;
     private game: IGame;
 
-    private previousTime: number = 0;
+    private _previousTime: number = 0;
 
     /**
      * Creates new Engine instance.
@@ -74,7 +74,7 @@ export class Engine{
         SceneManager.CURRENT_SCENE.start();
 
         // start of game loop after loading and starting procedures
-        this.loop();
+        requestAnimationFrame(this.loop.bind(this));
     };
 
     /**
@@ -102,12 +102,12 @@ export class Engine{
     private loop(){
         // main game loop
 
-        this.previousTime = performance.now();
+        let delta = (performance.now() - this._previousTime) / 100;
 
-        this.update(Renderer.renderProps.deltaTime);
+        this.update(delta);
         this.render();
 
-        Renderer.renderProps.deltaTime = performance.now() - this.previousTime;
+        this._previousTime = performance.now();
 
         requestAnimationFrame(this.loop.bind(this));
     };

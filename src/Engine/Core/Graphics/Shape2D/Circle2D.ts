@@ -1,11 +1,14 @@
 import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
 import { ShaderManager } from "@gl/ShaderManager";
 import { Drawable } from "@graphics/Drawable";
+import { Vector2 } from "@physics/Vector";
 
 /**
  * A Drawable for a 2D Circle
  */
 export class Circle2D extends Drawable{ 
+    private _r: number;
+
     /**
      * Creates a new Drawable 2D Circle
      * @param r The radius of the circle.
@@ -15,6 +18,8 @@ export class Circle2D extends Drawable{
 
         this.calcSize(r);
         this.calcBox();
+
+        this._r = r;
     };
 
     // calculates the width and height based on radius
@@ -44,7 +49,17 @@ export class Circle2D extends Drawable{
         );  
 
         for(let d = 0; d <= 360; d++){
+            let newVertex: Vector2 = Vector2.add(
+                this.center,
+                new Vector2(
+                    this._r * Math.cos(d * Math.PI / 180),
+                    this._r * Math.sin(d * Math.PI / 180) 
+                )
+            );
             
+            this._buffer.pushBackData(
+                [newVertex.x, newVertex.y]
+            );
         };
     };
 };
