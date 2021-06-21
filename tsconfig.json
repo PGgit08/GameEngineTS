@@ -53,7 +53,7 @@
       "@gl/*": ["Core/GL/*"],
       "@renderer/*": ["Core/Renderer/*"],
       "@scenes/*": ["Core/Scenes/*"],
-      "@premade/*": ["Core/Premade/*"],
+      "@world/*": ["Core/World/*"],
       "@game/*": ["Game/*"],
       "@engine": ["Core/Engine"],
       "@GETS": ["Core/index"]

@@ -25,6 +25,8 @@ export * from '@renderer/RenderView';
 export * from '@scenes/Scene';
 export * from '@scenes/SceneManager';
 
+export * from '@world/Particle';
+
 export * from '@engine';
 
 export * from '@game/IGame';

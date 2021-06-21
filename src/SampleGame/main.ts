@@ -11,7 +11,8 @@ import {
     Triangle2D,
     Rect2D,
     Circle2D,
-    RotationBehavior
+    RotationBehavior,
+    Particle
 } from '@GETS';
 
 
@@ -40,44 +41,22 @@ class SampleGame implements IGame{
         const Particles: TEntity = new TEntity("Particles");
         Particles.visible = false;
 
-        // create a single particle snippet
-        const MainParticle: TEntity = new TEntity("mp");
-        
-        const dc: DrawComponent = new DrawComponent();
-        dc.setCurrentDrawing(new Circle2D(50));
-        
-        MainParticle.addComponent(dc);
-        MainParticle.addBehavior(new RotationBehavior());
-        
-        
-        // more particles
-        const Particle1: TEntity = new TEntity("p1");
+        // create particle entities
+        const MainParticle = new Particle();
+        const Particle1 = new Particle();
+        const Particle2 = new Particle();
 
-        const dc1: DrawComponent = new DrawComponent();
-        dc1.setCurrentDrawing(new Rect2D(50, 50));
-
-
-        Particle1.addComponent(dc1);
-        // Particle1.addBehavior(new RotationBehavior());
-
-
-        const Particle2: TEntity = new TEntity("p2");
-
-        const dc2: DrawComponent = new DrawComponent();
-        dc2.setCurrentDrawing(new Rect2D(50, 50));
-
-        Particle2.addComponent(dc2);
-
-
-        MainParticle.worldTransform.position = new Vector2(200, 300);
+        // set their positions
+        MainParticle.localTransform.position = new Vector2(200, 300);
         Particle1.localTransform.position = new Vector2(100, 0);
         Particle2.localTransform.position = new Vector2(150, 0);
 
-        // Particle1.addChild(Particle2);
+        // order the in the hierarchy
+        Particle1.addChild(Particle2);
         MainParticle.addChild(Particle1);
         Particles.addChild(MainParticle);
 
-        // add all needed objects into the scene
+        // add "Particles" parent into sample scene
         SampleScene.addObject(Particles);
 
         // set the current scene
