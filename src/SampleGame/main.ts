@@ -48,8 +48,8 @@ class SampleGame implements IGame{
 
         // set their positions
         MainParticle.localTransform.position = new Vector2(200, 300);
-        Particle1.localTransform.position = new Vector2(100, 0);
-        Particle2.localTransform.position = new Vector2(150, 0);
+        Particle1.localTransform.position = new Vector2(120, 0);
+        Particle2.localTransform.position = new Vector2(120, 0);
 
         // order the in the hierarchy
         Particle1.addChild(Particle2);
