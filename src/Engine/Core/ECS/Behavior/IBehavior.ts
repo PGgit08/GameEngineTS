@@ -1,4 +1,5 @@
 import { TEntity } from "@ecs/TEntity";
+import { IBehaviorData } from "./IBehaviorData";
 
 /*
 Basically the same thing as a Component,
@@ -25,6 +26,8 @@ export abstract class TBehavior implements IBehavior{
     name: string
 
     owner: TEntity;
+
+    protected _data: IBehaviorData;
 
     /**
      * Creates a new behavior.

@@ -7,7 +7,7 @@ import { Vector2 } from '@physics/Vector';
 
 export class Transform{
     // position vector(defaults to origin)
-    private _position: Vector2 = Vector2.one;
+    private _position: Vector2 = Vector2.origin;
     private _rotation: number = 0;
     private _scale: Vector2 = Vector2.one;
 

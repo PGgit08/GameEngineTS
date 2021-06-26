@@ -1,3 +1,4 @@
+import { IBehaviorData } from '@ecs/Behavior/IBehaviorData';
 import { TEntity } from '@ecs/TEntity'; 
 import { RenderProps } from '@renderer/IViewProps';
 
@@ -22,6 +23,8 @@ export abstract class TComponent implements IComponent{
     name: string
 
     owner: TEntity;
+
+    protected _data: IBehaviorData;
 
     /**
      * Creates a new component.

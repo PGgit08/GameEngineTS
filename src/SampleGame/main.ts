@@ -52,8 +52,8 @@ class SampleGame implements IGame{
         Particle2.localTransform.position = new Vector2(120, 0);
 
         // order the in the hierarchy
-        Particle1.addChild(Particle2);
-        MainParticle.addChild(Particle1);
+        // Particle1.addChild(Particle2);
+        // MainParticle.addChild(Particle1);
         Particles.addChild(MainParticle);
 
         // add "Particles" parent into sample scene

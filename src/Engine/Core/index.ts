@@ -1,9 +1,13 @@
 // it was a pain doing this
 // NOTE: A lot of these exports are unnessacry for the 
 
-// actual game dev so the garbage code will be removed
+// in actual game dev the garbage code will be removed
 export * from '@ecs/Behavior/IBehavior';
+export * from '@ecs/Behavior/IBehaviorData';
+
 export * from '@ecs/Component/IComponent';
+export * from '@ecs/Component/IComponentData';
+
 export * from '@ecs/TEntity';
 export * from '@ecs/TGameObject';
 

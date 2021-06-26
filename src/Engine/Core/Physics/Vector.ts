@@ -66,8 +66,15 @@ export class Vector2{
         this.y /= v.y;
     };
 
+    /**
+     * Negates this vector.
+     */
+    public negative(): void{
+        this.x = -this.x;
+        this.y = -this.y;
+    };
+
     // vector arithmetic (static)
-    
     /**
      * Adds two vectors.
      * @param v1 Vector #1.

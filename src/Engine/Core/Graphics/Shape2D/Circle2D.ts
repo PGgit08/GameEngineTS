@@ -33,7 +33,8 @@ export class Circle2D extends Drawable{
         this._shader = ShaderManager.ACTIVE_SHADER;
 
         // triangle fan so that all triangles can be drawn around a center vertex
-        this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.LINE_LOOP);
+        // this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.LINE_LOOP);
+        this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.TRIANGLE_FAN);
 
         let posAttribute: AttributeInfo = new AttributeInfo();
 

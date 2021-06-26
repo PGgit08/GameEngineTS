@@ -1,4 +1,5 @@
 import { TBehavior } from "@ecs/Behavior/IBehavior";
+import { IBehaviorData } from "@ecs/Behavior/IBehaviorData";
 
 /**
  * Simple pre-build rotation behavior for an entity.

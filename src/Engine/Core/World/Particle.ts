@@ -1,8 +1,10 @@
 import { TBehavior } from "@ecs/Behavior/IBehavior";
+import { IBehaviorData } from "@ecs/Behavior/IBehaviorData";
 import { TEntity } from "@ecs/TEntity";
 import { DrawComponent } from "@graphics/DrawComponent";
 import { Circle2D } from "@graphics/Shape2D/Circle2D";
 import { Vector2 } from "@physics/Vector";
+import { Renderer } from "@renderer/Renderer";
 
 // cannot overwrite TEntity update, so must create behavior which
 // possibly can be an issue
@@ -18,19 +20,30 @@ export class ParticleBehavior extends TBehavior{
     private size: number;
 
     constructor(
-        size: number,
         vel: Vector2,
-        acc: Vector2
+        acc: Vector2,
+        size: number
     ){
         super("ParticleBehavior");
 
         this.vel = vel;
         this.acc = acc;
 
-        this.size = size
+        this.size = size;
     };
 
     update(dt: number){
+        // basic collision implementation for fun
+        if(this.owner.localTransform.position.x == Renderer.viewProps.width - this.size 
+            || this.owner.localTransform.position.x == this.size){
+                this.vel.x = -this.vel.x;
+        };
+
+        if(this.owner.localTransform.position.y == Renderer.viewProps.height - this.size
+            || this.owner.localTransform.position.y == this.size){
+                this.vel.y = -this.vel.y;
+        };
+    
         // default movement
         this.owner.localTransform.position.add(this.vel);
         this.owner.localTransform.rotation += 1.0;
@@ -45,12 +58,12 @@ export class Particle extends TEntity{
     /**
      * Create a new circular physical Particle which runs on a ParticleBehavior.
      * @param size Parameter for the size of the Particle(default: 10)
-     * @param vel Parameter for the velocity of the Particle(default: Vector2.one).
+     * @param vel Parameter for the velocity of the Particle(default: Vector2.right).
      * @param acc Parameter for the acceleration of the Particle(default: Vector2.origin).
      */
     constructor(
         size: number = 50,
-        vel: Vector2 = Vector2.one, 
+        vel: Vector2 = new Vector2(5, 5), 
         acc: Vector2 = Vector2.origin
     ){
         // create a new entity called "Particle"
@@ -66,9 +79,9 @@ export class Particle extends TEntity{
         // add needed components/behaviors to this particle
         this.addComponent(graphics);
         this.addBehavior(new ParticleBehavior(
-            size,
             vel,
-            acc
+            acc,
+            size
         ));
     };
 
