@@ -1,4 +1,5 @@
 import { GLMatrix4 } from "@gl/GLMatrix4";
+import { Color } from "@graphics/Color";
 
 /**
  * A WebGL Shader
@@ -28,14 +29,37 @@ export abstract class GLShader{
     /**
      * Sets a 4x4 matrix uniform.
      * @param uniformName The name of the matrix uniform.
-     * @param mat4 The matrix to the unifrom to.
+     * @param mat4 The matrix to set the uniform to.
      */
     public setUniformMatrix(uniformName: string, mat4: GLMatrix4): void{
+        if(this._uniforms[uniformName] === undefined){
+            console.warn(`Cannot find the uniform ${uniformName}`);
+            return;
+        };
+
         let location: WebGLUniformLocation = this.getUniformLocation(uniformName);
         GL.uniformMatrix4fv(
             location,
             false,
             mat4.glMatrix
+        );
+    };
+
+    /**
+     * Sets a color vec4 in the shader.
+     * @param uniformName The name of the vector uniform.
+     * @param color The color to set the uniform to.
+     */
+    public setUniformColor(uniformName: string, color: Color): void{
+        if(this._uniforms[uniformName] === undefined){
+            console.warn(`Cannot find the uniform ${uniformName}`);
+            return;
+        };
+
+        let location: WebGLUniformLocation = this.getUniformLocation(uniformName);
+        GL.uniform4fv(
+            location,
+            color.toFloat32Array()
         );
     };
 
