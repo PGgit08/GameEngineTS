@@ -1,5 +1,6 @@
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { Color } from "@graphics/Color";
+import { Material } from "@graphics/Material";
 
 /**
  * A WebGL Shader
@@ -89,11 +90,12 @@ export abstract class GLShader{
 
     /**
      * Apply standard uniforms to this shader.
+     * @param material The material associating with this shader.
      * @param model The model matrix.
      * @param projection The projection matrix.
      * @param view The view matrix.
      */
-    public abstract ApplyStandardUniforms(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void;
+    public abstract ApplyStandardUniforms(material: Material, model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void;
 
 
     /**
