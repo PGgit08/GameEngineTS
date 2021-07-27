@@ -18,6 +18,7 @@ export * from '@graphics/Shape2D/Circle2D';
 export * from '@graphics/Drawable';
 export * from '@graphics/DrawComponent';
 export * from '@graphics/Sprite';
+export * from '@graphics/Color';
 
 export * from '@physics/Transform';
 export * from '@physics/Vector';

@@ -7,8 +7,6 @@ import { Shader2D } from "./Shaders/Shader2D";
 export class ShaderManager{
     public static REGISTERED_SHADERS: {[name: string]: GLShader} = {};
 
-    public static ACTIVE_SHADER: GLShader;
-
     private static _isLoaded: boolean = false;
 
     public static get loaded(): boolean{
@@ -36,7 +34,7 @@ export class ShaderManager{
         this.REGISTERED_SHADERS[shader.name] = shader;
     };
 
-    public static SetShader(name: string){
-        this.ACTIVE_SHADER = this.REGISTERED_SHADERS[name];
+    public static GetShader(name: string): GLShader{
+        return this.REGISTERED_SHADERS[name];
     };
 };

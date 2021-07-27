@@ -27,7 +27,7 @@ export class Shader2D extends GLShader{
         this.setUniformMatrix('projection', projection);
         this.setUniformMatrix('view', view);
 
-        this.setUniformColor('color', new Color());
+        this.setUniformColor('color', material.tint);
     };
 
     protected get vSource(): string{

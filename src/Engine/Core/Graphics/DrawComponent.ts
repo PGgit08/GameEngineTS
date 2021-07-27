@@ -17,8 +17,18 @@ export class DrawComponent extends TComponent{
         this._currentDrawing = d;
     };
 
+    public get currentDrawing(): Drawable{
+        return this._currentDrawing;
+    };
+
+    /**
+     * Loads the current drawable's mesh into GPU.
+     */
     load(){
-        this._currentDrawing.uploadBuffer();
+        this._currentDrawing.loadMesh();
+
+        this._currentDrawing.mesh.upload();
+        this._currentDrawing.mesh.unbind();
     };
 
     update(dt: number){

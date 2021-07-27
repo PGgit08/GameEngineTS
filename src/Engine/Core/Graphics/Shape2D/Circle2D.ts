@@ -28,22 +28,19 @@ export class Circle2D extends Drawable{
         this._height = r * 2;
     };
 
-    makeBuffer(): void{
-        ShaderManager.SetShader('Shader2D');
-        this._shader = ShaderManager.ACTIVE_SHADER;
-
+    loadMesh(): void{
         // triangle fan so that all triangles can be drawn around a center vertex
         // this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.LINE_LOOP);
-        this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.TRIANGLE_FAN);
+        this._mesh = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.TRIANGLE_FAN);
 
         let posAttribute: AttributeInfo = new AttributeInfo();
 
-        posAttribute.location = this._shader.getAttributeLocation('coords');
+        posAttribute.location = this._material.shader.getAttributeLocation('coords');
         posAttribute.size = 2;
 
-        this._buffer.addAttribute(posAttribute);
+        this._mesh.addAttribute(posAttribute);
 
-        this._buffer.setData(
+        this._mesh.setData(
             [
                 this.center.x, this.center.y
             ]
@@ -58,7 +55,7 @@ export class Circle2D extends Drawable{
                 )
             );
             
-            this._buffer.pushBackData(
+            this._mesh.pushBackData(
                 [newVertex.x, newVertex.y]
             );
         };

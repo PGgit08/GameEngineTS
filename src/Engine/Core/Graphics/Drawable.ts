@@ -2,6 +2,7 @@ import { GLBuffer } from "@gl/GLBuffer";
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { GLShader } from "@gl/GLShader";
 import { Vector2 } from "@physics/Vector";
+import { Material } from "./Material";
 
 /**
  * Low-Level abstract class, that items which get drawn to the screen can inherit.
@@ -14,14 +15,15 @@ export abstract class Drawable{
     // the center point of the shape pre-transformation(defaults to 0,0 since origin default)
     public center: Vector2 = Vector2.origin;
 
-
     // the width and height of this Drawable
     protected _width: number = 100;
     protected _height: number = 100;
 
-    // the WebGL buffer and shaders for this Drawable item
-    protected _buffer: GLBuffer;
-    protected _shader: GLShader;
+    // the Material that associates with this drawable
+    protected _material: Material = Material.FromConfig();
+
+    // the mesh(vertex buffer) that associates with this drawable
+    protected _mesh: GLBuffer = new GLBuffer();
 
     // the min/max X calculated with origin and width(can be useful for AABB)
     protected _minX: number = -(this._width * this.origin.x);
@@ -31,6 +33,11 @@ export abstract class Drawable{
     protected _minY: number = -(this._height * this.origin.y);
     protected _maxY: number = this._height * this.origin.y;
 
+    /**
+     * Sets the verticies in the mesh and uploads it to the GPU. (done during loading-process)
+     * Sub-classes should override. (example: Rect2D, load verticies based on height and width)
+     */
+    public abstract loadMesh(): void;
 
     /**
      * Find min/max X/Y as well as center vector and make box dimensions out of it
@@ -48,23 +55,14 @@ export abstract class Drawable{
         this.center.y = this._minY + (this._height * this.origin.y);
     };
 
-    /**
-     * A pre-drawing method for a graphic in which to preform transforms.
-     * @param pos The position vector at which to preform transforms.
-     */
-    protected _preDraw(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
-        // prefrom translate to origin
-        // and transformations based on matrix
-        this._shader.ApplyStandardUniforms(model, projection, view);
+    private _setUniforms(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
+        this._material.ApplyStandardUniforms(model, projection, view);
     
     };  
 
-    /**
-     * A post-drawing method for a graphic.
-     */
-    protected _postDraw(): void{
-        this._buffer.bind();
-        this._buffer.draw();
+    private _drawMesh(): void{
+        this._mesh.bind();
+        this._mesh.draw();
     };
 
     /**
@@ -72,24 +70,15 @@ export abstract class Drawable{
      * @param pos The position to the transforming/rendering.
      */
     public draw(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
-        this._preDraw(model, projection, view);
-        this._postDraw();
+        this._setUniforms(model, projection, view);
+        this._drawMesh();
     };
 
-    /**
-     * Must by overwritten by drawables.
-     * Method creates/sets buffer and returns it.
-     */
-    protected abstract makeBuffer(): void;
+    public get mesh(): GLBuffer{
+        return this._mesh;
+    };
 
-    /**
-     * Must by overwritten by drawables.
-     * Method sets buffer and uploads it.
-     */
-    public uploadBuffer(): void{
-        this.makeBuffer();
-
-        this._buffer.upload();
-        this._buffer.unbind();
+    public get material(): Material{
+        return this._material;
     };
 };

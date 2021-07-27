@@ -14,6 +14,7 @@ import {
     RotationBehavior,
     Particle
 } from '@GETS';
+import { ColorChanger } from './scripts/ColorChanger';
 
 
 /* Game Class */
@@ -45,6 +46,8 @@ class SampleGame implements IGame{
         const MainParticle = new Particle();
         const Particle1 = new Particle();
         const Particle2 = new Particle();
+
+        MainParticle.addBehavior(new ColorChanger());
 
         // set their positions
         MainParticle.localTransform.position = new Vector2(200, 300);
