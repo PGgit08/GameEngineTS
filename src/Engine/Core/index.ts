@@ -15,10 +15,11 @@ export * from '@graphics/Shape2D/Triangle2D';
 export * from '@graphics/Shape2D/Rect2D';
 export * from '@graphics/Shape2D/Circle2D';
 
-export * from '@graphics/Drawable';
-export * from '@graphics/DrawComponent';
+export * from '@graphics/Renderable';
+export * from '@graphics/RenderComponent';
 export * from '@graphics/Sprite';
 export * from '@graphics/Color';
+export * from '@graphics/Material';
 
 export * from '@physics/Transform';
 export * from '@physics/Vector';

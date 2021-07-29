@@ -10,8 +10,8 @@ import { ShaderManager } from '@gl/ShaderManager';
 // can be called, and this scene can get pushed into
 // the game loop
 export class Scene {
-    private registeredCameras: Camera[] = [];
-    public activeCamera: Camera;
+    private _registeredCameras: {[name: string]: Camera} = {};
+    private _activeCamera: Camera;
 
     private root_entity: TEntity;
 
@@ -35,6 +35,9 @@ export class Scene {
         return this.root_entity.isLoaded;
     };
 
+    public get activeCamera(): Camera{
+        return this._activeCamera;
+    };
 
     /**
      * Recursivly attempts to find an Entity in this scene.
@@ -59,7 +62,10 @@ export class Scene {
      */
     load(): void{
         // create a default camera
-        this.activeCamera = new Camera("DefaultCamera");
+        this._activeCamera = new Camera("DefaultCamera");
+        this.addObject(this._activeCamera);
+
+
         this.root_entity.load();
     };
 
@@ -84,5 +90,24 @@ export class Scene {
      */
     render(): void{
         this.root_entity.render();
+    };
+
+    /**
+     * Registers the provided camera with this level. Automatically sets as the active camera
+     * if no active camera is currently set.
+     * @param camera The camera to register.
+     */
+    public registerCamera(camera: Camera): void{
+        if (this._registeredCameras[camera.name] === undefined){
+            this._registeredCameras[camera.name] = camera;
+
+            if(this._activeCamera === undefined){
+                this._activeCamera = camera;
+            };
+        
+        } 
+        else { 
+            console.warn( "A camera named '" + camera.name + "' has already been registered. New camera not registered." );
+        };
     };
 };

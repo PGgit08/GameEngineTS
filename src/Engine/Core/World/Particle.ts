@@ -1,8 +1,9 @@
 import { TBehavior } from "@ecs/Behavior/IBehavior";
 import { IBehaviorData } from "@ecs/Behavior/IBehaviorData";
 import { TEntity } from "@ecs/TEntity";
-import { DrawComponent } from "@graphics/DrawComponent";
+import { RenderComponent } from "@graphics/RenderComponent";
 import { Circle2D } from "@graphics/Shape2D/Circle2D";
+import { Rect2D } from "@graphics/Shape2D/Rect2D";
 import { Vector2 } from "@physics/Vector";
 import { Renderer } from "@renderer/Renderer";
 
@@ -73,16 +74,17 @@ export class Particle extends TEntity{
         this.particleSize = size;
 
         // create the graphics component add drawable
-        const graphics: DrawComponent = new DrawComponent();
-        graphics.setCurrentDrawing(new Circle2D(this.particleSize));
+        const graphics: RenderComponent = new RenderComponent();
+        // graphics.setCurrentDrawing(new Circle2D(this.particleSize));
+        graphics.setCurrentDrawing(new Rect2D(this.particleSize, this.particleSize));
 
         // add needed components/behaviors to this particle
         this.addComponent(graphics);
-        this.addBehavior(new ParticleBehavior(
-            vel,
-            acc,
-            size
-        ));
+        // this.addBehavior(new ParticleBehavior(
+        //     vel,
+        //     acc,
+        //     size
+        // ));
     };
 
     update(dt: number){

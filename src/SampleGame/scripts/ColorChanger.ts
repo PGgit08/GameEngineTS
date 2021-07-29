@@ -1,7 +1,10 @@
 // sample script for particle
-
-import { Color, Drawable, DrawComponent, TBehavior } from "@GETS";
-import { Material } from "@graphics/Material";
+import {
+    TBehavior,
+    Material,
+    Color,
+    RenderComponent
+} from '@GETS';
 
 export class ColorChanger extends TBehavior{
     private ownerМaterial: Material;
@@ -12,10 +15,8 @@ export class ColorChanger extends TBehavior{
     };
 
     start(){
-        this.ownerМaterial = this.owner.getComponent(DrawComponent).currentDrawing.material;
-
-        super.start();
-    }
+        this.ownerМaterial = this.owner.getComponent(RenderComponent).currentDrawing.material;
+    };
 
     update(dt: number){
         this.ownerМaterial.tint = this.colors[4]

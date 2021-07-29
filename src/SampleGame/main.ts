@@ -7,11 +7,6 @@ import {
     Vector2,
     IGame,
     Engine,
-    DrawComponent,
-    Triangle2D,
-    Rect2D,
-    Circle2D,
-    RotationBehavior,
     Particle
 } from '@GETS';
 import { ColorChanger } from './scripts/ColorChanger';

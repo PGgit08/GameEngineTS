@@ -1,23 +1,23 @@
 import { TComponent } from "@ecs/Component/IComponent";
-import { Drawable } from "@graphics/Drawable";
+import { Renderable } from "@graphics/Renderable";
 import { RenderProps } from "@renderer/IViewProps";
 import { Renderer } from "@renderer/Renderer";
 
 /**
  * A Graphics Component for managing the Drawing/Graphics of an Entity.
  */
-export class DrawComponent extends TComponent{
-    private _currentDrawing: Drawable;
+export class RenderComponent extends TComponent{
+    private _currentDrawing: Renderable;
     
     constructor(){
         super("DrawComponent");
     };
 
-    public setCurrentDrawing(d: Drawable){
+    public setCurrentDrawing(d: Renderable){
         this._currentDrawing = d;
     };
 
-    public get currentDrawing(): Drawable{
+    public get currentDrawing(): Renderable{
         return this._currentDrawing;
     };
 

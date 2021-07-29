@@ -10,10 +10,10 @@ import { Color } from "@graphics/Color";
  */
 export class Material{
     // the tint of this material(color)
-    public tint: Color;
+    private _tint: Color;
 
     // the shader that assosiates to this Material/Drawable.
-    public shader: GLShader;
+    private _shader: GLShader;
 
     /**
      * Creates new Material.
@@ -21,8 +21,8 @@ export class Material{
      * @param tint The tint that associates to this Material.
      */
     constructor(shader: GLShader, tint: Color){
-        this.shader = shader;
-        this.tint = tint;
+        this._shader = shader;
+        this._tint = tint;
     };
 
     /**
@@ -42,5 +42,17 @@ export class Material{
      */
     public ApplyStandardUniforms(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
         this.shader.ApplyStandardUniforms(this, model, projection, view);
+    };
+
+    public get shader(): GLShader{
+        return this._shader;
+    };
+
+    public get tint(): Color{
+        return this._tint;
+    };
+
+    public set tint(t: Color){
+        this._tint = t;
     };
 };

@@ -5,10 +5,11 @@ import { Vector2 } from "@physics/Vector";
 import { Material } from "./Material";
 
 /**
- * Low-Level abstract class, that items which get drawn to the screen can inherit.
- * @example Sprite   
+ * Any Renderable objects (Sprite, Rect2D, Circle2D) inherit this abstract class to have the items and properties
+ * required (Material, Mesh Buffers, etc.) in order to get Rendered to the screen. Renderables are taken
+ * care by a RenderComponent, which can be attached to an entity.
  */
-export abstract class Drawable{
+export abstract class Renderable{
     // the anchor point for a drawable, used for rotation and tranformations(defaults to half)
     public origin: Vector2 = new Vector2(0.5, 0.5);
 
@@ -16,22 +17,34 @@ export abstract class Drawable{
     public center: Vector2 = Vector2.origin;
 
     // the width and height of this Drawable
-    protected _width: number = 100;
-    protected _height: number = 100;
+    protected _width: number;
+    protected _height: number;
 
-    // the Material that associates with this drawable
+    // the Material that associates with this drawable(material setup will be different later with manager)
     protected _material: Material = Material.FromConfig();
 
-    // the mesh(vertex buffer) that associates with this drawable
+    // the mesh(vertex buffer) that associates with this drawable(buffer setup will be different later)
     protected _mesh: GLBuffer = new GLBuffer();
 
     // the min/max X calculated with origin and width(can be useful for AABB)
-    protected _minX: number = -(this._width * this.origin.x);
-    protected _maxX: number = this._width * this.origin.y;
+    protected _minX: number;
+    protected _maxX: number;
     
     // the min/max Y calculated with origin and height(can be useful for AABB)
-    protected _minY: number = -(this._height * this.origin.y);
-    protected _maxY: number = this._height * this.origin.y;
+    protected _minY: number;
+    protected _maxY: number;
+
+    /**
+     * Create a new Renderable item.
+     * @param width The width of this Renderable (default: 100).
+     * @param height The height of this Renderable (default: 100).
+     */
+    constructor(width: number = 100, height: number = 100){
+        this._width = width;
+        this._height = height;
+
+        this.calcBox();
+    };
 
     /**
      * Sets the verticies in the mesh and uploads it to the GPU. (done during loading-process)

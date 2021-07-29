@@ -1,12 +1,12 @@
 import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
 import { ShaderManager } from "@gl/ShaderManager";
-import { Drawable } from "@graphics/Drawable";
+import { Renderable } from "@graphics/Renderable";
 import { Vector2 } from "@physics/Vector";
 
 /**
  * A Drawable for a 2D Circle
  */
-export class Circle2D extends Drawable{ 
+export class Circle2D extends Renderable{ 
     private _r: number;
 
     /**
