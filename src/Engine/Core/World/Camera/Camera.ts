@@ -12,6 +12,7 @@ export class Camera extends TEntity{
     public get view(): GLMatrix4{
         // so far just return normal world transform
         // but later add matrix inverse
+        // console.log(this.worldTransform.position);
         return this.worldTransform.toMatrix();
     };
 };

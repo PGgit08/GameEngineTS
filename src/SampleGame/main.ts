@@ -9,6 +9,8 @@ import {
     Engine,
     Particle
 } from '@GETS';
+import { Camera } from '@world/Camera/Camera';
+import { CameraDemo } from './scripts/CameraDemo';
 import { ColorChanger } from './scripts/ColorChanger';
 
 
@@ -56,6 +58,10 @@ class SampleGame implements IGame{
 
         // add "Particles" parent into sample scene
         SampleScene.addObject(Particles);
+
+        // for now add Camera here
+        SampleScene.registerCamera(new Camera('DefaultCamera'));
+        SampleScene.activeCamera.addBehavior(new CameraDemo());
 
         // set the current scene
         SceneManager.setCurrentScene("SampleScene");

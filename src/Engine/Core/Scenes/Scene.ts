@@ -4,6 +4,7 @@ import { TGameObject } from '@ecs/TGameObject';
 import { SceneManager } from '@scenes/SceneManager';
 import { Camera } from 'Core/World/Camera/Camera';
 import { ShaderManager } from '@gl/ShaderManager';
+import { Renderer } from '@renderer/Renderer';
 
 
 // if a scene needs to be created, this class 
@@ -44,7 +45,7 @@ export class Scene {
      * @param name The name of the entity.
      * @returns Entity.
      */
-    getEntityByName(name: string): TEntity{
+    public getEntityByName(name: string): TEntity{
         return this.root_entity.getEntityByName(name);
     };
 
@@ -52,7 +53,7 @@ export class Scene {
      * Adds an Entity to the scene.
      * @param entity The Entity that needs to be added to the scene.
      */
-    addObject(entity: TEntity){
+    public addObject(entity: TEntity): void{
         this.root_entity.addChild(entity);
     };
 
@@ -60,19 +61,21 @@ export class Scene {
      * Preforms loading operations on all entities, called before start.
      * Mainly used for WebGL buffer loading for components, and assets.
      */
-    load(): void{
-        // create a default camera
-        this._activeCamera = new Camera("DefaultCamera");
-        this.addObject(this._activeCamera);
+    public load(): void{
+        // create a default camera, register it
+        // NOTE: this is done in main.ts IGame.start() method as entity loading is done before Engine.load() call
+        // let DefaultCamera: Camera = new Camera("DefaultCamera");
+        // this.addObject(DefaultCamera);
+        // this.registerCamera(DefaultCamera);
 
-
+        // start loading ( recursive )
         this.root_entity.load();
     };
 
     /**
      * Preforms pre-update procedures on the Entities in this Scene.
      */
-    start(): void{
+    public start(): void{
         this.root_entity.start();
     };
 
@@ -80,15 +83,18 @@ export class Scene {
      * Preforms update procedures on each frame on the Entities in this Scene.
      * @param dt The time since the last frame update.
      */
-    update(dt: number): void{
+    public update(dt: number): void{
         // set the view matrix to camera view matrix
+        Renderer.renderProps.vMatrix = this._activeCamera.view;
+
+        // recursive update
         this.root_entity.update(dt);
     };
 
     /**
      * Renders all Entities in this scene.
      */
-    render(): void{
+    public render(): void{
         this.root_entity.render();
     };
 
@@ -101,13 +107,32 @@ export class Scene {
         if (this._registeredCameras[camera.name] === undefined){
             this._registeredCameras[camera.name] = camera;
 
-            if(this._activeCamera === undefined){
+            if (this._activeCamera === undefined){
+                console.log(camera);
                 this._activeCamera = camera;
             };
-        
-        } 
+        }
+
         else { 
-            console.warn( "A camera named '" + camera.name + "' has already been registered. New camera not registered." );
+            console.warn("A camera named '" + camera.name + "' has already been registered. New camera not registered.");
+        };
+    };
+
+    /**
+     * Unregisters the provided camera with this level.
+     * @param camera The camera to unregister.
+     */
+    public unregisterCamera(camera: Camera): void {
+        if (this._registeredCameras[camera.name] !== undefined){
+            delete this._registeredCameras[camera.name];
+            if (this._activeCamera === camera){
+                // NOTE: auto-activate the next camera in line?
+                this._activeCamera = undefined;
+            };
+        } 
+        
+        else {
+            console.warn("No camera named '" + camera.name + "' hsd been registered. Camera not unregistered.");
         };
     };
 };

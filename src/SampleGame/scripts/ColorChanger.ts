@@ -6,6 +6,7 @@ import {
     RenderComponent
 } from '@GETS';
 
+// change color of particle
 export class ColorChanger extends TBehavior{
     private ownerМaterial: Material;
     private colors: Color[] = [Color.black, Color.blue, Color.green, Color.red, Color.orange];
