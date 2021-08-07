@@ -15,7 +15,7 @@ export * from '@graphics/Shape2D/Triangle2D';
 export * from '@graphics/Shape2D/Rect2D';
 export * from '@graphics/Shape2D/Circle2D';
 
-export * from '@graphics/Renderable';
+export * from '@graphics/Mesh';
 export * from '@graphics/RenderComponent';
 export * from '@graphics/Sprite';
 export * from '@graphics/Color';

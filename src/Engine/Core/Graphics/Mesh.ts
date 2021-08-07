@@ -9,7 +9,7 @@ import { Material } from "./Material";
  * required (Material, Mesh Buffers, etc.) in order to get Rendered to the screen. Renderables are taken
  * care by a RenderComponent, which can be attached to an entity.
  */
-export abstract class Renderable{
+export abstract class Mesh{
     // the anchor point for a drawable, used for rotation and tranformations(defaults to half)
     public origin: Vector2 = new Vector2(0.5, 0.5);
 
@@ -20,11 +20,11 @@ export abstract class Renderable{
     protected _width: number;
     protected _height: number;
 
-    // the Material that associates with this drawable(material setup will be different later with manager)
+    // the Material that associates with this mesh(material setup will be different later with manager)
     protected _material: Material = Material.FromConfig();
 
-    // the mesh(vertex buffer) that associates with this drawable(buffer setup will be different later)
-    protected _mesh: GLBuffer = new GLBuffer();
+    // the geometry(vertex buffer) that associates with this mesh
+    protected _geometry: GLBuffer = new GLBuffer();
 
     // the min/max X calculated with origin and width(can be useful for AABB)
     protected _minX: number;
@@ -35,9 +35,9 @@ export abstract class Renderable{
     protected _maxY: number;
 
     /**
-     * Create a new Renderable item.
-     * @param width The width of this Renderable (default: 100).
-     * @param height The height of this Renderable (default: 100).
+     * Create a new Mesh.
+     * @param width The width of this Mesh (default: 100).
+     * @param height The height of this Mesh (default: 100).
      */
     constructor(width: number = 100, height: number = 100){
         this._width = width;
@@ -50,7 +50,7 @@ export abstract class Renderable{
      * Sets the verticies in the mesh and uploads it to the GPU. (done during loading-process)
      * Sub-classes should override. (example: Rect2D, load verticies based on height and width)
      */
-    public abstract loadMesh(): void;
+    public abstract loadGeometry(): void;
 
     /**
      * Find min/max X/Y as well as center vector and make box dimensions out of it
@@ -68,27 +68,21 @@ export abstract class Renderable{
         this.center.y = this._minY + (this._height * this.origin.y);
     };
 
-    private _setUniforms(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
-        this._material.ApplyStandardUniforms(model, projection, view);
-    
-    };  
-
-    private _drawMesh(): void{
-        this._mesh.bind();
-        this._mesh.draw();
-    };
-
     /**
      * A draw method to preform tranforming and rendering.
      * @param pos The position to the transforming/rendering.
      */
     public draw(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
-        this._setUniforms(model, projection, view);
-        this._drawMesh();
+        // set the shader uniforms(matricies, color vectors)
+        this._material.ApplyStandardUniforms(model, projection, view);
+        
+        // set the current vertex buffer to this geometry, and draw the buffer
+        this._geometry.bind();
+        this._geometry.draw();
     };
 
-    public get mesh(): GLBuffer{
-        return this._mesh;
+    public get geometry(): GLBuffer{
+        return this._geometry;
     };
 
     public get material(): Material{

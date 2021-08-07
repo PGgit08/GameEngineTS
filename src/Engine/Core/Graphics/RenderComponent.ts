@@ -1,5 +1,5 @@
 import { TComponent } from "@ecs/Component/IComponent";
-import { Renderable } from "@graphics/Renderable";
+import { Mesh } from "@graphics/Mesh";
 import { RenderProps } from "@renderer/IViewProps";
 import { Renderer } from "@renderer/Renderer";
 
@@ -7,28 +7,28 @@ import { Renderer } from "@renderer/Renderer";
  * A Graphics Component for managing the Drawing/Graphics of an Entity.
  */
 export class RenderComponent extends TComponent{
-    private _currentDrawing: Renderable;
+    private _mesh: Mesh;
     
     constructor(){
         super("DrawComponent");
     };
 
-    public setCurrentDrawing(d: Renderable){
-        this._currentDrawing = d;
+    public set mesh(m: Mesh){
+        this._mesh = m;
     };
 
-    public get currentDrawing(): Renderable{
-        return this._currentDrawing;
+    public get mesh(): Mesh{
+        return this._mesh;
     };
 
     /**
      * Loads the current drawable's mesh into GPU.
      */
     load(){
-        this._currentDrawing.loadMesh();
+        this._mesh.loadGeometry();
 
-        this._currentDrawing.mesh.upload();
-        this._currentDrawing.mesh.unbind();
+        this._mesh.geometry.upload();
+        this._mesh.geometry.unbind();
     };
 
     update(dt: number){
@@ -44,6 +44,6 @@ export class RenderComponent extends TComponent{
         transform, unlike an entity's child,
         which is RELATIVE to it's owner.
         */
-        this._currentDrawing.draw(this.owner.worldMatrix, Renderer.renderProps.pMatrix, Renderer.renderProps.vMatrix);
+        this._mesh.draw(this.owner.worldMatrix, Renderer.renderProps.pMatrix, Renderer.renderProps.vMatrix);
     };
 };

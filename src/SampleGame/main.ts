@@ -60,8 +60,8 @@ class SampleGame implements IGame{
         SampleScene.addObject(Particles);
 
         // for now add Camera here
-        SampleScene.registerCamera(new Camera('DefaultCamera'));
-        SampleScene.activeCamera.addBehavior(new CameraDemo());
+        // SampleScene.registerCamera(new Camera('DefaultCamera'));
+        // SampleScene.activeCamera.addBehavior(new CameraDemo());
 
         // set the current scene
         SceneManager.setCurrentScene("SampleScene");

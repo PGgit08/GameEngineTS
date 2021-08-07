@@ -1,10 +1,10 @@
 import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
-import { Renderable } from "@graphics/Renderable";
+import { Mesh } from "@graphics/Mesh";
 
 /**
  * A Drawable for a 2D Rectangle
  */
-export class Rect2D extends Renderable{ 
+export class Rect2D extends Mesh{ 
     /**
      * Creates a new Drawable 2D Rectangle 
      * @param w The width of the rectangle
@@ -19,21 +19,22 @@ export class Rect2D extends Renderable{
         this.calcBox();
     };
 
-    loadMesh(): void{
-        this._mesh = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.LINE_LOOP);
+    loadGeometry(): void{
+        // this._geometry = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.LINE_LOOP);
+        this._geometry = new GLBuffer();
 
         let posAttribute: AttributeInfo = new AttributeInfo();
 
         posAttribute.location = this._material.shader.getAttributeLocation('coords');
         posAttribute.size = 2;
 
-        this._mesh.addAttribute(posAttribute);
+        this._geometry.addAttribute(posAttribute);
 
         /**
          * WebGL has some weird drawing order,
          * so this took like an hour to complete
          */
-        this._mesh.setData(
+        this._geometry.setData(
             [
                 this._minX, this._minY,
                 this._minX, this._maxY,

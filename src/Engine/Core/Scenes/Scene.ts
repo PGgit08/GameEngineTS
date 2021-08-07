@@ -85,7 +85,7 @@ export class Scene {
      */
     public update(dt: number): void{
         // set the view matrix to camera view matrix
-        Renderer.renderProps.vMatrix = this._activeCamera.view;
+        // Renderer.renderProps.vMatrix = this._activeCamera.view;
 
         // recursive update
         this.root_entity.update(dt);

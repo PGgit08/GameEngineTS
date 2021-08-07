@@ -6,7 +6,7 @@ import { TBehavior } from '@ecs/Behavior/IBehavior';
 import { GLMatrix4 } from '@gl/GLMatrix4';
 
 /**
- * The base of any object in the game
+ * The base of any object in the game.
  */
 export class TEntity extends TGameObject{
     name: string;
@@ -75,7 +75,7 @@ export class TEntity extends TGameObject{
      * Adds a behavior to this entity.
      * @param behavior The behavior that needs to be added to the entity.
      */
-    addBehavior(behavior: TBehavior){
+    public addBehavior(behavior: TBehavior){
         behavior.setOwner(this);
         this.behaviors.push(behavior);
     };
@@ -84,7 +84,7 @@ export class TEntity extends TGameObject{
      * Adds a component to this entity.
      * @param component The component that needs to be added to the entity.
      */
-    addComponent(component: TComponent){
+    public addComponent(component: TComponent){
         component.setOwner(this);
         this.components.push(component);
     };
@@ -93,7 +93,7 @@ export class TEntity extends TGameObject{
      * Adds a child to the entity.
      * @param child The child entity that needs to be added to this entity.
      */
-    addChild(child: TEntity){
+    public addChild(child: TEntity){
         child.parent = this;
         this.children.push(child);
     };
@@ -102,17 +102,17 @@ export class TEntity extends TGameObject{
     * Recursively attempts to retrieve a child entity with the given name from this entity or its children.
     * @param name The name of the entity to retrieve.
     */
-    getEntityByName( name: string ): TEntity {
-        if ( this.name === name ) {
+    public getEntityByName(name: string): TEntity{
+        if (this.name === name){
             return this;
-        }
+        };
 
-        for ( let child of this.children ) {
-            let result = child.getEntityByName( name );
-            if ( result !== undefined ) {
+        for (let child of this.children){
+            let result = child.getEntityByName(name);
+            if (result !== undefined){
                 return result;
-            }
-        }
+            };
+        };
 
         return undefined;
     };
@@ -121,8 +121,8 @@ export class TEntity extends TGameObject{
     * Recursively attempts to retrieve a behavior with the given name from this entity or its children.
     * @param name The name of the behavior to retrieve.
     */
-    public getBehaviorByName( name: string ): TBehavior {
-        for ( let behavior of this.behaviors ) {
+    public getBehaviorByName(name: string): TBehavior {
+        for (let behavior of this.behaviors){
             if ( behavior.name === name ) {
                 return behavior;
             }

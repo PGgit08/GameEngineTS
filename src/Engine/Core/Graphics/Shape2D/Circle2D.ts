@@ -1,12 +1,12 @@
 import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
 import { ShaderManager } from "@gl/ShaderManager";
-import { Renderable } from "@graphics/Renderable";
+import { Mesh } from "@graphics/Mesh";
 import { Vector2 } from "@physics/Vector";
 
 /**
  * A Drawable for a 2D Circle
  */
-export class Circle2D extends Renderable{ 
+export class Circle2D extends Mesh{ 
     private _r: number;
 
     /**
@@ -28,19 +28,19 @@ export class Circle2D extends Renderable{
         this._height = r * 2;
     };
 
-    loadMesh(): void{
+    loadGeometry(): void{
         // triangle fan so that all triangles can be drawn around a center vertex
         // this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.LINE_LOOP);
-        this._mesh = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.TRIANGLE_FAN);
+        this._geometry = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.TRIANGLE_FAN);
 
         let posAttribute: AttributeInfo = new AttributeInfo();
 
         posAttribute.location = this._material.shader.getAttributeLocation('coords');
         posAttribute.size = 2;
 
-        this._mesh.addAttribute(posAttribute);
+        this._geometry.addAttribute(posAttribute);
 
-        this._mesh.setData(
+        this._geometry.setData(
             [
                 this.center.x, this.center.y
             ]
@@ -55,7 +55,7 @@ export class Circle2D extends Renderable{
                 )
             );
             
-            this._mesh.pushBackData(
+            this._geometry.pushBackData(
                 [newVertex.x, newVertex.y]
             );
         };
