@@ -15,9 +15,9 @@ export class CameraDemo extends TBehavior{
     update(dt: number){
         console.log('call');
         // move camera to the right
-        this.owner.worldTransform.position.add(Vector2.right);
+        this.owner.Transform.position.add(Vector2.right);
 
-        console.log(this.owner.worldTransform.position);
+        console.log(this.owner.Transform.position);
 
         super.update(dt);
     };

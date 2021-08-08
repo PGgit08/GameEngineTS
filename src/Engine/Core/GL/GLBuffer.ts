@@ -49,6 +49,10 @@ export class GLBuffer{
     // (example: elementSize * typeSize)
     private _stride: number;
 
+    public get data(): number[]{
+        return this._data;
+    };
+
     /**
      * Creates a new Buffer object.
      * @param dataType The type of data in this buffer(default: GL.FLOAT).

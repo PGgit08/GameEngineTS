@@ -1,6 +1,5 @@
 import { TGameObject } from '@ecs/TGameObject';
 import { TComponent } from '@ecs/Component/IComponent';
-
 import { Transform } from '@physics/Transform';
 import { TBehavior } from '@ecs/Behavior/IBehavior';
 import { GLMatrix4 } from '@gl/GLMatrix4';
@@ -20,8 +19,7 @@ export class TEntity extends TGameObject{
     protected _visible: boolean = true;
 
     // the world/local transforms of the entity
-    public worldTransform: Transform = new Transform();
-    public localTransform: Transform = new Transform();
+    public Transform: Transform = new Transform();
 
     // same for the matricies
     protected _worldMatrix: GLMatrix4 = GLMatrix4.identity();
@@ -121,19 +119,19 @@ export class TEntity extends TGameObject{
     * Recursively attempts to retrieve a behavior with the given name from this entity or its children.
     * @param name The name of the behavior to retrieve.
     */
-    public getBehaviorByName(name: string): TBehavior {
+    public getBehaviorByName(name: string): TBehavior{
         for (let behavior of this.behaviors){
-            if ( behavior.name === name ) {
+            if (behavior.name === name){
                 return behavior;
-            }
-        }
+            };
+        };
 
-        for ( let child of this.children ) {
+        for (let child of this.children){
             let behavior = child.getBehaviorByName( name );
-            if ( behavior !== undefined ) {
+            if (behavior !== undefined){
                 return behavior;
-            }
-        }
+            };
+        };
 
         return undefined;
     };
@@ -273,25 +271,21 @@ export class TEntity extends TGameObject{
      * Gets worldMatrix of this Entity based on parents
      */
     public getWorldMatrix(){
-        this._worldMatrix = this.worldTransform.toMatrix();
-        this._localMatrix = this.localTransform.toMatrix();
+        this._localMatrix = this.Transform.toMatrix();
 
         if(this.parent && this.parent.visible){
             // incase this entity has a visible entity 
             // multiply the parent's world matrix by this entity's local matrix
             this._worldMatrix = GLMatrix4.mul(
                 this.parent.worldMatrix,
-                this.localMatrix
+                this._localMatrix
             );
         }
 
         else{
             // incase this entity does not have a visible parent entity
             // multiply it's local matrix by it's world matrix
-            this._worldMatrix = GLMatrix4.mul(
-                this._worldMatrix,
-                this._localMatrix
-            );
+            this._worldMatrix = this._localMatrix;
         };
     };
 }; 

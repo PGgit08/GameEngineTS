@@ -13,6 +13,7 @@ export class Camera extends TEntity{
         // so far just return normal world transform
         // but later add matrix inverse
         // console.log(this.worldTransform.position);
-        return this.worldTransform.toMatrix();
+        this.getWorldMatrix();
+        return this._worldMatrix;
     };
 };

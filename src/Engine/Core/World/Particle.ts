@@ -33,19 +33,19 @@ export class ParticleBehavior extends TBehavior{
 
     update(dt: number){
         // basic collision implementation for fun
-        if(this.owner.localTransform.position.x == Renderer.viewProps.width - this.size 
-            || this.owner.localTransform.position.x == this.size){
+        if(this.owner.Transform.position.x == Renderer.viewProps.width - this.size 
+            || this.owner.Transform.position.x == this.size){
                 this.vel.x = -this.vel.x;
         };
 
-        if(this.owner.localTransform.position.y == Renderer.viewProps.height - this.size
-            || this.owner.localTransform.position.y == this.size){
+        if(this.owner.Transform.position.y == Renderer.viewProps.height - this.size
+            || this.owner.Transform.position.y == this.size){
                 this.vel.y = -this.vel.y;
         };
     
         // default movement
-        this.owner.localTransform.position.add(this.vel);
-        this.owner.localTransform.rotation += 1.0;
+        this.owner.Transform.position.add(this.vel);
+        this.owner.Transform.rotation += 1.0;
     };
 };      
 

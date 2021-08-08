@@ -3,7 +3,7 @@ import { ShaderManager } from "@gl/ShaderManager";
 import { Mesh } from "@graphics/Mesh";
 
 /**
- * A Drawable for a 2D triangle
+ * A Mesh for a 2D triangle
  */
 export class Triangle2D extends Mesh{ 
     /**

@@ -2,7 +2,7 @@ import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
 import { Mesh } from "@graphics/Mesh";
 
 /**
- * A Drawable for a 2D Rectangle
+ * A Mesh for a 2D Rectangle
  */
 export class Rect2D extends Mesh{ 
     /**

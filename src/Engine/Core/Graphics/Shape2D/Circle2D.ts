@@ -4,7 +4,7 @@ import { Mesh } from "@graphics/Mesh";
 import { Vector2 } from "@physics/Vector";
 
 /**
- * A Drawable for a 2D Circle
+ * A Mesh for a 2D Circle
  */
 export class Circle2D extends Mesh{ 
     private _r: number;

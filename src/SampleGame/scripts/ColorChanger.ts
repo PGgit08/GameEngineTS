@@ -16,7 +16,7 @@ export class ColorChanger extends TBehavior{
     };
 
     start(){
-        this.ownerМaterial = this.owner.getComponent(RenderComponent).currentDrawing.material;
+        this.ownerМaterial = this.owner.getComponent(RenderComponent).mesh.material;
     };
 
     update(dt: number){
