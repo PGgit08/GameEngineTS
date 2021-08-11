@@ -2,7 +2,7 @@ import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
 import { ShaderManager } from "@gl/ShaderManager";
 import { Mesh } from "@graphics/Mesh";
 import { Vector2 } from "@physics/Vector";
-//
+// fixing stuff
 /**
  * A Mesh for a 2D Circle
  */
