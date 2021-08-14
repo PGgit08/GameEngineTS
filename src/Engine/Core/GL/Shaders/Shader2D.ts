@@ -7,10 +7,48 @@ import { Material } from "@graphics/Material";
  * A simple built-in 2D shader
  */
 export class Shader2D extends GLShader{
-    constructor(){
-        super("Shader2D");
+    private _vSource: string =  
+    `
+        attribute vec2 coords;
 
-        // this.load()
+        uniform mat4 model;
+        uniform mat4 projection;
+        uniform mat4 view;
+
+        void main(){
+            gl_Position = projection * view * model * vec4(coords, 0, 1.0);
+        }
+        
+`;
+
+    private _fSource: string = `
+        precision mediump float;
+
+        uniform vec4 color;
+
+        void main(void){
+            gl_FragColor = color;
+        }` ; 
+
+    constructor(){
+        // vertex source
+        const vSource: string =
+
+        // fragment source
+        const fSource: string = `
+            precision mediump float;
+
+            uniform vec4 color;
+
+            void main(void){
+                gl_FragColor = color;
+        }`;
+
+        super(
+            "Shader2D",
+            vSource,
+            fSource
+        );
     };
 
     /**
@@ -28,31 +66,5 @@ export class Shader2D extends GLShader{
         this.setUniformMatrix('view', view);
 
         this.setUniformColor('color', material.tint);
-    };
-
-    protected get vSource(): string{
-        return `
-            attribute vec2 coords;
-
-            uniform mat4 model;
-            uniform mat4 projection;
-            uniform mat4 view;
-
-            void main(){
-                gl_Position = projection * view * model * vec4(coords, 0, 1.0);
-            }
-        `;
-    };
-
-    protected get fSource(): string{
-        return `
-            precision mediump float;
-
-            uniform vec4 color;
-
-            void main(void){
-                gl_FragColor = color;
-            }
-        `;
     };
 };
