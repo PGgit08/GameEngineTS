@@ -3,27 +3,17 @@ import { Color } from "@graphics/Color";
 import { Material } from "@graphics/Material";
 
 /**
- * A WebGL Shader Builder
- * Should be inherited by Shader Classes 
+ * A WebGL Shader
  */
-export class GLShader{
+export abstract class GLShader{
     private _name: string;
     private _program: WebGLProgram;
 
     private _attributes: {[name: string]: number} = {};
     private _uniforms: {[name: string]: WebGLUniformLocation} = {};
 
-    private _vSource: string;
-    private _fSource: string;
-
-    /**
-     * Create a new GLShader.
-     * @param name The name of this shader.
-     */
     public constructor(name: string){
         this._name = name;
-
-        this.load();
     };
 
     public get name(): string{
@@ -105,24 +95,20 @@ export class GLShader{
      * @param projection The projection matrix.
      * @param view The view matrix.
      */
-    public ApplyStandardUniforms(material: Material, model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{};
+    public abstract ApplyStandardUniforms(material: Material, model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void;
 
 
     /**
      * Get the vertex shader source.
      * @returns String.
      */
-    public get vSource(): string{
-        return this._vSource;
-    };
+    protected abstract get vSource(): string;
     
     /**
      * Get the fragment shader source.
      * @returns String.
      */
-    public get fSource(): string{
-        return this._fSource;
-    };
+    protected abstract get fSource(): string;
 
     /**
      * Loads the shaders and makes shader programs
@@ -130,8 +116,8 @@ export class GLShader{
      * @param fSource Fragment shader source(string).
      */
     public load(){
-        let vertexShader = this.loadShader(this._vSource, GL.VERTEX_SHADER);
-        let fragmentShader = this.loadShader(this._fSource, GL.FRAGMENT_SHADER);
+        let vertexShader = this.loadShader(this.vSource, GL.VERTEX_SHADER);
+        let fragmentShader = this.loadShader(this.fSource, GL.FRAGMENT_SHADER);
 
         this.createProgram(vertexShader, fragmentShader);
 
