@@ -5,7 +5,7 @@ import { Shader2D } from "./Shaders/Shader2D";
  * Manages Shaders
  */
 export class ShaderManager{
-    public static REGISTERED_SHADERS: {[name: string]: GLShader} = {};
+    private static _registeredShaders: {[name: string]: GLShader} = {};
 
     private static _isLoaded: boolean = false;
 
@@ -23,18 +23,18 @@ export class ShaderManager{
     };
 
     public static Load(){
-        for(let s in ShaderManager.REGISTERED_SHADERS){
-            ShaderManager.REGISTERED_SHADERS[s].load();
+        for(let s in ShaderManager._registeredShaders){
+            ShaderManager._registeredShaders[s].load();
         };
 
         ShaderManager._isLoaded = true;
     };
 
     public static AddShader(shader: GLShader){
-        this.REGISTERED_SHADERS[shader.name] = shader;
+        this._registeredShaders[shader.name] = shader;
     };
 
     public static GetShader(name: string): GLShader{
-        return this.REGISTERED_SHADERS[name];
+        return this._registeredShaders[name];
     };
 };

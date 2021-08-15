@@ -102,13 +102,13 @@ export abstract class GLShader{
      * Get the vertex shader source.
      * @returns String.
      */
-    protected abstract get vSource(): string;
+    public abstract get vSource(): string;
     
     /**
      * Get the fragment shader source.
      * @returns String.
      */
-    protected abstract get fSource(): string;
+    public abstract get fSource(): string;
 
     /**
      * Loads the shaders and makes shader programs

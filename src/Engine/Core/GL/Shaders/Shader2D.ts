@@ -30,7 +30,7 @@ export class Shader2D extends GLShader{
         this.setUniformColor('color', material.tint);
     };
 
-    protected get vSource(): string{
+    public get vSource(): string{
         return `
             attribute vec2 coords;
             uniform mat4 model;
@@ -42,7 +42,7 @@ export class Shader2D extends GLShader{
         `;
     };
 
-    protected get fSource(): string{
+    public get fSource(): string{
         return `
             precision mediump float;
             uniform vec4 color;
