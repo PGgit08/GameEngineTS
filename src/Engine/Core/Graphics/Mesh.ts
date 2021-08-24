@@ -74,7 +74,7 @@ export abstract class Mesh{
      */
     public draw(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
         // set the shader uniforms(matricies, color vectors)
-        this._material.ApplyStandardUniforms(model, projection, view);
+        this._material.ApplyUniforms(model, projection, view);
         
         // set the current vertex buffer to this geometry, and draw the buffer
         this._geometry.bind();

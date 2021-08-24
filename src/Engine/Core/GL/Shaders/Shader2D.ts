@@ -9,8 +9,6 @@ import { Material } from "@graphics/Material";
 export class Shader2D extends GLShader{
     constructor(){
         super("Shader2D");
-
-        // this.load()
     };
 
     /**
@@ -20,13 +18,7 @@ export class Shader2D extends GLShader{
      * @param projection The projection matrix.
      * @param view The view matrix.
      */
-    public ApplyStandardUniforms(material: Material, model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4){
-        this.use();
-
-        this.setUniformMatrix('model', model);
-        this.setUniformMatrix('projection', projection);
-        this.setUniformMatrix('view', view);
-
+    public ApplyCustomUniforms(material: Material){
         this.setUniformColor('color', material.tint);
     };
 

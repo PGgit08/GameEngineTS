@@ -88,15 +88,33 @@ export abstract class GLShader{
         return this._uniforms[name];
     };
 
+    // apply standard uniforms that all shaders must have(in config)
+    private ApplyStandardUniforms(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
+        // edit to config
+        this.setUniformMatrix('model', model);
+        this.setUniformMatrix('projection', projection);
+        this.setUniformMatrix('view', view);
+    };
+
     /**
-     * Apply standard uniforms to this shader.
+     * Apply custom uniforms to this shader(based on material).
      * @param material The material associating with this shader.
+     */
+    public abstract ApplyCustomUniforms(material: Material): void;
+
+    /**
+     * Apply uniforms needed for this shader.
+     * @param material The material that applies to this shader.
      * @param model The model matrix.
      * @param projection The projection matrix.
      * @param view The view matrix.
      */
-    public abstract ApplyStandardUniforms(material: Material, model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void;
+    public ApplyUniforms(material: Material, model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
+        this.use();
 
+        this.ApplyStandardUniforms(model, projection, view);
+        this.ApplyCustomUniforms(material);
+    };
 
     /**
      * Get the vertex shader source.

@@ -40,8 +40,8 @@ export class Material{
      * @param projection The projection matrix.
      * @param view The view matrix.
      */
-    public ApplyStandardUniforms(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
-        this.shader.ApplyStandardUniforms(this, model, projection, view);
+    public ApplyUniforms(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
+        this.shader.ApplyUniforms(this, model, projection, view);
     };
 
     public get shader(): GLShader{
