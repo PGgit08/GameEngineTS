@@ -12,11 +12,8 @@ export class Shader2D extends GLShader{
     };
 
     /**
-     * Apply standard uniforms to this shader.
+     * Apply custom uniforms to this shader.
      * @param material The material associating with this shader.
-     * @param model The model matrix.
-     * @param projection The projection matrix.
-     * @param view The view matrix.
      */
     public ApplyCustomUniforms(material: Material){
         this.setUniformColor('color', material.tint);
@@ -25,6 +22,7 @@ export class Shader2D extends GLShader{
     public get vSource(): string{
         return `
             attribute vec2 coords;
+
             uniform mat4 model;
             uniform mat4 projection;
             uniform mat4 view;

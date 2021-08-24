@@ -1,5 +1,13 @@
 import { GLShader } from "@gl/GLShader";
-import { Shader2D } from "./Shaders/Shader2D";
+import { Shader2D } from "@gl/Shaders/Shader2D";
+
+/**
+ * The config that tells what each shader must have.
+ */
+export class ShaderConfig {
+    public static readonly ATTRIBS: string[] = ['coords'];
+    public static readonly UNIFORMS: string[] = ['model', 'projection', 'view'];
+};
 
 /**
  * Manages Shaders

@@ -1,6 +1,7 @@
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { Color } from "@graphics/Color";
 import { Material } from "@graphics/Material";
+import { ShaderConfig } from "@gl/ShaderManager";
 
 /**
  * A WebGL Shader
@@ -139,9 +140,23 @@ export abstract class GLShader{
 
         this.createProgram(vertexShader, fragmentShader);
 
+        this.setAttribLocations();
+
+        // linking program to GPU?
+        GL.linkProgram(this._program);
+
+        // check for errors in linking shaders
+        let error = GL.getProgramInfoLog(this._program).trim();
+        if (error !== "") {
+            throw new Error( "Error linking shader '" + this._name + "': " + error );
+        };
+
         // find attributes and uniforms in this shader program
         this.detectAttributes();
         this.detectUniforms(); 
+
+        // check if all standard variables exist
+        this.standardVariableCheck();
     };
 
     private loadShader(source: string, type: number): WebGLShader{
@@ -169,14 +184,7 @@ export abstract class GLShader{
         GL.attachShader(this._program, vShader);
         GL.attachShader(this._program, fShader);
 
-        // linking program to GPU?
-        GL.linkProgram(this._program);
 
-        // check for errors in linking shaders
-        let error = GL.getProgramInfoLog(this._program).trim();
-        if (error !== "") {
-            throw new Error( "Error linking shader '" + this._name + "': " + error );
-        }
     };
 
     private detectAttributes(): void{
@@ -202,6 +210,32 @@ export abstract class GLShader{
             };
 
             this._uniforms[info.name] = GL.getUniformLocation(this._program, info.name);
+        };
+    };
+
+    // sets the locations of attributes based on ShaderConfig
+    private setAttribLocations(): void {
+        let loc: number = 0;
+
+        for(let attrib_name of ShaderConfig.ATTRIBS){
+            GL.bindAttribLocation(this._program, loc, attrib_name);
+
+            loc ++;
+        };
+    };
+
+    // check if shader contains everything based on ShaderConfig
+    private standardVariableCheck(): void {
+        for(let attrib_name of ShaderConfig.ATTRIBS){
+            if( !Object.keys(this._attributes).includes(attrib_name) ){
+                throw new Error( "This shader is missing attribute: '" + attrib_name + "' ");
+            };
+        };
+
+        for(let uniform_name of ShaderConfig.UNIFORMS){
+            if( !Object.keys(this._uniforms).includes(uniform_name) ){
+                throw new Error( "This shader is missing uniform: '" + uniform_name + "' ");
+            };
         };
     };
 };
