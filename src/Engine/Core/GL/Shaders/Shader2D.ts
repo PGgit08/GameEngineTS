@@ -1,7 +1,7 @@
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { GLShader } from "@gl/GLShader";
 import { Color } from "@graphics/Color";
-import { Material } from "@graphics/Material";
+import { Material } from "@graphics/Materials/Material";
 
 /**
  * A simple built-in 2D shader

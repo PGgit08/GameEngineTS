@@ -4,6 +4,7 @@ import { RenderComponent } from "@graphics/RenderComponent";
 import { Rect2D } from "@graphics/Shape2D/Rect2D";
 import { Vector2 } from "@physics/Vector";
 import { Renderer } from "@renderer/Renderer";
+import { SceneManager } from "@scenes/SceneManager";
 
 // cannot overwrite TEntity update, so must create behavior which
 // possibly can be an issue
@@ -53,6 +54,8 @@ export class Particle extends TEntity{
     // the radius of the particle
     public particleSize: number;
 
+    a: number = 0;
+
 
     /**
      * Create a new circular physical Particle which runs on a ParticleBehavior.
@@ -82,6 +85,6 @@ export class Particle extends TEntity{
     };
 
     update(dt: number){
-        super.update(dt);
+        super.update(dt);    
     };
 }; 

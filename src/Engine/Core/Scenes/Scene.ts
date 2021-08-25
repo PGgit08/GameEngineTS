@@ -3,7 +3,7 @@ import { RenderProps } from '@renderer/IViewProps';
 import { TGameObject } from '@ecs/TGameObject';
 import { SceneManager } from '@scenes/SceneManager';
 import { Camera } from 'Core/World/Camera/Camera';
-import { ShaderManager } from '@gl/ShaderManager';
+import { ShaderManager } from '@graphics/ShaderManager';
 import { Renderer } from '@renderer/Renderer';
 
 

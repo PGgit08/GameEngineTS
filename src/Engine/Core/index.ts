@@ -19,7 +19,7 @@ export * from '@graphics/Mesh';
 export * from '@graphics/RenderComponent';
 export * from '@graphics/Sprite';
 export * from '@graphics/Color';
-export * from '@graphics/Material';
+export * from '@graphics/Materials/Material';
 
 export * from '@physics/Transform';
 export * from '@physics/Vector';

@@ -86,8 +86,8 @@ export class GLBuffer{
         // and enable 
         if(this._hasAttributeLocation){
             for(let att of this._attributes){
-                // kind of confused on this line(86), but anyways this takes values from the geometry buffer, and pushes them into the shader
-                GL.vertexAttribPointer(att.location, att.size, this._dataType, normalize, this._stride, att.offset * this._typeSize);
+                // right now offset and stride are 0, because for now there will be a buffer for each attribute
+                GL.vertexAttribPointer(att.location, att.size, this._dataType, normalize, 0, 0);
                 GL.enableVertexAttribArray(att.location);
             };
         };

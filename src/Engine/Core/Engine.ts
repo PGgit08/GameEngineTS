@@ -4,7 +4,7 @@ import { SceneManager } from "@scenes/SceneManager";
 import { RenderViewProps } from "@renderer/IViewProps";
 import { TEntity } from "@ecs/TEntity";
 import { GLMatrix4 } from "@gl/GLMatrix4";
-import { ShaderManager } from "@gl/ShaderManager";
+import { ShaderManager } from "@graphics/ShaderManager";
 
 /**
  * Main Engine class

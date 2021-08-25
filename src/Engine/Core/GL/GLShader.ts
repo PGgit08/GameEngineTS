@@ -1,7 +1,7 @@
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { Color } from "@graphics/Color";
-import { Material } from "@graphics/Material";
-import { ShaderConfig } from "@gl/ShaderManager";
+import { Material } from "@graphics/Materials/Material";
+import { ShaderConfig } from "@graphics/ShaderManager";
 
 /**
  * A WebGL Shader

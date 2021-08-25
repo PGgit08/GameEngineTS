@@ -1,5 +1,5 @@
 import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
-import { ShaderManager } from "@gl/ShaderManager";
+import { ShaderConfig, ShaderManager } from "@graphics/ShaderManager";
 import { Mesh } from "@graphics/Mesh";
 import { Vector2 } from "@physics/Vector";
 
@@ -35,7 +35,7 @@ export class Circle2D extends Mesh{
 
         let posAttribute: AttributeInfo = new AttributeInfo();
 
-        posAttribute.location = this._material.shader.getAttributeLocation('coords');
+        posAttribute.location = ShaderConfig.ATTRIB_INDICIES.coords;
         posAttribute.size = 2;
 
         this._geometry.addAttribute(posAttribute);

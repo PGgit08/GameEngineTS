@@ -2,7 +2,7 @@ import { GLBuffer } from "@gl/GLBuffer";
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { GLShader } from "@gl/GLShader";
 import { Vector2 } from "@physics/Vector";
-import { Material } from "./Material";
+import { Material } from "./Materials/Material";
 
 /**
  * Any Renderable objects (Sprite, Rect2D, Circle2D) inherit this abstract class to have the items and properties

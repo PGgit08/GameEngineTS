@@ -1,5 +1,5 @@
 import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
-import { ShaderManager } from "@gl/ShaderManager";
+import { ShaderManager } from "@graphics/ShaderManager";
 import { Mesh } from "@graphics/Mesh";
 
 /**

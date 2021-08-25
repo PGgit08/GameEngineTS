@@ -7,6 +7,7 @@ import { Shader2D } from "@gl/Shaders/Shader2D";
 export class ShaderConfig {
     public static readonly ATTRIBS: string[] = ['coords'];
     public static readonly UNIFORMS: string[] = ['model', 'projection', 'view'];
+    public static readonly ATTRIB_INDICIES: {[name: string]: number} = {'coords': 0};
 };
 
 /**

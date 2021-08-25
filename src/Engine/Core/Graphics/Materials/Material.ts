@@ -1,6 +1,6 @@
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { GLShader } from "@gl/GLShader";
-import { ShaderManager } from "@gl/ShaderManager";
+import { ShaderManager } from "@graphics/ShaderManager";
 import { Color } from "@graphics/Color";
 
 /**
