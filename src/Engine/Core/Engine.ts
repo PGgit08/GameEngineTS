@@ -18,7 +18,8 @@ export class Engine{
     private game: IGame;
 
     private _previousTime: number = 0;
-
+    
+    
     /**
      * Creates new Engine instance.
      * @param game The IGame for the engine to work with.
