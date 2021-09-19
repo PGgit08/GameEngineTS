@@ -31,7 +31,7 @@ export class RenderComponent extends TComponent{
         this._mesh.geometry.unbind();
     };
 
-    update(dt: number){
+    update(){
     };
 
     /**

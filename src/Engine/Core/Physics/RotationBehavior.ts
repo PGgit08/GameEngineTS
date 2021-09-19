@@ -1,16 +1,15 @@
 import { TBehavior } from "@ecs/Behavior/IBehavior";
-import { IBehaviorData } from "@ecs/Behavior/IBehaviorData";
 
 /**
  * Simple pre-build rotation behavior for an entity.
  */
-export class RotationBehavior extends TBehavior{
+export class RotationBehavior extends TBehavior {
     constructor(){
         super("RotationBehavior");
     };
 
-    update(dt: number){
-        super.update(dt);
+    update(){
+        super.update();
 
         // no deltaTime implement cuz confused 🤔
         this.owner.Transform.rotation += 1;
