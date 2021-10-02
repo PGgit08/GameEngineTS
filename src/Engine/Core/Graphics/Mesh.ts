@@ -79,6 +79,7 @@ export abstract class Mesh{
         // set the current vertex buffer to this geometry, and draw the buffer
         this._geometry.bind();
         this._geometry.draw();
+        this._geometry.unbind();
     };
 
     public get geometry(): GLBuffer{

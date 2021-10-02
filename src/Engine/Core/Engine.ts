@@ -13,7 +13,7 @@ import { ShaderManager } from "@graphics/ShaderManager";
  * Rendering
  * And ETC.
  */
-export class Engine {
+export class Engine{
     private _renderer: Renderer;
     private game: IGame;
 
@@ -25,10 +25,17 @@ export class Engine {
      * @param game The IGame for the engine to work with.
      * @param viewConfig RenderView physical properties
      */
-    constructor(game: IGame, viewConfig: RenderViewProps){
+    constructor(game:IGame, viewConfig: RenderViewProps){
         // basic constructor called
         // when engine created
-        this._renderer = new Renderer(viewConfig);
+        this._renderer = new Renderer(
+            viewConfig,
+            {
+                deltaTime: 0,
+                vMatrix: GLMatrix4.identity(),
+                pMatrix: GLMatrix4.projection(viewConfig.width, viewConfig.height),
+            }
+        );
 
         this.game = game;
     };
@@ -96,7 +103,7 @@ export class Engine {
 
         let delta = (performance.now() - this._previousTime) / 1000;
 
-        this.update();
+        this.update(delta);
         this.render();
 
         this._previousTime = performance.now();
@@ -108,10 +115,10 @@ export class Engine {
      * Updates current scene and Game.
      * @param delta Time since last frame update!
      */
-    private update(){
+    private update(delta:number){
         // update function
-        SceneManager.CURRENT_SCENE.update();
-        this.game.Update();
+        SceneManager.CURRENT_SCENE.update(delta);
+        this.game.Update(delta);
     };
 
     /**

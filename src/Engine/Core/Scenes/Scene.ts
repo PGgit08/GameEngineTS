@@ -23,7 +23,7 @@ export class Scene {
      * Creates a new scene which is added to the SceneManager.
      * @param name The Name of this scene.
      */
-    constructor(name: string) {
+    constructor(name: string){
         this.name = name;
         this.root_entity = new TEntity('ROOT');
         this.root_entity.visible = false;
@@ -32,11 +32,11 @@ export class Scene {
     };
 
 
-    public get loaded(): boolean {
+    public get loaded(): boolean{
         return this.root_entity.isLoaded;
     };
 
-    public get activeCamera(): Camera {
+    public get activeCamera(): Camera{
         return this._activeCamera;
     };
 
@@ -45,7 +45,7 @@ export class Scene {
      * @param name The name of the entity.
      * @returns Entity.
      */
-    public getEntityByName(name: string): TEntity {
+    public getEntityByName(name: string): TEntity{
         return this.root_entity.getEntityByName(name);
     };
 
@@ -53,7 +53,7 @@ export class Scene {
      * Adds an Entity to the scene.
      * @param entity The Entity that needs to be added to the scene.
      */
-    public addObject(entity: TEntity): void {
+    public addObject(entity: TEntity): void{
         this.root_entity.addChild(entity);
     };
 
@@ -61,7 +61,7 @@ export class Scene {
      * Preforms loading operations on all entities, called before start.
      * Mainly used for WebGL buffer loading for components, and assets.
      */
-    public load(): void {
+    public load(): void{
         // create a default camera, register it
         // NOTE: this is done in main.ts IGame.start() method as entity loading is done before Engine.load() call
         // let DefaultCamera: Camera = new Camera("DefaultCamera");
@@ -75,7 +75,7 @@ export class Scene {
     /**
      * Preforms pre-update procedures on the Entities in this Scene.
      */
-    public start(): void {
+    public start(): void{
         this.root_entity.start();
     };
 
@@ -83,18 +83,18 @@ export class Scene {
      * Preforms update procedures on each frame on the Entities in this Scene.
      * @param dt The time since the last frame update.
      */
-    public update(): void {
+    public update(dt: number): void{
         // set the view matrix to camera view matrix
         // Renderer.renderProps.vMatrix = this._activeCamera.view;
 
         // recursive update
-        this.root_entity.update();
+        this.root_entity.update(dt);
     };
 
     /**
      * Renders all Entities in this scene.
      */
-    public render(): void {
+    public render(): void{
         this.root_entity.render();
     };
 

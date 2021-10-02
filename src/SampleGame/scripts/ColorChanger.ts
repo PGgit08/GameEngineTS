@@ -19,9 +19,9 @@ export class ColorChanger extends TBehavior{
         this.ownerМaterial = this.owner.getComponent(RenderComponent).mesh.material;
     };
 
-    update(){
-        this.ownerМaterial.tint = this.colors[4]; // orange
+    update(dt: number){
+        this.ownerМaterial.tint = this.colors[4]
 
-        super.update();
+        super.update(dt);
     };
 }; 

@@ -64,7 +64,7 @@ export abstract class TComponent implements IComponent{
      * The loop operations of this component, called on each frame update.
      * @param dt The delta time since the last update call.
      */
-    update(): void{};
+    update(dt: number): void{};
 
     /**
      * The render operations of this component.

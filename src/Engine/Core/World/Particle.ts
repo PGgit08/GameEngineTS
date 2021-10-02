@@ -4,6 +4,7 @@ import { RenderComponent } from "@graphics/RenderComponent";
 import { Rect2D } from "@graphics/Shape2D/Rect2D";
 import { Vector2 } from "@physics/Vector";
 import { Renderer } from "@renderer/Renderer";
+import { SceneManager } from "@scenes/SceneManager";
 
 // cannot overwrite TEntity update, so must create behavior which
 // possibly can be an issue
@@ -11,7 +12,7 @@ import { Renderer } from "@renderer/Renderer";
 /**
  * A physics behavior for the Particle, contains physics properties
  */
-export class ParticleBehavior extends TBehavior {
+export class ParticleBehavior extends TBehavior{
     // physics properties
     public vel: Vector2;
     public acc: Vector2;
@@ -31,7 +32,7 @@ export class ParticleBehavior extends TBehavior {
         this.size = size;
     };
 
-    update(){
+    update(dt: number){
         // basic collision implementation for fun
         if(this.owner.Transform.position.x == Renderer.viewProps.width - this.size 
             || this.owner.Transform.position.x == this.size){
@@ -83,7 +84,7 @@ export class Particle extends TEntity{
         this.addComponent(renderer);
     };
 
-    update(){
-        // super.update();    
+    update(dt: number){
+        super.update(dt);    
     };
 }; 

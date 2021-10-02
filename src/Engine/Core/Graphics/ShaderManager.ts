@@ -5,9 +5,8 @@ import { Shader2D } from "@gl/Shaders/Shader2D";
  * The config that tells what each shader must have.
  */
 export class ShaderConfig {
-    public static readonly ATTRIBS: string[] = ['coords'];
     public static readonly UNIFORMS: string[] = ['model', 'projection', 'view'];
-    public static readonly ATTRIB_INDICIES: {[name: string]: number} = {'coords': 0};
+    public static readonly ATTRIBS: {[name: string]: number} = {'coords': 0};
 };
 
 /**

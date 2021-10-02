@@ -236,19 +236,19 @@ export class TEntity extends TGameObject{
      * Called on every frame.(recursive)
      * @param dt The amount of time since the last update call(deltaTime).
      */ 
-    update(): void {
+    update(dt: number): void {
         this.getWorldMatrix();
 
         for(let b of this.behaviors){
-            b.update();
+            b.update(dt);
         }; 
 
         for(let c of this.components){
-            c.update();
+            c.update(dt);
         };
 
         for(let c of this.children){
-            c.update();
+            c.update(dt);
         };
     };
 
