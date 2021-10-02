@@ -9,13 +9,11 @@ import {
     Engine,
     Particle
 } from '@GETS';
-import { Camera } from '@world/Camera/Camera';
-import { CameraDemo } from './scripts/CameraDemo';
 import { ColorChanger } from './scripts/ColorChanger';
 
 
 /* Game Class */
-class SampleGame implements IGame{
+class SampleGame implements IGame {
     // sceneCounter: number = 0;
 
     constructor(){
@@ -67,11 +65,11 @@ class SampleGame implements IGame{
         SceneManager.setCurrentScene("SampleScene");
     };
 
-    Update(deltaTime: number): void{
+    Update(): void {
         
     };
 
-    Render(deltaTime: number){
+    Render(): void {
         
     };
 };

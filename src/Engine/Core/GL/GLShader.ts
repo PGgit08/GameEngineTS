@@ -215,14 +215,18 @@ export abstract class GLShader{
 
     // sets the locations of attributes based on ShaderConfig
     private setAttribLocations(): void {
-        for(let attrib in ShaderConfig.ATTRIBS){
-            GL.bindAttribLocation(this._program, ShaderConfig.ATTRIBS[attrib], attrib);
+        let loc: number = 0;
+
+        for(let attrib_name of ShaderConfig.ATTRIBS){
+            GL.bindAttribLocation(this._program, loc, attrib_name);
+
+            loc ++;
         };
     };
 
     // check if shader contains everything based on ShaderConfig
     private standardVariableCheck(): void {
-        for(let attrib_name of Object.keys(ShaderConfig.ATTRIBS)){
+        for(let attrib_name of ShaderConfig.ATTRIBS){
             if( !Object.keys(this._attributes).includes(attrib_name) ){
                 throw new Error( "This shader is missing attribute: '" + attrib_name + "' ");
             };
