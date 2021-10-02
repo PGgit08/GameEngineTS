@@ -13,7 +13,7 @@ import { ShaderManager } from "@graphics/ShaderManager";
  * Rendering
  * And ETC.
  */
-export class Engine{
+export class Engine {
     private _renderer: Renderer;
     private game: IGame;
 

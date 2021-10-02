@@ -4,7 +4,7 @@ import { RenderViewProps } from '@renderer/IViewProps';
  * The physical RenderView for the game.
  * Creates WebGL context.
  */
-export class RenderView{
+export class RenderView {
     private gl: WebGLRenderingContext;
     private canvasId: string;
 
@@ -14,7 +14,7 @@ export class RenderView{
      * @param canvasProps The physical properties for the canvas.
      * @returns null if error.
      */
-    constructor(canvasId: string, canvasProps: RenderViewProps){
+    constructor(canvasId: string, canvasProps: RenderViewProps) {
         const searchElement = document.getElementById(canvasId);
         if(searchElement){
             console.log(searchElement);
