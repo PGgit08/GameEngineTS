@@ -1,7 +1,6 @@
 import { Renderer } from "@renderer/Renderer";
 import { IGame }from "@game/IGame";
 import { SceneManager } from "@scenes/SceneManager";
-import { RenderViewProps } from "@renderer/IViewProps";
 import { TEntity } from "@ecs/TEntity";
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { ShaderManager } from "@graphics/ShaderManager";
@@ -25,17 +24,8 @@ export class Engine {
      * @param game The IGame for the engine to work with.
      * @param viewConfig RenderView physical properties
      */
-    constructor(game:IGame, viewConfig: RenderViewProps){
-        // basic constructor called
-        // when engine created
-        this._renderer = new Renderer(
-            viewConfig,
-            {
-                deltaTime: 0,
-                vMatrix: GLMatrix4.identity(),
-                pMatrix: GLMatrix4.projection(viewConfig.width, viewConfig.height),
-            }
-        );
+    constructor(game: IGame, width: number, height: number){
+        this._renderer = new Renderer(width, height);
 
         this.game = game;
     };
@@ -98,15 +88,15 @@ export class Engine {
     /**
      * Game loop
      */
-    private loop(){
-        // main game loop
+    private loop(now: number): void {
+        now *= 0.001; // convert to seconds
+        Renderer.DeltaTime = now - this._previousTime;
+        this._previousTime = now;
 
-        let delta = (performance.now() - this._previousTime) / 1000;
+        let delta = Renderer.DeltaTime;
 
         this.update(delta);
         this.render();
-
-        this._previousTime = performance.now();
 
         requestAnimationFrame(this.loop.bind(this));
     };

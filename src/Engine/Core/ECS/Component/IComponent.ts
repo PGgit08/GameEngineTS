@@ -1,6 +1,5 @@
 import { IBehaviorData } from '@ecs/Behavior/IBehaviorData';
 import { TEntity } from '@ecs/TEntity'; 
-import { RenderProps } from '@renderer/IViewProps';
 
 export default interface IComponent{
     load(): void;

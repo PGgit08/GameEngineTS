@@ -25,8 +25,7 @@ export * from '@physics/Transform';
 export * from '@physics/Vector';
 export * from '@physics/RotationBehavior';
 
-export * from '@renderer/IViewProps';
-export * from '@renderer/RenderView';
+export * from '@renderer/Renderer';
 
 export * from '@scenes/Scene';
 export * from '@scenes/SceneManager';

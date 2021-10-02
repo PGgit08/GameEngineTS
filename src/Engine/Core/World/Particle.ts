@@ -12,7 +12,7 @@ import { SceneManager } from "@scenes/SceneManager";
 /**
  * A physics behavior for the Particle, contains physics properties
  */
-export class ParticleBehavior extends TBehavior{
+export class ParticleBehavior extends TBehavior {
     // physics properties
     public vel: Vector2;
     public acc: Vector2;
@@ -34,23 +34,23 @@ export class ParticleBehavior extends TBehavior{
 
     update(dt: number){
         // basic collision implementation for fun
-        if(this.owner.Transform.position.x == Renderer.viewProps.width - this.size 
+        if(this.owner.Transform.position.x == Renderer.Width - this.size 
             || this.owner.Transform.position.x == this.size){
                 this.vel.x = -this.vel.x;
         };
 
-        if(this.owner.Transform.position.y == Renderer.viewProps.height - this.size
+        if(this.owner.Transform.position.y == Renderer.Height - this.size
             || this.owner.Transform.position.y == this.size){
                 this.vel.y = -this.vel.y;
         };
     
         // default movement
-        this.owner.Transform.position.add(this.vel);
-        this.owner.Transform.rotation += 1.0;
+        // this.owner.Transform.position.add(this.vel);
+        this.owner.Transform.rotation += 360 * Renderer.DeltaTime;
     };
 };      
 
-export class Particle extends TEntity{
+export class Particle extends TEntity {
     // the radius of the particle
     public particleSize: number;
 
@@ -82,6 +82,7 @@ export class Particle extends TEntity{
 
         // add needed components/behaviors to this particle
         this.addComponent(renderer);
+        this.addBehavior(new ParticleBehavior(vel, acc, size));
     };
 
     update(dt: number){

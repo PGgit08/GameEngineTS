@@ -1,6 +1,5 @@
 import { TComponent } from "@ecs/Component/IComponent";
 import { Mesh } from "@graphics/Mesh";
-import { RenderProps } from "@renderer/IViewProps";
 import { Renderer } from "@renderer/Renderer";
 
 /**
@@ -44,6 +43,6 @@ export class RenderComponent extends TComponent{
         transform, unlike an entity's child,
         which is RELATIVE to it's owner.
         */
-        this._mesh.draw(this.owner.worldMatrix, Renderer.renderProps.pMatrix, Renderer.renderProps.vMatrix);
+        this._mesh.draw(this.owner.worldMatrix, Renderer.ProjectionMatrix, Renderer.ViewMatrix);
     };
 };

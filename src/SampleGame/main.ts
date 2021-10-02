@@ -77,10 +77,7 @@ class SampleGame implements IGame{
 };
 
 /* Make a new engine with this game */
-var GameEngine: Engine = new Engine(new SampleGame(), {
-    height: 600,
-    width: 800
-});
+var GameEngine: Engine = new Engine(new SampleGame(), 800, 600);
 
 // start engine
 GameEngine.start();

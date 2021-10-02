@@ -1,5 +1,4 @@
 import { TEntity } from '@ecs/TEntity';
-import { RenderProps } from '@renderer/IViewProps';
 import { TGameObject } from '@ecs/TGameObject';
 import { SceneManager } from '@scenes/SceneManager';
 import { Camera } from 'Core/World/Camera/Camera';
