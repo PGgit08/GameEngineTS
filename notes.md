@@ -19,7 +19,8 @@ The Life Cycle of the Engine is pretty simple now:
 
 ## TODO
 
-1. Clean-Up ( including Renderer )
-2. Add Normal Mesh Creation( Seperate Geometry and Material )
+1. Clean-Up Renderer
+2. Add VAOs
+3. Add Normal Mesh Creation
 
 ( then you can release this as version 1.0 or something )

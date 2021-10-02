@@ -35,7 +35,7 @@ export class Circle2D extends Mesh{
 
         let posAttribute: AttributeInfo = new AttributeInfo();
 
-        posAttribute.location = ShaderConfig.ATTRIBS.coords;
+        posAttribute.location = ShaderConfig.ATTRIB_INDICIES.coords;
         posAttribute.size = 2;
 
         this._geometry.addAttribute(posAttribute);
