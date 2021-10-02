@@ -13,7 +13,7 @@ import { ColorChanger } from './scripts/ColorChanger';
 
 
 /* Game Class */
-class SampleGame implements IGame{
+class SampleGame implements IGame {
     // sceneCounter: number = 0;
 
     constructor(){
