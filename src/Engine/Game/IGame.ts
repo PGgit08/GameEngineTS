@@ -16,11 +16,11 @@ export interface IGame {
      * Called on every frame update.
      * @param deltaTime Time since last frame update call.
      */
-    Update: (deltaTime: number) => void;
+    Update: () => void;
     
     /**
      * Called on every frame update.
      * @param deltaTime Time since last frame render call.
      */
-    Render: (deltaTime: number) => void;
+    Render: () => void;
 };

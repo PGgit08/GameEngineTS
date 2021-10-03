@@ -1,7 +1,9 @@
+import { Renderer } from '@renderer/Renderer';
+
 /**
  * Mathematical 2D Vector
  */
-export class Vector2{
+export class Vector2 {
     // items are public by default
     // x and y and magnitude for vector
     x: number;
@@ -67,9 +69,16 @@ export class Vector2{
     };
 
     /**
+     * Multiples this Vector with a DeltaTime vector
+     */
+    public timesDelta(): void {
+        this.multiply(Vector2.deltaVector());
+    };
+
+    /**
      * Negates this vector.
      */
-    public negative(): void{
+    public negative(): void {
         this.x = -this.x;
         this.y = -this.y;
     };
@@ -81,7 +90,7 @@ export class Vector2{
      * @param v2 Vector #2.
      * @returns new 2D Vector.
      */
-    static add(v1: Vector2, v2:Vector2){
+    static add(v1: Vector2, v2: Vector2){
         return new Vector2(v1.x + v2.x, v1.y + v2.y);
     };
 
@@ -91,7 +100,7 @@ export class Vector2{
      * @param v2 Vector #2.
      * @returns new 2D Vector.
      */
-    static subtract(v1: Vector2, v2:Vector2){
+    static subtract(v1: Vector2, v2: Vector2){
         return new Vector2(v1.x - v2.x, v1.y - v2.y);
     };
 
@@ -101,7 +110,7 @@ export class Vector2{
      * @param v2 Vector #2.
      * @returns new 2D Vector.
      */
-    static multiply(v1: Vector2, v2:Vector2){
+    static multiply(v1: Vector2, v2: Vector2){
         return new Vector2(v1.x * v2.x, v1.y * v2.y);
     };
 
@@ -111,15 +120,33 @@ export class Vector2{
      * @param v2 Vector #2.
      * @returns new 2D Vector.
      */
-    static divide(v1: Vector2, v2:Vector2){
+    static divide(v1: Vector2, v2: Vector2): Vector2 {
         return new Vector2(v1.x / v2.y, v1.y / v2.y);
     };
+
+    /**
+     * DeltaTime as 2D Vector.
+     * @returns new 2D Vector.
+     */
+    static deltaVector(): Vector2 {
+        return new Vector2(Renderer.DeltaTime, Renderer.DeltaTime);
+    };
+
+    /**
+     * Multiplies given Vector with DeltaTime Vector.
+     * @param v Given Vector to multiply with DeltaTime Vector.
+     * @returns new 2D Vector.
+     */
+    static withDelta(v: Vector2): Vector2 {
+        return Vector2.multiply(Vector2.deltaVector(), v);
+    };
+
 
     /**
      * Scales this Vector.
      * @param s Number to scale by.
      */
-    scale(s: number): void{
+    scale(s: number): void {
         this.x *= s;
         this.y *= s; 
     };

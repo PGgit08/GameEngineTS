@@ -32,7 +32,7 @@ export class ParticleBehavior extends TBehavior {
         this.size = size;
     };
 
-    update(dt: number){
+    update(){
         // basic collision implementation for fun
         if(this.owner.Transform.position.x == Renderer.Width - this.size 
             || this.owner.Transform.position.x == this.size){
@@ -45,8 +45,8 @@ export class ParticleBehavior extends TBehavior {
         };
     
         // default movement
-        // this.owner.Transform.position.add(this.vel);
-        this.owner.Transform.rotation += 360 * Renderer.DeltaTime;
+        this.owner.Transform.position.add(Vector2.withDelta(this.vel));
+        // this.owner.Transform.rotation += 360 * Renderer.DeltaTime;
     };
 };      
 
@@ -83,9 +83,5 @@ export class Particle extends TEntity {
         // add needed components/behaviors to this particle
         this.addComponent(renderer);
         this.addBehavior(new ParticleBehavior(vel, acc, size));
-    };
-
-    update(dt: number){
-        super.update(dt);    
     };
 }; 

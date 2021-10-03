@@ -82,12 +82,12 @@ export class Scene {
      * Preforms update procedures on each frame on the Entities in this Scene.
      * @param dt The time since the last frame update.
      */
-    public update(dt: number): void{
+    public update(): void{
         // set the view matrix to camera view matrix
         // Renderer.renderProps.vMatrix = this._activeCamera.view;
 
         // recursive update
-        this.root_entity.update(dt);
+        this.root_entity.update();
     };
 
     /**

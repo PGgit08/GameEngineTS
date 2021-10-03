@@ -95,7 +95,7 @@ export class Engine {
 
         let delta = Renderer.DeltaTime;
 
-        this.update(delta);
+        this.update();
         this.render();
 
         requestAnimationFrame(this.loop.bind(this));
@@ -105,10 +105,10 @@ export class Engine {
      * Updates current scene and Game.
      * @param delta Time since last frame update!
      */
-    private update(delta:number){
+    private update(){
         // update function
-        SceneManager.CURRENT_SCENE.update(delta);
-        this.game.Update(delta);
+        SceneManager.CURRENT_SCENE.update();
+        this.game.Update();
     };
 
     /**

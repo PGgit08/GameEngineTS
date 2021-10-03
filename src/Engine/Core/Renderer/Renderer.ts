@@ -102,6 +102,6 @@ export class Renderer {
         GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
         SceneManager.CURRENT_SCENE.render();
-        game.Render(Renderer.DeltaTime);
+        game.Render();
     };
 };
