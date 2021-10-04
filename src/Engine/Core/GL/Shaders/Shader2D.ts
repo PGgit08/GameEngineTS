@@ -6,7 +6,7 @@ import { Material } from "@graphics/Materials/Material";
 /**
  * A simple built-in 2D shader
  */
-export class Shader2D extends GLShader{
+export class Shader2D extends GLShader {
     constructor(){
         super("Shader2D");
     };
