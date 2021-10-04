@@ -19,6 +19,6 @@ export class ColorChanger extends TBehavior {
     };
 
     update(): void {
-        this.ownerМaterial.tint = Color.blue;
+        this.ownerМaterial.tint = Color.green;
     };
 }; 

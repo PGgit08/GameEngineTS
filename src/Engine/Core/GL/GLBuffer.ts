@@ -15,6 +15,11 @@ export class AttributeInfo {
      * The size (number of elements) in this attribute (i.e Vector2 = 2).
      */
     public size: number;
+
+    /**
+     * The attribute's offset from the beginning of the buffer.
+     */
+    public offset: number;
 };
 
 /**
@@ -38,10 +43,16 @@ export class GLBuffer {
     // if this buffer has any shader attributes
     private _hasAttributes: boolean = false;
 
-    // the size of each element in this buffer( Vector2 = elementSize 2 for example )
+    // the size of each element in this buffer ( Vector2 = elementSize 2 for example )
     private _elementSize: number = 0;
+
+    // the size of the type of data in the buffer ( example: FLOAT = 4 )
+    private _typeSize: number;
+
+    // the buffer's stride
+    private _stride: number;
     
-    public get data(): number[]{
+    public get data(): number[] {
         return this._data;
     };
 
@@ -51,7 +62,7 @@ export class GLBuffer {
      * @param bufferType The buffer type for this buffer(default: GL.ARRAY_BUFFER).
      * @param mode The drawing mode of this buffer(default: GL.TRIANGLES).
      */
-    constructor(dataType: number = GL.FLOAT, bufferType: number = GL.ARRAY_BUFFER, mode: number = GL.TRIANGLES){
+    constructor(dataType: number = GL.FLOAT, bufferType: number = GL.ARRAY_BUFFER, mode: number = GL.TRIANGLES) {
         this._dataType = dataType;
         this._bufferType = bufferType;
         this._mode = mode;
@@ -59,6 +70,11 @@ export class GLBuffer {
         this._buffer = GL.createBuffer();
 
         this._vertexArray = new VertexArray();
+
+        switch(this._bufferType) {
+            case GL.FLOAT:
+                this._typeSize = 4;
+        };
     };
 
     /**
@@ -107,14 +123,20 @@ export class GLBuffer {
         // set the current buffer and VAO
         this.bind();
 
-        GL.vertexAttribPointer(info.location, info.size, this._dataType, false, 0, 0);
+        GL.vertexAttribPointer(info.location, info.size, this._dataType, false, this._stride, info.offset * this._typeSize);
         GL.enableVertexAttribArray(info.location);
 
         // unbind current buffer and VAO
         this.unbind();
 
+        // increase the offset of the info my the element size
+        info.offset += this._elementSize;
+
         // increase element size by size that attribute wants
         this._elementSize += info.size;
+
+        // increase the buffer's stride ( distance from the beggining of one attribute set to the beggining of the next )
+        this._stride += this._elementSize * this._typeSize;
     };
     
     
