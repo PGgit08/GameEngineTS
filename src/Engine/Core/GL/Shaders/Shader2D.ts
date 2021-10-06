@@ -1,7 +1,7 @@
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { GLShader } from "@gl/GLShader";
 import { Color } from "@graphics/Color";
-import { Material } from "@graphics/Materials/Material";
+import { ColorMaterial } from "@graphics/Materials/ColorMaterial";
 
 /**
  * A simple built-in 2D shader
@@ -15,7 +15,7 @@ export class Shader2D extends GLShader {
      * Apply custom uniforms to this shader.
      * @param material The material associating with this shader.
      */
-    public ApplyCustomUniforms(material: Material){
+    public ApplyCustomUniforms(material: ColorMaterial){
         this.setUniformColor('color', material.tint);
     };
 

@@ -1,3 +1,4 @@
+import { ColorMaterial } from "@GETS";
 import { GLBuffer } from "@gl/GLBuffer";
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { GLShader } from "@gl/GLShader";
@@ -21,7 +22,7 @@ export abstract class Mesh{
     protected _height: number;
 
     // the Material that associates with this mesh(material setup will be different later with manager)
-    protected _material: Material = Material.FromConfig();
+    protected _material: Material = new ColorMaterial();
 
     // the geometry(vertex buffer) that associates with this mesh
     protected _geometry: GLBuffer = new GLBuffer();
@@ -72,7 +73,7 @@ export abstract class Mesh{
      * A draw method to preform tranforming and rendering.
      * @param pos The position to the transforming/rendering.
      */
-    public draw(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void{
+    public draw(model: GLMatrix4, projection: GLMatrix4, view: GLMatrix4): void {
         // set the shader uniforms(matricies, color vectors)
         this._material.ApplyUniforms(model, projection, view);
         
@@ -82,11 +83,11 @@ export abstract class Mesh{
         this._geometry.unbind();
     };
 
-    public get geometry(): GLBuffer{
+    public get geometry(): GLBuffer {
         return this._geometry;
     };
 
-    public get material(): Material{
+    public get material(): Material {
         return this._material;
     };
 };
