@@ -1,10 +1,11 @@
 import { TBehavior } from "@ecs/Behavior/IBehavior";
 import { TEntity } from "@ecs/TEntity";
 import { RenderComponent } from "@graphics/RenderComponent";
-import { Rect2D } from "@graphics/Shape2D/Rect2D";
+import { Rect } from '@graphics/Geometry/Rect';
 import { Vector2 } from "@physics/Vector";
 import { Renderer } from "@renderer/Renderer";
 import { SceneManager } from "@scenes/SceneManager";
+import { ColorMaterial, Mesh } from "@GETS";
 
 // cannot overwrite TEntity update, so must create behavior which
 // possibly can be an issue
@@ -78,10 +79,10 @@ export class Particle extends TEntity {
         const renderer: RenderComponent = new RenderComponent();
 
         // set the mesh of the render component
-        renderer.mesh = new Rect2D(this.particleSize, this.particleSize);
+        renderer.mesh = new Mesh(new Rect(size, size), new ColorMaterial());
 
         // add needed components/behaviors to this particle
         this.addComponent(renderer);
-        this.addBehavior(new ParticleBehavior(vel, acc, size));
+        // this.addBehavior(new ParticleBehavior(vel, acc, size));
     };
 }; 

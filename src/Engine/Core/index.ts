@@ -14,9 +14,9 @@ export * from '@ecs/TEntity';
 export * from '@ecs/TGameObject';
 
 
-export * from '@graphics/Shape2D/Triangle2D';
-export * from '@graphics/Shape2D/Rect2D';
-export * from '@graphics/Shape2D/Circle2D';
+// export * from '@graphics/Shape2D/Triangle2D';
+// export * from '@graphics/Shape2D/Rect2D';
+// export * from '@graphics/Shape2D/Circle2D';
 
 
 export * from '@graphics/Mesh';

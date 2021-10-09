@@ -9,7 +9,6 @@ import {
     Engine,
     Particle
 } from '@GETS';
-import { Camera } from '@world/Camera/Camera';
 import { ColorChanger } from './scripts/ColorChanger';
 
 
@@ -43,7 +42,7 @@ class SampleGame implements IGame {
         const Particle1 = new Particle();
         const Particle2 = new Particle();
 
-        MainParticle.addBehavior(new ColorChanger());
+        // MainParticle.addBehavior(new ColorChanger());
 
         // set their positions
         MainParticle.Transform.position = new Vector2(200, 300);

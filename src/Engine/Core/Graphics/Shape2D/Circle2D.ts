@@ -1,63 +1,63 @@
-import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
-import { ShaderConfig, ShaderManager } from "@graphics/ShaderManager";
-import { Mesh } from "@graphics/Mesh";
-import { Vector2 } from "@physics/Vector";
+// import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
+// import { ShaderConfig, ShaderManager } from "@graphics/ShaderManager";
+// import { Mesh } from "@graphics/Mesh";
+// import { Vector2 } from "@physics/Vector";
 
-/**
- * A Mesh for a 2D Circle
- */
-export class Circle2D extends Mesh{ 
-    private _r: number;
+// /**
+//  * A Mesh for a 2D Circle
+//  */
+// export class Circle2D extends Mesh{ 
+//     private _r: number;
 
-    /**
-     * Creates a new Drawable 2D Circle
-     * @param r The radius of the circle.
-     */
-    constructor(r: number){
-        super();
+//     /**
+//      * Creates a new Drawable 2D Circle
+//      * @param r The radius of the circle.
+//      */
+//     constructor(r: number){
+//         super();
 
-        this.calcSize(r);
-        this.calcBox();
+//         this.calcSize(r);
+//         this.calcBox();
 
-        this._r = r;
-    };
+//         this._r = r;
+//     };
 
-    // calculates the width and height based on radius
-    private calcSize(r: number){
-        this._width = r * 2;
-        this._height = r * 2;
-    };
+//     // calculates the width and height based on radius
+//     private calcSize(r: number){
+//         this._width = r * 2;
+//         this._height = r * 2;
+//     };
 
-    loadGeometry(): void{
-        // triangle fan so that all triangles can be drawn around a center vertex
-        // this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.LINE_LOOP);
-        this._geometry = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.TRIANGLE_FAN);
+//     loadGeometry(): void{
+//         // triangle fan so that all triangles can be drawn around a center vertex
+//         // this._buffer = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.LINE_LOOP);
+//         this._geometry = new GLBuffer(GL.FLOAT, GL.ARRAY_BUFFER, GL.TRIANGLE_FAN);
 
-        let posAttribute: AttributeInfo = new AttributeInfo();
+//         let posAttribute: AttributeInfo = new AttributeInfo();
 
-        posAttribute.location = ShaderConfig.ATTRIBS.coords;
-        posAttribute.size = 2;
+//         posAttribute.location = ShaderConfig.ATTRIBS.coords;
+//         posAttribute.size = 2;
 
-        this._geometry.addAttribute(posAttribute);
+//         this._geometry.addAttribute(posAttribute);
 
-        this._geometry.setData(
-            [
-                this.center.x, this.center.y
-            ]
-        );  
+//         this._geometry.setData(
+//             [
+//                 this.center.x, this.center.y
+//             ]
+//         );  
 
-        for(let d = 0; d <= 360; d++){
-            let newVertex: Vector2 = Vector2.add(
-                this.center,
-                new Vector2(
-                    this._r * Math.cos(d * Math.PI / 180),
-                    this._r * Math.sin(d * Math.PI / 180) 
-                )
-            );
+//         for(let d = 0; d <= 360; d++){
+//             let newVertex: Vector2 = Vector2.add(
+//                 this.center,
+//                 new Vector2(
+//                     this._r * Math.cos(d * Math.PI / 180),
+//                     this._r * Math.sin(d * Math.PI / 180) 
+//                 )
+//             );
             
-            this._geometry.pushBackData(
-                [newVertex.x, newVertex.y]
-            );
-        };
-    };
-};
+//             this._geometry.pushBackData(
+//                 [newVertex.x, newVertex.y]
+//             );
+//         };
+//     };
+// };

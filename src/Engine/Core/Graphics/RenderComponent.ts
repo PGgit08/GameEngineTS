@@ -20,16 +20,6 @@ export class RenderComponent extends TComponent{
         return this._mesh;
     };
 
-    /**
-     * Loads the current drawable's mesh into GPU.
-     */
-    load(){
-        this._mesh.loadGeometry();
-
-        this._mesh.geometry.upload();
-        this._mesh.geometry.unbind();
-    };
-
     update(){
     };
 
