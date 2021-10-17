@@ -12,10 +12,6 @@ export class Rect extends Geometry {
      */
     constructor(width: number = 100, height: number = 100, anchor = new Vector2(0.5, 0.5)){
         super(width, height, anchor);
-
-        console.log(
-            "Rect Instance"
-        );
     };
 
     protected setAttribs(): void {

@@ -83,6 +83,5 @@ export class Particle extends TEntity {
 
         // add needed components/behaviors to this particle
         this.addComponent(renderer);
-        // this.addBehavior(new ParticleBehavior(vel, acc, size));
     };
 }; 

@@ -39,27 +39,16 @@ class SampleGame implements IGame {
 
         // create particle entities
         const MainParticle = new Particle();
-        const Particle1 = new Particle();
-        const Particle2 = new Particle();
-
-        // MainParticle.addBehavior(new ColorChanger());
 
         // set their positions
         MainParticle.Transform.position = new Vector2(200, 300);
-        Particle1.Transform.position = new Vector2(120, 0);
-        Particle2.Transform.position = new Vector2(120, 0);
+        
 
-        // order the in the hierarchy
-        // Particle1.addChild(Particle2);
-        // MainParticle.addChild(Particle1);
         Particles.addChild(MainParticle);
 
         // add "Particles" parent into sample scene
         SampleScene.addObject(Particles);
 
-        // for now add Camera here
-        // SampleScene.registerCamera(new Camera('DefaultCamera'));
-        // SampleScene.activeCamera.addBehavior(new CameraDemo());
 
         // set the current scene
         SceneManager.setCurrentScene("SampleScene");

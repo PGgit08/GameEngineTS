@@ -5,22 +5,19 @@ import { Renderer } from "@renderer/Renderer";
 /**
  * A Graphics Component for managing the Drawing/Graphics of an Entity.
  */
-export class RenderComponent extends TComponent{
+export class RenderComponent extends TComponent {
     private _mesh: Mesh;
     
     constructor(){
         super("DrawComponent");
     };
 
-    public set mesh(m: Mesh){
+    public set mesh(m: Mesh) {
         this._mesh = m;
     };
 
-    public get mesh(): Mesh{
+    public get mesh(): Mesh {
         return this._mesh;
-    };
-
-    update(){
     };
 
     /**
