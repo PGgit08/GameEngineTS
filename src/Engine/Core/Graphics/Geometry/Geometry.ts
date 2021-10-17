@@ -44,6 +44,10 @@ export abstract class Geometry {
         
         // set the buffer's data to what geometry() function returns
         this._buffer.setData(this.geometry());
+
+        // after setting the buffer data upload the buffer to the gpu and unbind
+        this._buffer.upload();
+        this._buffer.unbind();
     };
 
     /**
