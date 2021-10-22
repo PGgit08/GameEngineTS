@@ -3,25 +3,23 @@ import {
     TBehavior,
     Material,
     Color,
-    RenderComponent
+    RenderComponent,
+    ColorMaterial
 } from '@GETS';
 
 // change color of particle
-export class ColorChanger extends TBehavior{
-    private ownerМaterial: Material;
-    private colors: Color[] = [Color.black, Color.blue, Color.green, Color.red, Color.orange];
+export class ColorChanger extends TBehavior {
+    private ownerМaterial: ColorMaterial;
 
     constructor(){
         super('ColorChanger');
     };
 
-    start(){
-        this.ownerМaterial = this.owner.getComponent(RenderComponent).mesh.material;
+    start(): void {
+        this.ownerМaterial = this.owner.getComponent(RenderComponent).mesh.material as ColorMaterial;
     };
 
-    update(dt: number){
-        this.ownerМaterial.tint = this.colors[4]
-
-        super.update(dt);
+    update(): void {
+        this.ownerМaterial.tint = Color.green;
     };
 }; 

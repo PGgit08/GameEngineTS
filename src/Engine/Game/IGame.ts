@@ -6,7 +6,7 @@
 // more examples:
 // Creator wants to instantiate some entity asset: do it in IGame(start)
 // Creator wants to change the color of some entity: do it in Behavior(start/update)
-export interface IGame{
+export interface IGame {
     /**
      * Called at the beggining of the game, before game loop.
      */
@@ -16,11 +16,11 @@ export interface IGame{
      * Called on every frame update.
      * @param deltaTime Time since last frame update call.
      */
-    Update: (deltaTime: number) => void;
+    Update: () => void;
     
     /**
      * Called on every frame update.
      * @param deltaTime Time since last frame render call.
      */
-    Render: (deltaTime: number) => void;
+    Render: () => void;
 };

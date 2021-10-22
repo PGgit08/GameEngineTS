@@ -1,9 +1,8 @@
 import { TEntity } from '@ecs/TEntity';
-import { RenderProps } from '@renderer/IViewProps';
 import { TGameObject } from '@ecs/TGameObject';
 import { SceneManager } from '@scenes/SceneManager';
 import { Camera } from 'Core/World/Camera/Camera';
-import { ShaderManager } from '@gl/ShaderManager';
+import { ShaderManager } from '@graphics/ShaderManager';
 import { Renderer } from '@renderer/Renderer';
 
 
@@ -83,12 +82,12 @@ export class Scene {
      * Preforms update procedures on each frame on the Entities in this Scene.
      * @param dt The time since the last frame update.
      */
-    public update(dt: number): void{
+    public update(): void{
         // set the view matrix to camera view matrix
         // Renderer.renderProps.vMatrix = this._activeCamera.view;
 
         // recursive update
-        this.root_entity.update(dt);
+        this.root_entity.update();
     };
 
     /**

@@ -62,5 +62,5 @@ export abstract class TBehavior implements IBehavior{
      * The loop operations of this behavior, called on each frame update.
      * @param dt The delta time since the last update call.
      */
-    update(dt: number){};
+    update(){};
 };

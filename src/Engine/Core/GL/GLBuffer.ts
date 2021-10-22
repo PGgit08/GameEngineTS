@@ -1,8 +1,11 @@
+import { VertexArray } from "@gl/VertexArray";
+
+
 /**
  * Represents the information needed for a GLBuffer attribute.
  **/
 // (copied from NarmovTech)
-export class AttributeInfo{
+export class AttributeInfo {
     /**
      * The location of this attribute.
      */
@@ -14,16 +17,15 @@ export class AttributeInfo{
     public size: number;
 
     /**
-     * The number of elements from the beginning of the buffer.
-     * example: buffer(coordinates): [1, 2](len=2), so offset = 2
+     * The attribute's offset from the beginning of the buffer.
      */
-    public offset: number = 0;
+    public offset: number;
 };
 
 /**
  * A WebGL buffer object
  */
-export class GLBuffer{
+export class GLBuffer {
     // mode, bufferType: array, dataType: float
     private _mode: number;
     private _bufferType: number;
@@ -34,22 +36,23 @@ export class GLBuffer{
 
     // the actual data(position info) + shader attributes to send positions to
     private _data: number[] = [];
-    private _attributes: AttributeInfo[] = [];
 
-    // if this buffer has any shader attributes(locations)
-    private _hasAttributeLocation: boolean = false;
+    // The VAO object for the attributes of this buffer.
+    private _vertexArray: VertexArray;
 
-    // the size of a position element in this buffer(example: Vector2 = 2)
+    // if this buffer has any shader attributes
+    private _hasAttributes: boolean = false;
+
+    // the size of each element in this buffer ( Vector2 = elementSize 2 for example )
     private _elementSize: number = 0;
 
-    // the size of the dataType(example: GL.FLOAT = 4)
+    // the size of the type of data in the buffer ( example: FLOAT = 4 )
     private _typeSize: number;
-    
-    // the amount of bytes to get from one set of numbers to the next
-    // (example: elementSize * typeSize)
-    private _stride: number;
 
-    public get data(): number[]{
+    // the buffer's stride
+    private _stride: number;
+    
+    public get data(): number[] {
         return this._data;
     };
 
@@ -59,50 +62,54 @@ export class GLBuffer{
      * @param bufferType The buffer type for this buffer(default: GL.ARRAY_BUFFER).
      * @param mode The drawing mode of this buffer(default: GL.TRIANGLES).
      */
-    constructor(dataType: number = GL.FLOAT, bufferType: number = GL.ARRAY_BUFFER, mode: number = GL.TRIANGLES){
+    constructor(dataType: number = GL.FLOAT, bufferType: number = GL.ARRAY_BUFFER, mode: number = GL.TRIANGLES) {
         this._dataType = dataType;
         this._bufferType = bufferType;
         this._mode = mode;
 
         this._buffer = GL.createBuffer();
+
+        this._vertexArray = new VertexArray();
+
+        switch(this._bufferType) {
+            case GL.FLOAT:
+                this._typeSize = 4;
+        };
     };
 
     /**
      * Deletes this buffer completly.
      */
-    public destroy(): void{
+    public destroy(): void {
         GL.deleteBuffer(this._buffer);
+        this._vertexArray.destroy();
     };
 
     /**
-     * Sets current buffer to this one(binding).
-     * @param normalize Whether to normalize the coordiantes or not(default: false).
+     * Sets current buffer to this one ( binding ).
+     * @param normalize Whether to normalize the coordiantes or not ( default: false ).
      */
-    public bind(normalize: boolean = false): void{
+    public bind(): void {
         GL.bindBuffer(this._bufferType, this._buffer);
 
         // if the shader has attributes assiosated with this buffer
         // tell webgl how to set the attributes with a pointer
         // and enable 
-        if(this._hasAttributeLocation){
-            for(let att of this._attributes){
-                // kind of confused on this line(86), but anyways this takes values from the geometry buffer, and pushes them into the shader
-                GL.vertexAttribPointer(att.location, att.size, this._dataType, normalize, this._stride, att.offset * this._typeSize);
-                GL.enableVertexAttribArray(att.location);
-            };
+        if (this._hasAttributes) {
+            this._vertexArray.bind();
         };
     };
 
     /**
      * Unbinds this buffer(removes it from being current).
      */
-    public unbind(): void{
+    public unbind(): void {
         // sets current buffer to "undefined"
         GL.bindBuffer(this._bufferType, undefined);
 
         // disable the shader attributes
-        for(let att of this._attributes){
-            GL.disableVertexAttribArray(att.location);
+        if (this._hasAttributes) {
+            this._vertexArray.unbind();
         };
     };
 
@@ -110,16 +117,26 @@ export class GLBuffer{
      * Adds an attribute to this buffer with the correct info.
      * @param info The attribute info.
      */
-    public addAttribute(info: AttributeInfo){
-        // console.log(info.size);
-        this._hasAttributeLocation = true;
-        info.offset = this._elementSize;
-        this._attributes.push(info);
+    public addAttribute(info: AttributeInfo): void {
+        this._hasAttributes = true;
 
-        // increases the size of a position element in this buffer to the size of the attribute
+        // set the current buffer and VAO
+        this.bind();
+
+        GL.vertexAttribPointer(info.location, info.size, this._dataType, false, this._stride, info.offset * this._typeSize);
+        GL.enableVertexAttribArray(info.location);
+
+        // unbind current buffer and VAO
+        this.unbind();
+
+        // increase the offset of the info my the element size
+        info.offset += this._elementSize;
+
+        // increase element size by size that attribute wants
         this._elementSize += info.size;
-        // console.log(this._elementSize);
-        this._stride = this._elementSize * this._typeSize;
+
+        // increase the buffer's stride ( distance from the beggining of one attribute set to the beggining of the next )
+        this._stride += this._elementSize * this._typeSize;
     };
     
     
@@ -127,7 +144,7 @@ export class GLBuffer{
      * Replaces the current data in this buffer with the provided data.
      * @param data The data to be loaded in this buffer.
      */
-    public setData(data: number[]): void{
+    public setData(data: number[]): void {
         this.clearData();
         this.pushBackData(data);
     };
@@ -136,7 +153,7 @@ export class GLBuffer{
      * Adds data to this buffer.
      * @param data
      */
-    public pushBackData(data: number[]): void{
+    public pushBackData(data: number[]): void {
         for(let d of data){
             this._data.push(d);
         };
@@ -145,14 +162,14 @@ export class GLBuffer{
     /**
      * Clears out all data in this buffer.
      * */
-    public clearData(): void{
+    public clearData(): void {
         this._data.length = 0;
     };
 
     /**
      * Sends this buffer to the GPU.
      */
-    public upload(): void{
+    public upload(): void {
         // make sure to bind first
         this.bind();
 
@@ -172,15 +189,16 @@ export class GLBuffer{
             bufferData,
             GL.STATIC_DRAW
         );
+
+        this.unbind();
     };
 
     /**
      * Draws the buffer.
      */
-    public draw(): void{
+    public draw(): void {
         if(this._bufferType === GL.ARRAY_BUFFER){
             // sticking to this one for now
-            // console.log(this._elementSize);
             GL.drawArrays(
                 this._mode,
                 0,

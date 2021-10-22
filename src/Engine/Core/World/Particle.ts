@@ -1,9 +1,11 @@
 import { TBehavior } from "@ecs/Behavior/IBehavior";
 import { TEntity } from "@ecs/TEntity";
 import { RenderComponent } from "@graphics/RenderComponent";
-import { Rect2D } from "@graphics/Shape2D/Rect2D";
+import { Rect } from '@graphics/Geometry/Rect';
 import { Vector2 } from "@physics/Vector";
 import { Renderer } from "@renderer/Renderer";
+import { SceneManager } from "@scenes/SceneManager";
+import { ColorMaterial, Mesh } from "@GETS";
 
 // cannot overwrite TEntity update, so must create behavior which
 // possibly can be an issue
@@ -11,7 +13,7 @@ import { Renderer } from "@renderer/Renderer";
 /**
  * A physics behavior for the Particle, contains physics properties
  */
-export class ParticleBehavior extends TBehavior{
+export class ParticleBehavior extends TBehavior {
     // physics properties
     public vel: Vector2;
     public acc: Vector2;
@@ -31,27 +33,50 @@ export class ParticleBehavior extends TBehavior{
         this.size = size;
     };
 
-    update(dt: number){
+    update(){
         // basic collision implementation for fun
-        if(this.owner.Transform.position.x == Renderer.viewProps.width - this.size 
+        if(this.owner.Transform.position.x == Renderer.Width - this.size 
             || this.owner.Transform.position.x == this.size){
                 this.vel.x = -this.vel.x;
         };
 
-        if(this.owner.Transform.position.y == Renderer.viewProps.height - this.size
+        if(this.owner.Transform.position.y == Renderer.Height - this.size
             || this.owner.Transform.position.y == this.size){
                 this.vel.y = -this.vel.y;
         };
     
         // default movement
-        this.owner.Transform.position.add(this.vel);
-        this.owner.Transform.rotation += 1.0;
+        this.owner.Transform.position.add(Vector2.withDelta(this.vel));
+        // this.owner.Transform.rotation += 360 * Renderer.DeltaTime;
     };
 };      
 
-export class Particle extends TEntity{
+class ParticleSummoner extends TBehavior {
+    private _counter: number = 0;
+
+    constructor(){
+        super("ParticleSummoner");
+    };
+
+    update(){
+        this._counter ++;
+
+        if(this._counter == 100){
+            // doodoo instantiation, just experimental for now
+            let TestParticle: Particle = new Particle();
+            TestParticle.Transform.position = new Vector2(300, 200);
+
+            SceneManager.CURRENT_SCENE.getEntityByName("Particles").addChild(TestParticle);
+        };
+    };
+
+};
+
+export class Particle extends TEntity {
     // the radius of the particle
     public particleSize: number;
+
+    a: number = 0;
 
 
     /**
@@ -75,13 +100,10 @@ export class Particle extends TEntity{
         const renderer: RenderComponent = new RenderComponent();
 
         // set the mesh of the render component
-        renderer.mesh = new Rect2D(this.particleSize, this.particleSize);
+        renderer.mesh = new Mesh(new Rect(size, size), new ColorMaterial());
 
         // add needed components/behaviors to this particle
         this.addComponent(renderer);
-    };
-
-    update(dt: number){
-        super.update(dt);
+        this.addBehavior(new ParticleSummoner());
     };
 }; 

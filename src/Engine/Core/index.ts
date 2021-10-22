@@ -5,34 +5,45 @@
 export * from '@ecs/Behavior/IBehavior';
 export * from '@ecs/Behavior/IBehaviorData';
 
+
 export * from '@ecs/Component/IComponent';
 export * from '@ecs/Component/IComponentData';
+
 
 export * from '@ecs/TEntity';
 export * from '@ecs/TGameObject';
 
-export * from '@graphics/Shape2D/Triangle2D';
-export * from '@graphics/Shape2D/Rect2D';
-export * from '@graphics/Shape2D/Circle2D';
+
+// export * from '@graphics/Shape2D/Triangle2D';
+// export * from '@graphics/Shape2D/Rect2D';
+// export * from '@graphics/Shape2D/Circle2D';
+
 
 export * from '@graphics/Mesh';
 export * from '@graphics/RenderComponent';
 export * from '@graphics/Sprite';
 export * from '@graphics/Color';
-export * from '@graphics/Material';
+
+export * from '@graphics/Materials/Material';
+export * from '@graphics/Materials/ColorMaterial'
+
 
 export * from '@physics/Transform';
 export * from '@physics/Vector';
 export * from '@physics/RotationBehavior';
 
-export * from '@renderer/IViewProps';
-export * from '@renderer/RenderView';
+
+export * from '@renderer/Renderer';
+
 
 export * from '@scenes/Scene';
 export * from '@scenes/SceneManager';
 
+
 export * from '@world/Particle';
 
+
 export * from '@engine';
+
 
 export * from '@game/IGame';

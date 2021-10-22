@@ -15,3 +15,11 @@ The Life Cycle of the Engine is pretty simple now:
 3. Game Loop(main loop)
     *. Calls Update() method of all Entities(includes update components + behaviors).
     *. Calls Render() method of all Entities(includes render components).
+
+
+## TODO
+
+1. Clean-Up ( including Renderer )
+2. Add Normal Mesh Creation( Seperate Geometry and Material )
+
+( then you can release this as version 1.0 or something )
