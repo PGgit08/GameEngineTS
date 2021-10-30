@@ -4,10 +4,10 @@ import { Vector2 } from '@physics/Vector';
 
 export abstract class Geometry {
     // the anchor point for a drawable, used for rotation and tranformations(defaults to half)
-    private _anchor: Vector2;
+    protected _anchor: Vector2;
 
     // the anchor point on graph
-    private _anchorPoint: Vector2 = Vector2.origin;
+    protected _anchorPoint: Vector2 = Vector2.origin;
 
     // the width and height of this Drawable
     protected _width: number;

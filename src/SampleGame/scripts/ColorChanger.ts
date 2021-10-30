@@ -10,6 +10,7 @@ import {
 // change color of particle
 export class ColorChanger extends TBehavior {
     private ownerМaterial: ColorMaterial;
+    private _counter: number = 0;
 
     constructor(){
         super('ColorChanger');

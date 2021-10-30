@@ -5,7 +5,9 @@ import { Rect } from '@graphics/Geometry/Rect';
 import { Vector2 } from "@physics/Vector";
 import { Renderer } from "@renderer/Renderer";
 import { SceneManager } from "@scenes/SceneManager";
-import { ColorMaterial, Mesh } from "@GETS";
+import { Circle, Color, ColorMaterial, Mesh } from "@GETS";
+import { Triangle } from "@graphics/Geometry/Triangle";
+import { ColorChanger } from "../../../SampleGame/scripts/ColorChanger";
 
 // cannot overwrite TEntity update, so must create behavior which
 // possibly can be an issue
@@ -51,26 +53,6 @@ export class ParticleBehavior extends TBehavior {
     };
 };      
 
-class ParticleSummoner extends TBehavior {
-    private _counter: number = 0;
-
-    constructor(){
-        super("ParticleSummoner");
-    };
-
-    update(){
-        this._counter ++;
-
-        if(this._counter == 100){
-            // doodoo instantiation, just experimental for now
-            let TestParticle: Particle = new Particle();
-            TestParticle.Transform.position = new Vector2(300, 200);
-
-            SceneManager.CURRENT_SCENE.getEntityByName("Particles").addChild(TestParticle);
-        };
-    };
-
-};
 
 export class Particle extends TEntity {
     // the radius of the particle
@@ -100,10 +82,11 @@ export class Particle extends TEntity {
         const renderer: RenderComponent = new RenderComponent();
 
         // set the mesh of the render component
-        renderer.mesh = new Mesh(new Rect(size, size), new ColorMaterial());
+        renderer.mesh = new Mesh(new Circle(), new ColorMaterial());
 
         // add needed components/behaviors to this particle
         this.addComponent(renderer);
-        this.addBehavior(new ParticleSummoner());
+        // this.addBehavior(new ParticleSummoner());
+        this.addBehavior(new ColorChanger());
     };
 }; 
