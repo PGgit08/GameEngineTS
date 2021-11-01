@@ -20,7 +20,10 @@ export class Renderer {
     // Canvas related variables
     private static _canvasId: string;
 
-    // DeltaTime (keeping it public static for now)
+    /**
+     * @property The time between the start of the current frame and the start of the next frame 
+     * Mutiply by this for pixel-per-second (pph) speed
+    */
     public static DeltaTime: number = 0;
 
     public static get CanvasId(): string {

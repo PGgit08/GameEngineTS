@@ -62,7 +62,7 @@ export class GLBuffer {
      * @param bufferType The buffer type for this buffer(default: GL.ARRAY_BUFFER).
      * @param mode The drawing mode of this buffer(default: GL.TRIANGLES).
      */
-    constructor(dataType: number = GL.FLOAT, bufferType: number = GL.ARRAY_BUFFER, mode: number = GL.TRIANGLES) {
+    constructor(mode: number = GL.TRIANGLES, dataType: number = GL.FLOAT, bufferType: number = GL.ARRAY_BUFFER) {
         this._dataType = dataType;
         this._bufferType = bufferType;
         this._mode = mode;

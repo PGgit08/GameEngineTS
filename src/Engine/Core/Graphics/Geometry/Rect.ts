@@ -14,6 +14,10 @@ export class Rect extends Geometry {
         super(width, height, anchor);
     };
 
+    protected initBuffer(): GLBuffer {
+        return new GLBuffer();
+    };
+
     protected setAttribs(): void {
         let posAttribute: AttributeInfo = new AttributeInfo();
 

@@ -1,16 +1,11 @@
 import { TBehavior } from "@ecs/Behavior/IBehavior";
 import { TEntity } from "@ecs/TEntity";
 import { RenderComponent } from "@graphics/RenderComponent";
-import { Rect } from '@graphics/Geometry/Rect';
 import { Vector2 } from "@physics/Vector";
 import { Renderer } from "@renderer/Renderer";
-import { SceneManager } from "@scenes/SceneManager";
 import { Circle, Color, ColorMaterial, Mesh } from "@GETS";
-import { Triangle } from "@graphics/Geometry/Triangle";
 import { ColorChanger } from "../../../SampleGame/scripts/ColorChanger";
 
-// cannot overwrite TEntity update, so must create behavior which
-// possibly can be an issue
 
 /**
  * A physics behavior for the Particle, contains physics properties
@@ -69,7 +64,7 @@ export class Particle extends TEntity {
      */
     constructor(
         size: number = 50,
-        vel: Vector2 = new Vector2(5, 5), 
+        vel: Vector2 = new Vector2(10, 10), 
         acc: Vector2 = Vector2.origin
     ){
         // create a new entity called "Particle"
@@ -82,11 +77,12 @@ export class Particle extends TEntity {
         const renderer: RenderComponent = new RenderComponent();
 
         // set the mesh of the render component
-        renderer.mesh = new Mesh(new Circle(), new ColorMaterial());
+        renderer.mesh = new Mesh(new Circle(size, size), new ColorMaterial());
 
         // add needed components/behaviors to this particle
         this.addComponent(renderer);
         // this.addBehavior(new ParticleSummoner());
         this.addBehavior(new ColorChanger());
+        this.addBehavior(new ParticleBehavior(vel, acc, size));
     };
 }; 

@@ -15,11 +15,11 @@ export class Shader2D extends GLShader {
      * Apply custom uniforms to this shader.
      * @param material The material associating with this shader.
      */
-    public ApplyCustomUniforms(material: ColorMaterial){
+    public ApplyCustomUniforms(material: ColorMaterial): void {
         this.setUniformColor('color', material.tint);
     };
 
-    public get vSource(): string{
+    public get vSource(): string {
         return `
             attribute vec2 coords;
 
@@ -32,7 +32,7 @@ export class Shader2D extends GLShader {
         `;
     };
 
-    public get fSource(): string{
+    public get fSource(): string {
         return `
             precision mediump float;
             uniform vec4 color;

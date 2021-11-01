@@ -17,7 +17,7 @@ export class ShaderManager {
 
     private static _isLoaded: boolean = false;
 
-    public static get loaded(): boolean{
+    public static get loaded(): boolean {
         return ShaderManager._isLoaded;
     };
 

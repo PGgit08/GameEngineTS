@@ -14,6 +14,10 @@ export class Circle extends Geometry {
         super(width, height, anchor);
     };
 
+    protected initBuffer(): GLBuffer {
+        return new GLBuffer(GL.TRIANGLE_FAN);
+    };
+
     protected setAttribs(): void {
         let posAttribute: AttributeInfo = new AttributeInfo();
 
@@ -43,6 +47,5 @@ export class Circle extends Geometry {
         };
 
         return geo;
-
     };
 };

@@ -9,7 +9,6 @@ import {
     Engine,
     Particle
 } from '@GETS';
-import { ColorChanger } from './scripts/ColorChanger';
 
 
 /* Game Class */

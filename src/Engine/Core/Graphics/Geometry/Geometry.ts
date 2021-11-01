@@ -22,7 +22,7 @@ export abstract class Geometry {
     protected _maxY: number;
 
     // The WebGL buffer that associates to this Geometry
-    protected _buffer: GLBuffer = new GLBuffer();
+    protected _buffer: GLBuffer;
 
     /**
      * Create a new Geometry. Contains buffers and attributes.
@@ -35,6 +35,9 @@ export abstract class Geometry {
         this._height = height;
 
         this._anchor = anchor;
+        
+        // set the buffer to sub-class's preference
+        this._buffer = this.initBuffer();
 
         // calculate AABB box
         this.calcBox();
@@ -65,6 +68,11 @@ export abstract class Geometry {
         this._anchorPoint.x = this._minX + (this._width * this._anchor.x);   
         this._anchorPoint.y = this._minY + (this._height * this._anchor.y);
     };
+
+    /**
+     * Creates the buffer for this Geometry.
+     */
+    protected abstract initBuffer(): GLBuffer;
 
     /**
      * Specify the attributes needed for this buffer.
