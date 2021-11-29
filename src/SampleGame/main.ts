@@ -50,7 +50,7 @@ class SampleGame implements IGame {
 
 
         // set the current scene
-        SceneManager.setCurrentScene("SampleScene");
+        SceneManager.setCurrentScene(SampleScene);
     };
 
     Update(): void {
@@ -60,6 +60,21 @@ class SampleGame implements IGame {
     Render(): void {
         
     };
+};
+
+// make entities on start
+const onStart = (): void => {
+    // create a scene
+    const SampleScene = new Scene("SampleScene");
+    
+    // create a particle
+    const Particle1: Particle = new Particle();
+    Particle1.Transform.position = new Vector2(200, 300);
+
+    // add the particle into the scene
+    SampleScene.addObject(Particle1);
+
+    SceneManager.setCurrentScene(SampleScene);
 };
 
 /* Make a new engine with this game */

@@ -7,7 +7,7 @@ import { GLMatrix4 } from '@gl/GLMatrix4';
 /**
  * The base of any object in the game.
  */
-export class TEntity extends TGameObject{
+export class TEntity extends TGameObject {
     name: string;
 
     children: TEntity[] = [];

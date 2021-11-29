@@ -9,7 +9,7 @@ import { Renderer } from '@renderer/Renderer';
 // if a scene needs to be created, this class 
 // can be called, and this scene can get pushed into
 // the game loop
-export class Scene {
+export class Scene extends TGameObject {
     private _registeredCameras: {[name: string]: Camera} = {};
     private _activeCamera: Camera;
 
@@ -23,6 +23,8 @@ export class Scene {
      * @param name The Name of this scene.
      */
     constructor(name: string){
+        super();
+
         this.name = name;
         this.root_entity = new TEntity('ROOT');
         this.root_entity.visible = false;
