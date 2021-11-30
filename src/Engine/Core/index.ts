@@ -44,6 +44,3 @@ export * from '@world/Particle';
 
 
 export * from '@engine';
-
-
-export * from '@game/IGame';
