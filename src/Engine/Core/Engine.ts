@@ -1,4 +1,5 @@
 import { Renderer } from "@renderer/Renderer";
+import { IGame }from "@game/IGame";
 import { SceneManager } from "@scenes/SceneManager";
 import { Entity } from "@ecs/Entity";
 import { ShaderManager } from "@graphics/ShaderManager";
@@ -11,25 +12,21 @@ import { ShaderManager } from "@graphics/ShaderManager";
  * And ETC.
  */
 export class Engine {
-    // the renderer associated with this Engine instance
     private _renderer: Renderer;
+    private game: IGame;
 
-    // function passed in constructor, called on start
-    private _onStart: () => void;
-    
-    // used for deltaTime calculation
     private _previousTime: number = 0;
     
     
     /**
      * Creates new Engine instance.
-     * @param onStart Function called on Start of Engine lifecycle (default = empty)
-     * @param width The width of the RenderView
-     * @param height The height of the RenderView
+     * @param game The IGame for the engine to work with.
+     * @param viewConfig RenderView physical properties
      */
-    constructor(width: number, height: number, onStart: () => void = () => {}){
+    constructor(game: IGame, width: number, height: number){
         this._renderer = new Renderer(width, height);
-        this._onStart = onStart;
+
+        this.game = game;
     };
 
     /**
@@ -43,7 +40,7 @@ export class Engine {
     /**
      * Pre-loop
      */
-    public start(): void {
+    public start(){
         // load the shader manager
         ShaderManager.Init();
 
@@ -55,11 +52,11 @@ export class Engine {
 
         /**
          * Because asset loading does not exist yet,
-         * onStart() is for debugging, and all entities
+         * game Start() is for debugging, and all entities
          * are created there, therefore game start is called here
          * (this can be seen as AssetManager.load)
          */
-        this._onStart();
+        this.game.Start();
 
         // start of game loop after loading and starting procedures
         requestAnimationFrame(this.loop.bind(this));
@@ -88,6 +85,8 @@ export class Engine {
         Renderer.DeltaTime = now - this._previousTime;
         this._previousTime = now;
 
+        let delta = Renderer.DeltaTime;
+
         this.update();
         this.render();
 
@@ -98,16 +97,17 @@ export class Engine {
      * Updates current scene and Game.
      * @param delta Time since last frame update!
      */
-    private update(): void {
+    private update(){
         // update function
         SceneManager.CURRENT_SCENE.update();
+        this.game.Update();
     };
 
     /**
      * Renders current scene and game(@class Renderer.renderWorld)
      */
-    private render(): void {
+    private render(){
         // rendering function
-        this._renderer.renderWorld();
+        this._renderer.renderWorld(this.game);
     };
 };
