@@ -1,20 +1,20 @@
-import { TGameObject } from '@ecs/TGameObject';
-import { TComponent } from '@ecs/Component/IComponent';
+import { GameObject } from '@ecs/GameObject';
+import { Component } from '@ecs/Component/Component';
 import { Transform } from '@physics/Transform';
-import { TBehavior } from '@ecs/Behavior/IBehavior';
+import { Behavior } from '@ecs/Behavior/Behavior';
 import { GLMatrix4 } from '@gl/GLMatrix4';
 
 /**
  * The base of any object in the game.
  */
-export class TEntity extends TGameObject {
+export class Entity extends GameObject {
     name: string;
 
-    children: TEntity[] = [];
-    parent: TEntity;
+    children: Entity[] = [];
+    parent: Entity;
 
-    components: TComponent[] = [];
-    behaviors: TBehavior[] = [];
+    components: Component[] = [];
+    behaviors: Behavior[] = [];
     
     protected _visible: boolean = true;
 
@@ -35,15 +35,15 @@ export class TEntity extends TGameObject {
         this._visible = v;
     };
 
-    public get worldMatrix(): GLMatrix4{
+    public get worldMatrix(): GLMatrix4 {
         return this._worldMatrix;
     };
 
-    public get localMatrix(): GLMatrix4{
+    public get localMatrix(): GLMatrix4 {
         return this._localMatrix;
     };
 
-    public get isLoaded(): boolean{
+    public get isLoaded(): boolean {
         return this._isLoaded;
     };
 
@@ -52,7 +52,7 @@ export class TEntity extends TGameObject {
      * @param name The name of the entity.
      * @param components An optional parameter for adding a list of components to this Entity.
      */
-    constructor(name: string, components?: TComponent[], behaviors?: TBehavior[]){
+    constructor(name: string, components?: Component[], behaviors?: Behavior[]){
         super();
         this.name = name;
         
@@ -73,7 +73,7 @@ export class TEntity extends TGameObject {
      * Adds a behavior to this entity.
      * @param behavior The behavior that needs to be added to the entity.
      */
-    public addBehavior(behavior: TBehavior){
+    public addBehavior(behavior: Behavior): void {
         behavior.setOwner(this);
         this.behaviors.push(behavior);
     };
@@ -82,7 +82,7 @@ export class TEntity extends TGameObject {
      * Adds a component to this entity.
      * @param component The component that needs to be added to the entity.
      */
-    public addComponent(component: TComponent){
+    public addComponent(component: Component): void {
         component.setOwner(this);
         this.components.push(component);
     };
@@ -91,7 +91,7 @@ export class TEntity extends TGameObject {
      * Adds a child to the entity.
      * @param child The child entity that needs to be added to this entity.
      */
-    public addChild(child: TEntity){
+    public addChild(child: Entity): void {
         child.parent = this;
         this.children.push(child);
     };
@@ -100,13 +100,13 @@ export class TEntity extends TGameObject {
     * Recursively attempts to retrieve a child entity with the given name from this entity or its children.
     * @param name The name of the entity to retrieve.
     */
-    public getEntityByName(name: string): TEntity{
+    public geEntityByName(name: string): Entity {
         if (this.name === name){
             return this;
         };
 
         for (let child of this.children){
-            let result = child.getEntityByName(name);
+            let result = child.geEntityByName(name);
             if (result !== undefined){
                 return result;
             };
@@ -119,7 +119,7 @@ export class TEntity extends TGameObject {
     * Recursively attempts to retrieve a behavior with the given name from this entity or its children.
     * @param name The name of the behavior to retrieve.
     */
-    public getBehaviorByName(name: string): TBehavior{
+    public geBehaviorByName(name: string): Behavior {
         for (let behavior of this.behaviors){
             if (behavior.name === name){
                 return behavior;
@@ -127,7 +127,7 @@ export class TEntity extends TGameObject {
         };
 
         for (let child of this.children){
-            let behavior = child.getBehaviorByName( name );
+            let behavior = child.geBehaviorByName( name );
             if (behavior !== undefined){
                 return behavior;
             };
@@ -140,7 +140,7 @@ export class TEntity extends TGameObject {
      * Recursively attempts to retrieve a component with the given name from this entity or its children.
      * @param name The name of the component to retrieve.
      */
-    public getComponentByName(name: string): TComponent{
+    public geComponentByName(name: string): Component {
         for (let component of this.components){
             if(component.name === name){
                 return component;
@@ -148,7 +148,7 @@ export class TEntity extends TGameObject {
         };
 
         for (let child of this.children){
-            let component = child.getComponentByName( name );
+            let component = child.geComponentByName( name );
             if(component !== undefined){
                 return component;
             };
@@ -161,7 +161,7 @@ export class TEntity extends TGameObject {
      * Recursively attempts to retrieve a behavior with the given type from this entity or its children.
      * @param type The typeof behavior that needs to be retrieved.
      */
-    public getBehavior<T extends TBehavior>(type: new () => T): T{
+    public geBehavior<T extends Behavior>(type: new () => T): T {
         for(let behavior of this.behaviors){
             if(typeof behavior === typeof type){
                 return behavior as T;
@@ -169,7 +169,7 @@ export class TEntity extends TGameObject {
         };
 
         for(let child of this.children){
-            let behavior = child.getBehavior(type);
+            let behavior = child.geBehavior(type);
             if(behavior !== undefined){
                 return behavior;
             };
@@ -182,7 +182,7 @@ export class TEntity extends TGameObject {
      * Recursively attempts to retrieve a component with the given type from this entity or its children.
      * @param type The typeof component that needs to be retrieved.
      */
-    public getComponent<T extends TComponent>(type: new () => T): T{
+    public geComponent<T extends Component>(type: new () => T): T {
         for(let component of this.components){
             if(component instanceof type){
                 return component as T;
@@ -190,7 +190,7 @@ export class TEntity extends TGameObject {
         };
 
         for(let child of this.children){
-            let component = child.getComponent(type);
+            let component = child.geComponent(type);
             if(component !== undefined){
                 return component;
             };
@@ -199,20 +199,6 @@ export class TEntity extends TGameObject {
         return undefined;
     };
 
-    /**
-     * Calls load method of children and components, sets this entity to LOADED.(recursive)
-     */
-     load(){
-        for(let c of this.components){
-            c.load();
-        };
-
-        for(let c of this.children){
-            c.load();
-        };
-
-        this._isLoaded = true;
-    };
 
     /* 
     * Calls start method of children, behaviors, and components before game loop.(recursive)
@@ -282,7 +268,7 @@ export class TEntity extends TGameObject {
             );
         }
 
-        else{
+        else {
             // incase this entity does not have a visible parent entity
             // multiply it's local matrix by it's world matrix
             this._worldMatrix = this._localMatrix;

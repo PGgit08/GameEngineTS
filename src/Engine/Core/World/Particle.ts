@@ -1,5 +1,5 @@
-import { TBehavior } from "@ecs/Behavior/IBehavior";
-import { TEntity } from "@ecs/TEntity";
+import { Behavior } from "@ecs/Behavior/Behavior";
+import { Entity } from "@ecs/Entity";
 import { RenderComponent } from "@graphics/RenderComponent";
 import { Vector2 } from "@physics/Vector";
 import { Renderer } from "@renderer/Renderer";
@@ -10,7 +10,7 @@ import { ColorChanger } from "../../../SampleGame/scripts/ColorChanger";
 /**
  * A physics behavior for the Particle, contains physics properties
  */
-export class ParticleBehavior extends TBehavior {
+export class ParticleBehavior extends Behavior {
     // physics properties
     public vel: Vector2;
     public acc: Vector2;
@@ -49,7 +49,7 @@ export class ParticleBehavior extends TBehavior {
 };      
 
 
-export class Particle extends TEntity {
+export class Particle extends Entity {
     // the radius of the particle
     public particleSize: number;
 

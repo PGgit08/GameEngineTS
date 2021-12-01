@@ -2,7 +2,7 @@
  * Any object(Entity) in the game.
  * Each object has a GLOBAL_ID.
  */
-export class TGameObject {
+export class GameObject {
     // current GLOBAL_ID(static)
     private static GLOBAL_ID: number = 0;
 
@@ -13,7 +13,7 @@ export class TGameObject {
      * @description Set's object global id when called.
      */
     constructor(){
-        this.id = TGameObject.GLOBAL_ID ++;
+        this.id = GameObject.GLOBAL_ID ++;
     };
 
     get ID (): number {

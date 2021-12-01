@@ -1,5 +1,4 @@
-import { TEntity } from "@ecs/TEntity";
-import { IBehaviorData } from "./IBehaviorData";
+import { Entity } from "@ecs/Entity";
 
 /*
 Basically the same thing as a Component,
@@ -7,27 +6,10 @@ however doesn't contain a render method,
 and focuses more on pre-render update operations
 like movement for example.
 */
-export default interface IBehavior{
-    start(): void;
-
-    update(dt: number): void;
-
-    owner: TEntity;
-    setOwner(owner: TEntity): void;
-};
-
-/*
-Basically the same thing as a Component,
-however doesn't contain a render method,
-and focuses more on pre-render update operations
-like movement for example.
-*/
-export abstract class TBehavior implements IBehavior{
+export abstract class Behavior {
     name: string
 
-    owner: TEntity;
-
-    protected _data: IBehaviorData;
+    owner: Entity;
 
     /**
      * Creates a new behavior.
@@ -49,7 +31,7 @@ export abstract class TBehavior implements IBehavior{
      * Set's the owner of this behavior.
      * @param o The owner Entity.
      */
-    setOwner(o: TEntity){
+    setOwner(o: Entity){
         this.owner = o;
     };
 

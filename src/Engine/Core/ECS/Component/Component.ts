@@ -1,29 +1,15 @@
-import { IBehaviorData } from '@ecs/Behavior/IBehaviorData';
-import { TEntity } from '@ecs/TEntity'; 
+import { Entity } from '@ecs/Entity'; 
 
-export default interface IComponent{
-    load(): void;
-    
-    start(): void;
-
-    update(dt: number): void;
-
-    render(): void;
-
-    owner: TEntity;
-    setOwner(owner: TEntity): void;
-};
 
 /**
  * A component that can be attached to an Entity.
  * Typically something visual.
  */
-export abstract class TComponent implements IComponent{
+export abstract class Component {
     name: string
 
-    owner: TEntity;
+    owner: Entity;
 
-    protected _data: IBehaviorData;
 
     /**
      * Creates a new component.
@@ -45,14 +31,9 @@ export abstract class TComponent implements IComponent{
      * Set's the owner of this component.
      * @param o The owner Entity.
      */
-    setOwner(o: TEntity): void{
+    setOwner(o: Entity): void{
         this.owner = o;
     };
-
-    /**
-     * Loads this components for webgl(buffers+shaders) and more.
-     */
-    load(): void{};
 
     /**
      * The pre-loop operations of this component.

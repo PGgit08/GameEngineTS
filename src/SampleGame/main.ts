@@ -1,5 +1,3 @@
-// importing from namespace not
-// really working now
 import {
     Scene,
     SceneManager,
