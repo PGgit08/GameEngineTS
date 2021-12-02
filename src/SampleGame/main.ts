@@ -1,6 +1,6 @@
 import {
     Scene,
-    TEntity,
+    Entity,
     SceneManager,
     Vector2,
     IGame,
@@ -31,7 +31,7 @@ class SampleGame implements IGame {
         const SampleScene: Scene = new Scene("SampleScene");
         
         // create a "Particles" parent entity for particles in game
-        const Particles: TEntity = new TEntity("Particles");
+        const Particles: Entity = new Entity("Particles");
         Particles.visible = false;
 
         // create particle entities
