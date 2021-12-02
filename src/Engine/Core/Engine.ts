@@ -1,7 +1,7 @@
 import { Renderer } from "@renderer/Renderer";
-import { IGame }from "@game/IGame";
 import { SceneManager } from "@scenes/SceneManager";
-import { Entity } from "@ecs/Entity";
+import { TEntity } from "@ecs/TEntity";
+import { GLMatrix4 } from "@gl/GLMatrix4";
 import { ShaderManager } from "@graphics/ShaderManager";
 
 /**
@@ -12,51 +12,58 @@ import { ShaderManager } from "@graphics/ShaderManager";
  * And ETC.
  */
 export class Engine {
+    // the renderer associated with this Engine instance
     private _renderer: Renderer;
-    private game: IGame;
 
+    // function passed in constructor, called on start
+    private _onStart: () => void;
+    
+    // used for deltaTime calculation
     private _previousTime: number = 0;
     
     
     /**
      * Creates new Engine instance.
-     * @param game The IGame for the engine to work with.
-     * @param viewConfig RenderView physical properties
+     * @param onStart Function called on Start of Engine lifecycle (default = empty)
+     * @param width The width of the RenderView
+     * @param height The height of the RenderView
      */
-    constructor(game: IGame, width: number, height: number){
+    constructor(width: number, height: number, onStart: () => void = () => {}){
         this._renderer = new Renderer(width, height);
-
-        this.game = game;
+        this._onStart = onStart;
     };
 
     /**
      * Same thing as SceneManager.CURRENT_SCENE.addObject(o)
      * @param o The Entity to be added to the Current scene
      */
-    public addObject(o: Entity): void {
+    public addObject(o: TEntity): void {
         SceneManager.CURRENT_SCENE.addObject(o);
     };
 
     /**
      * Pre-loop
      */
-    public start(){
+    public start(): void {
         // load the shader manager
         ShaderManager.Init();
+
+        /**
+         * Because asset loading does not exist yet,
+         * onStart() is for debugging, and all entities
+         * are created there, therefore game start is called here
+         * (this can be seen as AssetManager.load)
+         */
+        this._onStart();
+
+        // load everything in scenes
+        SceneManager.CURRENT_SCENE.load();
 
         // and wait for it to finish loading
         this.loading();
 
-        // done loading, cal; start
+        // done loading, start needed things
         SceneManager.CURRENT_SCENE.start();
-
-        /**
-         * Because asset loading does not exist yet,
-         * game Start() is for debugging, and all entities
-         * are created there, therefore game start is called here
-         * (this can be seen as AssetManager.load)
-         */
-        this.game.Start();
 
         // start of game loop after loading and starting procedures
         requestAnimationFrame(this.loop.bind(this));
@@ -66,7 +73,11 @@ export class Engine {
      * Wait for everything to finish loading.
      */
     private loading(){
-        console.log(ShaderManager);
+        if(!SceneManager.CURRENT_SCENE.loaded){
+            // start a recursive loop with requestAnimFrame
+            requestAnimationFrame(this.loading.bind(this));
+        };
+
         if(!ShaderManager.loaded){
             // same recursion
             requestAnimationFrame(this.loading.bind(this));
@@ -85,8 +96,6 @@ export class Engine {
         Renderer.DeltaTime = now - this._previousTime;
         this._previousTime = now;
 
-        let delta = Renderer.DeltaTime;
-
         this.update();
         this.render();
 
@@ -97,17 +106,16 @@ export class Engine {
      * Updates current scene and Game.
      * @param delta Time since last frame update!
      */
-    private update(){
+    private update(): void {
         // update function
         SceneManager.CURRENT_SCENE.update();
-        this.game.Update();
     };
 
     /**
      * Renders current scene and game(@class Renderer.renderWorld)
      */
-    private render(){
+    private render(): void {
         // rendering function
-        this._renderer.renderWorld(this.game);
+        this._renderer.renderWorld();
     };
 };

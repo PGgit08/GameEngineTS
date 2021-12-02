@@ -1,4 +1,3 @@
-import { IGame } from "@game/IGame";
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { SceneManager } from "@scenes/SceneManager";
 
@@ -99,12 +98,10 @@ export class Renderer {
 
     /**
      * Renders all elements of world on Renderer.
-     * @param game The user's IGame.
      */
-    renderWorld(game: IGame): void {
+    renderWorld(): void {
         GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
         SceneManager.CURRENT_SCENE.render();
-        game.Render();
     };
 };

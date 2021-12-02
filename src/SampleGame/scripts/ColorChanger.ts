@@ -1,6 +1,6 @@
 // sample script for particle
 import {
-    Behavior,
+    TBehavior,
     Material,
     Color,
     RenderComponent,
@@ -8,7 +8,7 @@ import {
 } from '@GETS';
 
 // change color of particle
-export class ColorChanger extends Behavior {
+export class ColorChanger extends TBehavior {
     private ownerМaterial: ColorMaterial;
     private _counter: number = 0;
 
@@ -17,7 +17,7 @@ export class ColorChanger extends Behavior {
     };
 
     start(): void {
-        this.ownerМaterial = this.owner.geComponent(RenderComponent).mesh.material as ColorMaterial;
+        this.ownerМaterial = this.owner.getComponent(RenderComponent).mesh.material as ColorMaterial;
     };
 
     update(): void {

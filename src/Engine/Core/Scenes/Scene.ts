@@ -1,5 +1,5 @@
-import { Entity } from '@ecs/Entity';
-import { GameObject } from '@ecs/GameObject';
+import { TEntity } from '@ecs/TEntity';
+import { TGameObject } from '@ecs/TGameObject';
 import { SceneManager } from '@scenes/SceneManager';
 import { Camera } from 'Core/World/Camera/Camera';
 import { ShaderManager } from '@graphics/ShaderManager';
@@ -9,11 +9,11 @@ import { Renderer } from '@renderer/Renderer';
 // if a scene needs to be created, this class 
 // can be called, and this scene can get pushed into
 // the game loop
-export class Scene extends GameObject {
+export class Scene extends TGameObject {
     private _registeredCameras: {[name: string]: Camera} = {};
     private _activeCamera: Camera;
 
-    private root_entity: Entity;
+    private root_entity: TEntity;
 
     // names of scene
     name: string;
@@ -26,7 +26,7 @@ export class Scene extends GameObject {
         super();
 
         this.name = name;
-        this.root_entity = new Entity('ROOT');
+        this.root_entity = new TEntity('ROOT');
         this.root_entity.visible = false;
 
         SceneManager.addScene(this);
@@ -46,22 +46,37 @@ export class Scene extends GameObject {
      * @param name The name of the entity.
      * @returns Entity.
      */
-    public geEntityByName(name: string): Entity{
-        return this.root_entity.geEntityByName(name);
+    public getEntityByName(name: string): TEntity{
+        return this.root_entity.getEntityByName(name);
     };
 
     /**
      * Adds an Entity to the scene.
      * @param entity The Entity that needs to be added to the scene.
      */
-    public addObject(entity: Entity): void{
+    public addObject(entity: TEntity): void{
         this.root_entity.addChild(entity);
+    };
+
+    /**
+     * Preforms loading operations on all entities, called before start.
+     * Mainly used for WebGL buffer loading for components, and assets.
+     */
+    public load(): void{
+        // create a default camera, register it
+        // NOTE: this is done in main.ts IGame.start() method as entity loading is done before Engine.load() call
+        // let DefaultCamera: Camera = new Camera("DefaultCamera");
+        // this.addObject(DefaultCamera);
+        // this.registerCamera(DefaultCamera);
+
+        // start loading ( recursive )
+        this.root_entity.load();
     };
 
     /**
      * Preforms pre-update procedures on the Entities in this Scene.
      */
-    public start(): void {
+    public start(): void{
         this.root_entity.start();
     };
 
