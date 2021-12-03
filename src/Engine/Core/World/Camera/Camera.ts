@@ -1,7 +1,7 @@
-import { TEntity } from "@ecs/TEntity";
+import { Entity } from "@ecs/Entity";
 import { GLMatrix4 } from "@gl/GLMatrix4";
 
-export class Camera extends TEntity{
+export class Camera extends Entity{
     constructor(name: string){
         super(name);
     };

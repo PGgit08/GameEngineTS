@@ -1,6 +1,6 @@
-import { Particle, SceneManager, TBehavior, Vector2 } from "@GETS";
+import { Particle, SceneManager, Behavior, Vector2 } from "@GETS";
 
-class ParticleSummoner extends TBehavior {
+class ParticleSummoner extends Behavior {
     private _counter: number = 0;
 
     constructor(){

@@ -25,8 +25,6 @@ export class Entity extends GameObject {
     protected _worldMatrix: GLMatrix4 = GLMatrix4.identity();
     protected _localMatrix: GLMatrix4 = GLMatrix4.identity();
 
-    protected _isLoaded: boolean = false;
-
     public get visible(): boolean{
         return this._visible;
     };
@@ -41,10 +39,6 @@ export class Entity extends GameObject {
 
     public get localMatrix(): GLMatrix4 {
         return this._localMatrix;
-    };
-
-    public get isLoaded(): boolean {
-        return this._isLoaded;
     };
 
     /**
@@ -100,13 +94,13 @@ export class Entity extends GameObject {
     * Recursively attempts to retrieve a child entity with the given name from this entity or its children.
     * @param name The name of the entity to retrieve.
     */
-    public geEntityByName(name: string): Entity {
+    public getEntityByName(name: string): Entity {
         if (this.name === name){
             return this;
         };
 
         for (let child of this.children){
-            let result = child.geEntityByName(name);
+            let result = child.getEntityByName(name);
             if (result !== undefined){
                 return result;
             };
@@ -119,7 +113,7 @@ export class Entity extends GameObject {
     * Recursively attempts to retrieve a behavior with the given name from this entity or its children.
     * @param name The name of the behavior to retrieve.
     */
-    public geBehaviorByName(name: string): Behavior {
+    public getBehaviorByName(name: string): Behavior {
         for (let behavior of this.behaviors){
             if (behavior.name === name){
                 return behavior;
@@ -127,7 +121,7 @@ export class Entity extends GameObject {
         };
 
         for (let child of this.children){
-            let behavior = child.geBehaviorByName( name );
+            let behavior = child.getBehaviorByName( name );
             if (behavior !== undefined){
                 return behavior;
             };
@@ -140,7 +134,7 @@ export class Entity extends GameObject {
      * Recursively attempts to retrieve a component with the given name from this entity or its children.
      * @param name The name of the component to retrieve.
      */
-    public geComponentByName(name: string): Component {
+    public getComponentByName(name: string): Component {
         for (let component of this.components){
             if(component.name === name){
                 return component;
@@ -148,7 +142,7 @@ export class Entity extends GameObject {
         };
 
         for (let child of this.children){
-            let component = child.geComponentByName( name );
+            let component = child.getComponentByName( name );
             if(component !== undefined){
                 return component;
             };
@@ -161,7 +155,7 @@ export class Entity extends GameObject {
      * Recursively attempts to retrieve a behavior with the given type from this entity or its children.
      * @param type The typeof behavior that needs to be retrieved.
      */
-    public geBehavior<T extends Behavior>(type: new () => T): T {
+    public getBehavior<T extends Behavior>(type: new () => T): T {
         for(let behavior of this.behaviors){
             if(typeof behavior === typeof type){
                 return behavior as T;
@@ -169,7 +163,7 @@ export class Entity extends GameObject {
         };
 
         for(let child of this.children){
-            let behavior = child.geBehavior(type);
+            let behavior = child.getBehavior(type);
             if(behavior !== undefined){
                 return behavior;
             };
@@ -182,7 +176,7 @@ export class Entity extends GameObject {
      * Recursively attempts to retrieve a component with the given type from this entity or its children.
      * @param type The typeof component that needs to be retrieved.
      */
-    public geComponent<T extends Component>(type: new () => T): T {
+    public getComponent<T extends Component>(type: new () => T): T {
         for(let component of this.components){
             if(component instanceof type){
                 return component as T;
@@ -190,7 +184,7 @@ export class Entity extends GameObject {
         };
 
         for(let child of this.children){
-            let component = child.geComponent(type);
+            let component = child.getComponent(type);
             if(component !== undefined){
                 return component;
             };
@@ -203,7 +197,7 @@ export class Entity extends GameObject {
     /* 
     * Calls start method of children, behaviors, and components before game loop.(recursive)
     */
-    start(): void{
+    start(): void {
         for(let b of this.behaviors){
             b.start();
         };

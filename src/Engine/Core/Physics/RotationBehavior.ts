@@ -1,11 +1,10 @@
-import { TBehavior } from "@ecs/Behavior/IBehavior";
-import { IBehaviorData } from "@ecs/Behavior/IBehaviorData";
+import { Behavior } from "@ecs/Behavior/Behavior";
 import { Renderer } from "@GETS";
 
 /**
  * Simple pre-build rotation behavior for an entity.
  */
-export class RotationBehavior extends TBehavior{
+export class RotationBehavior extends Behavior{
     constructor(){
         super("RotationBehavior");
     };

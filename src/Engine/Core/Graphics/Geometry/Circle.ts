@@ -36,8 +36,8 @@ export class Circle extends Geometry {
             let newVertex: Vector2 = Vector2.add(
                 this._anchorPoint,
                 new Vector2(
-                    this._width * Math.cos(d * Math.PI / 180),
-                    this._height * Math.sin(d * Math.PI / 180) 
+                    this._width / 2 * Math.cos(d * Math.PI / 180),
+                    this._height / 2 * Math.sin(d * Math.PI / 180) 
                 )
             );
             

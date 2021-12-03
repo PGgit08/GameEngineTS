@@ -5,8 +5,10 @@ import {
     SceneManager,
     Vector2,
     Engine,
-    Particle
+    Particle,
+    RenderComponent
 } from '@GETS';
+import { ColorChanger } from './scripts/ColorChanger';
 
 // make entities on start
 const onStart = (): void => {
@@ -15,11 +17,15 @@ const onStart = (): void => {
     
     // create a particle
     const Particle1: Particle = new Particle();
+
+    // set the config of the particle
+    Particle1.addBehavior(new ColorChanger());
     Particle1.Transform.position = new Vector2(200, 300);
 
     // add the particle into the scene
     SampleScene.addObject(Particle1);
 
+    // set this sample scene as the current scene
     SceneManager.setCurrentScene(SampleScene);
 };
 

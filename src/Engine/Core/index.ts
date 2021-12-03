@@ -2,21 +2,18 @@
 // NOTE: A lot of these exports are unnessacry for the 
 
 // in actual game dev the garbage code will be removed
-export * from '@ecs/Behavior/IBehavior';
-export * from '@ecs/Behavior/IBehaviorData';
+
+export * from '@ecs/Behavior/Behavior';
+export * from '@ecs/Component/Component';
 
 
-export * from '@ecs/Component/IComponent';
-export * from '@ecs/Component/IComponentData';
-
-
-export * from '@ecs/TEntity';
-export * from '@ecs/TGameObject';
+export * from '@ecs/Entity';
+export * from '@ecs/GameObject';
 
 
 export * from '@graphics/Geometry/Circle';
 export * from '@graphics/Geometry/Rect';
-export * from '@graphics/Geometry/Triangle';
+export * from '@graphics/Geometry/RightTriangle';
 
 
 export * from '@graphics/Mesh';

@@ -1,16 +1,22 @@
-import { TBehavior } from "@ecs/Behavior/IBehavior";
-import { TEntity } from "@ecs/TEntity";
+import { Behavior } from "@ecs/Behavior/Behavior";
+import { Entity } from "@ecs/Entity";
 import { RenderComponent } from "@graphics/RenderComponent";
 import { Vector2 } from "@physics/Vector";
 import { Renderer } from "@renderer/Renderer";
-import { Circle, Color, ColorMaterial, Mesh } from "@GETS";
-import { ColorChanger } from "../../../SampleGame/scripts/ColorChanger";
+import { Geometry } from "@graphics/Geometry/Geometry";
+import { Mesh } from "@graphics/Mesh";
+import { ColorMaterial } from "@graphics/Materials/ColorMaterial";
+
+// geometries
+import { Circle } from "@graphics/Geometry/Circle";
+import { Rect } from "@graphics/Geometry/Rect";
+import { RightTriangle } from "@graphics/Geometry/RightTriangle";
 
 
 /**
  * A physics behavior for the Particle, contains physics properties
  */
-export class ParticleBehavior extends TBehavior {
+export class ParticleBehavior extends Behavior {
     // physics properties
     public vel: Vector2;
     public acc: Vector2;
@@ -30,7 +36,7 @@ export class ParticleBehavior extends TBehavior {
         this.size = size;
     };
 
-    update(){
+    update() {
         // basic collision implementation for fun
         if(this.owner.Transform.position.x == Renderer.Width - this.size 
             || this.owner.Transform.position.x == this.size){
@@ -49,12 +55,9 @@ export class ParticleBehavior extends TBehavior {
 };      
 
 
-export class Particle extends TEntity {
+export class Particle extends Entity {
     // the radius of the particle
     public particleSize: number;
-
-    a: number = 0;
-
 
     /**
      * Create a new circular physical Particle which runs on a ParticleBehavior.
@@ -75,14 +78,13 @@ export class Particle extends TEntity {
 
         // create the RenderComponent that associates to this Particle
         const renderer: RenderComponent = new RenderComponent();
-
+        
         // set the mesh of the render component
         renderer.mesh = new Mesh(new Circle(size, size), new ColorMaterial());
 
         // add needed components/behaviors to this particle
         this.addComponent(renderer);
-        // this.addBehavior(new ParticleSummoner());
-        this.addBehavior(new ColorChanger());
+
         this.addBehavior(new ParticleBehavior(vel, acc, size));
     };
 }; 

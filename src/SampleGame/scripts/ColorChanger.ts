@@ -1,6 +1,6 @@
 // sample script for particle
 import {
-    TBehavior,
+    Behavior,
     Material,
     Color,
     RenderComponent,
@@ -8,7 +8,7 @@ import {
 } from '@GETS';
 
 // change color of particle
-export class ColorChanger extends TBehavior {
+export class ColorChanger extends Behavior {
     private ownerМaterial: ColorMaterial;
     private _counter: number = 0;
 

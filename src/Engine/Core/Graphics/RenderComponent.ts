@@ -1,11 +1,11 @@
-import { TComponent } from "@ecs/Component/IComponent";
+import { Component } from "@ecs/Component/Component";
 import { Mesh } from "@graphics/Mesh";
 import { Renderer } from "@renderer/Renderer";
 
 /**
  * A Graphics Component for managing the Drawing/Graphics of an Entity.
  */
-export class RenderComponent extends TComponent {
+export class RenderComponent extends Component {
     private _mesh: Mesh;
     
     constructor(){

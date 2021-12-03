@@ -1,6 +1,6 @@
 import { Renderer } from "@renderer/Renderer";
 import { SceneManager } from "@scenes/SceneManager";
-import { TEntity } from "@ecs/TEntity";
+import { Entity } from "@ecs/Entity";
 import { GLMatrix4 } from "@gl/GLMatrix4";
 import { ShaderManager } from "@graphics/ShaderManager";
 
@@ -37,7 +37,7 @@ export class Engine {
      * Same thing as SceneManager.CURRENT_SCENE.addObject(o)
      * @param o The Entity to be added to the Current scene
      */
-    public addObject(o: TEntity): void {
+    public addObject(o: Entity): void {
         SceneManager.CURRENT_SCENE.addObject(o);
     };
 
@@ -48,6 +48,10 @@ export class Engine {
         // load the shader manager
         ShaderManager.Init();
 
+        // and wait for it to finish loading
+        this.loading();
+
+        
         /**
          * Because asset loading does not exist yet,
          * onStart() is for debugging, and all entities
@@ -55,12 +59,6 @@ export class Engine {
          * (this can be seen as AssetManager.load)
          */
         this._onStart();
-
-        // load everything in scenes
-        SceneManager.CURRENT_SCENE.load();
-
-        // and wait for it to finish loading
-        this.loading();
 
         // done loading, start needed things
         SceneManager.CURRENT_SCENE.start();
@@ -72,12 +70,7 @@ export class Engine {
     /**
      * Wait for everything to finish loading.
      */
-    private loading(){
-        if(!SceneManager.CURRENT_SCENE.loaded){
-            // start a recursive loop with requestAnimFrame
-            requestAnimationFrame(this.loading.bind(this));
-        };
-
+    private loading(): void {
         if(!ShaderManager.loaded){
             // same recursion
             requestAnimationFrame(this.loading.bind(this));
