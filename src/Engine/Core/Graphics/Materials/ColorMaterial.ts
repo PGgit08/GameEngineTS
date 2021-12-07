@@ -5,7 +5,7 @@ import { ShaderManager } from '@graphics/ShaderManager';
 export class ColorMaterial extends Material {
     private _tint: Color;
 
-    constructor(tint: Color = Color.white){
+    constructor(tint: Color = Color.WHITE){
         super();
 
         // get the shader that associates with this material

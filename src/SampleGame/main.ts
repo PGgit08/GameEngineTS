@@ -10,7 +10,6 @@ import {
     ColorMaterial,
     Color
 } from '@GETS';
-import { ColorChanger } from './scripts/ColorChanger';
 
 // make entities on start
 const onStart = (): void => {
@@ -19,7 +18,7 @@ const onStart = (): void => {
     
     // create a particle
     const Particle1: Particle = new Particle();
-    Particle1.getComponent(RenderComponent).mesh.material
+    (Particle1.getComponent(RenderComponent).mesh.material as ColorMaterial).tint = Color.GREEN;
 
     // set the config of the particle
     Particle1.Transform.position = new Vector2(200, 300);
