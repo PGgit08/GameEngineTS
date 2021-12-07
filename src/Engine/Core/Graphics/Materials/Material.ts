@@ -2,6 +2,7 @@ import { GLMatrix4 } from "@gl/GLMatrix4";
 import { GLShader } from "@gl/GLShader";
 import { ShaderManager } from "@graphics/ShaderManager";
 
+
 /**
  * The material that is linked to a drawable.
  * Contains Color, Texture, and etc. for a drawable.
@@ -13,11 +14,6 @@ export class Material {
 
     // the shader that assosiates to this Material/Drawable.
     protected _shader: GLShader;
-
-    /**
-     * Creates new Material.
-     */
-    constructor(){};
 
     /**
      * Apply standard uniforms to this Material's shader.

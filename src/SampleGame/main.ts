@@ -6,7 +6,9 @@ import {
     Vector2,
     Engine,
     Particle,
-    RenderComponent
+    RenderComponent,
+    ColorMaterial,
+    Color
 } from '@GETS';
 import { ColorChanger } from './scripts/ColorChanger';
 
@@ -17,9 +19,9 @@ const onStart = (): void => {
     
     // create a particle
     const Particle1: Particle = new Particle();
+    Particle1.getComponent(RenderComponent).mesh.material
 
     // set the config of the particle
-    Particle1.addBehavior(new ColorChanger());
     Particle1.Transform.position = new Vector2(200, 300);
 
     // add the particle into the scene

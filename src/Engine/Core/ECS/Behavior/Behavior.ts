@@ -7,24 +7,24 @@ and focuses more on pre-render update operations
 like movement for example.
 */
 export abstract class Behavior {
-    name: string
+    private _name: string
 
-    owner: Entity;
+    public owner: Entity;
 
     /**
      * Creates a new behavior.
      * @param name The name of the behavior.
      */
     constructor(name: string){
-        this.name = name;
+        this._name = name;
     };
 
-    /**
-     * @deprecated (later when _name is private)
-     * Gets name of this behavior.
-     */
-    public get getName(): string{
-        return this.name
+    public get name(): string {
+        return this._name;
+    };
+
+    public set name(name: string) {
+        this._name = name;
     };
 
     /**
