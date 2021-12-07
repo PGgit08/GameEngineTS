@@ -57,7 +57,7 @@ export class ParticleBehavior extends Behavior {
 
 export class Particle extends Entity {
     // the radius of the particle
-    public particleSize: number;
+    private _particleSize: number;
 
     /**
      * Create a new circular physical Particle which runs on a ParticleBehavior.
@@ -70,21 +70,16 @@ export class Particle extends Entity {
         vel: Vector2 = new Vector2(10, 10), 
         acc: Vector2 = Vector2.origin
     ){
-        // create a new entity called "Particle"
-        super("Particle");
-
-        // set properties of this entity
-        this.particleSize = size;
-
         // create the RenderComponent that associates to this Particle
         const renderer: RenderComponent = new RenderComponent();
         
         // set the mesh of the render component
         renderer.mesh = new Mesh(new Circle(size, size), new ColorMaterial());
 
-        // add needed components/behaviors to this particle
-        this.addComponent(renderer);
+        // create a new entity called "Particle"
+        super("Particle", [renderer]);
 
-        this.addBehavior(new ParticleBehavior(vel, acc, size));
+        // set properties of this entity
+        this._particleSize = size;
     };
 }; 

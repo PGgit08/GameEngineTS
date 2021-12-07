@@ -16,7 +16,11 @@ export class Scene extends GameObject {
     private root_entity: Entity;
 
     // names of scene
-    name: string;
+    private _name: string;
+
+    public name(): string {
+        return this._name;
+    };
 
     /**
      * Creates a new scene which is added to the SceneManager.
@@ -25,9 +29,10 @@ export class Scene extends GameObject {
     constructor(name: string){
         super();
 
-        this.name = name;
+        this._name = name;
         this.root_entity = new Entity('ROOT');
         this.root_entity.visible = false;
+        this.root_entity.relativeChildren = false;
 
         SceneManager.addScene(this);
     };

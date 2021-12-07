@@ -16,7 +16,11 @@ export class Entity extends GameObject {
     components: Component[] = [];
     behaviors: Behavior[] = [];
     
+    // boolean stating whether this class gets rendered or not
     protected _visible: boolean = true;
+
+    // boolean stating whether the children of this class have a relative position to their parent(this class)
+    protected _relativeChildren: boolean = true;
 
     // the world/local transforms of the entity
     public Transform: Transform = new Transform();
@@ -25,13 +29,23 @@ export class Entity extends GameObject {
     protected _worldMatrix: GLMatrix4 = GLMatrix4.identity();
     protected _localMatrix: GLMatrix4 = GLMatrix4.identity();
 
-    public get visible(): boolean{
+    public get visible(): boolean {
         return this._visible;
     };
 
-    public set visible(v: boolean){
+    public set visible(v: boolean) {
         this._visible = v;
     };
+
+
+    public get relativeChildren(): boolean {
+        return this._relativeChildren;
+    };
+
+    public set relativeChildren(rC: boolean) {
+        this._relativeChildren = rC;
+    };
+
 
     public get worldMatrix(): GLMatrix4 {
         return this._worldMatrix;
@@ -238,8 +252,11 @@ export class Entity extends GameObject {
      * @param renderProps The engine properties of the renderer.
      */
     render(): void {
-        for(let c of this.components){
-            c.render();
+        // if this entity is meant to be rendered then render it
+        if(this._visible){
+            for(let c of this.components){
+                c.render();
+            };
         };
 
         for(let c of this.children){
@@ -253,18 +270,16 @@ export class Entity extends GameObject {
     public getWorldMatrix(){
         this._localMatrix = this.Transform.toMatrix();
 
-        if(this.parent && this.parent.visible){
-            // incase this entity has a visible entity 
-            // multiply the parent's world matrix by this entity's local matrix
+        // if the parent entity wants its children to be relative to its position
+        if(this.parent && this.parent.relativeChildren){
             this._worldMatrix = GLMatrix4.mul(
                 this.parent.worldMatrix,
                 this._localMatrix
             );
         }
 
+        // if the parent entity doesn't want its children to be relative to its position
         else {
-            // incase this entity does not have a visible parent entity
-            // multiply it's local matrix by it's world matrix
             this._worldMatrix = this._localMatrix;
         };
     };

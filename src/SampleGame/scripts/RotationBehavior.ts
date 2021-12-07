@@ -10,7 +10,6 @@ export class RotationBehavior extends Behavior{
     };
 
     update(){
-        // no deltaTime implement cuz confused 🤔
         this.owner.Transform.rotation += 1 * Renderer.DeltaTime;
     };
 };

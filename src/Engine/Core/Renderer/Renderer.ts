@@ -18,6 +18,7 @@ export class Renderer {
 
     // Canvas related variables
     private static _canvasId: string;
+    private static _viewport: HTMLCanvasElement;
 
     /**
      * @property The time between the start of the current frame and the start of the next frame 
@@ -27,6 +28,10 @@ export class Renderer {
 
     public static get CanvasId(): string {
         return Renderer._canvasId;
+    };
+
+    public static get Viewport(): HTMLCanvasElement {
+        return Renderer._viewport;
     };
 
     /**
@@ -57,7 +62,7 @@ export class Renderer {
             // no canvas has been found
             let gameCanvas: HTMLCanvasElement;
 
-            try{
+            try {
                 // make a canvas and set attributes
                 gameCanvas = document.createElement("canvas") as HTMLCanvasElement;
                 gameCanvas.id = Renderer._canvasId;
@@ -83,8 +88,10 @@ export class Renderer {
                 throw new Error("Problem Creating Canvas");
             };
 
-            /** WebGL Pre-Graphic Setup */
+            // set the html viewport
+            Renderer._viewport = gameCanvas;
 
+            /** WebGL Pre-Graphic Setup */
             // Set clear color to black, fully opaque
             GL.clearColor(0.0, 0.0, 0.0, 1.0);
             // Clear the color buffer with specified clear color

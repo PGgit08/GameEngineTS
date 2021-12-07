@@ -27,7 +27,6 @@ export * from '@graphics/Materials/ColorMaterial'
 
 export * from '@physics/Transform';
 export * from '@physics/Vector';
-export * from '@physics/RotationBehavior';
 
 
 export * from '@renderer/Renderer';

@@ -1,11 +1,12 @@
 import { Scene }  from "@scenes/Scene";
+import { Dictionary } from "@types";
 
 // a scene manager class for the games scenes
 // this is created so that scenes can be accessed
 // anywhere globally through this class's static
 export class SceneManager {
     // an object of registered scenes in the game
-    public static GAME_SCENES: {[name: string]: Scene} = {};
+    public static GAME_SCENES: Dictionary<number, Scene> = {};
     
     // the current scene
     public static CURRENT_SCENE: Scene;
@@ -15,7 +16,7 @@ export class SceneManager {
      * @param scene The scene to add.
      */
     public static addScene(scene: Scene): void {
-        this.GAME_SCENES[scene.name] = scene;
+        this.GAME_SCENES[scene.ID] = scene;
     };
 
     /**
@@ -23,9 +24,10 @@ export class SceneManager {
      * @param name The name of the scene to retrieve.
      * @returns Scene.
      */ 
-    public static getScene(name: string): Scene {
-        return this.GAME_SCENES[name];
+    public static getScene(id: number): Scene {
+        return this.GAME_SCENES[id];
     };
+
 
     /**
      * Sets the current Scene.
