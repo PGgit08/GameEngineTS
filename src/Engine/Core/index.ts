@@ -37,6 +37,7 @@ export * from '@scenes/SceneManager';
 
 
 export * from '@extra/Wait';
+export * from '@extra/Timer';
 export * from '@extra/Random';
 
 

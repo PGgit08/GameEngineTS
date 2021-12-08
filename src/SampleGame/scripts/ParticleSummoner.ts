@@ -35,7 +35,7 @@ export class ParticleSummoner extends Behavior {
 
                 this._particleInstanced = false;
             });
-        };
+        }; 
     };
 
 };
