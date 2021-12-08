@@ -4,22 +4,43 @@ import { Wait } from "@extra/Wait";
  * Pretty much just setTimeout but synchronous
  */
 export class Timer {
-    private _finished: boolean = false;
+    // whether the timer is running or not
+    private _running: boolean = false;
+
+    // the callback called after the timer goes off
+    public callback: () => void = () => {};
+
+    // the milliseconds the timer runs for
+    public ms: number;
 
     /**
-     * Sets a timer for a certian amount of time.
-     * @param ms Milliseconds the timer runs for.
+     * Whether the timer is running or not.
      */
-    constructor(ms: number){
-        Wait(ms).then(() => { this._finished = true });
+    public get running(): boolean {
+        return this._running;
     };
 
     /**
-     * Function called after timer goes off.
-     * @param callback The callback called after the timer goes off.
+     * Sets a timer for a certian amount of time.
+     * @param ms Milliseconds the timer runs for ( default: 1000 ).
+     * @param callback Optional function that is called after timer goes off ( default: () => void ).
      */
-    public after(callback: () => void): void {
-        while(!this._finished);
-        callback();
+    constructor(ms: number = 1000, callback?: () => void){
+        this.ms = ms;
+        if(callback){
+            this.callback = callback;
+        };
+    };
+
+    /**
+     * Runs the timer.
+     */
+    public run(): void {
+        this._running = true;
+
+        Wait(this.ms).then(() => {
+            this.callback();
+            this._running = false;
+        });
     };
 };
