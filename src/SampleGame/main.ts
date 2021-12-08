@@ -1,5 +1,7 @@
-// importing from namespace not
-// really working now
+/**
+ * A simple sample game that renders a particle in a random position 
+ */
+
 import {
     Scene,
     SceneManager,
@@ -9,8 +11,11 @@ import {
     RenderComponent,
     ColorMaterial,
     Color,
-    Entity
+    Entity,
 } from '@GETS';
+
+// import scripts
+import { ParticleSummoner } from './scripts/ParticleSummoner';
 import { RotationBehavior } from './scripts/RotationBehavior';
 
 // make entities on start
@@ -19,21 +24,12 @@ const onStart = (): void => {
     const SampleScene = new Scene("SampleScene");
     
     // create a parent class for all the particles that is invisible
-    const Particles: Entity = new Entity("Particles", [], [new RotationBehavior()]);
+    const Particles: Entity = new Entity("Particles", [], [new ParticleSummoner()]);
 
     // Particles config
     Particles.visible = false;
-    // Particles.relativeChildren = false;
-
-    // create a particle
-    const Particle1: Particle = new Particle();
-    (Particle1.getComponent(RenderComponent).mesh.material as ColorMaterial).tint = Color.GREEN;
-
-    // set the config of the particle
-    Particle1.Transform.position = new Vector2(200, 300);
-
-    // add all Particles into the parent particle class
-    Particles.addChild(Particle1);
+    Particles.relativeChildren = false;
+    // Particles.Transform.position = new Vector2(200, 300);
 
     // add the particle into the scene
     SampleScene.addObject(Particles);

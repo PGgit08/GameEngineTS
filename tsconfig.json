@@ -54,7 +54,7 @@
       "@renderer/*": ["Core/Renderer/*"],
       "@scenes/*": ["Core/Scenes/*"],
       "@world/*": ["Core/World/*"],
-      "@game/*": ["Game/*"],
+      "@extra/*": ["Core/Extra/*"],
       "@types": ["Core/Types.ts"],
       "@engine": ["Core/Engine"],
       "@GETS": ["Core/index"]

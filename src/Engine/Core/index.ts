@@ -36,6 +36,10 @@ export * from '@scenes/Scene';
 export * from '@scenes/SceneManager';
 
 
+export * from '@extra/Wait';
+export * from '@extra/Random';
+
+
 export * from '@world/Particle';
 
 

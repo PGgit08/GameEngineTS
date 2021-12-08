@@ -1,21 +1,40 @@
-import { Particle, SceneManager, Behavior, Vector2 } from "@GETS";
+import { 
+    Particle,
+    RenderComponent,
+    Color,
+    ColorMaterial,
+    Behavior,
+    Wait,
+    Random,
+    Vector2,
+    Renderer
+ } from "@GETS";
 
-class ParticleSummoner extends Behavior {
-    private _counter: number = 0;
+export class ParticleSummoner extends Behavior {
+    private _colors: Color[] = [Color.BLUE, Color.GREEN, Color.ORANGE];
+
+    private _particleInstanced: boolean = false;
 
     constructor(){
         super("ParticleSummoner");
     };
 
     update(){
-        this._counter ++;
+        if(!this._particleInstanced){
+            this._particleInstanced = true;
+            Wait(500).then(() => {
+                // create a particle
+                const NewParticle: Particle = new Particle();
 
-        if(this._counter == 100){
-            // doodoo instantiation, just experimental for now
-            let TestParticle: Particle = new Particle();
-            TestParticle.Transform.position = new Vector2(300, 200);
+                // set config of particle
+                (NewParticle.getComponent(RenderComponent).mesh.material as ColorMaterial).tint = this._colors[Random(this._colors.length)];
+                NewParticle.Transform.position = new Vector2(Random(Renderer.Width), Random(Renderer.Height));
 
-            SceneManager.CURRENT_SCENE.getEntityByName("Particles").addChild(TestParticle);
+                // add this particle to the owner
+                this.owner.addChild(NewParticle);
+
+                this._particleInstanced = false;
+            });
         };
     };
 
