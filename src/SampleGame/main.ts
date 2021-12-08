@@ -1,20 +1,14 @@
 /**
  * A simple sample game that renders a particle in a random position 
  */
-
 import {
     Scene,
     SceneManager,
-    Vector2,
     Engine,
-    Particle,
-    RenderComponent,
-    ColorMaterial,
-    Color,
     Entity,
 } from '@GETS';
 
-// import scripts
+// import self-made scripts
 import { ParticleSummoner } from './scripts/ParticleSummoner';
 import { RotationBehavior } from './scripts/RotationBehavior';
 
@@ -24,11 +18,11 @@ const onStart = (): void => {
     const SampleScene = new Scene("SampleScene");
     
     // create a parent class for all the particles that is invisible
-    const Particles: Entity = new Entity("Particles", [], [new ParticleSummoner()]);
+    const Particles: Entity = new Entity("Particles", [], [new ParticleSummoner(), new RotationBehavior(10)]);
 
     // Particles config
     Particles.visible = false;
-    Particles.relativeChildren = false;
+    // Particles.relativeChildren = false;
     // Particles.Transform.position = new Vector2(200, 300);
 
     // add the particle into the scene

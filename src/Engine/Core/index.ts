@@ -36,9 +36,8 @@ export * from '@scenes/Scene';
 export * from '@scenes/SceneManager';
 
 
-export * from '@extra/Wait';
-export * from '@extra/Timer';
-export * from '@extra/Random';
+export * from '@extra/Time';
+export * from '@extra/GMath';
 
 
 export * from '@world/Particle';

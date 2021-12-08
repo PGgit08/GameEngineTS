@@ -5,7 +5,7 @@ import { Vector2 } from '@physics/Vector';
  * Basic tranfrom of an entity.
  */
 
-export class Transform{
+export class Transform {
     // position vector(defaults to origin)
     private _position: Vector2 = Vector2.origin;
     private _rotation: number = 0;
@@ -19,27 +19,27 @@ export class Transform{
     * NOTE: Matricies for preforming transformations will be used later.
     */
     
-    public get position(): Vector2{
+    public get position(): Vector2 {
         return this._position;
     };
 
-    public get rotation(): number{
+    public get rotation(): number {
         return this._rotation;
     };
 
-    public get scale(): Vector2{
+    public get scale(): Vector2 {
         return this._scale;
     };
 
-    public set position(p: Vector2){
+    public set position(p: Vector2) {
         this._position = p;
     };
 
-    public set rotation(r: number){
+    public set rotation(r: number) {
         this._rotation = r;
     };
 
-    public set scale(s: Vector2){
+    public set scale(s: Vector2) {
         this._scale = s;
     };
 
@@ -47,7 +47,7 @@ export class Transform{
      * Converts transform into a matrix
      * @returns glMatrix mat2d item
      */
-    public toMatrix(){
+    public toMatrix(): GLMatrix4 {
         // turn translation/rotation/scale into matricies
         let translate = GLMatrix4.translation(this._position);
         let rotation = GLMatrix4.rotation(this._rotation * Math.PI / 180);
