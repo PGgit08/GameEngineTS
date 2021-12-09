@@ -38,16 +38,16 @@ export abstract class Component {
     /**
      * The pre-loop operations of this component.
      */
-    start(): void {};
+    abstract start(): void;
 
     /**
      * The loop operations of this component, called on each frame update.
      * @param dt The delta time since the last update call.
      */
-    update(): void {};
+    abstract update(): void;
 
     /**
      * The render operations of this component.
      */
-    render(): void {};
+    abstract render(): void;
 };

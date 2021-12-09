@@ -7,7 +7,7 @@ import { Geometry } from "@graphics/Geometry/Geometry";
 import { Material } from "@graphics/Materials/Material";
 
 /**
- * Any Renderable objects (Sprite, Rect2D, Circle2D) inherit this abstract class to have the items and properties
+ * Any Renderable objects (Sprite, Rect2D, Ellipse2D) inherit this abstract class to have the items and properties
  * required (Material, Mesh Buffers, etc.) in order to get Rendered to the screen. Renderables are taken
  * care by a RenderComponent, which can be attached to an entity.
  */

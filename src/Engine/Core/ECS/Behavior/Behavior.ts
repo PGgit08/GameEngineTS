@@ -38,11 +38,11 @@ export abstract class Behavior {
     /**
      * The pre-loop operations of this behavior.
      */
-    start(){};
+    abstract start(): void;
 
     /**
      * The loop operations of this behavior, called on each frame update.
      * @param dt The delta time since the last update call.
      */
-    update(){};
+    abstract update(): void;
 };

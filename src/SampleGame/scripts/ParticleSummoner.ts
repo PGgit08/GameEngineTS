@@ -13,7 +13,7 @@ import {
 export class ParticleSummoner extends Behavior {
     private _colors: Color[] = [Color.BLUE, Color.GREEN, Color.ORANGE];
 
-    private _timer: Time.Timer = new Time.Timer(500);
+    private _timer: Time.Timer = new Time.Timer(5);
 
     constructor(){
         super("ParticleSummoner");
@@ -30,6 +30,8 @@ export class ParticleSummoner extends Behavior {
             this.owner.addChild(NewParticle);
         };
     };
+
+    start(){};
 
     update(){
         if(!this._timer.running) {

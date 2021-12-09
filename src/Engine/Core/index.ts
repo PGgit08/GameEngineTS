@@ -11,7 +11,7 @@ export * from '@ecs/Entity';
 export * from '@ecs/GameObject';
 
 
-export * from '@graphics/Geometry/Circle';
+export * from '@graphics/Geometry/Ellipse';
 export * from '@graphics/Geometry/Rect';
 export * from '@graphics/Geometry/RightTriangle';
 

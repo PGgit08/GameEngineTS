@@ -3,7 +3,7 @@ import { AttributeInfo, GLBuffer } from "@gl/GLBuffer";
 import { ShaderConfig } from "@graphics/ShaderManager";
 import { Geometry } from "./Geometry";
 
-export class Circle extends Geometry {
+export class Ellipse extends Geometry {
     /**
      * Create a new Rectangle Geometry.
      * @param width Width of this rectangle.

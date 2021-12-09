@@ -1,5 +1,5 @@
 /**
- * A simple sample game that renders a particle in a random position 
+ * A simple sample game that renders a new particle in a random position after a certian amount of time
  */
 import {
     Scene,
@@ -18,9 +18,9 @@ const onStart = (): void => {
     const SampleScene = new Scene("SampleScene");
     
     // create a parent class for all the particles that is invisible
-    const Particles: Entity = new Entity("Particles", [], [new ParticleSummoner(), new RotationBehavior(10)]);
+    const Particles: Entity = new Entity("Particles", [], [new ParticleSummoner()]);
 
-    // Particles config
+    // Particles Entity config
     Particles.visible = false;
     // Particles.relativeChildren = false;
     // Particles.Transform.position = new Vector2(200, 300);

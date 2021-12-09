@@ -17,6 +17,8 @@ export class RotationBehavior extends Behavior {
         this._rotationSpeed = rotationSpeed;
     };
 
+    start() {};
+
     update(){
         this.owner.Transform.rotation += this._rotationSpeed * Renderer.DeltaTime;
     };

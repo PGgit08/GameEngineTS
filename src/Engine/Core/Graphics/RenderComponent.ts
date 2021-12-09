@@ -20,6 +20,9 @@ export class RenderComponent extends Component {
         return this._mesh;
     };
 
+    start() {};
+    update() {};
+
     /**
      * Draws the current drawing.
      * @param renderProps The Engine RendererProps.
