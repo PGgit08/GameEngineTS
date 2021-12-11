@@ -56,7 +56,7 @@ export abstract class Geometry {
     /**
      * Find min/max X/Y as well as anchorPoint and make box dimensions out of it
      */
-    protected calcBox(): void {
+    private calcBox(): void {
         // find min/max X/Y
         this._minX = -(this._width * this._anchor.x);
         this._maxX = this._width * (1.0 - this._anchor.x);

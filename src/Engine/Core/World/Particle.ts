@@ -5,6 +5,7 @@ import { ColorMaterial } from "@graphics/Materials/ColorMaterial";
 
 // Geometries
 import { Ellipse } from "@graphics/Geometry/Ellipse";
+import { Rect } from "@GETS";
 
 /**
  * Just a basic entity which is just a simple Ellipse.
@@ -24,7 +25,7 @@ export class Particle extends Entity {
         const renderer: RenderComponent = new RenderComponent();
         
         // set the mesh of the render component
-        renderer.mesh = new Mesh(new Ellipse(size, size), new ColorMaterial());
+        renderer.mesh = new Mesh(new Rect(size, size), new ColorMaterial());
 
         // create a new entity called "Particle"
         super("Particle", [renderer]);

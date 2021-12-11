@@ -1,8 +1,5 @@
-import { ColorMaterial } from "@GETS";
 import { GLBuffer } from "@gl/GLBuffer";
 import { GLMatrix4 } from "@gl/GLMatrix4";
-import { GLShader } from "@gl/GLShader";
-import { Vector2 } from "@physics/Vector";
 import { Geometry } from "@graphics/Geometry/Geometry";
 import { Material } from "@graphics/Materials/Material";
 
@@ -13,7 +10,7 @@ import { Material } from "@graphics/Materials/Material";
  */
 export class Mesh {
     private _geometry: Geometry;
-    private _material: Material & any;
+    private _material: Material;
 
     // the buffer received from this Mesh's Geometry
     private _buffer: GLBuffer;
@@ -50,7 +47,7 @@ export class Mesh {
         return this._geometry;
     };
 
-    public get material(): Material & any {
+    public get material(): Material {
         return this._material;  
     };
 };

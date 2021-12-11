@@ -33,9 +33,6 @@ export class Rect extends Geometry {
             this._minX, this._maxY,
             this._maxX, this._maxY,
             this._minX, this._minY,
-            this._minX, this._maxY,
-            this._maxX, this._maxY,
-            this._minX, this._minY,
             this._maxX, this._minY,
             this._maxX, this._maxY
         ];
