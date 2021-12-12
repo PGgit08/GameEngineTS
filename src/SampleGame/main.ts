@@ -7,9 +7,6 @@ import {
 } from '@GETS';
 
 
-// import self made assets
-import { Car } from './assets/entities/Car';
-
 // import self-made scripts
 import { ParticleSummoner } from './scripts/ParticleSummoner';
 import { RotationBehavior } from './scripts/RotationBehavior';
@@ -36,28 +33,9 @@ const onStart1 = (): void => {
     SceneManager.setCurrentScene(SampleScene);
 };
 
-/**
- * A simple sample game that renders a Car mesh
- */
-const onStart2 = (): void => {
-    // create a scene
-    const SampleScene = new Scene("SampleScene");
-
-    // create a car entity
-    const Car1: Car = new Car();
-
-    // Car1 entity config
-    Car1.Transform.position = new Vector2(200, 300);
-
-    // add this car entity into the scene
-    SampleScene.addObject(Car1);
-
-    // set this sample scene as the current scene
-    SceneManager.setCurrentScene(SampleScene);
-};
 
 /* Make a new engine with this game */
-var GameEngine: Engine = new Engine(800, 600, onStart2);
+var GameEngine: Engine = new Engine(800, 600, onStart1);
 
 // start engine
 GameEngine.start();
