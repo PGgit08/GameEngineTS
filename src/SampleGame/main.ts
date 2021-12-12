@@ -3,7 +3,6 @@ import {
     SceneManager,
     Engine,
     Entity,
-    Vector2,
 } from '@GETS';
 
 
