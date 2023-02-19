@@ -3,7 +3,7 @@ import {
 } from "../engine/GETS"
 
 const engine: Engine = new Engine(
-    (): void => { console.log("onStart from main.ts!") }
+    (): void => { console.log("onStart() from main.ts!") }
 );
 
 engine.update();

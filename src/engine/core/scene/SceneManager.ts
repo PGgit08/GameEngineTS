@@ -3,16 +3,21 @@ import Dictionary from "../types/Dictionary";
 import { Scene } from "./Scene";
 
 export class SceneManager implements Lifecycle {
-    private static _instance: SceneManager = new SceneManager();
+    private static _instance: SceneManager;
 
     private _gameScenes: Dictionary<string, Scene> = {}; // id: Scene (SHOULD BE CHANGED LATER TO NAME)
-    private _currentScene: Scene = new Scene("SampleScene");
+    private _currentScene: Scene;
 
     get currentScene(): Scene {
         return this._currentScene;
     }
 
     public static getInstance(): SceneManager {
+        if (!this._instance) {
+            this._instance = new SceneManager();
+            this._instance.setCurrentScene(new Scene("SampleScene")); // create this scene by default
+        }
+
         return this._instance;
     }
 
@@ -26,7 +31,12 @@ export class SceneManager implements Lifecycle {
         return this._gameScenes[id];
     }
 
-    public setCurrentScene(id: string): void {
+    public setCurrentScene(scene: Scene): void {
+        this.addScene(scene);
+        this._currentScene = scene;
+    }
+
+    public setCurrentSceneById(id: string): void {
         this._currentScene = this.getScene(id);
     }
 
