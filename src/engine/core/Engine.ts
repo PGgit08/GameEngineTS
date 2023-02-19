@@ -17,17 +17,15 @@ export class Engine implements Lifecycle {
     }
 
     public start(): void {
-        console.log("Start!");
         this._onStart();
-
         SceneManager.getInstance().start();
     }
     
     public update(): void {
-        console.log("Update!");
+        SceneManager.getInstance().update();
     }
 
     public render(): void {
-        console.log("Render!");
+        SceneManager.getInstance().render();
     }
 }

@@ -1,15 +1,16 @@
+import { v4 } from 'uuid';
+
 export class GameObject {
-    private static GLOBAL_ID: number = 0;
-    private _id: number;
+    private _id: string;
 
     /**
      * The unique ID of this GameObject
      */
-    get id(): number {
+    get id(): string {
         return this._id;
     }
 
     constructor() {
-        this._id = GameObject.GLOBAL_ID++;
+        this._id = v4();
     }
 }
