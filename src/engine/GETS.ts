@@ -1,3 +1,5 @@
+import Engine from './core/Engine';
+
 /** EXPORT EVERYTHING */
 export * from '../engine/core/Engine';
 

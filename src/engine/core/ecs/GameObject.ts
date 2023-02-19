@@ -1,6 +1,6 @@
 import { v4 } from 'uuid';
 
-export class GameObject {
+export default class GameObject {
     private readonly _id: string;
     private readonly _name: string;
 

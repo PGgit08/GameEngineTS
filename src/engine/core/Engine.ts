@@ -1,7 +1,7 @@
-import { Lifecycle } from "./Lifecycle";
-import { SceneManager } from "./scene/SceneManager";
+import Lifecycle from "./Lifecycle";
+import SceneManager from "./scene/SceneManager";
 
-export class Engine implements Lifecycle {
+export default class Engine implements Lifecycle {
     private static _isInstance: boolean = false;
     private _onStart: () => void;
 

@@ -1,9 +1,9 @@
-import { Lifecycle } from "../Lifecycle";
+import Lifecycle from "../Lifecycle";
 import Dictionary from "../types/Dictionary";
-import { SampleScene } from "../world/SampleScene";
-import { Scene } from "./Scene";
+import SampleScene from "../world/SampleScene";
+import Scene from "./Scene";
 
-export class SceneManager implements Lifecycle {
+export default class SceneManager implements Lifecycle {
     private static _instance: SceneManager;
 
     private _gameScenes: Dictionary<string, Scene> = {}; // id: Scene (SHOULD BE CHANGED LATER TO NAME)

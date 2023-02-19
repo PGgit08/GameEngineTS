@@ -1,6 +1,6 @@
-import { Behavior } from "../ecs/Behavior";
+import Behavior from "../ecs/Behavior";
 
-export class SampleBehavior extends Behavior {
+export default class SampleBehavior extends Behavior {
     constructor() {
         super("SampleBehavior");
     }
