@@ -13,7 +13,14 @@ export class Engine implements Lifecycle {
         this._onStart = onStart;
         this.start();
 
+        setInterval(this.cycle.bind(this), 500); // test loop
+
         Engine._isInstance = true;
+    }
+
+    private cycle(): void {
+        this.update();
+        this.render();
     }
 
     public start(): void {

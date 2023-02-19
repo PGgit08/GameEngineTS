@@ -19,20 +19,14 @@ export class Scene extends GameObject implements Lifecycle {
     }
 
     public start(): void {
-        console.log("Scene Start! @ID " + this.id);
-
         this._rootEntity.start();
     }
 
     public update(): void {
-        console.log("Scene Update!");
-
         this._rootEntity.update();
     }
 
     public render(): void {
-        console.log("Scene Render!");
-
         this._rootEntity.render();
     }
 }

@@ -13,7 +13,7 @@ export interface Lifecycle {
     update(): void;
 
     /**
-     * Called periodically, and is used render components.
+     * Called periodically, and is used render components. (SHOULD NOT BE USED BY BEHAVIORS)
      */
     render(): void;
 }
