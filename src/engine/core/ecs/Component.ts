@@ -2,8 +2,8 @@ import { Lifecycle } from "../Lifecycle";
 import { GameObject } from "./GameObject";
 
 export class Component extends GameObject implements Lifecycle {
-    constructor() {
-        super();
+    constructor(name: string) {
+        super(name);
     }
 
     public start(): void {}
