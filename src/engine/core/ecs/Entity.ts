@@ -1,9 +1,9 @@
-import Lifecycle from "../Lifecycle";
-import Behavior from "./Behavior";
-import Component from "./Component";
-import GameObject  from "./GameObject";
+import { Lifecycle } from "../Lifecycle";
+import { Behavior } from "./Behavior";
+import { Component } from "./Component";
+import { GameObject } from "./GameObject";
 
-export default class Entity extends GameObject implements Lifecycle {
+export class Entity extends GameObject implements Lifecycle {
     public parent: Entity;
     private _children: Entity[] = [];
 

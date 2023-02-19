@@ -1,7 +1,7 @@
-import Lifecycle from "../Lifecycle";
-import GameObject from "./GameObject";
+import { Lifecycle } from "../Lifecycle";
+import { GameObject } from "./GameObject";
 
-export default abstract class Component extends GameObject implements Lifecycle {
+export abstract class Component extends GameObject implements Lifecycle {
     constructor(name: string) {
         super(name);
     }

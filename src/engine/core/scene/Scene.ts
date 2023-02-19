@@ -1,9 +1,9 @@
-import Entity from "../ecs/Entity";
-import GameObject from "../ecs/GameObject";
-import Lifecycle from "../Lifecycle";
-import SceneManager from "./SceneManager";
+import { Entity } from "../ecs/Entity";
+import { GameObject } from "../ecs/GameObject";
+import { Lifecycle } from "../Lifecycle";
+import { SceneManager } from "./SceneManager";
 
-export default class Scene extends GameObject implements Lifecycle {
+export class Scene extends GameObject implements Lifecycle {
     private _rootEntity: Entity;
 
     constructor(name: string) {

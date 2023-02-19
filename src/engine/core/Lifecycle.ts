@@ -1,7 +1,7 @@
 /**
  * Defines the GETS lifecycle methods.
  */
-export default interface Lifecycle {
+export interface Lifecycle {
     /**
      * Called once at the start of the program.
      */
