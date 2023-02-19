@@ -14,6 +14,10 @@ export class Scene extends GameObject implements Lifecycle {
         SceneManager.getInstance().addScene(this);
     }
 
+    public addEntities(...entities: Entity[]): void {
+        this._rootEntity.addChildren(...entities);
+    }
+
     public start(): void {
         console.log("Scene Start! @ID " + this.id);
 

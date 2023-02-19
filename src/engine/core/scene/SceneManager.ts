@@ -1,5 +1,6 @@
 import { Lifecycle } from "../Lifecycle";
 import Dictionary from "../types/Dictionary";
+import { SampleScene } from "../world/SampleScene";
 import { Scene } from "./Scene";
 
 export class SceneManager implements Lifecycle {
@@ -15,7 +16,7 @@ export class SceneManager implements Lifecycle {
     public static getInstance(): SceneManager {
         if (!this._instance) {
             this._instance = new SceneManager();
-            this._instance.setCurrentScene(new Scene("SampleScene")); // create this scene by default
+            this._instance.setCurrentScene(new SampleScene()); // create this scene by default
         }
 
         return this._instance;
