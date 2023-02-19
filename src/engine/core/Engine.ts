@@ -1,5 +1,6 @@
 import { Lifecycle } from "./Lifecycle";
-import { SceneManager } from "./scene/SceneManager";
+import { RendererManager } from "./managers/RendererManager";
+import { SceneManager } from "./managers/SceneManager";
 
 export class Engine implements Lifecycle {
     private static _isInstance: boolean = false;
@@ -26,13 +27,16 @@ export class Engine implements Lifecycle {
     public start(): void {
         this._onStart();
         SceneManager.getInstance().start();
+        RendererManager.getInstance().start();
     }
     
     public update(): void {
         SceneManager.getInstance().update();
+        RendererManager.getInstance().update();
     }
 
     public render(): void {
         SceneManager.getInstance().render();
+        RendererManager.getInstance().render();
     }
 }

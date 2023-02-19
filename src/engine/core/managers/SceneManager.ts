@@ -1,12 +1,12 @@
 import { Lifecycle } from "../Lifecycle";
-import Dictionary from "../types/Dictionary";
-import { SampleScene } from "../world/SampleScene";
-import { Scene } from "./Scene";
+import Dictionary from "../../extra/Dictionary";
+import { SampleScene } from "../samples/SampleScene";
+import { Scene } from "../scene/Scene";
 
 export class SceneManager implements Lifecycle {
     private static _instance: SceneManager;
 
-    private _gameScenes: Dictionary<string, Scene> = {}; // id: Scene (SHOULD BE CHANGED LATER TO NAME)
+    private _gameScenes: Dictionary<string, Scene> = {}; // name: Scene
     private _currentScene: Scene;
 
     get currentScene(): Scene {
@@ -25,11 +25,11 @@ export class SceneManager implements Lifecycle {
     private constructor() {}
 
     public addScene(scene: Scene): void {
-        this._gameScenes[scene.id] = scene;
+        this._gameScenes[scene.name] = scene;
     }
 
-    public getScene(id: string): Scene {
-        return this._gameScenes[id];
+    public getScene(name: string): Scene {
+        return this._gameScenes[name];
     }
 
     public setCurrentScene(scene: Scene): void {
@@ -37,8 +37,8 @@ export class SceneManager implements Lifecycle {
         this._currentScene = scene;
     }
 
-    public setCurrentSceneById(id: string): void {
-        this._currentScene = this.getScene(id);
+    public setCurrentSceneByName(name: string): void {
+        this._currentScene = this.getScene(name);
     }
 
     public start(): void {

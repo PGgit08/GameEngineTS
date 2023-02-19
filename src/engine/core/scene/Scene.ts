@@ -1,7 +1,7 @@
 import { Entity } from "../ecs/Entity";
 import { GameObject } from "../ecs/GameObject";
 import { Lifecycle } from "../Lifecycle";
-import { SceneManager } from "./SceneManager";
+import { SceneManager } from "../managers/SceneManager";
 
 export class Scene extends GameObject implements Lifecycle {
     private _rootEntity: Entity;
