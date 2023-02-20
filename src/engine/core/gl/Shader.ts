@@ -1,4 +1,10 @@
-export abstract class Shader {
+import Dictionary from "../../extra/Dictionary";
+import { GameObject } from "../ecs/GameObject";
+
+export abstract class Shader extends GameObject {
+    private _attributes: Dictionary<string, number> = {};
+    private _uniforms: Dictionary<string, WebGLUniformLocation> = {};
+
     private _program: WebGLProgram;
 
     /**
@@ -10,6 +16,8 @@ export abstract class Shader {
      * Returns the Fragment Shader source code in GLSL
      */
     public abstract get fSource(): string;
+
+    constructor(name: string) { super(name); }
 
     public use(): void {
         gl.useProgram(this._program);
@@ -29,6 +37,9 @@ export abstract class Shader {
         this.createProgram(vShader, fShader);
 
         gl.linkProgram(this._program);
+
+        this.detectAttributes();
+        this.detectUniforms();
     }
 
     public loadShader(source: string, type: number): WebGLShader {
@@ -55,5 +66,30 @@ export abstract class Shader {
         }
 
         this._program = program;
+    }
+
+    private detectAttributes(): void {
+        let attributeCount = gl.getProgramParameter(this._program, gl.ACTIVE_ATTRIBUTES);
+        for (let i = 0; i < attributeCount; i++) {
+            let info: WebGLActiveInfo = gl.getActiveAttrib(this._program, i);
+
+            if (!info){
+                break;
+            };
+
+            this._attributes[info.name] = gl.getAttribLocation(this._program, info.name);
+        };
+    }
+
+    private detectUniforms(): void {
+        let uniformCount = gl.getProgramParameter(this._program, gl.ACTIVE_UNIFORMS);
+        for (let i = 0; i < uniformCount; i++){
+            let info: WebGLActiveInfo = gl.getActiveUniform(this._program, i);
+            if (!info){
+                break;
+            };
+
+            this._uniforms[info.name] = gl.getUniformLocation(this._program, info.name);
+        };
     }
 }
