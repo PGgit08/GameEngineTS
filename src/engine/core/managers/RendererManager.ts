@@ -47,7 +47,7 @@ export class RendererManager extends Manager implements Lifecycle {
 
     public load(): void {
         Object.values(this._gameRenderers).forEach((r) => r.load());
-        
+
         window.gl = this._currentRenderer.gl;
     }
 
