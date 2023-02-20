@@ -2,6 +2,9 @@ import { GameObject } from "../ecs/GameObject";
 import { Lifecycle } from "../Lifecycle";
 import { RendererManager } from "../managers/RendererManager";
 
+/**
+ * A view that can be rendered on and chosen by the RenderManager
+ */
 export class Renderer extends GameObject implements Lifecycle {
     private _width: number;
     private _height: number;
