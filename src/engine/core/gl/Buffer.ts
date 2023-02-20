@@ -21,7 +21,7 @@ export class Buffer {
         return this._data;
     }
 
-    constructor(mode: number = gl.TRIANGLES, data: number[]) {
+    constructor(mode: number, data: number[]) {
         this._mode = mode;
         this._data = data;
         this._buffer = gl.createBuffer();
