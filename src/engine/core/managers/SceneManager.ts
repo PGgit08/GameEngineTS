@@ -2,8 +2,9 @@ import { Lifecycle } from "../Lifecycle";
 import Dictionary from "../../extra/Dictionary";
 import { SampleScene } from "../samples/SampleScene";
 import { Scene } from "../scene/Scene";
+import { Manager } from "./Manager";
 
-export class SceneManager implements Lifecycle {
+export class SceneManager extends Manager implements Lifecycle {
     private static _instance: SceneManager;
 
     private _gameScenes: Dictionary<string, Scene> = {}; // name: Scene
@@ -22,9 +23,10 @@ export class SceneManager implements Lifecycle {
         return this._instance;
     }
 
-    private constructor() {}
+    private constructor() { super(); }
 
     public addScene(scene: Scene): void {
+        super.registerName(scene.name);
         this._gameScenes[scene.name] = scene;
     }
 
@@ -33,7 +35,6 @@ export class SceneManager implements Lifecycle {
     }
 
     public setCurrentScene(scene: Scene): void {
-        this.addScene(scene);
         this._currentScene = scene;
     }
 

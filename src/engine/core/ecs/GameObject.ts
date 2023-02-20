@@ -4,8 +4,6 @@ export class GameObject {
     private readonly _id: string;
     private readonly _name: string;
 
-    private _registeredNames: string[] = [];
-
     /**
      * The unique ID of this GameObject
      */
@@ -14,20 +12,14 @@ export class GameObject {
     }
 
     /**
-     * The name of this Gameobject (NOT ALWAYS UNIQUE)
+     * The name of this Gameobject (CAN BE UNIQUE)
      */
     get name(): string {
         return this._name;
     }   
 
-    constructor(name: string, uniqueName: boolean = false) {        
-        if (this._registeredNames.includes(name) && uniqueName) {
-            throw new Error("GameObject with identical name already exists");
-        }
-
+    constructor(name: string) {        
         this._id = v4();
         this._name = name;
-
-        this._registeredNames.push(this._name);
     }
 }

@@ -1,5 +1,6 @@
 import { GameObject } from "../ecs/GameObject";
 import { Lifecycle } from "../Lifecycle";
+import { RendererManager } from "../managers/RendererManager";
 
 export class Renderer extends GameObject implements Lifecycle {
     private _width: number;
@@ -31,7 +32,7 @@ export class Renderer extends GameObject implements Lifecycle {
     }
 
     constructor(name: string, canvasId?: string){
-        super(name, true);
+        super(name);
 
         if (canvasId != undefined) {
             this._canvasId = canvasId;
@@ -46,12 +47,15 @@ export class Renderer extends GameObject implements Lifecycle {
             this.createCanvas();
         }
 
+        this._canvasId = this._canvas.id;
         this._gl = this._canvas.getContext("webgl") as WebGLRenderingContext;
 
         this._gl.clearColor(0.0, 0.0, 0.0, 1.0); // Set clear color to black, fully opaque
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
         this._gl.viewport(0, 0, this._width, this._height);
         this._gl.enable(this._gl.DEPTH_TEST);
+
+        RendererManager.getInstance().addRenderer(this);
     }
 
     /**

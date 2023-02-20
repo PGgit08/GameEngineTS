@@ -2,8 +2,9 @@ import Dictionary from "../../extra/Dictionary";
 import { Renderer } from "../graphics/Renderer";
 import { Lifecycle } from "../Lifecycle";
 import { SampleRenderer } from "../samples/SampleRenderer";
+import { Manager } from "./Manager";
 
-export class RendererManager implements Lifecycle {
+export class RendererManager extends Manager implements Lifecycle {
     private static _instance: RendererManager;
 
     private _gameRenderers: Dictionary<string, Renderer> = {}; // name: Renderer
@@ -22,9 +23,10 @@ export class RendererManager implements Lifecycle {
         return this._instance;
     }
 
-    private constructor() {}
+    private constructor() { super(); }
 
     public addRenderer(renderer: Renderer): void {
+        super.registerName(renderer.name);
         this._gameRenderers[renderer.name] = renderer;
     }
 
@@ -33,7 +35,6 @@ export class RendererManager implements Lifecycle {
     }
 
     public setCurrentRenderer(renderer: Renderer): void {
-        this.addRenderer(renderer);
         this._currentRenderer = renderer;
     }
 
