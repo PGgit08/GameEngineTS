@@ -14,7 +14,7 @@ export class Engine implements Lifecycle {
         this._onStart = onStart;
         this.start();
 
-        setInterval(this.cycle.bind(this), 500); // test loop
+        setInterval(this.cycle.bind(this), 500); // test loop, to be changed to requestAnimationFrame in the future
 
         Engine._isInstance = true;
     }
