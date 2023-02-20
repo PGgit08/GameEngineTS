@@ -36,10 +36,14 @@ export class RendererManager extends Manager implements Lifecycle {
 
     public setCurrentRenderer(renderer: Renderer): void {
         this._currentRenderer = renderer;
+        window.gl = renderer.gl;
     }
 
     public setCurrentRendererByName(name: string): void {
-        this._currentRenderer = this.getRenderer(name);
+        const renderer: Renderer = this.getRenderer(name);
+
+        this._currentRenderer = renderer;
+        window.gl = renderer.gl;
     }
 
     public start(): void {
