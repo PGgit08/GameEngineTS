@@ -19,6 +19,13 @@ export abstract class Geometry {
     public abstract data(): number[];
 
     /**
+     * Load this Geometry and upload its Buffer
+     */
+    public load(): void {
+        this._buffer.upload();
+    }
+
+    /**
      * Draw the Geometry
      */
     public draw(): void {
