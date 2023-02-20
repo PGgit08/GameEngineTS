@@ -5,7 +5,10 @@ export class Renderer extends GameObject implements Lifecycle {
     private _width: number;
     private _height: number;
 
+    private _canvas: HTMLCanvasElement;
     private _canvasId: string;
+
+    private _gl: WebGLRenderingContext;
 
     get width(): number {
         return this._width;
@@ -17,6 +20,14 @@ export class Renderer extends GameObject implements Lifecycle {
 
     get canvasId(): string {
         return this._canvasId;
+    }
+
+    get canvas(): HTMLCanvasElement {
+        return this._canvas;
+    }
+
+    get gl(): WebGLRenderingContext {
+        return this._gl;
     }
 
     constructor(name: string, canvasId?: string){
@@ -34,42 +45,50 @@ export class Renderer extends GameObject implements Lifecycle {
 
             this.createCanvas();
         }
+
+        this._gl = this._canvas.getContext("webgl") as WebGLRenderingContext;
+
+        this._gl.clearColor(0.0, 0.0, 0.0, 1.0); // Set clear color to black, fully opaque
+        this._gl.clear(this._gl.COLOR_BUFFER_BIT);
+        this._gl.viewport(0, 0, this._width, this._height);
+        this._gl.enable(this._gl.DEPTH_TEST);
     }
 
     /**
      * Build this Renderer if a canvas is supplied
      */
     private fromCanvas(): void {
-        const gameCanvas: HTMLCanvasElement = document.getElementById(this._canvasId) as HTMLCanvasElement;
+        this._canvas = document.getElementById(this._canvasId) as HTMLCanvasElement;
 
-        this._width = gameCanvas.width;
-        this._height = gameCanvas.height;
+        this._width = this._canvas.width;
+        this._height = this._canvas.height;
     }
 
     /**
      * Build this Renderer if there is no canvas supplied
      */
     private createCanvas(): void {
-        const gameCanvas: HTMLCanvasElement = document.createElement("canvas") as HTMLCanvasElement;
-        gameCanvas.id = this.id;
+        this._canvas = document.createElement("canvas") as HTMLCanvasElement;
 
-        gameCanvas.width = this._width;
-        gameCanvas.height = this._height;
+        this._canvas.id = this.id;
 
-        gameCanvas.style.border = "thick solid #0000FF"; 
+        this._canvas.width = this._width;
+        this._canvas.height = this._height;
 
-        document.body.appendChild(gameCanvas);
+        this._canvas.style.border = "thick solid #0000FF"; 
+
+        document.body.appendChild(this._canvas);
     }
 
     public start(): void {
-        console.log("Renderer Start");
+        // console.log("Renderer Start");
     }
 
     public update(): void {
-        console.log("Renderer Update");
+        // console.log("Renderer Update");
     }
 
     public render(): void {
-        console.log("Renderer Render");
+        // console.log("Renderer Render");
     }
 }
