@@ -4,7 +4,7 @@ import { Component } from "./Component";
 import { GameObject } from "./GameObject";
 
 export class Entity extends GameObject implements Lifecycle {
-    public parent: Entity;
+    public parent: Entity = null;
     private _children: Entity[] = [];
 
     private _components: Component[] = [];
