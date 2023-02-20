@@ -3,17 +3,22 @@
  */
 export interface Lifecycle {
     /**
-     * Called once at the start of the program.
+     * Called once before start, loads everything from an AssetManager(NOT MADE YET)
+     */
+    load(): void;
+
+    /**
+     * Called once after loading.
      */
     start(): void;
 
     /**
-     * Called periodically, and is used to update components and behaviors.
+     * Called periodically, per frame update, and is used to update components and behaviors.
      */
     update(): void;
 
     /**
-     * Called periodically, and is used render components. (SHOULD NOT BE USED BY BEHAVIORS)
+     * Called periodically, per frame update, and is used render components. (SHOULD NOT BE USED BY BEHAVIORS)
      */
     render(): void;
 }

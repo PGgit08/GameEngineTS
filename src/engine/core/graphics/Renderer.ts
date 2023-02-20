@@ -37,26 +37,7 @@ export class Renderer extends GameObject implements Lifecycle {
     constructor(name: string, canvasId?: string){
         super(name);
 
-        if (canvasId != undefined) {
-            this._canvasId = canvasId;
-
-            this.fromCanvas();
-        }
-
-        if (canvasId == undefined) {
-            this._width = 800;
-            this._height = 600;
-
-            this.createCanvas();
-        }
-
-        this._canvasId = this._canvas.id;
-        this._gl = this._canvas.getContext("webgl") as WebGLRenderingContext;
-
-        this._gl.clearColor(0.0, 0.0, 0.0, 1.0); // Set clear color to black, fully opaque
-        this._gl.clear(this._gl.COLOR_BUFFER_BIT);
-        this._gl.viewport(0, 0, this._width, this._height);
-        this._gl.enable(this._gl.DEPTH_TEST);
+        this._canvasId = canvasId;
 
         RendererManager.getInstance().addRenderer(this);
     }
@@ -78,6 +59,7 @@ export class Renderer extends GameObject implements Lifecycle {
         this._canvas = document.createElement("canvas") as HTMLCanvasElement;
 
         this._canvas.id = this.id;
+        this._canvasId = this._canvas.id;
 
         this._canvas.width = this._width;
         this._canvas.height = this._height;
@@ -85,6 +67,26 @@ export class Renderer extends GameObject implements Lifecycle {
         this._canvas.style.border = "thick solid #0000FF"; 
 
         document.body.appendChild(this._canvas);
+    }
+
+    public load(): void {
+        if (this._canvasId != undefined) {
+            this.fromCanvas();
+        }
+
+        if (this._canvasId == undefined) {
+            this._width = 800;
+            this._height = 600;
+
+            this.createCanvas();
+        }
+        
+        this._gl = this._canvas.getContext("webgl") as WebGLRenderingContext;
+
+        this._gl.clearColor(0.0, 0.0, 0.0, 1.0); // Set clear color to black, fully opaque
+        this._gl.clear(this._gl.COLOR_BUFFER_BIT);
+        this._gl.viewport(0, 0, this._width, this._height);
+        this._gl.enable(this._gl.DEPTH_TEST);
     }
 
     public start(): void {

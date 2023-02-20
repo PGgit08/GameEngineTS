@@ -18,6 +18,10 @@ export class Scene extends GameObject implements Lifecycle {
         this._rootEntity.addChildren(...entities);
     }
 
+    public load(): void {
+        this._rootEntity.load();
+    }
+
     public start(): void {
         this._rootEntity.start();
     }

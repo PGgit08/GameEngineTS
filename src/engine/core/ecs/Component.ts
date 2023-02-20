@@ -6,7 +6,8 @@ export abstract class Component extends GameObject implements Lifecycle {
         super(name);
     }
 
-    public abstract start(): void
-    public abstract update(): void
-    public abstract render(): void
+    public abstract load(): void;
+    public abstract start(): void;
+    public abstract update(): void;
+    public abstract render(): void;
 }

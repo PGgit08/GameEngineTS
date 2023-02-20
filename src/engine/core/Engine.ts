@@ -26,6 +26,11 @@ export class Engine implements Lifecycle {
         this.render();
     }
 
+    public load(): void {
+        RendererManager.getInstance().load();
+        SceneManager.getInstance().load();
+    }
+
     public start(): void {
         this._onStart();
         SceneManager.getInstance().start();

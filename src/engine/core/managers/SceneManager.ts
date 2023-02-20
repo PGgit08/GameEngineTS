@@ -1,8 +1,8 @@
 import { Lifecycle } from "../Lifecycle";
 import Dictionary from "../../extra/Dictionary";
-import { SampleScene } from "../samples/SampleScene";
 import { Scene } from "../scene/Scene";
 import { Manager } from "./Manager";
+import { SampleScene } from "../samples/SampleScene";
 
 export class SceneManager extends Manager implements Lifecycle {
     private static _instance: SceneManager;
@@ -17,7 +17,6 @@ export class SceneManager extends Manager implements Lifecycle {
     public static getInstance(): SceneManager {
         if (!this._instance) {
             this._instance = new SceneManager();
-            this._instance.setCurrentScene(new SampleScene()); // create this scene by default
         }
 
         return this._instance;
@@ -40,6 +39,11 @@ export class SceneManager extends Manager implements Lifecycle {
 
     public setCurrentSceneByName(name: string): void {
         this._currentScene = this.getScene(name);
+    }
+
+
+    public load(): void {
+        Object.values(this._gameScenes).forEach((s) => s.load());
     }
 
     public start(): void {

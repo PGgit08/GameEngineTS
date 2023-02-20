@@ -5,6 +5,10 @@ export class SampleBehavior extends Behavior {
         super("SampleBehavior");
     }
 
+    public load(): void {
+        
+    }
+
     public start(): void {
         // console.log("SampleBehavior Start!");
     }
