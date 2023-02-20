@@ -37,8 +37,8 @@ export class Engine implements Lifecycle {
 
     public load(): void {
         this._onLoad(); // SIMULATE ASSET LOADING
-        SceneManager.getInstance().load();
         RendererManager.getInstance().load();
+        SceneManager.getInstance().load();
     }
 
     public start(): void {
