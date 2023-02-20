@@ -7,6 +7,11 @@ export class Engine implements Lifecycle {
     private _onStart: () => void;
     private _onLoad: () => void;
 
+    /**
+     * Creates the single Engine instance.
+     * @param onLoad Simulates ASSET LOADING, to be REMOVED later. 
+     * @param onStart Function that is called on start, once everything has been loaded.
+     */
     constructor(onLoad: () => void, onStart: () => void) {
         if (Engine._isInstance) {
             throw new Error("Engine instance already exists!");
