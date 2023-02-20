@@ -2,7 +2,6 @@ import { Lifecycle } from "../Lifecycle";
 import Dictionary from "../../extra/Dictionary";
 import { Scene } from "../scene/Scene";
 import { Manager } from "./Manager";
-import { SampleScene } from "../samples/SampleScene";
 
 export class SceneManager extends Manager implements Lifecycle {
     private static _instance: SceneManager;

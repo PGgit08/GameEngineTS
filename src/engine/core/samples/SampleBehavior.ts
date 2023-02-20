@@ -6,7 +6,7 @@ export class SampleBehavior extends Behavior {
     }
 
     public load(): void {
-        
+        // console.log("SampleBehavior Load!");
     }
 
     public start(): void {

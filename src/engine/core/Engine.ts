@@ -5,13 +5,17 @@ import { SceneManager } from "./managers/SceneManager";
 export class Engine implements Lifecycle {
     private static _isInstance: boolean = false;
     private _onStart: () => void;
+    private _onLoad: () => void;
 
-    constructor(onStart: () => void) {
+    constructor(onLoad: () => void, onStart: () => void) {
         if (Engine._isInstance) {
             throw new Error("Engine instance already exists!");
         }
         
+        this._onLoad = onLoad;
         this._onStart = onStart;
+
+        this.load();
         this.start();
 
         setInterval(this.cycle.bind(this), 500); // test loop, to be changed to requestAnimationFrame in the future
@@ -27,14 +31,15 @@ export class Engine implements Lifecycle {
     }
 
     public load(): void {
-        RendererManager.getInstance().load();
+        this._onLoad(); // SIMULATE ASSET LOADING
         SceneManager.getInstance().load();
+        RendererManager.getInstance().load();
     }
 
     public start(): void {
-        this._onStart();
         SceneManager.getInstance().start();
         RendererManager.getInstance().start();
+        this._onStart();
     }
     
     public update(): void {
