@@ -6,10 +6,10 @@ export class SampleBehavior extends Behavior {
     }
 
     public start(): void {
-        // console.log("SampleBehavior Start!");
+        console.log("SampleBehavior Start!");
     }
 
     public update(): void {
-        // console.log("SampleBehavior Update!");
+        console.log("SampleBehavior Update!");
     }
 }
