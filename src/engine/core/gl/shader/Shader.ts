@@ -1,5 +1,6 @@
-import Dictionary from "../../extra/Dictionary";
-import { GameObject } from "../ecs/GameObject";
+import Dictionary from "../../../extra/Dictionary";
+import { GameObject } from "../../ecs/GameObject";
+import { ShaderManager } from "../../managers/ShaderManager";
 
 export abstract class Shader extends GameObject {
     private _attributes: Dictionary<string, number> = {};
@@ -17,7 +18,7 @@ export abstract class Shader extends GameObject {
      */
     public abstract get fSource(): string;
 
-    constructor(name: string) { super(name); }
+    constructor(name: string) { super(name); ShaderManager.getInstance().addShader(this); }
 
     public use(): void {
         gl.useProgram(this._program);
@@ -91,5 +92,13 @@ export abstract class Shader extends GameObject {
 
             this._uniforms[info.name] = gl.getUniformLocation(this._program, info.name);
         };
+    }
+
+    public getAttributeLocation(attributeName: string): number {
+        return this._attributes[attributeName];
+    }
+
+    public getUniformLocation(uniformName: string): WebGLUniformLocation {
+        return this._uniforms[uniformName];
     }
 }

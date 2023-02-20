@@ -1,3 +1,4 @@
+import { ShaderManager } from "../../managers/ShaderManager";
 import { Geometry } from "./Geometry";
 
 export class Triangle extends Geometry {
@@ -6,7 +7,11 @@ export class Triangle extends Geometry {
     }
 
     protected setAttributes(): void {
-        this._buffer.addAttribute({location: 0, size: 4, offset: 0}); // add the position attribute
+        this._buffer.addAttribute({
+            location: ShaderManager.getInstance().getShader("Shader2D").getAttributeLocation("position"),
+            size: 4,
+            offset: 0
+        }); // add the position attribute
     }
 
     public data(): number[] {

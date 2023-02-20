@@ -1,4 +1,5 @@
 import { Renderer } from "../engine/core/graphics/Renderer";
+import { ShaderManager } from "../engine/core/managers/ShaderManager";
 import { Scene } from "../engine/core/scene/Scene";
 import {
     Engine, 
@@ -17,6 +18,8 @@ const onLoad = (): void => {
     RendererManager.getInstance().setCurrentRenderer(renderer);
     RendererManager.getInstance().load();
 
+    // CALL ADDITIONAL ShaderManager load
+    ShaderManager.getInstance().load();
 
     // NEXT look for scenes and load them
     const scene: Scene = new SampleScene();
@@ -26,7 +29,7 @@ const onLoad = (): void => {
 
 new Engine(
     onLoad,
-    (): void => { console.log("onStart() from main.ts!"); console.log(gl); }
+    (): void => { console.log("onStart() from main.ts!"); }
 );
 
 export {}
