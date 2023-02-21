@@ -1,14 +1,13 @@
-import { Shader } from "../gl/shader/Shader";
-import { ShaderManager } from "../managers/ShaderManager";
 import { Geometry } from "./geometry/Geometry";
+import { Material } from "./material/Material";
 
 export class Mesh {
     private _geometry: Geometry;
-    private _shader: Shader;
+    private _material: Material;
 
-    constructor(geometry: Geometry, shaderName: string) {
+    constructor(geometry: Geometry, material: Material) {
         this._geometry = geometry;
-        this._shader = ShaderManager.getInstance().getShader(shaderName);
+        this._material = material;
     }
 
     /**
@@ -22,7 +21,7 @@ export class Mesh {
      * Renders the Mesh
      */
     public draw(): void {
-        this._shader.use();
+        this._material.applyStandarUniforms();
         this._geometry.draw();
     }
 }

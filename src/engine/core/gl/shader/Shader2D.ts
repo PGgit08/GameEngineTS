@@ -10,7 +10,7 @@ export class Shader2D extends Shader {
         vec4 clipspace_position;
 
         // uniforms will recieve data dynamically from the code
-        mat3 projection = mat3(1.0);
+        uniform mat3 projection;
 
         // all shaders have a main function
         void main() {

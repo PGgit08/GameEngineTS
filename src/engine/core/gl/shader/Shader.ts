@@ -1,6 +1,7 @@
 import Dictionary from "../../../extra/Dictionary";
 import { GameObject } from "../../ecs/GameObject";
 import { ShaderManager } from "../../managers/ShaderManager";
+import { mat3 } from "gl-matrix";
 
 export abstract class Shader extends GameObject {
     private _attributes: Dictionary<string, number> = {};
@@ -101,5 +102,18 @@ export abstract class Shader extends GameObject {
 
     public getUniformLocation(uniformName: string): WebGLUniformLocation {
         return this._uniforms[uniformName];
+    }
+
+    public applyStandardUniforms(projection: mat3): void {
+        this.setUniformMatrix('projection', projection);
+    }
+
+    private setUniformMatrix(uniformName: string, mat3: mat3): void {
+        const location = this.getUniformLocation(uniformName);
+        gl.uniformMatrix3fv(
+            location,
+            false,
+            mat3
+        )
     }
 }

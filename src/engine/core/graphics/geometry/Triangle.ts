@@ -15,11 +15,11 @@ export class Triangle extends Geometry {
     }
 
     public data(): number[] {
-        // NOT CLIPSPACE YET
+        // REGULAR SPACE (TEST)
         return [
-            0, 0,
-            0, 0.5, 
-            0.5, 0.5
+            100, 100,
+            100, 300, 
+            300, 300
         ]
     }
 }
