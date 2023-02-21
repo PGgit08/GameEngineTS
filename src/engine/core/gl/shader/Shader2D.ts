@@ -4,14 +4,19 @@ export class Shader2D extends Shader {
     get vSource(): string {
         return `
         // an attribute will receive data from a buffer
-        attribute vec4 a_position;
+        attribute vec2 a_position;
       
+        // the final clipspace position
+        vec4 clipspace_position;
+
+        // uniforms will recieve data dynamically from the code
+        mat3 projection = mat3(1.0);
+
         // all shaders have a main function
         void main() {
-      
-          // gl_Position is a special variable a vertex shader
-          // is responsible for setting
-          gl_Position = a_position;
+          // turn 2D position into 3D position for matrix multiplication, then turn result into 4D WebGL vector
+          clipspace_position = vec4((projection * vec3(a_position, 1)).xy, 0.0, 1.0);
+          gl_Position = clipspace_position;
         }
         `;
     }

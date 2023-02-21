@@ -50,6 +50,7 @@ export abstract class Shader extends GameObject {
         gl.compileShader(shader);
 
         if (gl.getShaderInfoLog(shader) !== "") {
+            console.log(gl.getShaderInfoLog(shader));
             throw new Error("Problem compiling shader.");
         }
 

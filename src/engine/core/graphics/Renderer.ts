@@ -1,6 +1,7 @@
 import { GameObject } from "../ecs/GameObject";
 import { Lifecycle } from "../Lifecycle";
 import { RendererManager } from "../managers/RendererManager";
+import { mat3 } from "gl-matrix";
 
 /**
  * A view that can be rendered on and chosen by the RenderManager
@@ -8,6 +9,8 @@ import { RendererManager } from "../managers/RendererManager";
 export class Renderer extends GameObject implements Lifecycle {
     private _width: number;
     private _height: number;
+
+    private _projectionMat: mat3;
 
     private _canvas: HTMLCanvasElement;
     private _canvasId: string;
@@ -32,6 +35,10 @@ export class Renderer extends GameObject implements Lifecycle {
 
     get gl(): WebGLRenderingContext {
         return this._gl;
+    }
+
+    get projectionMat(): mat3 {
+        return this._projectionMat;
     }
 
     constructor(name: string, canvasId?: string){
@@ -86,6 +93,12 @@ export class Renderer extends GameObject implements Lifecycle {
         if (!this._gl) {
             throw new Error("Browser does not support WebGL");
         }
+
+        this._projectionMat = mat3.fromValues(
+            2 / this._width, 0, -1, // column 1
+            0, -2 / this._height, 1, // column 2
+            0, 0, 1 // column 3
+        );
 
         this._gl.clearColor(0.0, 0.0, 0.0, 1.0); // Set clear color to black, fully opaque
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
