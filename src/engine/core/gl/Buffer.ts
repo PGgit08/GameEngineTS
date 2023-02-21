@@ -75,6 +75,7 @@ export class Buffer {
      */
     public addAttribute(info: AttributeInfo): void {
         info.offset += this._elementSize * this.TYPE_SIZE; // increase attrib offset by the prev element size
+        this._attributes.push(info);
         this._elementSize += info.size;
         this._stride += this._elementSize * this.TYPE_SIZE; // help WebGL with a stride value
 

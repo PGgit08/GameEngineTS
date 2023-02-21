@@ -2,13 +2,13 @@ import { ShaderManager } from "../../managers/ShaderManager";
 import { Geometry } from "./Geometry";
 
 export class Triangle extends Geometry {
-    constructor() {
-        super();
+    constructor(mode: number = gl.TRIANGLES) {
+        super(mode);
     }
 
     protected setAttributes(): void {
         this._buffer.addAttribute({
-            location: ShaderManager.getInstance().getShader("Shader2D").getAttributeLocation("position"),
+            location: ShaderManager.getInstance().getShader("Shader2D").getAttributeLocation("a_position"),
             size: 4,
             offset: 0
         }); // add the position attribute
@@ -17,9 +17,9 @@ export class Triangle extends Geometry {
     public data(): number[] {
         // NOT CLIPSPACE YET
         return [
-            0, 0, 0, 0,
-            0, 0.5, 0, 0,
-            0.7, 0, 0, 0
+            0, 0, 0, 1,
+            0, 0.5, 0, 1,
+            0.5, 0.5, 0, 1
         ]
     }
 }

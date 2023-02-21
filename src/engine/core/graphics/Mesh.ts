@@ -4,11 +4,11 @@ import { Geometry } from "./geometry/Geometry";
 
 export class Mesh {
     private _geometry: Geometry;
-    private _shaderName: string;
+    private _shader: Shader;
 
     constructor(geometry: Geometry, shaderName: string) {
         this._geometry = geometry;
-        this._shaderName = shaderName;
+        this._shader = ShaderManager.getInstance().getShader(shaderName);
     }
 
     /**
@@ -16,14 +16,13 @@ export class Mesh {
      */
     public load(): void {
         this._geometry.load();
-        ShaderManager.getInstance().getShader(this._shaderName);
     }
 
     /**
      * Renders the Mesh
      */
     public draw(): void {
-        ShaderManager.getInstance().getShader(this._shaderName).use();
+        this._shader.use();
         this._geometry.draw();
     }
 }

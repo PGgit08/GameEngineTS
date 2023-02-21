@@ -103,5 +103,6 @@ export class Renderer extends GameObject implements Lifecycle {
 
     public render(): void {
         // console.log("Renderer Render");
+        this._gl.clear(this._gl.COLOR_BUFFER_BIT);
     }
 }

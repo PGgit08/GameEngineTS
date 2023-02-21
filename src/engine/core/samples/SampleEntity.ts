@@ -8,6 +8,6 @@ export class SampleEntity extends Entity {
     constructor() { 
         super("SampleEntity");
         this.addBehaviors(new SampleBehavior());
-        this.addComponents(new MeshComponent(new Mesh(new Triangle(), "Shader2D")));
+        this.addComponents(new MeshComponent(new Mesh(new Triangle(gl.LINE_STRIP), "Shader2D")));
     }
 }
