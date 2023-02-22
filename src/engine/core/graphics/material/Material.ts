@@ -11,6 +11,6 @@ export class Material {
 
     public applyStandarUniforms(): void {
         this._shader.use();
-        this._shader.applyStandardUniforms(RendererManager.getInstance().currentRenderer.projectionMat);
+        this._shader.applyStandardUniforms(RendererManager.getInstance().currentRenderer.projectionMat, 100, 100);
     }
 }

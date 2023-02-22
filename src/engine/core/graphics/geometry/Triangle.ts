@@ -15,11 +15,11 @@ export class Triangle extends Geometry {
     }
 
     public data(): number[] {
-        // REGULAR SPACE (TEST)
+        // MODEL SPACE (TEST)
         return [
-            0, 0,
-            100, 300, 
-            300, 300
+            -50, -50,
+            -50, 50, 
+            50, 50
         ]
     }
 }

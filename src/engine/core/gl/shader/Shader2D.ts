@@ -11,11 +11,12 @@ export class Shader2D extends Shader {
 
         // uniforms will recieve data dynamically from the code
         uniform mat3 projection;
+        uniform vec2 translation;
 
         // all shaders have a main function
         void main() {
           // turn 2D position into 3D position for matrix multiplication, then turn result into 4D WebGL vector
-          clipspace_position = vec4((projection * vec3(a_position, 1)).xy, 0.0, 1.0);
+          clipspace_position = vec4((projection * vec3((a_position + translation), 1)).xy, 0.0, 1.0);
           gl_Position = clipspace_position;
         }
         `;
