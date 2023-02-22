@@ -95,9 +95,9 @@ export class Renderer extends GameObject implements Lifecycle {
         }
 
         this._projectionMat = mat3.fromValues(
-            2 / this._width, 0, -1, // column 1
-            0, -2 / this._height, 1, // column 2
-            0, 0, 1 // column 3
+            2 / this._width, 0, 0, // column 1 (scale X by 2/width, translate by -1)
+            0, -2 / this._height, 0, // column 2 (scale Y by 2/height translate by 1)
+            -1, 1, 1 // column 3 (NONE)
         );
 
         this._gl.clearColor(0.0, 0.0, 0.0, 1.0); // Set clear color to black, fully opaque

@@ -7,7 +7,7 @@ export class Buffer {
     private _data: number[] = [];
     private _buffer: WebGLBuffer;
 
-    private _mode: number;
+    private _mode: number = gl.TRIANGLES; // can be modified
 
     private _attributes: AttributeInfo[] = [];
     private _hasAttributes: boolean = false;
@@ -21,8 +21,15 @@ export class Buffer {
         return this._data;
     }
 
-    constructor(mode: number, data: number[]) {
+    public get mode(): number {
+        return this._mode;
+    }
+
+    public set mode(mode: number) {
         this._mode = mode;
+    }
+
+    constructor(data: number[]) {
         this._data = data;
         this._buffer = gl.createBuffer();
     }

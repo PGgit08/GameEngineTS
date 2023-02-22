@@ -2,8 +2,8 @@ import { ShaderManager } from "../../managers/ShaderManager";
 import { Geometry } from "./Geometry";
 
 export class Triangle extends Geometry {
-    constructor(mode: number = gl.TRIANGLES) {
-        super(mode);
+    constructor() {
+        super();
     }
 
     protected setAttributes(): void {
@@ -17,7 +17,7 @@ export class Triangle extends Geometry {
     public data(): number[] {
         // REGULAR SPACE (TEST)
         return [
-            100, 100,
+            0, 0,
             100, 300, 
             300, 300
         ]

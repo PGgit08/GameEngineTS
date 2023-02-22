@@ -3,8 +3,22 @@ import { Buffer } from "../../gl/Buffer";
 export abstract class Geometry {
     protected _buffer: Buffer;
 
-    constructor(mode: number) {
-        this._buffer = new Buffer(mode, this.data());
+    constructor() {
+        this._buffer = new Buffer(this.data());
+    }
+
+    /**
+     * Sets the Buffer's drawing mode to LINE_STRIP
+     */
+    public enableWireframe(): void {
+        this._buffer.mode = gl.LINE_STRIP;
+    }
+
+    /**
+     * Sets the Buffer's drawing mode to default (TRIANGLES)
+     */
+    public disableWireframe(): void {
+        this._buffer.mode = gl.TRIANGLES;
     }
 
     /**

@@ -5,9 +5,11 @@ export class Mesh {
     private _geometry: Geometry;
     private _material: Material;
 
-    constructor(geometry: Geometry, material: Material) {
+    constructor(geometry: Geometry, material: Material, wireframe?: boolean) {
         this._geometry = geometry;
         this._material = material;
+
+        if (wireframe) { this._geometry.enableWireframe(); }
     }
 
     /**
