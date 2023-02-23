@@ -1,5 +1,5 @@
 import { mat3, vec2 } from "gl-matrix";
-import { degToRadians } from "../../extra/MathUtils";
+import { degToRadians } from "../math/Utils";
 import { Component } from "../ecs/Component";
 import { RendererManager } from "../managers/RendererManager";
 import { Mesh } from "./Mesh";
@@ -23,7 +23,7 @@ export class MeshComponent extends Component {
     public render(): void {
         console.log("MESH COMPONENT RENDER");
 
-        // MATRIX TESTING
+        // MATRIX TESTING (TO BE UPDATED WITH ACTUAL TRANSFORM LATER)
         const transMat: mat3 = mat3.create();
         const rotMat: mat3 = mat3.create();
         const scaleMat: mat3 = mat3.create();
