@@ -2,6 +2,9 @@ export class Vector2 {
     public x: number;
     public y: number;
 
+    public static readonly zero: Vector2 = new Vector2();
+    public static readonly one: Vector2 = new Vector2(1, 1);
+
     constructor(x: number = 0, y: number = 0) {
         this.x = x;
         this.y = y;
@@ -18,12 +21,7 @@ export class Vector2 {
         this.y -= v.y;
     }
 
-    public scale(s: number): void {
-        this.x *= s;
-        this.y *= s;
-    }
-
-    public vectorScale(v: Vector2): void {
+    public scale(v: Vector2): void {
         this.x *= v.x;
         this.y *= v.y;
     }
@@ -51,11 +49,7 @@ export class Vector2 {
         return new Vector2(v1.x - v2.x, v1.y - v2.y);
     }
 
-    public static scale(v: Vector2, s: number): Vector2 {
-        return new Vector2(v.x * s, v.y * s);
-    }
-
-    public static vectorScale(v1: Vector2, v2: Vector2): Vector2 {
+    public static scale(v1: Vector2, v2: Vector2): Vector2 {
         return new Vector2(v1.x * v2.x, v1.y * v2.y);
     }
 
