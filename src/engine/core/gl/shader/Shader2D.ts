@@ -6,18 +6,18 @@ export class Shader2D extends Shader {
         // an attribute will receive data from a buffer
         attribute vec2 a_position;
       
-        // the final clipspace position
-        vec4 clipspace_position;
+        // the 2D clipspace position
+        vec2 clipspace_position;
 
         // uniforms will recieve data dynamically from the code
         uniform mat3 projection;
-        uniform vec2 translation;
+        uniform mat3 model;
 
         // all shaders have a main function
         void main() {
           // turn 2D position into 3D position for matrix multiplication, then turn result into 4D WebGL vector
-          clipspace_position = vec4((projection * vec3((a_position + translation), 1)).xy, 0.0, 1.0);
-          gl_Position = clipspace_position;
+          clipspace_position = (projection * model * vec3(a_position, 1)).xy; // order of multiplication matters here, right to left
+          gl_Position = vec4(clipspace_position, 0.0, 1.0);
         }
         `;
     }

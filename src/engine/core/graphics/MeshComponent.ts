@@ -1,4 +1,7 @@
+import { mat3, vec2 } from "gl-matrix";
+import { degToRadians } from "../../extra/MathUtils";
 import { Component } from "../ecs/Component";
+import { RendererManager } from "../managers/RendererManager";
 import { Mesh } from "./Mesh";
 
 export class MeshComponent extends Component {
@@ -19,6 +22,24 @@ export class MeshComponent extends Component {
 
     public render(): void {
         console.log("MESH COMPONENT RENDER");
-        this._mesh.draw();
+
+        // MATRIX TESTING
+        const transMat: mat3 = mat3.create();
+        const rotMat: mat3 = mat3.create();
+        const scaleMat: mat3 = mat3.create();
+
+        const outMat: mat3 = mat3.create();
+
+        mat3.fromTranslation(transMat, vec2.fromValues(100, 100));
+        mat3.fromRotation(rotMat, degToRadians(10));
+        mat3.fromScaling(scaleMat, vec2.fromValues(1, 1));
+
+        mat3.mul(outMat, transMat, rotMat);
+        mat3.mul(outMat, outMat, scaleMat);
+
+        this._mesh.render(
+            outMat,
+            RendererManager.getInstance().currentRenderer.projectionMat
+        );
     }
 }

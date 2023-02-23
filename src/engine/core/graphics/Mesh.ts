@@ -1,5 +1,6 @@
 import { Geometry } from "./geometry/Geometry";
 import { Material } from "./material/Material";
+import { mat3 } from "gl-matrix";
 
 export class Mesh {
     private _geometry: Geometry;
@@ -22,8 +23,12 @@ export class Mesh {
     /**
      * Renders the Mesh
      */
-    public draw(): void {
-        this._material.applyStandarUniforms();
+    public render(model: mat3, projection: mat3): void {
+        this._material.applyStandardUniforms(
+            model,
+            projection
+        );
+        
         this._geometry.draw();
     }
 }

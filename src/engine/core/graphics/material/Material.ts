@@ -1,6 +1,6 @@
-import { RendererManager } from "../../managers/RendererManager";
 import { Shader } from "../../gl/shader/Shader";
 import { ShaderManager } from "../../managers/ShaderManager";
+import { mat3 } from "gl-matrix";
 
 export class Material {
     private _shader: Shader;
@@ -9,8 +9,8 @@ export class Material {
         this._shader = ShaderManager.getInstance().getShader(shaderName);
     }
 
-    public applyStandarUniforms(): void {
+    public applyStandardUniforms(model: mat3, projection: mat3): void {
         this._shader.use();
-        this._shader.applyStandardUniforms(RendererManager.getInstance().currentRenderer.projectionMat, 100, 100);
+        this._shader.applyStandardUniforms(model, projection);
     }
 }

@@ -104,9 +104,9 @@ export abstract class Shader extends GameObject {
         return this._uniforms[uniformName];
     }
 
-    public applyStandardUniforms(projection: mat3, x: number, y: number): void {
+    public applyStandardUniforms(model: mat3, projection: mat3): void {
+        this.setUniformMatrix('model', model);
         this.setUniformMatrix('projection', projection);
-        this.setUniformVector('translation', x, y);
     }
 
     private setUniformMatrix(uniformName: string, mat3: mat3): void {
@@ -118,7 +118,7 @@ export abstract class Shader extends GameObject {
         )
     }
 
-    // TESTING
+    // TESTING ONLY
     private setUniformVector(uniformName: string, x: number, y: number): void {
         const location = this.getUniformLocation(uniformName);
         gl.uniform2fv(
