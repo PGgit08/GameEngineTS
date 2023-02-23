@@ -1,4 +1,6 @@
+import { mat3 } from "gl-matrix";
 import { Lifecycle } from "../Lifecycle";
+import { Transform } from "../math/Transform";
 import { Behavior } from "./Behavior";
 import { Component } from "./Component";
 import { GameObject } from "./GameObject";
@@ -9,6 +11,14 @@ export class Entity extends GameObject implements Lifecycle {
 
     private _components: Component[] = [];
     private _behaviors: Behavior[] = [];
+
+    public transform: Transform = new Transform();
+
+    private _worldMatrix: mat3;
+
+    get worldMatrix(): mat3 {
+        return this._worldMatrix;
+    }
 
     constructor(name: string) {
         super(name);
@@ -29,6 +39,7 @@ export class Entity extends GameObject implements Lifecycle {
      */
     public addComponents(...components: Component[]): void {
         this._components.push(...components);
+        components.forEach((c) => c.parent = this);
     }
 
     /**
@@ -37,12 +48,13 @@ export class Entity extends GameObject implements Lifecycle {
      */
     public addBehaviors(...behaviors: Behavior[]): void {
         this._behaviors.push(...behaviors);
+        behaviors.forEach((b) => b.parent = this);
     }
 
 
     public load(): void {
         this._components.forEach((c) => c.load());
-        this._behaviors.forEach((b) => b.load());
+        // this._behaviors.forEach((b) => b.load());
 
         this._children.forEach((c) => c.load());
     }
@@ -62,6 +74,8 @@ export class Entity extends GameObject implements Lifecycle {
     }
     
     public render(): void {
+        this._worldMatrix = this.transform.toMatrix();
+
         this._components.forEach((c) => c.render());
 
         this._children.forEach((c) => c.render());
