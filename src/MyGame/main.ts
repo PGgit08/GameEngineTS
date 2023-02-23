@@ -1,6 +1,6 @@
 import { Renderer } from "../engine/core/graphics/Renderer";
 import { ShaderManager } from "../engine/core/managers/ShaderManager";
-import { Scene } from "../engine/core/scene/Scene";
+import { Scene } from "../engine/core/ecs/Scene";
 import {
     Engine, 
     RendererManager, 

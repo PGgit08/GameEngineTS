@@ -19,7 +19,7 @@ export abstract class Shader extends GameObject {
      */
     public abstract get fSource(): string;
 
-    constructor(name: string) { super(name); ShaderManager.getInstance().addShader(this); }
+    constructor(name: string) { super(name, true); ShaderManager.getInstance().addShader(this); }
 
     public use(): void {
         gl.useProgram(this._program);

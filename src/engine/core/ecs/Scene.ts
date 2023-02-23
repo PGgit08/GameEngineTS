@@ -1,5 +1,5 @@
-import { Entity } from "../ecs/Entity";
-import { GameObject } from "../ecs/GameObject";
+import { Entity } from "./Entity";
+import { GameObject } from "./GameObject";
 import { Lifecycle } from "../Lifecycle";
 import { SceneManager } from "../managers/SceneManager";
 

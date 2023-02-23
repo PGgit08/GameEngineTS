@@ -3,7 +3,7 @@ import { GameObject } from "./GameObject";
 
 export abstract class Behavior extends GameObject implements Lifecycle {
     constructor(name: string) {
-        super(name);
+        super(name, true);
     }
 
     public abstract load(): void;

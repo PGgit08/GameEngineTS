@@ -1,6 +1,6 @@
 import { Lifecycle } from "../Lifecycle";
 import Dictionary from "../../extra/Dictionary";
-import { Scene } from "../scene/Scene";
+import { Scene } from "../ecs/Scene";
 import { Manager } from "./Manager";
 
 export class SceneManager extends Manager implements Lifecycle {

@@ -1,4 +1,4 @@
-import { Scene } from "../scene/Scene";
+import { Scene } from "../ecs/Scene";
 import { SampleEntity } from "./SampleEntity";
 
 export class SampleScene extends Scene {
