@@ -30,9 +30,9 @@ export class MeshComponent extends Component {
 
         const outMat: mat3 = mat3.create();
 
-        mat3.fromTranslation(transMat, vec2.fromValues(100, 100));
-        mat3.fromRotation(rotMat, degToRadians(10));
-        mat3.fromScaling(scaleMat, vec2.fromValues(1, 1));
+        mat3.fromTranslation(transMat, vec2.fromValues(250, 100));
+        mat3.fromRotation(rotMat, degToRadians(25));
+        mat3.fromScaling(scaleMat, vec2.fromValues(2, 2));
 
         mat3.mul(outMat, transMat, rotMat);
         mat3.mul(outMat, outMat, scaleMat);
