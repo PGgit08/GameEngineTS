@@ -8,11 +8,14 @@ export class SampleBehavior extends Behavior {
     
     public start(): void {
         // console.log("SampleBehavior Start!");
-        this.parent.transform.translate(new Vector2(100, 100));
-        this.parent.transform.rotate(50);
+        this.parent.transform.position = new Vector2(100, 100);
+        this.parent.transform.rotation = 50;
     }
 
     public update(): void {
         // console.log("SampleBehavior Update!");
+        this.parent.transform.translate(new Vector2(10, 0));
+        // this.parent.transform.scale.x += 0.1;
+        this.parent.transform.rotate(5);
     }
 }
