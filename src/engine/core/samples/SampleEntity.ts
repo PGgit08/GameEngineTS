@@ -5,6 +5,7 @@ import { Mesh } from "../graphics/Mesh";
 import { MeshComponent } from "../graphics/MeshComponent";
 import { SampleBehavior } from "./SampleBehavior";
 
+// THIS WOULD PROBABLY BE A PREFAB
 export class SampleEntity extends Entity {
     constructor() { 
         super("SampleEntity");

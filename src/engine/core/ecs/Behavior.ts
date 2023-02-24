@@ -7,7 +7,7 @@ export abstract class Behavior extends GameObject implements Lifecycle {
     public parent: Entity;
 
     /**
-     * The transform of the parent entity
+     * The transform of the parent Entity.
      */
     get transform(): Transform {
         return this.parent.transform;

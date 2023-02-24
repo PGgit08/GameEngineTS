@@ -14,14 +14,32 @@ export class Entity extends GameObject implements Lifecycle {
 
     public transform: Transform = new Transform();
 
-    private _worldMatrix: mat3;
+    /** The Matrix of the Entity in screen-space. */
+    private _worldMatrix: mat3 = mat3.create();
 
+    /** The Matrix of the Entity relative to its parent Entity. */
+    private _localMatrix: mat3 = mat3.create();
+
+    private _relativeChildren: boolean;
+
+    /** The Matrix of the Entity in screen-space. */
     get worldMatrix(): mat3 {
         return this._worldMatrix;
     }
 
-    constructor(name: string) {
+    /** The Matrix of the Entity relative to its parent Entity. */
+    get localMatrix(): mat3 {
+        return this._localMatrix;
+    }
+
+    /** States whether the children of this Entity are relative in Transform to this Entity */
+    get relativeChildren(): boolean {
+        return this._relativeChildren;
+    }
+
+    constructor(name: string, realtiveChildren: boolean = true) {
         super(name);
+        this._relativeChildren = realtiveChildren;
     }
 
     /**
@@ -74,7 +92,23 @@ export class Entity extends GameObject implements Lifecycle {
     }
     
     public render(): void {
-        this._worldMatrix = this.transform.toMatrix();
+        this._localMatrix = this.transform.toMatrix();
+
+        // if this Entity has a parent and the parent wants it's children to be 
+        // relative to it, then multiply the entity by its parent's world matrix
+        // after multiplying it by its own local matrix 
+        if (this.parent && this.parent.relativeChildren) {
+            mat3.mul(
+                this._worldMatrix,
+                this.parent.worldMatrix,
+                this._localMatrix
+            );
+        }
+
+        else {
+            this._worldMatrix = this._localMatrix;
+        }
+
 
         this._components.forEach((c) => c.render());
 
