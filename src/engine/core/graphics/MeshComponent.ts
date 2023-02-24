@@ -19,7 +19,7 @@ export class MeshComponent extends Component {
     public update(): void {}
 
     public render(): void {
-        console.log("MESH COMPONENT RENDER");
+        // console.log("MESH COMPONENT RENDER");
 
         this._mesh.render(
             this.parent.worldMatrix,
