@@ -39,8 +39,8 @@ const onLoad = (): void => {
 
     entity1.addBehaviors(new MoveBehavior());
 
-    entity1.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
-    entity2.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
+    entity1.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial(), true)));
+    entity2.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial(), true)));
 
     entity1.addChildren(entity2);
 
