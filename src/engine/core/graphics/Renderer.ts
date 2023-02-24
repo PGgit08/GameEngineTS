@@ -42,7 +42,7 @@ export class Renderer extends GameObject implements Lifecycle {
     }
 
     constructor(name: string, canvasId?: string){
-        super(name);
+        super(name, true);
 
         this._canvasId = canvasId;
 

@@ -7,9 +7,9 @@ export * from '../engine/core/ecs/Behavior';
 // export * from '../engine/core/ecs/GameObject';
 
 export * from '../engine/core/samples/SampleBehavior';
-export * from '../engine/core/samples/SampleRenderer';
-export * from '../engine/core/samples/SampleEntity';
-export * from '../engine/core/samples/SampleScene';
+export * from './core/samples/DefaultRenderer';
+export * from './core/samples/DefaultEntity';
+export * from './core/samples/DefaultScene';
 
 export * from '../engine/core/managers/SceneManager';
 export * from '../engine/core/managers/RendererManager';
