@@ -7,7 +7,7 @@ export class Scene extends GameObject implements Lifecycle {
     private _rootEntity: Entity;
 
     constructor(name: string) {
-        super(name);
+        super(name, true);
 
         this._rootEntity = new Entity("ROOT_ENTITY", false);
 

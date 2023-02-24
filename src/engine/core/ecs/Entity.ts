@@ -14,7 +14,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     public transform: Transform = new Transform();
 
-    /** The Matrix of the Entity in screen-space. */
+    /** The Matrix of the Entity in world-space. */
     private _worldMatrix: mat3 = mat3.create();
 
     /** The Matrix of the Entity relative to its parent Entity. */
