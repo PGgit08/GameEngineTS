@@ -1,5 +1,3 @@
-import { mat3, vec2 } from "gl-matrix";
-import { degToRadians } from "../math/Utils";
 import { Component } from "../ecs/Component";
 import { RendererManager } from "../managers/RendererManager";
 import { Mesh } from "./Mesh";
