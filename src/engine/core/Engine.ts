@@ -23,7 +23,7 @@ export class Engine implements Lifecycle {
         this.load();
         this.start();
 
-        setInterval(this.cycle.bind(this), 100); // test loop, to be changed to requestAnimationFrame in the future
+        setInterval(this.cycle.bind(this), 20); // test loop, to be changed to requestAnimationFrame in the future
 
         console.log(SceneManager.getInstance(), RendererManager.getInstance());
 

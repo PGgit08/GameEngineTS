@@ -21,6 +21,10 @@ export class Vector2 {
         this.y -= v.y;
     }
 
+    public numberScale(n: number): void {
+        this.scale(new Vector2(n, n));
+    }
+
     public scale(v: Vector2): void {
         this.x *= v.x;
         this.y *= v.y;
@@ -47,6 +51,10 @@ export class Vector2 {
 
     public static subtract(v1: Vector2, v2: Vector2): Vector2 {
         return new Vector2(v1.x - v2.x, v1.y - v2.y);
+    }
+
+    public static numberScale(v1: Vector2, n: number): Vector2 {
+        return this.scale(v1, new Vector2(n, n));
     }
 
     public static scale(v1: Vector2, v2: Vector2): Vector2 {

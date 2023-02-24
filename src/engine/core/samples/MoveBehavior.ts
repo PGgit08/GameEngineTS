@@ -1,9 +1,17 @@
+import { Input } from "../../extra/Input";
 import { Behavior } from "../ecs/Behavior";
 import { Vector2 } from "../math/Vector2";
 
 export class MoveBehavior extends Behavior {
-    constructor() {
+    private _speed: number;
+
+    /**
+     * Control the Entity with button pressed.
+     * @param speed The speed of the movable Entity.
+     */
+    constructor(speed: number = 5) {
         super("MoveBehavior");
+        this._speed = speed;
     }
     
     public start(): void {
@@ -12,6 +20,29 @@ export class MoveBehavior extends Behavior {
 
     public update(): void {
         // console.log("SampleBehavior Update!");
-        this.transform.translate(new Vector2(1, 0));
+
+        if (Input.KeyPressed("KeyW")) {
+            this.transform.translate(Vector2.numberScale(new Vector2(0, -1), this._speed));
+        }
+
+        if (Input.KeyPressed("KeyA")) {
+            this.transform.translate(Vector2.numberScale(new Vector2(-1, 0), this._speed));
+        }
+
+        if (Input.KeyPressed("KeyS")) {
+            this.transform.translate(Vector2.numberScale(new Vector2(0, 1), this._speed));
+        }
+
+        if (Input.KeyPressed("KeyD")) {
+            this.transform.translate(Vector2.numberScale(new Vector2(1, 0), this._speed));
+        }
+
+        if (Input.KeyPressed("ArrowLeft")) {
+            this.transform.rotate(-this._speed);
+        }
+
+        if (Input.KeyPressed("ArrowRight")) {
+            this.transform.rotate(this._speed);
+        }
     }
 }

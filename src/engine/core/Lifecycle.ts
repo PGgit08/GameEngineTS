@@ -3,12 +3,12 @@
  */
 export interface Lifecycle {
     /**
-     * Called once before start, loads everything from an AssetManager(NOT MADE YET)
+     * Called once during load period, and one during Entity Spawn (NOT MADE YET).
      */
     load(): void;
 
     /**
-     * Called once after loading.
+     * Called ONLY ONCE after loading period.
      */
     start(): void;
 
