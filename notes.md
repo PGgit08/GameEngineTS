@@ -12,3 +12,13 @@
 
 - **Prefabs should also exist and Entity Spawn / Destroy**
 
+# TODO
+- Movement along local axis.
+- Textures, Lighting, Prefabs, Asset Loading.
+
+# Lifecycle:
+- load() -> called ONCE during loading period, called ONCE during Entity Spawn (NOT MADE YET)
+- start() -> called ONLY ONCE in the whole game after loading period
+- update() -> called ONCE per frame update, before render
+- render() -> called ONCE per frame update, for render
+
