@@ -1,5 +1,6 @@
 import { mat3 } from "gl-matrix";
 import { Lifecycle } from "../Lifecycle";
+import { SceneManager } from "../managers/SceneManager";
 import { Transform } from "../math/Transform";
 import { Behavior } from "./Behavior";
 import { Component } from "./Component";
@@ -35,6 +36,34 @@ export class Entity extends GameObject implements Lifecycle {
     /** States whether the children of this Entity are relative in Transform to this Entity */
     get relativeChildren(): boolean {
         return this._relativeChildren;
+    }
+
+    /**
+     * Clones and Spawns an Entity.
+     * @param entity The Entity to Clone and Spawn.
+     * @param transform The Transform at which to Spawn the Entity (default = Transform()).
+     * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
+     * @param load Load Entity during Spawn? (default = true).
+     * @returns The cloned Entity.
+     */
+    public static Spawn(entity: Entity, transform: Transform = new Transform(), parent?: Entity, load: boolean = true): Entity {
+        const clone: Entity = this.Clone(entity);
+
+        clone.transform = transform;
+
+        if (parent) {
+            clone.parent = parent;
+        }
+
+        if (!parent) {
+            SceneManager.getInstance().currentScene.addEntities(clone);
+        }
+
+        if (load) {
+            clone.load();
+        }
+
+        return clone;
     }
 
     /**

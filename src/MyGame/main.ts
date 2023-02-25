@@ -18,6 +18,7 @@ import { Mesh } from "../engine/core/graphics/Mesh";
 import { Vector2 } from "../engine/core/math/Vector2";
 import { Input } from "../engine/extra/Input";
 import { Triangle } from "../engine/core/graphics/geometry/Triangle";
+import { Transform } from "../engine/core/math/Transform";
 
 // THIS IS USED TO SIMULATE ASSET LOADING IN THE LOADING PERIOD 
 const onLoad = (): void => {
@@ -36,23 +37,19 @@ const onLoad = (): void => {
 
     // NEXT look for scenes and load them (MANUAL SCENE BUILDING HERE)
     const scene1: Scene = new Scene("Scene1");
-    const entity1: Entity = new Entity("Entity1");
-    const entity2: Entity = Entity.Clone(entity1);
 
-    entity1.transform.position = new Vector2(200, 200);
-    entity2.transform.position = new Vector2(400, 0);
+    const prefabEntity: Entity = new Entity("Square Prefab"); // SOME DUMB PREFAB TESTING
+    prefabEntity.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
 
-    entity1.addBehaviors(new MoveBehavior());
-    // entity2.addBehaviors(new MoveBehavior());
+    const entity1: Entity = Entity.Clone(prefabEntity);
+    const entity2: Entity = Entity.Clone(prefabEntity);
 
-    entity1.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
-    entity2.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
+    entity1.transform.position = new Vector2(100, 100);
 
     entity1.addChildren(entity2);
+    entity1.addBehaviors(new MoveBehavior());
 
-    scene1.addEntities(
-        entity1
-    )
+    scene1.addEntities(entity1);
 
     SceneManager.getInstance().setCurrentScene(scene1);
     SceneManager.getInstance().load();

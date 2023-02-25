@@ -8,13 +8,17 @@
 
 - Load custom Meshes from OBJ asset files (**NOT HERE YET**)
 
-- After loading that, initially create DefaultScene and set it as the current Scene. After load Scenes and if one is "default" set it as current Renderer.
+- After loading that, initially create DefaultScene and set it as the current Scene. After load Scenes and if one is "default" set it as current Scene.
 
 - **Prefabs should also exist and Entity Spawn / Destroy**
 
 # TODO
 - Movement along local axis. -- DONE
+- Component/Behavior/Entity/Scene localizing
+- Entity Spawning / Clone / Destructions -- CLONE DONE
 - Textures, Lighting, Prefabs, Asset Loading.
+- Physics / Collsion
+- Entity Communication
 
 # Lifecycle:
 - load() -> called ONCE during loading period, called ONCE during Entity Spawn (NOT MADE YET)
