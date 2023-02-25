@@ -17,6 +17,7 @@ import { ColorMaterial } from "../engine/core/graphics/material/ColorMaterial";
 import { Mesh } from "../engine/core/graphics/Mesh";
 import { Vector2 } from "../engine/core/math/Vector2";
 import { Input } from "../engine/extra/Input";
+import { Triangle } from "../engine/core/graphics/geometry/Triangle";
 
 // THIS IS USED TO SIMULATE ASSET LOADING IN THE LOADING PERIOD 
 const onLoad = (): void => {
@@ -43,10 +44,10 @@ const onLoad = (): void => {
 
     entity1.addBehaviors(new MoveBehavior());
 
-    entity1.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
+    entity1.addComponents(new MeshComponent(new Mesh(new Triangle(), new ColorMaterial())));
     entity2.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
 
-    entity1.addChildren(entity2);
+    // entity1.addChildren(entity2);
 
     scene1.addEntities(
         entity1

@@ -22,19 +22,19 @@ export class MoveBehavior extends Behavior {
         // console.log("SampleBehavior Update!");
 
         if (Input.KeyPressed("KeyW")) {
-            this.transform.translate(Vector2.numberScale(new Vector2(0, -1), this._speed));
+            this.transform.localTranslate(Vector2.numberScale(new Vector2(0, -1), this._speed));
         }
 
         if (Input.KeyPressed("KeyA")) {
-            this.transform.translate(Vector2.numberScale(new Vector2(-1, 0), this._speed));
+            this.transform.localTranslate(Vector2.numberScale(new Vector2(-1, 0), this._speed));
         }
 
         if (Input.KeyPressed("KeyS")) {
-            this.transform.translate(Vector2.numberScale(new Vector2(0, 1), this._speed));
+            this.transform.localTranslate(Vector2.numberScale(new Vector2(0, 1), this._speed));
         }
 
         if (Input.KeyPressed("KeyD")) {
-            this.transform.translate(Vector2.numberScale(new Vector2(1, 0), this._speed));
+            this.transform.localTranslate(Vector2.numberScale(new Vector2(1, 0), this._speed));
         }
 
         if (Input.KeyPressed("ArrowLeft")) {

@@ -13,7 +13,7 @@
 - **Prefabs should also exist and Entity Spawn / Destroy**
 
 # TODO
-- Movement along local axis.
+- Movement along local axis. -- DONE
 - Textures, Lighting, Prefabs, Asset Loading.
 
 # Lifecycle:

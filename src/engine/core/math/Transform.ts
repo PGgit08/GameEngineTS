@@ -16,11 +16,50 @@ export class Transform {
     }
 
     /**
+     * Translate the object along its local X/Y axis.
+     * @param v The Vector2 to translate the object by.
+     */
+    public localTranslate(v: Vector2): void {
+        this.translate(this.localDirection(v));
+    }
+
+    /**
      * Rotate the object.
      * @param d The degrees to rotate the object by.
      */
     public rotate(d: number): void {
         this.rotation += d;
+    }
+
+    /**
+     * Changes a vector from world-space to local-space.
+     * @param direction The world-space vector.
+     * @returns The world-space vector in the Entity's local-space.
+     */
+    public localDirection(direction: Vector2): Vector2 {
+        const localDirection: vec2 = vec2.create();
+        const rotMat: mat3 = mat3.create();
+
+        mat3.fromRotation(rotMat, degToRadians(this.rotation));
+        vec2.transformMat3(localDirection, vec2.fromValues(direction.x, direction.y), rotMat);
+
+        return new Vector2(localDirection[0], localDirection[1]);
+    }
+
+    /**
+     * Rotates the transform around a point.
+     * @param point The point to rotate around.
+     */
+    public rotateAround(point: Vector2): void {
+
+    }
+
+    /**
+     * Rotate the transform so it looks at a point.
+     * @param point The point to look at.
+     */
+    public lookAt(point: Vector2): void {
+
     }
 
     /**

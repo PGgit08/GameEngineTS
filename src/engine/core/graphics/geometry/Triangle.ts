@@ -18,8 +18,8 @@ export class Triangle extends Geometry {
         // MODEL SPACE (TEST)
         return [
             -50, -50,
-            -50, 50, 
-            50, 50
+            50, -50, 
+            0, -100
         ]
     }
 }
