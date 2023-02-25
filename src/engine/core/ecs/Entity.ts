@@ -1,4 +1,8 @@
 import { mat3 } from "gl-matrix";
+import { Triangle } from "../graphics/geometry/Triangle";
+import { ColorMaterial } from "../graphics/material/ColorMaterial";
+import { Mesh } from "../graphics/Mesh";
+import { MeshComponent } from "../graphics/MeshComponent";
 import { Lifecycle } from "../Lifecycle";
 import { SceneManager } from "../managers/SceneManager";
 import { Transform } from "../math/Transform";
