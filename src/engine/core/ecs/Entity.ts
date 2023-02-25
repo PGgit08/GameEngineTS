@@ -37,6 +37,21 @@ export class Entity extends GameObject implements Lifecycle {
         return this._relativeChildren;
     }
 
+    /**
+     * Returns the clone of an Entity. This clone isn't attached to any Scenes or parent Entities. 
+     * The clone also doesn't have a transform.
+     * @param entity The entity to clone.
+     */
+    public static Clone(entity: Entity): Entity {
+        const clone: Entity = new Entity(entity.name + " (Clone)", entity._relativeChildren);
+
+        clone.addBehaviors(...entity._behaviors);
+        clone.addComponents(...entity._components);
+        clone.addChildren(...entity._children);
+
+        return clone;
+    }
+
     constructor(name: string, realtiveChildren: boolean = true) {
         super(name);
         this._relativeChildren = realtiveChildren;
