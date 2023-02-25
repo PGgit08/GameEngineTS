@@ -27,6 +27,18 @@ export class Entity extends GameObject implements Lifecycle {
 
     private _relativeChildren: boolean;
 
+    get behaviors(): Behavior[] {
+        return this._behaviors;
+    }
+
+    get components(): Component[] {
+        return this._components;
+    }
+
+    get children(): Entity[] {
+        return this._children;
+    }
+
     /** The Matrix of the Entity in screen-space. */
     get worldMatrix(): mat3 {
         return this._worldMatrix;
@@ -78,9 +90,9 @@ export class Entity extends GameObject implements Lifecycle {
     public static Clone(entity: Entity): Entity {
         const clone: Entity = new Entity(entity.name + " (Clone)", entity._relativeChildren);
 
-        clone.addBehaviors(...entity._behaviors);
-        clone.addComponents(...entity._components);
-        clone.addChildren(...entity._children);
+        clone.addBehaviors(...entity.behaviors);
+        clone.addComponents(...entity.components);
+        clone.addChildren(...entity.children);
 
         return clone;
     }

@@ -43,11 +43,11 @@ const onLoad = (): void => {
 
     // PREFAB CLONING IN LOAD
     const entity1: Entity = Entity.Clone(prefabEntity);
-    const entity2: Entity = Entity.Clone(prefabEntity);
+    // const entity2: Entity = Entity.Clone(prefabEntity);
 
     entity1.transform.position = new Vector2(500, 500);
 
-    entity1.addChildren(entity2);
+    // entity1.addChildren(entity2);
     entity1.addBehaviors(new MoveBehavior());
 
     scene1.addEntities(entity1);
