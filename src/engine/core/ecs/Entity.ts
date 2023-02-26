@@ -84,17 +84,39 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * Returns the clone of an Entity. This clone isn't attached to any Scenes or parent Entities. 
-     * The clone also doesn't have a transform.
+     * The clone also doesn't have a Transform.
      * @param entity The entity to clone.
      */
     public static Clone(entity: Entity): Entity {
-        const clone: Entity = new Entity(entity.name + " (Clone)", entity._relativeChildren);
+        const clonedEntity: Entity = new Entity(entity + " (Clone)", entity.relativeChildren);
 
-        clone.addBehaviors(...entity.behaviors);
-        clone.addComponents(...entity.components);
-        clone.addChildren(...entity.children);
+        const clonedComponents: Component[] = [];
+        const clonedBehaviors: Behavior[] = [];
+        const clonedChildren: Entity[] = [];
 
-        return clone;
+        entity.components.forEach((c) => {
+            const c1 = c.clone() as Component;
+            c1.parent = clonedEntity;
+            clonedComponents.push(c1);
+        });
+        
+        entity.behaviors.forEach((b) => {
+            const b1 = b.clone() as Behavior;
+            b1.parent = clonedEntity;
+            clonedBehaviors.push(b1);
+        });
+        
+        entity.children.forEach((c) => {
+            const c1 = c.clone() as Entity;
+            c1.parent = clonedEntity;
+            clonedChildren.push(c1);
+        });
+
+        clonedEntity.addComponents(...clonedComponents);
+        clonedEntity.addBehaviors(...clonedBehaviors);
+        clonedEntity.addChildren(...clonedChildren);
+
+        return clonedEntity;
     }
 
     constructor(name: string, realtiveChildren: boolean = true) {

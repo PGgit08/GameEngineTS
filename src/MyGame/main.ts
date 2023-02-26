@@ -17,8 +17,6 @@ import { ColorMaterial } from "../engine/core/graphics/material/ColorMaterial";
 import { Mesh } from "../engine/core/graphics/Mesh";
 import { Vector2 } from "../engine/core/math/Vector2";
 import { Input } from "../engine/extra/Input";
-import { Triangle } from "../engine/core/graphics/geometry/Triangle";
-import { Transform } from "../engine/core/math/Transform";
 
 // THIS IS USED TO SIMULATE ASSET LOADING IN THE LOADING PERIOD 
 const onLoad = (): void => {
@@ -43,17 +41,18 @@ const onLoad = (): void => {
 
     // PREFAB CLONING IN LOAD
     const entity1: Entity = Entity.Clone(prefabEntity);
-    // const entity2: Entity = Entity.Clone(prefabEntity);
+    const entity2: Entity = Entity.Clone(prefabEntity);
 
     // console.log(prefabEntity);
     entity1.transform.position = new Vector2(500, 500);
+    entity2.transform.position = new Vector2(100, 100);
 
     // console.log(entity1);
 
-    // entity1.addChildren(entity2);
+    entity1.addChildren(entity2);
     // entity1.addBehaviors(new MoveBehavior());
 
-    // scene1.addEntities(entity1);
+    scene1.addEntities(entity1);
 
     SceneManager.getInstance().setCurrentScene(scene1);
     SceneManager.getInstance().load();
