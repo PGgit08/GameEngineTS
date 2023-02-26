@@ -43,16 +43,15 @@ const onLoad = (): void => {
     const entity1: Entity = Entity.Clone(prefabEntity);
     const entity2: Entity = Entity.Clone(prefabEntity);
 
-    // console.log(prefabEntity);
     entity1.transform.position = new Vector2(500, 500);
     entity2.transform.position = new Vector2(100, 100);
 
-    // console.log(entity1);
-
-    // entity1.addChildren(entity2);
     entity1.addBehaviors(new MoveBehavior());
+    entity1.addChildren(entity2);
 
     scene1.addEntities(entity1);
+
+    console.log(prefabEntity, entity1, entity2);
 
     SceneManager.getInstance().setCurrentScene(scene1);
     SceneManager.getInstance().load();
