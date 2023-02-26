@@ -88,35 +88,8 @@ export class Entity extends GameObject implements Lifecycle {
      * @param entity The entity to clone.
      */
     public static Clone(entity: Entity): Entity {
-        const clonedEntity: Entity = new Entity(entity + " (Clone)", entity.relativeChildren);
-
-        const clonedComponents: Component[] = [];
-        const clonedBehaviors: Behavior[] = [];
-        const clonedChildren: Entity[] = [];
-
-        entity.components.forEach((c) => {
-            const c1 = c.clone() as Component;
-            c1.parent = clonedEntity;
-            clonedComponents.push(c1);
-        });
-        
-        entity.behaviors.forEach((b) => {
-            const b1 = b.clone() as Behavior;
-            b1.parent = clonedEntity;
-            clonedBehaviors.push(b1);
-        });
-        
-        entity.children.forEach((c) => {
-            const c1 = c.clone() as Entity;
-            c1.parent = clonedEntity;
-            clonedChildren.push(c1);
-        });
-
-        clonedEntity.addComponents(...clonedComponents);
-        clonedEntity.addBehaviors(...clonedBehaviors);
-        clonedEntity.addChildren(...clonedChildren);
-
-        return clonedEntity;
+        return entity.clone();
+        // return new Entity("brhu");
     }
 
     constructor(name: string, realtiveChildren: boolean = true) {
@@ -151,6 +124,23 @@ export class Entity extends GameObject implements Lifecycle {
         behaviors.forEach((b) => b.parent = this);
     }
 
+    public clone(): Entity {
+        const clonedEntity = new Entity(this.name + " (Clone)", this._relativeChildren);
+
+        const clonedBehaviors: Behavior[] = [];
+        const clonedComponents: Component[] = [];
+        const clonedChildren: Entity[] = [];
+
+        this._behaviors.forEach((b) => clonedBehaviors.push(b.clone() as Behavior));
+        this._components.forEach((c) => clonedComponents.push(c.clone() as Component));
+        this._children.forEach((c) => clonedChildren.push(c.clone() as Entity));
+
+        clonedEntity.addBehaviors(...clonedBehaviors);
+        clonedEntity.addComponents(...clonedComponents);
+        clonedEntity.addChildren(...clonedChildren);
+
+        return clonedEntity;
+    }
 
     public load(): void {
         this._components.forEach((c) => c.load());

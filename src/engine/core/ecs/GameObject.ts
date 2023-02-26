@@ -27,8 +27,6 @@ export class GameObject {
         if (this.constructor.toString().match(/\w+/g)[1] !== this._name && this._nameCheck) {
             throw new Error("GameObject name and class name do not match");
         }
-
-        console.log(this.clone());
     }
 
     public clone(): GameObject {

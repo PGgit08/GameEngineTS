@@ -49,8 +49,8 @@ const onLoad = (): void => {
 
     // console.log(entity1);
 
-    entity1.addChildren(entity2);
-    // entity1.addBehaviors(new MoveBehavior());
+    // entity1.addChildren(entity2);
+    entity1.addBehaviors(new MoveBehavior());
 
     scene1.addEntities(entity1);
 
