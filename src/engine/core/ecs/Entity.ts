@@ -1,8 +1,4 @@
 import { mat3 } from "gl-matrix";
-import { Triangle } from "../graphics/geometry/Triangle";
-import { ColorMaterial } from "../graphics/material/ColorMaterial";
-import { Mesh } from "../graphics/Mesh";
-import { MeshComponent } from "../graphics/MeshComponent";
 import { Lifecycle } from "../Lifecycle";
 import { SceneManager } from "../managers/SceneManager";
 import { Transform } from "../math/Transform";
@@ -102,8 +98,8 @@ export class Entity extends GameObject implements Lifecycle {
      * @param children The children to add
      */
     public addChildren(...children: Entity[]): void {
-        this._children.push(...children);
         children.forEach((c) => c.parent = this);
+        this._children.push(...children);
     } 
 
     /**
@@ -111,8 +107,8 @@ export class Entity extends GameObject implements Lifecycle {
      * @param components The components to add
      */
     public addComponents(...components: Component[]): void {
-        this._components.push(...components);
         components.forEach((c) => c.parent = this);
+        this._components.push(...components);
     }
 
     /**
@@ -120,8 +116,8 @@ export class Entity extends GameObject implements Lifecycle {
      * @param behaviors The behaviors to add
      */
     public addBehaviors(...behaviors: Behavior[]): void {
-        this._behaviors.push(...behaviors);
         behaviors.forEach((b) => b.parent = this);
+        this._behaviors.push(...behaviors);
     }
 
     public clone(): Entity {
