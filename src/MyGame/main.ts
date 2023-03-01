@@ -61,11 +61,12 @@ const onLoad = (): void => {
 
 // TESTING
 const engineConfig: EngineConfig = {
-    scenes: [MyScene],
-    renderers: [DefaultRenderer]
+    renderers: [DefaultRenderer],
+    scenes: [MyScene]
 };
 
 new Engine(
+    engineConfig,
     onLoad,
     (): void => { console.log("onStart() from main.ts!"); }
 );
