@@ -14,3 +14,5 @@ export * from './core/samples/DefaultScene';
 export * from './core/managers/SceneManager';
 export * from './core/managers/RendererManager';
 
+export * from './extra/EngineConfig';
+

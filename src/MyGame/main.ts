@@ -4,7 +4,8 @@ import {
     DefaultRenderer, 
     SceneManager,
     Entity,
-    MoveBehavior
+    MoveBehavior,
+    EngineConfig
 } from "../engine/GETS"
 
 // MANUAL LOADING IMPORTS
@@ -17,6 +18,7 @@ import { ColorMaterial } from "../engine/core/graphics/material/ColorMaterial";
 import { Mesh } from "../engine/core/graphics/Mesh";
 import { Vector2 } from "../engine/core/math/Vector2";
 import { Input } from "../engine/extra/Input";
+import { MyScene } from "./scenes/MyScene";
 
 // THIS IS USED TO SIMULATE ASSET LOADING IN THE LOADING PERIOD 
 const onLoad = (): void => {
@@ -56,6 +58,12 @@ const onLoad = (): void => {
     SceneManager.getInstance().setCurrentScene(scene1);
     SceneManager.getInstance().load();
 } 
+
+// TESTING
+const engineConfig: EngineConfig = {
+    scenes: [MyScene],
+    renderers: [DefaultRenderer]
+};
 
 new Engine(
     onLoad,

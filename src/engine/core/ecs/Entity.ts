@@ -51,7 +51,7 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     /**
-     * Clones and Spawns an Entity.
+     * (DO NOT USE YET, BEING DEVELOPED). Clones and Spawns an Entity.
      * @param entity The Entity to Clone and Spawn.
      * @param transform The Transform at which to Spawn the Entity (default = Transform()).
      * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
@@ -79,7 +79,7 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     /**
-     * Returns the clone of an Entity. This clone isn't attached to any Scenes or parent Entities. 
+     * (DO NOT USE YET, BEING DEVELOPED). Returns the clone of an Entity. This clone isn't attached to any Scenes or parent Entities. 
      * The clone also doesn't have a Transform.
      * @param entity The entity to clone.
      */
