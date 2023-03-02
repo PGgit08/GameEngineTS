@@ -1,9 +1,9 @@
+import { vec2 } from "gl-matrix";
 import { Scene } from "../../engine/core/ecs/Scene";
 import { Square } from "../../engine/core/graphics/geometry/Square";
 import { ColorMaterial } from "../../engine/core/graphics/material/ColorMaterial";
 import { Mesh } from "../../engine/core/graphics/Mesh";
 import { MeshComponent } from "../../engine/core/graphics/MeshComponent";
-import { Vector2 } from "../../engine/core/math/Vector2";
 import { Entity, MoveBehavior, SceneManager } from "../../engine/GETS";
 
 export class MyScene extends Scene {
@@ -18,8 +18,8 @@ export class MyScene extends Scene {
 
         entity1.addBehaviors(new MoveBehavior());
 
-        entity1.transform.position = new Vector2(100, 100);
-        entity2.transform.position = new Vector2(100, 200);
+        entity1.transform.position = vec2.fromValues(100, 100);
+        entity2.transform.position = vec2.fromValues(100, 200);
 
         entity1.addChildren(entity2);
 

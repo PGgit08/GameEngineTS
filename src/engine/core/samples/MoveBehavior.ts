@@ -1,6 +1,6 @@
+import { vec2 } from "gl-matrix";
 import { Input } from "../../extra/Input";
 import { Behavior } from "../ecs/Behavior";
-import { Vector2 } from "../math/Vector2";
 
 export class MoveBehavior extends Behavior {
     public speed: number = 5;
@@ -17,19 +17,31 @@ export class MoveBehavior extends Behavior {
 
     public update(): void {
         if (Input.KeyPressed("KeyW")) {
-            this.transform.localTranslate(Vector2.numberScale(new Vector2(0, -1), this.speed));
+            const translation = vec2.create();
+            vec2.scale(translation, vec2.fromValues(0, -1), this.speed);
+
+            this.transform.localTranslate(translation);
         }
 
         if (Input.KeyPressed("KeyA")) {
-            this.transform.localTranslate(Vector2.numberScale(new Vector2(-1, 0), this.speed));
+            const translation = vec2.create();
+            vec2.scale(translation, vec2.fromValues(-1, 0), this.speed);
+
+            this.transform.localTranslate(translation);
         }
 
         if (Input.KeyPressed("KeyS")) {
-            this.transform.localTranslate(Vector2.numberScale(new Vector2(0, 1), this.speed));
+            const translation = vec2.create();
+            vec2.scale(translation, vec2.fromValues(0, 1), this.speed);
+
+            this.transform.localTranslate(translation);
         }
 
         if (Input.KeyPressed("KeyD")) {
-            this.transform.localTranslate(Vector2.numberScale(new Vector2(1, 0), this.speed));
+            const translation = vec2.create();
+            vec2.scale(translation, vec2.fromValues(0, -1), this.speed);
+
+            this.transform.localTranslate(translation);
         }
 
         if (Input.KeyPressed("ArrowLeft")) {
