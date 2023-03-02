@@ -3,46 +3,41 @@ import { Behavior } from "../ecs/Behavior";
 import { Vector2 } from "../math/Vector2";
 
 export class MoveBehavior extends Behavior {
-    private _speed: number;
+    public speed: number = 5;
 
     /**
      * Control the Entity with button pressed.
      * @param speed The speed of the movable Entity.
      */
-    constructor(speed: number = 5) {
+    constructor() {
         super("MoveBehavior");
-        this._speed = speed;
     }
     
-    public start(): void {
-        // console.log("SampleBehavior Start!");
-    }
+    public start(): void {}
 
     public update(): void {
-        // console.log("SampleBehavior Update!");
-
         if (Input.KeyPressed("KeyW")) {
-            this.transform.localTranslate(Vector2.numberScale(new Vector2(0, -1), this._speed));
+            this.transform.localTranslate(Vector2.numberScale(new Vector2(0, -1), this.speed));
         }
 
         if (Input.KeyPressed("KeyA")) {
-            this.transform.localTranslate(Vector2.numberScale(new Vector2(-1, 0), this._speed));
+            this.transform.localTranslate(Vector2.numberScale(new Vector2(-1, 0), this.speed));
         }
 
         if (Input.KeyPressed("KeyS")) {
-            this.transform.localTranslate(Vector2.numberScale(new Vector2(0, 1), this._speed));
+            this.transform.localTranslate(Vector2.numberScale(new Vector2(0, 1), this.speed));
         }
 
         if (Input.KeyPressed("KeyD")) {
-            this.transform.localTranslate(Vector2.numberScale(new Vector2(1, 0), this._speed));
+            this.transform.localTranslate(Vector2.numberScale(new Vector2(1, 0), this.speed));
         }
 
         if (Input.KeyPressed("ArrowLeft")) {
-            this.transform.rotate(-this._speed);
+            this.transform.rotate(-this.speed);
         }
 
         if (Input.KeyPressed("ArrowRight")) {
-            this.transform.rotate(this._speed);
+            this.transform.rotate(this.speed);
         }
     }
 }

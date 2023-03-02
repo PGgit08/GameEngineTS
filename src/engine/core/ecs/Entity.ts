@@ -140,7 +140,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     public load(): void {
         this._components.forEach((c) => c.load());
-        // this._behaviors.forEach((b) => b.load());
+        this._behaviors.forEach((b) => b.load());
 
         this._children.forEach((c) => c.load());
     }

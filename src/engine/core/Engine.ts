@@ -7,23 +7,19 @@ import { ShaderManager } from "./managers/ShaderManager";
 
 export class Engine implements Lifecycle {
     private static _isInstance: boolean = false;
-    private _onStart: () => void;
-    private _onLoad: () => void;
-    private _engineConfig: EngineConfig;
+
+    private _config: EngineConfig;
 
     /**
      * Creates the single Engine instance.
-     * @param onLoad Simulates ASSET LOADING, to be REMOVED later. 
-     * @param onStart Function that is called on start, once everything has been loaded.
+     * @param config The EngineConfig for the Engine instance.
      */
-    constructor(engineConfig: EngineConfig, onLoad: () => void, onStart: () => void) {
+    constructor(config: EngineConfig) {
         if (Engine._isInstance) {
             throw new Error("Engine instance already exists!");
         }
         
-        this._onLoad = onLoad;
-        this._onStart = onStart;
-        this._engineConfig = engineConfig;
+        this._config = config;
 
         this.load();
         this.start();
@@ -41,24 +37,20 @@ export class Engine implements Lifecycle {
     }
 
     public load(): void {
-        // this._onLoad(); // SIMULATE ASSET LOADING (for now)
-
-        // ENGINE CONFIG TESTING
         Input.addListeners();
 
-        this._engineConfig.renderers.forEach((R) => new R());
+        this._config.renderers.forEach((R) => new R());
         RendererManager.getInstance().load();
 
         ShaderManager.getInstance().load();
 
-        this._engineConfig.scenes.forEach((S) => new S());
+        this._config.scenes.forEach((S) => new S());
         SceneManager.getInstance().load();
     }
 
     public start(): void {
         RendererManager.getInstance().start();
         SceneManager.getInstance().start();
-        this._onStart();
     }
     
     public update(): void {
