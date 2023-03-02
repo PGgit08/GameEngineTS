@@ -1,6 +1,10 @@
 import { Scene } from "../../engine/core/ecs/Scene";
+import { Square } from "../../engine/core/graphics/geometry/Square";
+import { ColorMaterial } from "../../engine/core/graphics/material/ColorMaterial";
+import { Mesh } from "../../engine/core/graphics/Mesh";
+import { MeshComponent } from "../../engine/core/graphics/MeshComponent";
 import { Vector2 } from "../../engine/core/math/Vector2";
-import { Entity, SceneManager } from "../../engine/GETS";
+import { Entity, MoveBehavior, SceneManager } from "../../engine/GETS";
 
 export class MyScene extends Scene {
     constructor() {
@@ -8,6 +12,11 @@ export class MyScene extends Scene {
 
         const entity1: Entity = new Entity("Entity1");
         const entity2: Entity = new Entity("Entity2");
+
+        entity1.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
+        entity2.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
+
+        entity1.addBehaviors(new MoveBehavior());
 
         entity1.transform.position = new Vector2(100, 100);
         entity2.transform.position = new Vector2(100, 200);
