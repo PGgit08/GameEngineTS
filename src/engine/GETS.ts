@@ -2,7 +2,7 @@
 export * from './core/Engine';
 
 export * from './core/ecs/Entity';
-export * from './core/ecs/Component';
+// export * from './core/ecs/Component';
 export * from './core/ecs/Behavior';
 // export * from '../engine/core/ecs/GameObject';
 
