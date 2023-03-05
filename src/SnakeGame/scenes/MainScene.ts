@@ -1,13 +1,11 @@
 import { vec2 } from "gl-matrix";
-import { Scene, SceneManager } from "../../engine/GETS";
+import { Scene } from "../../engine/GETS";
 import { HeadJointBehavior } from "../behaviors/HeadJointBehavior";
 import { SnakeJoint } from "../entities/SnakeJoint";
 
 export class MainScene extends Scene {
     constructor(){
         super("MainScene");
-
-        SceneManager.getInstance().setCurrentScene(this);
 
         const headJoint = new SnakeJoint();
 

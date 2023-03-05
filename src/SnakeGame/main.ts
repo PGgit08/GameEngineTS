@@ -5,6 +5,10 @@ new Engine(
     {
         renderers: [DefaultRenderer],
         scenes: [MainScene],
+        defaults: {
+            renderer: "DefaultRenderer",
+            scene: "MainScene"
+        }
     }
 );
 

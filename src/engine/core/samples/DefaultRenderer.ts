@@ -1,9 +1,8 @@
 import { Renderer } from "../graphics/Renderer";
-import { RendererManager } from "../managers/RendererManager";
 
 export class DefaultRenderer extends Renderer {
     /**
-     * A Default Renderer to be used by Games, automatically sets to current Renderer.
+     * A Default Renderer to be used by Games.
      */
-    constructor() { super("DefaultRenderer"); RendererManager.getInstance().setCurrentRenderer(this); }
+    constructor() { super("DefaultRenderer"); }
 }

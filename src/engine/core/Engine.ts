@@ -40,11 +40,13 @@ export class Engine implements Lifecycle {
         Input.addListeners();
 
         this._config.renderers.forEach((R) => new R());
+        RendererManager.getInstance().setCurrentRendererByName(this._config.defaults.renderer);
         RendererManager.getInstance().load();
 
         ShaderManager.getInstance().load();
 
         this._config.scenes.forEach((S) => new S());
+        SceneManager.getInstance().setCurrentSceneByName(this._config.defaults.scene);
         SceneManager.getInstance().load();
     }
 

@@ -2,6 +2,16 @@ import { Scene } from "../core/ecs/Scene";
 import { Renderer } from "../core/graphics/Renderer";
 
 /**
+ * The Configuration for EngineConfig defaults.
+ * @property {string} renderer - The name of the default Renderer.
+ * @property {string} scene - The name of the default Scene.
+ */
+interface DefaultsConfig {
+    renderer: string;
+    scene: string;
+}
+
+/**
  * The Configuration for an Engine instance.
  * @property {Array} renderers - The Renderer(s) to be used in the Game.
  * @property {Array} scenes - The Scene(s) to be used in the Game.
@@ -12,4 +22,5 @@ export interface EngineConfig {
     // Variable -> b: { new(): Type } = Type;
     renderers: { new (): Renderer }[];
     scenes: { new (): Scene }[];
+    defaults: DefaultsConfig;
 }
