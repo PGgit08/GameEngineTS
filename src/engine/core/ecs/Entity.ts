@@ -7,6 +7,8 @@ import { Component } from "./Component";
 import { GameObject } from "./GameObject";
 
 export class Entity extends GameObject implements Lifecycle {
+    private _loaded = false;
+
     public parent: Entity = null;
     private _children: Entity[] = [];
 
@@ -50,6 +52,11 @@ export class Entity extends GameObject implements Lifecycle {
         return this._relativeChildren;
     }
 
+
+    public static Spawn<T extends Entity>(entity: new () => T): T {
+        return new entity();
+    }
+
     /**
      * (DO NOT USE YET, BEING DEVELOPED). Clones and Spawns an Entity.
      * @param entity The Entity to Clone and Spawn.
@@ -58,8 +65,8 @@ export class Entity extends GameObject implements Lifecycle {
      * @param load Load Entity during Spawn? (default = true).
      * @returns The cloned Entity.
      */
-    public static Spawn(entity: Entity, transform: Transform = new Transform(), parent?: Entity, load: boolean = true): Entity {
-        const clone: Entity = this.Clone(entity);
+    public static OldSpawn(entity: Entity, transform: Transform = new Transform(), parent?: Entity, load: boolean = true): Entity {
+        const clone: Entity = this.OldClone(entity);
 
         clone.transform = transform;
 
@@ -84,7 +91,7 @@ export class Entity extends GameObject implements Lifecycle {
      * The clone also doesn't have a Transform.
      * @param entity The entity to clone.
      */
-    public static Clone(entity: Entity): Entity {
+    public static OldClone(entity: Entity): Entity {
         return entity.clone();
     }
 
@@ -139,10 +146,14 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     public load(): void {
-        this._components.forEach((c) => c.load());
-        this._behaviors.forEach((b) => b.load());
+        if (!this._loaded) {
+            this._components.forEach((c) => c.load());
+            this._behaviors.forEach((b) => b.load());
 
-        this._children.forEach((c) => c.load());
+            this._children.forEach((c) => c.load());
+
+            this._loaded = true;
+        }
     }
 
     public start(): void {
