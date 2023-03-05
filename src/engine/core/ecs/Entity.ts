@@ -53,8 +53,27 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
 
-    public static Spawn<T extends Entity>(entity: new () => T): T {
-        return new entity();
+    /**
+     * A test Spawn function that Spawns an Entity TYPE, and loads it.
+     * @param Spawned The Entity TYPE to Spawn.
+     * @param transform The Transform at which to Spawn the Entity (default = new Transform()).
+     * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
+     * @returns The Spawned Entity.
+     */
+    public static Spawn<T extends Entity>(Spawned: new () => T, transform: Transform = new Transform(), parent?: Entity): T {
+        const spawned: T = new Spawned();
+
+        spawned.transform = transform;
+        
+        if (parent) {
+            parent.addChildren(spawned);
+        } else {
+            SceneManager.getInstance().currentScene.addEntities(spawned);
+        }
+
+        spawned.load();
+
+        return spawned;
     }
 
     /**
