@@ -14,7 +14,10 @@ export class HeadJointBehavior extends Behavior {
     }
 
     public update(): void {
-        this._joints[0].transform.position = this.parent.transform.position;
-        this.parent.transform.localTranslate(vec2.fromValues(0, -2));
+        const oldPos = this.parent.transform.position;
+
+        this.parent.transform.localTranslate(vec2.fromValues(0, -10));
+
+        this._joints[0].transform.position = oldPos;
     }
 }
