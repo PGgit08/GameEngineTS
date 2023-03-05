@@ -11,13 +11,16 @@ export class HeadJointBehavior extends Behavior {
 
     public start(): void {
         this._joints.push(Entity.Spawn(SnakeJoint));
+        this._joints[0].transform = this.transform;
     }
 
     public update(): void {
-        const oldPos = this.parent.transform.position;
+        const oldPos = this.transform.position;
 
-        this.parent.transform.localTranslate(vec2.fromValues(0, -10));
+        this.transform.localTranslate(vec2.fromValues(0, -10));
 
-        this._joints[0].transform.position = oldPos;
+        // this._joints[0].transform.position = oldPos;
+
+        console.log(oldPos, this.transform);
     }
 }

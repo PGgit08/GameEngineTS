@@ -12,7 +12,7 @@ export class MainScene extends Scene {
         headJoint.transform.position = vec2.fromValues(200, 200);
         headJoint.transform.scale = vec2.fromValues(0.2, 0.2);
 
-        headJoint.addBehaviors(new HeadJointBehavior);
+        headJoint.addBehaviors(new HeadJointBehavior());
 
         this.addEntities(headJoint);
     }

@@ -40,7 +40,7 @@ export class Transform {
         const rotMat: mat3 = mat3.create();
 
         mat3.fromRotation(rotMat, degToRadians(this.rotation));
-        vec2.transformMat3(localDirection, vec2.fromValues(directionVector[0], directionVector[1]), rotMat);
+        vec2.transformMat3(localDirection, directionVector, rotMat);
 
         return localDirection;
     }
