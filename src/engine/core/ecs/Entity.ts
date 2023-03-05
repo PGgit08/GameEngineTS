@@ -86,7 +86,6 @@ export class Entity extends GameObject implements Lifecycle {
      */
     public static Clone(entity: Entity): Entity {
         return entity.clone();
-        // return new Entity("brhu");
     }
 
     constructor(name: string, realtiveChildren: boolean = true) {
@@ -177,7 +176,6 @@ export class Entity extends GameObject implements Lifecycle {
         else {
             this._worldMatrix = this._localMatrix;
         }
-
 
         this._components.forEach((c) => c.render());
 

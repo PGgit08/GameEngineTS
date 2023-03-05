@@ -4,7 +4,7 @@ import { degToRadians } from "./Utils";
 export class Transform {
     public position: vec2 = vec2.create();
     public rotation: number = 0;
-    public scale: vec2 = vec2.create();
+    public scale: vec2 = vec2.fromValues(1, 1);
 
     /**
      * Translate the object.

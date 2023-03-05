@@ -20,7 +20,6 @@ export class MeshComponent extends Component {
 
     public render(): void {
         // console.log("MESH COMPONENT RENDER");
-
         this._mesh.render(
             this.parent.worldMatrix,
             RendererManager.getInstance().currentRenderer.projectionMat

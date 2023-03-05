@@ -3,6 +3,12 @@ import { Shader } from "./Shader";
 export class Shader2D extends Shader {
     get vSource(): string {
         return `
+        mat3 testModel = mat3(
+          1.0, 0.0, 0.0,
+          0.0, 1.0, 0.0,
+          100.0, 100.0, 1.0
+        );
+
         // an attribute will receive data from a buffer
         attribute vec2 a_position;
       
