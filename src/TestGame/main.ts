@@ -13,3 +13,5 @@ new Engine(
         scenes: [MyScene]
     }
 );
+
+export {}

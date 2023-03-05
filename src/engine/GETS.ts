@@ -5,6 +5,14 @@ export * from './core/ecs/Entity';
 // export * from './core/ecs/Component';
 export * from './core/ecs/Behavior';
 // export * from '../engine/core/ecs/GameObject';
+export * from './core/ecs/Scene';
+
+export * from './core/math/Transform';
+
+export * from './core/graphics/Mesh';
+export * from './core/graphics/MeshComponent';
+export * from './core/graphics/material/ColorMaterial';
+export * from './core/graphics/geometry/Square';
 
 export * from './core/samples/MoveBehavior';
 export * from './core/samples/DefaultRenderer';

@@ -39,7 +39,7 @@ export class MoveBehavior extends Behavior {
 
         if (Input.KeyPressed("KeyD")) {
             const translation = vec2.create();
-            vec2.scale(translation, vec2.fromValues(0, -1), this.speed);
+            vec2.scale(translation, vec2.fromValues(1, 0), this.speed);
 
             this.transform.localTranslate(translation);
         }

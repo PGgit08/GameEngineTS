@@ -10,6 +10,8 @@ export class MyScene extends Scene {
     constructor() {
         super("MyScene");
 
+        SceneManager.getInstance().setCurrentScene(this);
+
         const entity1: Entity = new Entity("Entity1");
         const entity2: Entity = new Entity("Entity2");
 
@@ -24,7 +26,5 @@ export class MyScene extends Scene {
         entity1.addChildren(entity2);
 
         this.addEntities(entity1);
-
-        SceneManager.getInstance().setCurrentScene(this);
     }
 }
