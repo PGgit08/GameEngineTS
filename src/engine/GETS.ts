@@ -23,4 +23,5 @@ export * from './core/managers/SceneManager';
 export * from './core/managers/RendererManager';
 
 export * from './extra/EngineConfig';
+export * from './extra/Input';
 
