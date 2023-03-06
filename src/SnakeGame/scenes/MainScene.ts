@@ -11,6 +11,7 @@ export class MainScene extends Scene {
 
         headJoint.transform.position = vec2.fromValues(200, 200);
         headJoint.transform.scale = vec2.fromValues(0.2, 0.2);
+        headJoint.transform.rotate(0);
 
         headJoint.addBehaviors(new HeadJointBehavior());
 

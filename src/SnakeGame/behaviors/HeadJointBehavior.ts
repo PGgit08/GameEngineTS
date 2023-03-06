@@ -1,39 +1,36 @@
 import { vec2 } from "gl-matrix";
-import { Behavior, Entity, Input, Transform } from "../../engine/GETS";
+import { Behavior, Entity, Input } from "../../engine/GETS";
 import { SnakeJoint } from "../entities/SnakeJoint";
 
 export class HeadJointBehavior extends Behavior {
     private _joints: SnakeJoint[] = [];
-    private readonly leftDisplacement: vec2 = vec2.fromValues(-10, 0);
-    private readonly rightDisplacement: vec2 = vec2.fromValues(10, 0); 
+    private readonly leftDisplacement: vec2 = vec2.fromValues(-30, 0);
+    private readonly rightDisplacement: vec2 = vec2.fromValues(30, 0); 
 
     private _displacement: vec2 = this.rightDisplacement;
+
+    private _displacement2: vec2 = vec2.fromValues(0, -30);
 
     constructor() {
         super("HeadJointBehavior");
     }
 
     public start(): void {
-        // const initPos: vec2 = vec2.subtract(vec2.create(), this.transform.position, vec2.fromValues(30, 0));
-        const initTrans: Transform = new Transform();
-
-        // initTrans.position = initPos;
-
-        this._joints.push(Entity.Spawn(SnakeJoint, initTrans));
+        this._joints.push(Entity.Spawn(SnakeJoint));
     }
 
     public update(): void {
         const oldPos = this.transform.position;
 
         if (Input.KeyPressed("ArrowLeft")) {
-            this._displacement = this.leftDisplacement;
+            this.transform.rotate(-90);
         }
 
         if (Input.KeyPressed("ArrowRight")) {
-            this._displacement = this.rightDisplacement;
+            this.transform.rotate(90);
         }
 
-        this.transform.translate(this._displacement);
+        this.transform.localTranslate(this._displacement2);
 
         this._joints[this._joints.length - 1].transform.position = oldPos;
     }
