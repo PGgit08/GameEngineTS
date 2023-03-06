@@ -11,7 +11,7 @@ export class Transform {
      * @param v The vec2 to translate the object by.
      */
     public translate(v: vec2): void {
-        vec2.add(this.position, v, this.position);
+        this.position = vec2.fromValues(this.position[0] + v[0], this.position[1] + v[1]);
     }
 
     /**
