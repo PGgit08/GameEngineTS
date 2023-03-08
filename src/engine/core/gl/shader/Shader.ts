@@ -1,7 +1,7 @@
 import Dictionary from "../../../extra/Dictionary";
 import { GameObject } from "../../ecs/GameObject";
 import { ShaderManager } from "../../managers/ShaderManager";
-import { mat3 } from "gl-matrix";
+import { mat3, vec2, vec4 } from "gl-matrix";
 
 export abstract class Shader extends GameObject {
     private _attributes: Dictionary<string, number> = {};
@@ -30,7 +30,7 @@ export abstract class Shader extends GameObject {
     }
 
     /**
-     * Load all info about this Shader
+     * Load this Shader
      */
     public load(): void {
         const vShader: WebGLShader = this.loadShader(this.vSource, gl.VERTEX_SHADER);
@@ -44,6 +44,12 @@ export abstract class Shader extends GameObject {
         this.detectUniforms();
     }
 
+    /**
+     * Compile Shader given source code.
+     * @param source Shader source code string.
+     * @param type The Shader type (vertex/fragment).
+     * @returns The compiled WebGLShader.
+     */
     public loadShader(source: string, type: number): WebGLShader {
         const shader: WebGLShader = gl.createShader(type);
 
@@ -104,12 +110,22 @@ export abstract class Shader extends GameObject {
         return this._uniforms[uniformName];
     }
 
+    /**
+     * Apply standard matrix uniforms.
+     * @param model The Model Matrix (3x3).
+     * @param projection The Projection Matrix (3x3).
+     */
     public applyStandardUniforms(model: mat3, projection: mat3): void {
         this.setUniformMatrix('model', model);
         this.setUniformMatrix('projection', projection);
     }
 
-    private setUniformMatrix(uniformName: string, mat3: mat3): void {
+    /**
+     * Set a matrix uniform.
+     * @param uniformName The uniform name.
+     * @param mat3 The matrix.
+     */
+    public setUniformMatrix(uniformName: string, mat3: mat3): void {
         const location = this.getUniformLocation(uniformName);
         gl.uniformMatrix3fv(
             location,
@@ -118,12 +134,29 @@ export abstract class Shader extends GameObject {
         )
     }
 
-    // TESTING ONLY
-    private setUniformVector(uniformName: string, x: number, y: number): void {
+    /**
+     * Set a uniform 2D vector.
+     * @param uniformName The uniform name.
+     * @param vec The vector.
+     */
+    public setUniformVec2(uniformName: string, vec: vec2): void {
         const location = this.getUniformLocation(uniformName);
         gl.uniform2fv(
             location,
-            new Float32Array([x, y])
+            new Float32Array(vec)
+        )
+    }
+
+    /**
+     * Set a uniform 4D vector.
+     * @param uniformName The uniform name.
+     * @param vec The vector.
+     */
+    public setUniformVec4(uniformName: string, vec: vec4): void {
+        const location = this.getUniformLocation(uniformName);
+        gl.uniform4fv(
+            location,
+            new Float32Array(vec)
         )
     }
 }
