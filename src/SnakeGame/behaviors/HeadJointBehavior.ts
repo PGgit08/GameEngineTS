@@ -11,7 +11,7 @@ export class HeadJointBehavior extends Behavior {
     }
 
     public start(): void {
-        this._joints.push(Entity.Spawn(SnakeJoint));
+        this._joints.push(Entity.Spawn(SnakeJoint), Entity.Spawn(SnakeJoint));
     }
 
     public update(): void {
@@ -27,6 +27,8 @@ export class HeadJointBehavior extends Behavior {
 
         this.transform.localTranslate(this._displacement);
 
-        this._joints[this._joints.length - 1].transform.position = oldPos;
+        const movedJoint: SnakeJoint = this._joints.pop();
+        movedJoint.transform.position = oldPos;
+        this._joints.unshift(movedJoint);
     }
 }
