@@ -13,6 +13,7 @@ export * from './core/graphics/Mesh';
 export * from './core/graphics/MeshComponent';
 export * from './core/graphics/material/ColorMaterial';
 export * from './core/graphics/geometry/Square';
+export * from './core/graphics/Color';
 
 export * from './core/samples/MoveBehavior';
 export * from './core/samples/DefaultRenderer';

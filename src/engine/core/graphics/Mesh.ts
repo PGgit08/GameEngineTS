@@ -28,6 +28,7 @@ export class Mesh {
             model,
             projection
         );
+        this._material.applyAdditionalUniforms();
         
         this._geometry.draw();
     }

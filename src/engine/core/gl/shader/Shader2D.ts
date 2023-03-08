@@ -3,6 +3,7 @@ import { Shader } from "./Shader";
 export class Shader2D extends Shader {
     get vSource(): string {
         return `
+        // TESTING, IGNORE
         mat3 testModel = mat3(
           1.0, 0.0, 0.0,
           0.0, 1.0, 0.0,
@@ -34,13 +35,18 @@ export class Shader2D extends Shader {
         // to pick one. mediump is a good default
         precision mediump float;
       
+        uniform vec4 color;
+
         void main() {
           // gl_FragColor is a special variable a fragment shader
           // is responsible for setting
-          gl_FragColor = vec4(1, 0, 0.5, 1); // return redish-purple
+          gl_FragColor = color;
         }
         `;
     }
 
+    /**
+     * A default 2D Shader with color support.
+     */
     constructor() { super("Shader2D"); }
 }
