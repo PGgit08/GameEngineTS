@@ -7,6 +7,6 @@ export class SnakeJoint extends Entity {
 
         this.transform.scale = vec2.fromValues(0.2, 0.2);
 
-        this.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial(Color.GREEN))));
+        this.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial(Color.YELLOW))));
     }
 }
