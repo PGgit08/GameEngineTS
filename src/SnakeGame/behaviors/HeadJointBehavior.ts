@@ -12,11 +12,24 @@ export class HeadJointBehavior extends Behavior {
 
     public start(): void {
         this._joints.push(Entity.Spawn(SnakeJoint), Entity.Spawn(SnakeJoint));
+
+        setInterval(this.move.bind(this), 300); // move the snake at a much slower rate compared to frame rate
+    }
+
+    /**
+     * Moves the whole snake.
+     */
+    private move(): void {
+        const oldPos = this.transform.position;
+
+        this.transform.localTranslate(this._displacement);
+
+        const movedJoint: SnakeJoint = this._joints.pop();
+        movedJoint.transform.position = oldPos;
+        this._joints.unshift(movedJoint);
     }
 
     public update(): void {
-        const oldPos = this.transform.position;
-
         if (Input.KeyPressed("ArrowLeft")) {
             this.transform.rotate(-90);
         }
@@ -24,11 +37,5 @@ export class HeadJointBehavior extends Behavior {
         if (Input.KeyPressed("ArrowRight")) {
             this.transform.rotate(90);
         }
-
-        this.transform.localTranslate(this._displacement);
-
-        const movedJoint: SnakeJoint = this._joints.pop();
-        movedJoint.transform.position = oldPos;
-        this._joints.unshift(movedJoint);
     }
 }
