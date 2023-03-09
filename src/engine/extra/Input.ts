@@ -1,6 +1,6 @@
 export class Input {
     private static _pressedKey: string = null;
-    private static _newKey: boolean = null; // True if a the pressed key is new (or when reset)
+    private static _newKey: boolean = null; // True if a the pressed key is new
 
 
     /**
