@@ -5,6 +5,10 @@ import { Mesh } from "./Mesh";
 export class MeshComponent extends Component {
     private _mesh: Mesh;
 
+    public get mesh(): Mesh {
+        return this._mesh;
+    }
+
     constructor(mesh: Mesh) {
         super("MeshComponent");
 

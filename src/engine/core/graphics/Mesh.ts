@@ -3,33 +3,33 @@ import { Material } from "./material/Material";
 import { mat3 } from "gl-matrix";
 
 export class Mesh {
-    private _geometry: Geometry;
-    private _material: Material;
+    public geometry: Geometry;
+    public material: Material;
 
     constructor(geometry: Geometry, material: Material, wireframe?: boolean) {
-        this._geometry = geometry;
-        this._material = material;
+        this.geometry = geometry;
+        this.material = material;
 
-        if (wireframe) { this._geometry.enableWireframe(); }
+        if (wireframe) { this.geometry.enableWireframe(); }
     }
 
     /**
      * Loads the Mesh, should be called in load() of Lifecycle
      */
     public load(): void {
-        this._geometry.load();
+        this.geometry.load();
     }
 
     /**
      * Renders the Mesh
      */
     public render(model: mat3, projection: mat3): void {
-        this._material.applyStandardUniforms(
+        this.material.applyStandardUniforms(
             model,
             projection
         );
-        this._material.applyAdditionalUniforms();
+        this.material.applyAdditionalUniforms();
         
-        this._geometry.draw();
+        this.geometry.draw();
     }
 }
