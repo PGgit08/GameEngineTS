@@ -153,13 +153,13 @@ export class Entity extends GameObject implements Lifecycle {
      * @param ComponentType The component Type.
      * @returns The desired Component.
      */
-    public getComponent<T extends Component>(ComponentType: new () => T): T {
+    public getComponent<T extends Component>(ComponentType: new (...args: any[]) => T): T {
         for (let c of this._components) {
             if (c instanceof ComponentType) {
-                return c;
+                return c as T;
             }
         }
-
+        // ConstructorParameters<T>
         return undefined;
     }
 
@@ -168,10 +168,10 @@ export class Entity extends GameObject implements Lifecycle {
      * @param BehaviorType The behavior Type.
      * @returns The desired Behavior.
      */
-    public getBehavior<T extends Behavior>(BehaviorType: new () => T): T {
+    public getBehavior<T extends Behavior>(BehaviorType: new (...args: any[]) => T): T {
         for (let b of this._behaviors) {
             if (b instanceof BehaviorType) {
-                return b;
+                return b as T;
             }
         }
 
