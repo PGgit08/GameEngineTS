@@ -148,6 +148,40 @@ export class Entity extends GameObject implements Lifecycle {
         this._behaviors.push(...behaviors);
     }
 
+    /**
+     * Returns a Component by it's type from the Entity.
+     * @param ComponentType The component Type.
+     * @returns The desired Component.
+     */
+    public getComponent<T extends Component>(ComponentType: new () => T): T {
+        for (let c of this._components) {
+            if (c instanceof ComponentType) {
+                return c;
+            }
+        }
+
+        return undefined;
+    }
+
+    /**
+     * Returns a Behavior by it's type from the Entity.
+     * @param BehaviorType The behavior Type.
+     * @returns The desired Behavior.
+     */
+    public getBehavior<T extends Behavior>(BehaviorType: new () => T): T {
+        for (let b of this._behaviors) {
+            if (b instanceof BehaviorType) {
+                return b;
+            }
+        }
+
+        return undefined;
+    }
+
+    
+    /**
+     * TESTING (DONT USE)
+     */
     public clone(): Entity {
         const clonedEntity = new Entity(this.name + " (Clone)", this._relativeChildren);
 
