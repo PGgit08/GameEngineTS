@@ -1,4 +1,4 @@
-import { mat3 } from "gl-matrix";
+import { mat3, vec2 } from "gl-matrix";
 import { Lifecycle } from "../Lifecycle";
 import { SceneManager } from "../managers/SceneManager";
 import { Transform } from "../math/Transform";
@@ -56,15 +56,15 @@ export class Entity extends GameObject implements Lifecycle {
     /**
      * A Spawn function that Spawns an Entity TYPE, and loads it.
      * @param Spawned The Entity TYPE to Spawn.
-     * @param transform The optional Transform at which to Spawn the Entity.
+     * @param position The optional position at which to Spawn the Entity.
      * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
      * @returns The Spawned Entity.
      */
-    public static Spawn<T extends Entity>(Spawned: new () => T, transform?: Transform, parent?: Entity): T {
+    public static Spawn<T extends Entity>(Spawned: new () => T, position?: vec2, parent?: Entity): T {
         const spawned: T = new Spawned();
 
-        if (transform) {
-            spawned.transform = transform;
+        if (position) {
+            spawned.transform.position = position;
         }
         
         if (parent) {
@@ -125,7 +125,7 @@ export class Entity extends GameObject implements Lifecycle {
     public removeChild(entity: Entity): void {
         this._children.forEach((e) => {
             if (e.id === entity.id) {
-                this._children.splice(this._children.indexOf(e), 0);
+                this._children.splice(this._children.indexOf(e), 1);
             }
         });
     }
