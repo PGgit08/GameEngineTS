@@ -6,7 +6,7 @@ export class MeshComponent extends Component {
     private _mesh: Mesh;
 
     public get mesh(): Mesh {
-        return this._mesh;
+        return this._mesh as Mesh;
     }
 
     constructor(mesh: Mesh) {

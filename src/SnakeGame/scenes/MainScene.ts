@@ -9,7 +9,7 @@ export class MainScene extends Scene {
 
         const headJoint = new SnakeJoint();
 
-        // CURSED
+        // CURSED (less cursed)
         (headJoint.getComponent(MeshComponent).mesh.material as ColorMaterial).color = Color.GREEN;
 
         headJoint.transform.position = vec2.fromValues(200, 200);

@@ -54,7 +54,7 @@ export class Entity extends GameObject implements Lifecycle {
 
 
     /**
-     * A test Spawn function that Spawns an Entity TYPE, and loads it.
+     * A Spawn function that Spawns an Entity TYPE, and loads it.
      * @param Spawned The Entity TYPE to Spawn.
      * @param transform The optional Transform at which to Spawn the Entity.
      * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
@@ -79,41 +79,11 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     /**
-     * (DO NOT USE YET, BEING DEVELOPED). Clones and Spawns an Entity.
-     * @param entity The Entity to Clone and Spawn.
-     * @param transform The Transform at which to Spawn the Entity (default = Transform()).
-     * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
-     * @param load Load Entity during Spawn? (default = true).
-     * @returns The cloned Entity.
+     * Despawns a given Entity instance (TO BE CHANGED TO DESPAWN BY NAME LATER).
+     * @param entity The given Entity to despawn.
      */
-    public static OldSpawn(entity: Entity, transform: Transform = new Transform(), parent?: Entity, load: boolean = true): Entity {
-        const clone: Entity = this.OldClone(entity);
-
-        clone.transform = transform;
-
-        if (parent) {
-            clone.parent = parent;
-        }
-
-        if (!parent) {
-            SceneManager.getInstance().currentScene.addEntities(clone);
-        }
-
-        if (load) {
-            clone.load();
-        }
-
-        return clone;
-    }
-
-    /**
-     * (DO NOT USE YET, BEING DEVELOPED). Returns the clone of an Entity. 
-     * This clone isn't attached to any Scenes or parent Entities. 
-     * The clone also doesn't have a Transform.
-     * @param entity The entity to clone.
-     */
-    public static OldClone(entity: Entity): Entity {
-        return entity.clone();
+    public static Despawn(entity: Entity): void {
+        entity.parent.removeChild(entity);
     }
 
     constructor(name: string, realtiveChildren: boolean = true) {
@@ -146,6 +116,18 @@ export class Entity extends GameObject implements Lifecycle {
     public addBehaviors(...behaviors: Behavior[]): void {
         behaviors.forEach((b) => b.parent = this);
         this._behaviors.push(...behaviors);
+    }
+
+    /**
+     * Removes a given Entity child from this Entity.
+     * @param entity The Entity to remove.
+     */
+    public removeChild(entity: Entity): void {
+        this._children.forEach((e) => {
+            if (e.id === entity.id) {
+                this._children.splice(this._children.indexOf(e), 0);
+            }
+        });
     }
 
     /**
