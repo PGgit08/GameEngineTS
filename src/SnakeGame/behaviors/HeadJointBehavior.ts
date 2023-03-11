@@ -1,5 +1,6 @@
 import { vec2 } from "gl-matrix";
-import { Behavior, Entity, Input } from "../../engine/GETS";
+import { Behavior, Entity, Input, RendererManager } from "../../engine/GETS";
+import { Food } from "../entities/Food";
 import { SnakeJoint } from "../entities/SnakeJoint";
 
 export class HeadJointBehavior extends Behavior {
@@ -11,9 +12,8 @@ export class HeadJointBehavior extends Behavior {
     }
 
     public start(): void {
-        this._joints.push(Entity.Spawn(SnakeJoint), Entity.Spawn(SnakeJoint));
-
-        setInterval(this.move.bind(this), 300); // move the snake at a much slower rate compared to frame rate
+        setInterval(this.move.bind(this), 200); // move the snake at a much slower rate compared to frame rate
+        setInterval(this.spawnFood.bind(this), 2000); // spawn food periodically @2000 ms
     }
 
     /**
@@ -24,9 +24,21 @@ export class HeadJointBehavior extends Behavior {
 
         this.transform.localTranslate(this._displacement);
 
-        const movedJoint: SnakeJoint = this._joints.pop();
-        movedJoint.transform.position = oldPos;
-        this._joints.unshift(movedJoint);
+        if (this._joints.length > 0) {
+            const movedJoint: SnakeJoint = this._joints.pop();
+            movedJoint.transform.position = oldPos;
+            this._joints.unshift(movedJoint);
+        }
+    }
+
+    /**
+     * Used to periodically spawn foods.
+     */
+    private spawnFood(): void {
+        Entity.Spawn(Food, vec2.fromValues(
+            Math.random() * RendererManager.getInstance().currentRenderer.width,
+            Math.random() * RendererManager.getInstance().currentRenderer.height
+        ));
     }
 
     public update(): void {
