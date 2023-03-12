@@ -28,11 +28,4 @@ export class GameObject {
             throw new Error("GameObject name and class name do not match");
         }
     }
-
-    public clone(): GameObject {
-        const clone: GameObject = Object.create(this);
-        clone._id = v4();
-
-        return clone;
-    }
 }
