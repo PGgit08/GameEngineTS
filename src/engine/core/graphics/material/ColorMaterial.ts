@@ -9,7 +9,7 @@ export class ColorMaterial extends Material {
      * @param color The Color for this Material (default = Color.WHITE).
      */
     constructor(color: Color = Color.WHITE) {
-        super("Shader2D");
+        super("ColorShader");
         this.color = color;
     }
 

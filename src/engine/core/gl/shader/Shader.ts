@@ -159,4 +159,17 @@ export abstract class Shader extends GameObject {
             new Float32Array(vec)
         )
     }
+
+    /**
+     * Sets a uniform integer.
+     * @param uniformName The uniform name.
+     * @param int The integer.
+     */
+    public setUniformInt(uniformName: string, int: number): void {
+        const location = this.getUniformLocation(uniformName);
+        gl.uniform1i(
+            location,
+            int
+        );
+    }
 }

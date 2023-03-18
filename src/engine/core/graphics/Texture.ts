@@ -7,6 +7,8 @@ export class Texture {
 
     private _texture: WebGLTexture;
 
+    public readonly unit: GLenum = gl.TEXTURE0;
+
     public get name(): string {
         return this._name
     }
@@ -48,5 +50,29 @@ export class Texture {
             img.onload = () => resolve(img);
             img.onerror = reject;
         });
+    }
+
+    /**
+     * Activate the texture to it's unit and bind it.
+     */
+    public activateAndBind() {
+        gl.activeTexture(this.unit);
+
+        this.bind();
+    }
+
+    /**
+     * Binds the texture.
+     */
+    public bind(): void {
+        // this binds the texture to the unit (called in activateAndBind())
+        gl.bindTexture(gl.TEXTURE_2D, this.texture);
+    }
+
+    /**
+     * Unbinds the texture.
+     */
+    public unbind(): void {
+        gl.bindTexture(gl.TEXTURE_2D, undefined);
     }
 }

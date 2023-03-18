@@ -1,6 +1,6 @@
 import { Shader } from "./Shader";
 
-export class Shader2D extends Shader {
+export class TextureShader extends Shader {
     get vSource(): string {
         return `
         // TESTING, IGNORE
@@ -35,18 +35,18 @@ export class Shader2D extends Shader {
         // to pick one. mediump is a good default
         precision mediump float;
       
-        uniform vec4 color;
+        uniform sampler2D texture;
 
         void main() {
           // gl_FragColor is a special variable a fragment shader
           // is responsible for setting
-          gl_FragColor = color;
+          gl_FragColor = texture2D(texture, /** ADD ATTRIBUTE HERE LATER */);
         }
         `;
     }
 
     /**
-     * A default 2D Shader with color support.
+     * A shader with texture support.
      */
-    constructor() { super("Shader2D"); }
+    constructor() { super("TextureShader"); }
 }

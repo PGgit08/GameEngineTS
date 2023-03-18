@@ -8,7 +8,7 @@ export class Triangle extends Geometry {
 
     protected setAttributes(): void {
         this._buffer.addAttribute({
-            location: ShaderManager.getInstance().getShader("Shader2D").getAttributeLocation("a_position"),
+            location: ShaderManager.getInstance().getShader("ColorShader").getAttributeLocation("a_position"),
             size: 2,
             offset: 0
         }); // add the position attribute
