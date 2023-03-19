@@ -7,8 +7,6 @@ export class Texture {
 
     private _texture: WebGLTexture;
 
-    public readonly unit: GLenum = gl.TEXTURE0;
-
     public get name(): string {
         return this._name
     }
@@ -24,39 +22,45 @@ export class Texture {
     constructor(name: string, fileName: string) {
         this._name = name;
         this._fileName = fileName;
+        
+
+
+        this.load();
     }
 
     /**
      * Loads this Texture from the Image.
      */
     public load(): void {
-        this.loadImage().then(
-            (img) => {
-                gl.bindTexture(gl.TEXTURE_2D, this._texture);
-                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA,gl.UNSIGNED_BYTE, img);
-                gl.generateMipmap(gl.TEXTURE_2D);
-            }
-        ).catch(
-            () => { throw new Error("Unable to load Texture image.") }
-        );
-    }
+        this._texture = gl.createTexture();
 
-    private loadImage(): Promise<HTMLImageElement> {
-        return new Promise((resolve, reject) => {
-            const img = new Image();
-            
-            img.src = this._fileName;
-            
-            img.onload = () => resolve(img);
-            img.onerror = reject;
-        });
+        gl.bindTexture(gl.TEXTURE_2D, this._texture);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));
+        
+        const img = new Image();
+        
+        img.src = this.fileName;
+        
+        img.onload = () => {
+            gl.bindTexture(gl.TEXTURE_2D, this._texture);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+            // gl.generateMipmap(gl.TEXTURE_2D);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+
+        }
+
+        img.onerror = () => {
+            throw new Error("Unable to load Texture image.");
+        }
     }
 
     /**
      * Activate the texture to it's unit and bind it.
      */
     public activateAndBind() {
-        gl.activeTexture(this.unit);
+        gl.activeTexture(gl.TEXTURE0);
 
         this.bind();
     }
@@ -66,7 +70,7 @@ export class Texture {
      */
     public bind(): void {
         // this binds the texture to the unit (called in activateAndBind())
-        gl.bindTexture(gl.TEXTURE_2D, this.texture);
+        gl.bindTexture(gl.TEXTURE_2D, this._texture);
     }
 
     /**

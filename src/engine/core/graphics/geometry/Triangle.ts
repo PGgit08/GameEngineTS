@@ -7,19 +7,22 @@ export class Triangle extends Geometry {
     }
 
     protected setAttributes(): void {
-        this._buffer.addAttribute({
+        this._positionBuffer.addAttribute({
             location: ShaderManager.getInstance().getShader("ColorShader").getAttributeLocation("a_position"),
             size: 2,
             offset: 0
         }); // add the position attribute
     }
 
-    public data(): number[] {
-        // MODEL SPACE (TEST)
+    public textureData(): number[] {
+        return [];
+    }
+
+    public positionData(): number[] {
         return [
             -50, -50,
             50, -50, 
             0, -100
-        ]
+        ];
     }
 }

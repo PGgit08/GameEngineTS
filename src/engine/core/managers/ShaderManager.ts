@@ -3,6 +3,7 @@ import { Shader } from "../gl/shader/Shader";
 import { ColorShader } from "../gl/shader/ColorShader";
 import { Lifecycle } from "../Lifecycle";
 import { Manager } from "./Manager";
+import { TextureShader } from "../gl/shader/TextureShader";
 
 export class ShaderManager extends Manager implements Lifecycle {
     private static _instance: ShaderManager;
@@ -30,6 +31,7 @@ export class ShaderManager extends Manager implements Lifecycle {
 
     public load(): void {
         new ColorShader();
+        new TextureShader();
 
         Object.values(this._gameShaders).forEach((s) => s.load());
     }

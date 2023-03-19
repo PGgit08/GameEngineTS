@@ -7,21 +7,46 @@ export class Square extends Geometry {
     }
 
     protected setAttributes(): void {
-        this._buffer.addAttribute({
-            location: ShaderManager.getInstance().getShader("ColorShader").getAttributeLocation("a_position"),
+        this._positionBuffer.addAttribute({
+            location: ShaderManager.getInstance().getShader("TextureShader").getAttributeLocation("a_position"),
             size: 2,
             offset: 0
-        })
+        });
+
+        this._textureBuffer.addAttribute({
+            location: ShaderManager.getInstance().getShader("TextureShader").getAttributeLocation("a_texcoord"),
+            size: 2,
+            offset: 0
+        });
     }
 
-    public data(): number[] {
+    public textureData(): number[] {
         return [
-            -50, -50,
-            -50, 50, 
-            50, 50,
-            50, 50,
-            50, -50,
-            -50, -50
-        ]
+            0, 0,
+            0, 1,
+            1, 1,
+            // 1, 0,
+            // 1, 1,
+            // 0, 1
+        ];
+    }
+
+    public positionData(): number[] {
+        // return [
+        //     -50, -50,
+        //     -50, 50, 
+        //     50, 50,
+        //     50, 50,
+        //     50, -50,
+        //     -50, -50
+        // ];
+        return [
+            0, 600,
+            0, 0,
+            600, 0,
+            // 600, 0,
+            // 600, 600,
+            // 0, 600
+        ];
     }
 }

@@ -1,24 +1,26 @@
 import { Buffer } from "../../gl/Buffer";
 
 export abstract class Geometry {
-    protected _buffer: Buffer;
+    protected _positionBuffer: Buffer;
+    protected _textureBuffer: Buffer;
 
     constructor() {
-        this._buffer = new Buffer(this.data());
+        this._positionBuffer = new Buffer(this.positionData());
+        this._textureBuffer = new Buffer(this.textureData());
     }
 
     /**
      * Sets the Buffer's drawing mode to LINE_STRIP
      */
     public enableWireframe(): void {
-        this._buffer.mode = gl.LINE_STRIP;
+        this._positionBuffer.mode = gl.LINE_STRIP;
     }
 
     /**
      * Sets the Buffer's drawing mode to default (TRIANGLES)
      */
     public disableWireframe(): void {
-        this._buffer.mode = gl.TRIANGLES;
+        this._positionBuffer.mode = gl.TRIANGLES;
     }
 
     /**
@@ -27,22 +29,29 @@ export abstract class Geometry {
     protected abstract setAttributes(): void;
 
     /**
-     * The verticies for this Geometry's Buffer
+     * The positions of the verticies for this Geometry's position Buffer
      */
-    public abstract data(): number[];
+    public abstract positionData(): number[];
+
+    /**
+     * The texture positions buffer data for this Geometry's texture Buffer
+     */
+    public abstract textureData(): number[];
 
     /**
      * Load this Geometry and upload its Buffer
      */
     public load(): void {
         this.setAttributes();
-        this._buffer.upload();
+        this._positionBuffer.upload();
     }
 
     /**
      * Draw the Geometry
      */
     public draw(): void {
-        this._buffer.draw();
+        // this._textureBuffer.draw();
+        this._textureBuffer.bind();
+        this._positionBuffer.draw();
     }
 }

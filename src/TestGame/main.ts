@@ -10,7 +10,11 @@ import { MyScene } from "./scenes/MyScene";
 new Engine(
     {
         renderers: [DefaultRenderer],
-        scenes: [MyScene]
+        scenes: [MyScene],
+        defaults: {
+            renderer: "DefaultRenderer",
+            scene: "MyScene"
+        }
     }
 );
 

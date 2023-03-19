@@ -10,8 +10,9 @@ export class TextureMaterial extends Material {
     }
 
     public applyAdditionalUniforms(): void {
-        this.texture.activateAndBind();
-        this._shader.setUniformInt('texture', this.texture.unit);
-        this.texture.unbind();
+        if (this.texture.texture !== undefined) {
+            this.texture.activateAndBind();
+            this._shader.setUniformInt('texture', 0);
+        }
     }
 }
