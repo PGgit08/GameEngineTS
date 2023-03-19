@@ -20,13 +20,13 @@ export class TextureShader extends Shader {
         vec2 clipspace_position;
 
         // uniforms will recieve data dynamically from the code
-        uniform mat3 projection;
-        uniform mat3 model;
+        uniform mat3 u_projection;
+        uniform mat3 u_model;
 
         // all shaders have a main function
         void main() {
           // turn 2D position into 3D position for matrix multiplication, then turn result into 4D WebGL vector
-          clipspace_position = (projection * model * vec3(a_position, 1)).xy; // order of multiplication matters here, right to left
+          clipspace_position = (u_projection * u_model * vec3(a_position, 1)).xy; // order of multiplication matters here, right to left
           gl_Position = vec4(clipspace_position, 0.0, 1.0);
 
           v_texcoord = a_texcoord;
@@ -42,10 +42,10 @@ export class TextureShader extends Shader {
         varying vec2 v_texcoord;
          
         // The texture.
-        uniform sampler2D texture;
+        uniform sampler2D u_texture;
          
         void main() {
-          gl_FragColor = texture2D(texture, v_texcoord);
+          gl_FragColor = texture2D(u_texture, v_texcoord);
         }
         `;
     }

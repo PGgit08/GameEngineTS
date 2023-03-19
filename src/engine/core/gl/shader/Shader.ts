@@ -116,8 +116,8 @@ export abstract class Shader extends GameObject {
      * @param projection The Projection Matrix (3x3).
      */
     public applyStandardUniforms(model: mat3, projection: mat3): void {
-        this.setUniformMatrix('model', model);
-        this.setUniformMatrix('projection', projection);
+        this.setUniformMatrix('u_model', model);
+        this.setUniformMatrix('u_projection', projection);
     }
 
     /**

@@ -12,7 +12,7 @@ export class TextureMaterial extends Material {
     public applyAdditionalUniforms(): void {
         if (this.texture.texture !== undefined) {
             this.texture.activateAndBind();
-            this._shader.setUniformInt('texture', 0);
+            this._shader.setUniformInt('u_texture', 0);
         }
     }
 }

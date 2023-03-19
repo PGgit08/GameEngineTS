@@ -14,6 +14,6 @@ export class ColorMaterial extends Material {
     }
 
     public applyAdditionalUniforms(): void {
-        this._shader.setUniformVec4('color', this.color.toVec4());
+        this._shader.setUniformVec4('u_color', this.color.toVec4());
     }
 }
