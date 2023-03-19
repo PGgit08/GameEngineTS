@@ -9,12 +9,12 @@ export class MyScene extends Scene {
         const entity1: Entity = new Entity("Entity1");
         const entity2: Entity = new Entity("Entity2");
 
-        entity1.addComponents(new MeshComponent(new Mesh(new Square(), new TextureMaterial(new Texture('tex', imgUrl)))));
+        entity1.addComponents(new MeshComponent(new Mesh(new Square(), new TextureMaterial(new Texture(imgUrl)))));
         // entity2.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
 
         // entity1.addBehaviors(new MoveBehavior());
 
-        // entity1.transform.position = vec2.fromValues(100, 100);
+        entity1.transform.position = vec2.fromValues(100, 100);
         // entity2.transform.position = vec2.fromValues(100, 200);
 
         entity1.addChildren(entity2);
