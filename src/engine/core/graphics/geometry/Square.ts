@@ -33,12 +33,12 @@ export class Square extends Geometry {
 
     public positionData(): number[] {
         return [
-            -50, -50,
-            -50, 50, 
-            50, 50,
-            50, 50,
-            50, -50,
-            -50, -50
+            -.50, -.50,
+            -.50, .50, 
+            .50, .50,
+            .50, .50,
+            .50, -.50,
+            -.50, -.50
         ];
 
         // return [
