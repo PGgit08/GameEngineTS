@@ -1,6 +1,6 @@
 import { vec2 } from "gl-matrix";
 import { Entity, MoveBehavior, Scene, Mesh, MeshComponent, TextureMaterial, Square, Texture} from "../../engine/GETS";
-import imgUrl from '../assets/happy.png';
+import imgUrl from '../assets/f-texture.png';
 
 export class MyScene extends Scene {
     constructor() {

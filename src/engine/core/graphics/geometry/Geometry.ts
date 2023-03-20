@@ -44,6 +44,7 @@ export abstract class Geometry {
     public load(): void {
         this.setAttributes();
         this._positionBuffer.upload();
+        this._textureBuffer.upload();
     }
 
     /**
