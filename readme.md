@@ -8,7 +8,7 @@ To test run -> **npm run dev**
 - Movement along local axis. -- DONE
 - Component/Behavior/Entity/Scene localizing -- HALF-DONE
 - Entity Spawning / Despawning -- DONE
-- Textures, Lighting, Cameras
+- Textures, Lighting, Cameras -- TEXTURE WORK-ON
 - Sprites 
 - Physics (matter.js) / Collsion
 - Entity Communication
