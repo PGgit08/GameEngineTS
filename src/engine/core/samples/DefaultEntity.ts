@@ -1,7 +1,8 @@
 import { vec2 } from "gl-matrix";
 import { Entity } from "../ecs/Entity";
+import { Color } from "../graphics/Color";
 import { Square } from "../graphics/geometry/Square";
-import { ColorMaterial } from "../graphics/material/ColorMaterial";
+import { StandardMaterial } from "../graphics/material/StandardMaterial";
 import { Mesh } from "../graphics/Mesh";
 import { MeshComponent } from "../graphics/MeshComponent";
 import { RendererManager } from "../managers/RendererManager";
@@ -19,6 +20,6 @@ export class DefaultEntity extends Entity {
             RendererManager.getInstance().currentRenderer.height / 2
         )
 
-        this.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
+        this.addComponents(new MeshComponent(new Mesh(new Square(), new StandardMaterial(undefined, Color.BLACK))));
     }
 }

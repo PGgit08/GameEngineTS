@@ -11,8 +11,7 @@ export * from './core/math/Transform';
 
 export * from './core/graphics/Mesh';
 export * from './core/graphics/MeshComponent';
-export * from './core/graphics/material/ColorMaterial';
-export * from './core/graphics/material/TextureMaterial';
+export * from './core/graphics/material/StandardMaterial';
 export * from './core/graphics/Texture';
 export * from './core/graphics/geometry/Square';
 export * from './core/graphics/Color';

@@ -8,10 +8,10 @@ export class Triangle extends Geometry {
 
     protected setAttributes(): void {
         this._positionBuffer.addAttribute({
-            location: ShaderManager.getInstance().getShader("ColorShader").getAttributeLocation("a_position"),
+            location: ShaderManager.getInstance().getShader("Shader2D").getAttributeLocation("a_position"),
             size: 2,
             offset: 0
-        }); // add the position attribute
+        }); // TODO: add the texture attribute
     }
 
     public textureData(): number[] {
@@ -22,7 +22,7 @@ export class Triangle extends Geometry {
         return [
             -50, -50,
             50, -50, 
-            0, -100
+            0, -50
         ];
     }
 }

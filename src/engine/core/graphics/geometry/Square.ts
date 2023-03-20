@@ -8,13 +8,13 @@ export class Square extends Geometry {
 
     protected setAttributes(): void {
         this._positionBuffer.addAttribute({
-            location: ShaderManager.getInstance().getShader("TextureShader").getAttributeLocation("a_position"),
+            location: ShaderManager.getInstance().getShader("Shader2D").getAttributeLocation("a_position"),
             size: 2,
             offset: 0
         });
 
         this._textureBuffer.addAttribute({
-            location: ShaderManager.getInstance().getShader("TextureShader").getAttributeLocation("a_texcoord"),
+            location: ShaderManager.getInstance().getShader("Shader2D").getAttributeLocation("a_texcoord"),
             size: 2,
             offset: 0
         });
@@ -33,21 +33,12 @@ export class Square extends Geometry {
 
     public positionData(): number[] {
         return [
-            -.50, -.50,
-            -.50, .50, 
-            .50, .50,
-            .50, .50,
-            .50, -.50,
-            -.50, -.50
+            -50, -50,
+            -50, 50, 
+            50, 50,
+            50, 50,
+            50, -50,
+            -50, -50
         ];
-
-        // return [
-        //     0, 600,
-        //     0, 0,
-        //     600, 0,
-        //     // 600, 0,
-        //     // 600, 600,
-        //     // 0, 600
-        // ];
     }
 }
