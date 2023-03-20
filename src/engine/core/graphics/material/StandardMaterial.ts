@@ -15,7 +15,7 @@ export class StandardMaterial extends Material {
     }
 
     public applyAdditionalUniforms(): void {
-        if (this.texture.texture !== undefined) {
+        if (this.texture !== undefined && this.texture.texture !== undefined) {
             this._shader.setUniformInt('u_texture', 0);
         }
 

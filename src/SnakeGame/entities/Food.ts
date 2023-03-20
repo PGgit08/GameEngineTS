@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Color, ColorMaterial, Entity, Mesh, MeshComponent, RendererManager, Square } from "../../engine/GETS";
+import { Color, StandardMaterial, Entity, Mesh, MeshComponent, Square } from "../../engine/GETS";
 
 export class Food extends Entity {
     constructor(){
@@ -8,6 +8,6 @@ export class Food extends Entity {
         this.transform.scale = vec2.fromValues(0.15, 0.15);
         // this.transform.position = 
 
-        this.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial(Color.RED))));
+        this.addComponents(new MeshComponent(new Mesh(new Square(), new StandardMaterial(undefined, Color.RED))));
     }
 }

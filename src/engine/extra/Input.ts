@@ -21,7 +21,7 @@ export class Input {
      */
     public static KeyPressed(key: string): boolean {
         if (this._pressedKey === key && this._newKey) {
-            this._newKey = false;         
+            this._newKey = false;
             return true;
         } else { return false; }
     }

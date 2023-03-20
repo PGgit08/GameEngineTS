@@ -20,6 +20,6 @@ export class DefaultEntity extends Entity {
             RendererManager.getInstance().currentRenderer.height / 2
         )
 
-        this.addComponents(new MeshComponent(new Mesh(new Square(), new StandardMaterial(undefined, Color.BLACK))));
+        this.addComponents(new MeshComponent(new Mesh(new Square(), new StandardMaterial(undefined, Color.WHITE))));
     }
 }
