@@ -36,7 +36,7 @@ export abstract class Geometry {
     /**
      * The texture positions buffer data for this Geometry's texture Buffer
      */
-    public abstract textureData(): number[];
+    public abstract textureData(): number[]; // (WebGL texture origin is at top-left corner, down +Y, right +X)
 
     /**
      * Load this Geometry and upload its Buffer
