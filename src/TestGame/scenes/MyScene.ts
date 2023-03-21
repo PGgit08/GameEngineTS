@@ -14,8 +14,8 @@ export class MyScene extends Scene {
 
         // entity1.addBehaviors(new MoveBehavior());
 
-        entity1.transform.position = vec2.fromValues(100, 100);
-        // entity1.transform.scale = vec2.fromValues(1.2, 1.1);
+        entity1.transform.position = vec2.fromValues(300, 300);
+        entity1.transform.scale = vec2.fromValues(.5, .5);
         // entity2.transform.position = vec2.fromValues(100, 200);
 
         entity1.addChildren(entity2);

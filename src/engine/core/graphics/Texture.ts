@@ -1,3 +1,5 @@
+import { isPowerOf2 } from "../math/Utils";
+
 /**
  * Represents a WebGL Texture.
  */
@@ -32,23 +34,28 @@ export class Texture {
     public load(): void {
         this._texture = gl.createTexture();
 
-        gl.bindTexture(gl.TEXTURE_2D, this._texture);
+        this.bind();
+
+        // default image to blue pixel
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));
-        
+
         const img = new Image();
-        
         img.src = this.fileName;
         
         img.onload = () => {
-            gl.bindTexture(gl.TEXTURE_2D, this._texture);
+            this.bind();
+            
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
 
-            // TODO: Add power of 2 thingy here
-            gl.generateMipmap(gl.TEXTURE_2D);
-            // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-            // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-            // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+            if (isPowerOf2(img.width) && isPowerOf2(img.height)) {
+                gl.generateMipmap(gl.TEXTURE_2D); // MIPMAP defaults: MIN -> NEAREST_MIPMAP_LINEAR, MAG -> probably LINEAR
+            } else {
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+            }
         }
 
         img.onerror = () => {

@@ -55,5 +55,7 @@ export abstract class Geometry {
         // this._textureBuffer.draw();
         this._textureBuffer.bind();
         this._positionBuffer.draw();
+
+        this._textureBuffer.unbind();
     }
 }

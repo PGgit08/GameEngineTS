@@ -6,4 +6,8 @@ function radiansToDeg(rad: number): number {
     return rad / (Math.PI / 180);
 }
 
-export { degToRadians, radiansToDeg };
+function isPowerOf2(num: number): boolean {
+    return false;
+}
+
+export { degToRadians, radiansToDeg, isPowerOf2 };

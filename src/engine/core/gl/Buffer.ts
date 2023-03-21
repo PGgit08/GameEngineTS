@@ -77,7 +77,7 @@ export class Buffer {
     }
 
     /**
-     * Adds an Attribute to this buffer
+     * Adds an Attribute to this Buffer
      * @param info The info of the Attribute
      */
     public addAttribute(info: AttributeInfo): void {
