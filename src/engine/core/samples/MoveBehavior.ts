@@ -16,39 +16,39 @@ export class MoveBehavior extends Behavior {
     public start(): void {}
 
     public update(): void {
-        if (Input.KeyPressed("KeyW")) {
+        if (Input.KeyDown("KeyW")) {
             const translation = vec2.create();
             vec2.scale(translation, vec2.fromValues(0, -1), this.speed);
 
             this.transform.localTranslate(translation);
         }
 
-        if (Input.KeyPressed("KeyA")) {
+        if (Input.KeyDown("KeyA")) {
             const translation = vec2.create();
             vec2.scale(translation, vec2.fromValues(-1, 0), this.speed);
 
             this.transform.localTranslate(translation);
         }
 
-        if (Input.KeyPressed("KeyS")) {
+        if (Input.KeyDown("KeyS")) {
             const translation = vec2.create();
             vec2.scale(translation, vec2.fromValues(0, 1), this.speed);
 
             this.transform.localTranslate(translation);
         }
 
-        if (Input.KeyPressed("KeyD")) {
+        if (Input.KeyDown("KeyD")) {
             const translation = vec2.create();
             vec2.scale(translation, vec2.fromValues(1, 0), this.speed);
 
             this.transform.localTranslate(translation);
         }
 
-        if (Input.KeyPressed("ArrowLeft")) {
+        if (Input.KeyDown("ArrowLeft")) {
             this.transform.rotate(-this.speed);
         }
 
-        if (Input.KeyPressed("ArrowRight")) {
+        if (Input.KeyDown("ArrowRight")) {
             this.transform.rotate(this.speed);
         }
     }

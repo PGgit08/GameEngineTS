@@ -12,6 +12,8 @@ export class Engine implements Lifecycle {
 
     private _config: EngineConfig;
 
+    private _loopId: number;
+
     /**
      * Creates the single Engine instance.
      * @param config The EngineConfig for the Engine instance.
@@ -26,7 +28,8 @@ export class Engine implements Lifecycle {
         this.load();
         this.start();
 
-        setInterval(this.cycle.bind(this), 30); // test loop, to be changed to requestAnimationFrame in the future
+        // setInterval(this.cycle.bind(this), 30); // test loop
+        this._loopId = requestAnimationFrame(this.cycle.bind(this));
 
         console.log(SceneManager.getInstance(), RendererManager.getInstance());
 
@@ -36,6 +39,8 @@ export class Engine implements Lifecycle {
     private cycle(): void {
         this.update();
         this.render();
+
+        requestAnimationFrame(this.cycle.bind(this));
     }
 
     public load(): void {
@@ -68,5 +73,10 @@ export class Engine implements Lifecycle {
     public render(): void {
         RendererManager.getInstance().render();
         SceneManager.getInstance().render();
+    }
+
+    // TODO: Add this later to Lifecycle interface
+    public end(): void {
+        cancelAnimationFrame(this._loopId);
     }
 }

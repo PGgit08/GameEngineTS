@@ -17,11 +17,20 @@ export class Input {
     }
 
     /**
-     * Returns true if the given key is pressed during the frame.
+     * Returns true if the given key is/was pressed during the frame.
      */
     public static KeyPressed(key: string): boolean {
         if (this._pressedKey === key && this._newKey) {
             this._newKey = false;
+            return true;
+        } else { return false; }
+    }
+
+    /**
+     * Returns true if the given key is down during the frame.
+     */
+    public static KeyDown(key: string): boolean {
+        if (this._pressedKey === key) {
             return true;
         } else { return false; }
     }

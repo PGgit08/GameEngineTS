@@ -1,6 +1,6 @@
 import { vec2 } from "gl-matrix";
 import { TextureManager } from "../../engine/core/managers/TextureManager";
-import { Entity, MoveBehavior, Scene, Mesh, MeshComponent, Square, Texture, StandardMaterial} from "../../engine/GETS";
+import { Entity, MoveBehavior, Scene, Mesh, MeshComponent, Square, StandardMaterial} from "../../engine/GETS";
 
 export class MyScene extends Scene {
     constructor() {
@@ -20,7 +20,7 @@ export class MyScene extends Scene {
 
         // entity2.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
 
-        // entity1.addBehaviors(new MoveBehavior());
+        entity1.addBehaviors(new MoveBehavior());
 
         entity1.transform.position = vec2.fromValues(300, 300);
         entity1.transform.scale = vec2.fromValues(1.3, 1.3);
