@@ -57,6 +57,9 @@ export class Renderer extends GameObject implements Lifecycle {
 
         this._width = this._canvas.width;
         this._height = this._canvas.height;
+
+        this._canvas.style.width = this._canvas.width.toString();
+        this._canvas.style.height = this._canvas.height.toString();
     }
 
     /**
@@ -72,6 +75,9 @@ export class Renderer extends GameObject implements Lifecycle {
         this._canvas.height = this._height;
 
         this._canvas.style.border = "thick solid #0000FF"; 
+
+        this._canvas.style.width = this._canvas.width.toString();
+        this._canvas.style.height = this._canvas.height.toString();
 
         document.body.appendChild(this._canvas);
     }
