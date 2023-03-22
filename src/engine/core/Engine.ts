@@ -52,7 +52,7 @@ export class Engine implements Lifecycle {
 
         ShaderManager.getInstance().load();
 
-        this._config.textures.forEach((t) => new Texture(t.name, t.fileName));
+        if (this._config.textures !== undefined) { this._config.textures.forEach((t) => new Texture(t.name, t.fileName)); }
         TextureManager.getInstance().load();
 
         this._config.scenes.forEach((S) => new S());
