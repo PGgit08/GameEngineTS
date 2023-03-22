@@ -1,6 +1,6 @@
 import { vec2 } from "gl-matrix";
 import { Entity, MoveBehavior, Scene, Mesh, MeshComponent, Square, Texture, StandardMaterial} from "../../engine/GETS";
-import imgUrl from '../assets/happy.png';
+import imgUrl from '../assets/emoji.jpg';
 
 export class MyScene extends Scene {
     constructor() {
@@ -9,7 +9,7 @@ export class MyScene extends Scene {
         const entity1: Entity = new Entity("Entity1");
         const entity2: Entity = new Entity("Entity2");
 
-        entity1.addComponents(new MeshComponent(new Mesh(new Square(), new StandardMaterial(new Texture(imgUrl)))));
+        entity1.addComponents(new MeshComponent(new Mesh(new Square(), new StandardMaterial(new Texture('', imgUrl)))));
         // entity2.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
 
         // entity1.addBehaviors(new MoveBehavior());

@@ -1,17 +1,12 @@
+import { GameObject } from "../ecs/GameObject";
 import { isPowerOf2 } from "../math/Utils";
 
 /**
  * Represents a WebGL Texture.
  */
-export class Texture {
-    private _name: string;
+export class Texture extends GameObject {
     private _fileName: string;
-
     private _texture: WebGLTexture;
-
-    public get name(): string {
-        return this._name
-    }
 
     public get fileName(): string {
         return this._fileName;
@@ -21,11 +16,10 @@ export class Texture {
         return this._texture;
     }
 
-    constructor(fileName: string) {
-        this._name = '';
-        this._fileName = fileName;
+    constructor(name: string, fileName: string) {
+        super(name);
 
-        this.load();
+        this._fileName = fileName;
     }
 
     /**
