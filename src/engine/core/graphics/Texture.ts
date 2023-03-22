@@ -50,8 +50,6 @@ export class Texture {
             if (isPowerOf2(img.width) && isPowerOf2(img.height)) {
                 gl.generateMipmap(gl.TEXTURE_2D); // MIPMAP defaults: probably NEAREST_MIPMAP_LINEAR small, LINEAR big
             } else {
-                console.log('hi');
-                console.log(img.width, img.height);
                 // first clamp when not power of two (so tex coordinates end at 1.0)
                 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
                 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
