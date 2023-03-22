@@ -1,9 +1,11 @@
 import { EngineConfig } from "../extra/EngineConfig";
 import { Input } from "../extra/Input";
+import { Texture } from "../GETS";
 import { Lifecycle } from "./Lifecycle";
 import { RendererManager } from "./managers/RendererManager";
 import { SceneManager } from "./managers/SceneManager";
 import { ShaderManager } from "./managers/ShaderManager";
+import { TextureManager } from "./managers/TextureManager";
 
 export class Engine implements Lifecycle {
     private static _isInstance: boolean = false;
@@ -44,6 +46,9 @@ export class Engine implements Lifecycle {
         RendererManager.getInstance().load();
 
         ShaderManager.getInstance().load();
+
+        this._config.textures.forEach((t) => new Texture(t.name, t.fileName));
+        TextureManager.getInstance().load();
 
         this._config.scenes.forEach((S) => new S());
         SceneManager.getInstance().setCurrentSceneByName(this._config.defaults.scene);

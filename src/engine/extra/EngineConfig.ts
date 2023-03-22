@@ -1,5 +1,6 @@
 import { Scene } from "../core/ecs/Scene";
 import { Renderer } from "../core/graphics/Renderer";
+import { TextureInfo } from "./TextureInfo";
 
 /**
  * The Configuration for EngineConfig defaults.
@@ -22,5 +23,6 @@ export interface EngineConfig {
     // Variable -> b: { new(): Type } = Type;
     renderers: { new (): Renderer }[];
     scenes: { new (): Scene }[];
+    textures?: TextureInfo[];
     defaults: DefaultsConfig;
 }
