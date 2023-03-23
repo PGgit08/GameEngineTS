@@ -17,6 +17,11 @@ export class Texture extends GameObject {
         return this._texture;
     }
 
+    /**
+     * Creates a new Texture.
+     * @param name The GameObject name of this Texture.
+     * @param fileName The file path of this Texture.
+     */
     constructor(name: string, fileName: string) {
         super(name);
 
