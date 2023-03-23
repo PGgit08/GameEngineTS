@@ -23,6 +23,7 @@ export * from './core/samples/DefaultScene';
 
 export * from './core/managers/SceneManager';
 export * from './core/managers/RendererManager';
+export * from './core/managers/TextureManager';
 
 export * from './extra/EngineConfig';
 export * from './extra/Input';
