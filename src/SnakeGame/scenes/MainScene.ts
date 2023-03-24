@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Color, MeshComponent, Scene, StandardMaterial } from "../../engine/GETS";
+import { MeshComponent, Scene } from "../../engine/GETS";
 import { HeadJointBehavior } from "../behaviors/HeadJointBehavior";
 import { SnakeJoint } from "../entities/SnakeJoint";
 
