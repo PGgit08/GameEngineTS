@@ -28,6 +28,8 @@ export class TextureManager extends Manager implements Lifecycle {
     }
 
     public load(): void {
+        new Texture('WHITE');
+
         Object.values(this._gameTextures).forEach((t) => t.load());
     }
 

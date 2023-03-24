@@ -1,6 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { TextureManager } from "../../engine/core/managers/TextureManager";
-import { Entity, MoveBehavior, Scene, Mesh, MeshComponent, Square, StandardMaterial} from "../../engine/GETS";
+import { Entity, MoveBehavior, Scene, MeshComponent, Sprite, TextureManager} from "../../engine/GETS";
 
 export class MyScene extends Scene {
     constructor() {
@@ -11,14 +10,9 @@ export class MyScene extends Scene {
 
         entity1.addComponents(
             new MeshComponent(
-                new Mesh(
-                    new Square(),
-                    new StandardMaterial(TextureManager.getInstance().getTextureByName('emoji'))
-                )
+                new Sprite(TextureManager.getInstance().getTextureByName('f-texture'))
             )
         );
-
-        // entity2.addComponents(new MeshComponent(new Mesh(new Square(), new ColorMaterial())));
 
         entity1.addBehaviors(new MoveBehavior());
 

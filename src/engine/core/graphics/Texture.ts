@@ -20,9 +20,9 @@ export class Texture extends GameObject {
     /**
      * Creates a new Texture.
      * @param name The GameObject name of this Texture.
-     * @param fileName The file path of this Texture.
+     * @param fileName The file path of this Texture (IF NOTHING SUPPLIED, TEXTURE DEFAULTS TO WHITE PIXEL).
      */
-    constructor(name: string, fileName: string) {
+    constructor(name: string, fileName?: string) {
         super(name);
 
         this._fileName = fileName;
@@ -38,6 +38,16 @@ export class Texture extends GameObject {
 
         this.bind();
 
+        if (this._fileName !== undefined) {
+            this.loadImage();
+        } else {
+            // set image to WHITE if nothing supplied
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([255, 255, 255, 255]));
+        }
+    }
+
+    // loads texture from image
+    private loadImage(): void {
         // default image to blue pixel
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));
 

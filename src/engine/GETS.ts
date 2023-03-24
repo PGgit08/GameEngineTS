@@ -15,6 +15,7 @@ export * from './core/graphics/material/StandardMaterial';
 export * from './core/graphics/Texture';
 export * from './core/graphics/geometry/Square';
 export * from './core/graphics/Color';
+export * from './core/graphics/Sprite';
 
 export * from './core/samples/MoveBehavior';
 export * from './core/samples/DefaultRenderer';
