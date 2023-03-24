@@ -42,7 +42,6 @@ export class Shader2D extends Shader {
          
         void main() {
             gl_FragColor = u_color * texture2D(u_texture, v_texcoord);
-            // gl_FragColor = u_color;
         }
         `;
     }

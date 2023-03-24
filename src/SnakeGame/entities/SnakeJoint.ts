@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Entity, MeshComponent, Mesh, Square, StandardMaterial, Color, TextureManager } from "../../engine/GETS";
+import { Entity, MeshComponent, TextureManager, Sprite } from "../../engine/GETS";
 
 export class SnakeJoint extends Entity {
     constructor() {
@@ -7,8 +7,10 @@ export class SnakeJoint extends Entity {
 
         this.transform.scale = vec2.fromValues(0.2, 0.2);
 
-        this.addComponents(new MeshComponent(new Mesh(new Square(), new StandardMaterial(
-            TextureManager.getInstance().getTextureByName('f-texture'), Color.YELLOW
-        ))));
+        this.addComponents(
+            new MeshComponent(
+                new Sprite(TextureManager.getInstance().getTextureByName('f-texture'))
+            )
+        )
     }
 }

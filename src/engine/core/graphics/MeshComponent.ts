@@ -1,15 +1,16 @@
 import { Component } from "../ecs/Component";
 import { RendererManager } from "../managers/RendererManager";
 import { Mesh } from "./Mesh";
+import { Sprite } from "./Sprite";
 
 export class MeshComponent extends Component {
-    private _mesh: Mesh;
+    private _mesh: Mesh & Sprite; // IDK IF THIS IS A GOOD IDEA
 
-    public get mesh(): Mesh {
+    public get mesh(): Mesh & Sprite {
         return this._mesh;
     }
 
-    constructor(mesh: Mesh) {
+    constructor(mesh: Mesh & Sprite) {
         super("MeshComponent");
 
         this._mesh = mesh;
