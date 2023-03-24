@@ -8,10 +8,14 @@ To test run -> **npm run dev**
 - Movement along local axis. -- DONE
 - Component/Behavior/Entity/Scene localizing -- HALF-DONE
 - Entity Spawning / Despawning -- DONE
-- Textures, Lighting, Cameras -- TEXTURE WORK-ON
+- Sprites (+ Animated Sprites)
+- Lighting, Cameras
 - Sprites 
 - Physics (matter.js) / Collsion
 - Entity Communication
+
+## Sprite Idea
+A Sprite extends Mesh, because it is a Square Geometry with a Texture Material. The Geometry can be updated if the Sprite uses a SpriteSheet.
 
 # Usage
 Projects should be structures accordingly: 
