@@ -12,7 +12,7 @@ export class Sprite extends Mesh {
      */
     constructor(textureName: string) {
         const texture: Texture = TextureManager.getInstance().getTextureByName(textureName);
-        super(new Square(), new StandardMaterial(texture, Color.BLUE));
+        super(new Square(), new StandardMaterial(texture, Color.RED));
     }
 
     public render(model: mat3, projection: mat3): void {

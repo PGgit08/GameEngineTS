@@ -1,6 +1,7 @@
 import { GameObject } from "../ecs/GameObject";
 import { TextureManager } from "../managers/TextureManager";
 import { isPowerOf2 } from "../math/Utils";
+import { Frame } from "./Frame";
 
 /**
  * Represents a WebGL Texture.
@@ -8,6 +9,8 @@ import { isPowerOf2 } from "../math/Utils";
 export class Texture extends GameObject {
     private _fileName: string;
     private _texture: WebGLTexture;
+
+    private _frames: Frame[] = [];
 
     public get fileName(): string {
         return this._fileName;
@@ -26,6 +29,7 @@ export class Texture extends GameObject {
         super(name);
 
         this._fileName = fileName;
+        this._frames.push(new Frame()); // config this frame to take up whole texture
 
         TextureManager.getInstance().addTexture(this);
     }
