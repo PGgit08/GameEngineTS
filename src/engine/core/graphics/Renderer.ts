@@ -94,7 +94,7 @@ export class Renderer extends GameObject implements Lifecycle {
             this.createCanvas();
         }
         
-        this._gl = this._canvas.getContext("webgl") as WebGLRenderingContext;
+        this._gl = this._canvas.getContext("webgl", {alpha: false}) as WebGLRenderingContext;
 
         if (!this._gl) {
             throw new Error("Browser does not support WebGL");
