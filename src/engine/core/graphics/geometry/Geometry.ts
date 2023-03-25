@@ -10,6 +10,22 @@ export abstract class Geometry {
     }
 
     /**
+     * Sets the data of this Geometry's position Buffer.
+     * @param data The data to set to.
+     */
+    public setPositionBuffer(data: number[]): void {
+        this._positionBuffer.data = data;
+    }
+
+    /**
+     * Sets the data of this Geometry's texture Buffer.
+     * @param data The data to set to.
+     */
+    public setTexBuffer(data: number[]): void {
+        this._textureBuffer.data = data;
+    }
+
+    /**
      * Sets the Buffer's drawing mode to LINE_STRIP
      */
     public enableWireframe(): void {
@@ -29,12 +45,12 @@ export abstract class Geometry {
     protected abstract setAttributes(): void;
 
     /**
-     * The positions of the verticies for this Geometry's position Buffer. (DEFAULT VALUES)
+     * Returns the positions of the verticies for this Geometry's position Buffer.
      */
     public abstract positionData(): number[];
 
     /**
-     * The texture positions buffer data for this Geometry's texture Buffer. (DEFAULT VALUES)
+     * Returns texture positions buffer data for this Geometry's texture Buffer.
      * @param minTexX The top left corner X coord of this Frame in its Texture (in WebGL coordinates).
      * @param minTexY The top left corner Y coord of this Frame in its Texture (in WebGL coordinates).
      * @param maxTexX The bottom right corner X coord of this Frame in its Texture (in WebGL coordinates).

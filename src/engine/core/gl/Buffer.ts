@@ -33,8 +33,11 @@ export class Buffer {
         this._mode = mode;
     }
 
-    constructor(data: number[]) {
-        this._data = data;
+    constructor(data?: number[]) {
+        if (data !== undefined) {
+            this._data = data;
+        }
+        
         this._buffer = gl.createBuffer();
     }
 

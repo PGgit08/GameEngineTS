@@ -35,6 +35,9 @@ export class Texture extends GameObject {
         this._frames['DEFAULT_FRAME'] = new Frame(0, 0, 1, 1);
         this._frames['DEFAULT_FRAME'].calcTexCoords(1, 1);
 
+        // this._frames['sprite1'] = new Frame(0, 480, 1920, 1080);
+        // this._frames['sprite1'].calcTexCoords(1920, 1560);
+
         TextureManager.getInstance().addTexture(this);
     }
 
@@ -97,6 +100,11 @@ export class Texture extends GameObject {
             this._frames['DEFAULT_FRAME'].width = img.width;
             this._frames['DEFAULT_FRAME'].height = img.height;
             this._frames['DEFAULT_FRAME'].calcTexCoords(img.width, img.height);
+
+            console.log(img.width, img.height);
+
+            // this._frames['sprite1'] = new Frame(0, 480, 1920, 1080);
+            // this._frames['sprite1'].calcTexCoords(img.width, img.height);
         }
 
         img.onerror = () => {

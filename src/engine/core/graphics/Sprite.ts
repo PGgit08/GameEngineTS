@@ -22,6 +22,12 @@ export class Sprite extends Mesh {
         } else {
             this._frame = texture.getDefaultFrame();
         }
+
+        // set texture buffer with Frame info
+        this._geometry.setTexBuffer(this._geometry.textureData(
+            this._frame.minTexX, this._frame.minTexY,
+            this._frame.maxTexX, this._frame.maxTexY
+        ));
     }
 
     public render(model: mat3, projection: mat3): void {
