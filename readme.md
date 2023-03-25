@@ -15,7 +15,7 @@ To test run -> **npm run dev**
 - Entity Communication
 
 ## Sprite Idea
-A Sprite extends Mesh, because it is a Square Geometry with a Texture Material. The Geometry can be updated if the Sprite uses a SpriteSheet.
+A Sprite extends Mesh, because it is a Square Geometry with a Texture Material. The Sprite can get optional Geometries (i.e. Sprite Shape in Unity), the Sprite can also use "Sprite Atlases" or "Sprite Sheets" using the Frame property of Textures. (WORK-ON)
 
 # Usage
 Projects should be structures accordingly: 
