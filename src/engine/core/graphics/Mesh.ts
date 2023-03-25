@@ -3,8 +3,8 @@ import { Material } from "./material/Material";
 import { mat3 } from "gl-matrix";
 
 export class Mesh {
-    private _geometry: Geometry;
-    private _material: Material;
+    protected _geometry: Geometry;
+    protected _material: Material;
 
     public get geometry(): Geometry {
         return this._geometry;

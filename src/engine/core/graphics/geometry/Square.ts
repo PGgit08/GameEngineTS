@@ -20,14 +20,14 @@ export class Square extends Geometry {
         });
     }
 
-    public textureData(): number[] {
+    public textureData(minTexX: number, minTexY: number, maxTexX: number, maxTexY: number): number[] {
         return [
-            0, 0,
-            0, 1,
-            1, 1,
-            1, 1,
-            1, 0,
-            0, 0
+            minTexX, minTexY,
+            minTexX, maxTexY,
+            maxTexX, maxTexY,
+            maxTexX, maxTexY,
+            maxTexX, minTexY,
+            minTexX, minTexY
         ];
     }
 

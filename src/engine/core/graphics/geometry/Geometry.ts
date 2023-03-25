@@ -6,7 +6,7 @@ export abstract class Geometry {
 
     constructor() {
         this._positionBuffer = new Buffer(this.positionData());
-        this._textureBuffer = new Buffer(this.textureData());
+        this._textureBuffer = new Buffer(this.textureData(0, 0, 1, 1));
     }
 
     /**
@@ -29,14 +29,23 @@ export abstract class Geometry {
     protected abstract setAttributes(): void;
 
     /**
-     * The positions of the verticies for this Geometry's position Buffer
+     * The positions of the verticies for this Geometry's position Buffer. (DEFAULT VALUES)
      */
     public abstract positionData(): number[];
 
     /**
-     * The texture positions buffer data for this Geometry's texture Buffer
+     * The texture positions buffer data for this Geometry's texture Buffer. (DEFAULT VALUES)
+     * @param minTexX The top left corner X coord of this Frame in its Texture (in WebGL coordinates).
+     * @param minTexY The top left corner Y coord of this Frame in its Texture (in WebGL coordinates).
+     * @param maxTexX The bottom right corner X coord of this Frame in its Texture (in WebGL coordinates).
+     * @param maxTexY The bottom right corner Y coord of this Frame in its Texture (in WebGL coordinates).
      */
-    public abstract textureData(): number[]; // (WebGL texture origin is at top-left corner, down +Y, right +X)
+    public abstract textureData(
+        minTexX: number,
+        minTexY: number,
+        maxTexX: number,
+        maxTexY: number
+    ): number[]; // (WebGL texture origin is at top-left corner, down +Y, right +X)
 
     /**
      * Load this Geometry and upload its Buffer
@@ -52,7 +61,6 @@ export abstract class Geometry {
      * Draw the Geometry
      */
     public draw(): void {
-        // this._textureBuffer.draw();
         this._textureBuffer.bind();
         this._positionBuffer.draw();
 

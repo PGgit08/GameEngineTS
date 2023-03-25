@@ -21,6 +21,10 @@ export class Buffer {
         return this._data;
     }
 
+    public set data(data: number[]) {
+        this._data = data;
+    }
+
     public get mode(): number {
         return this._mode;
     }

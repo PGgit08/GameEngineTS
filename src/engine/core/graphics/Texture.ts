@@ -1,3 +1,4 @@
+import Dictionary from "../../extra/Dictionary";
 import { GameObject } from "../ecs/GameObject";
 import { TextureManager } from "../managers/TextureManager";
 import { isPowerOf2 } from "../math/Utils";
@@ -10,7 +11,7 @@ export class Texture extends GameObject {
     private _fileName: string;
     private _texture: WebGLTexture;
 
-    private _frames: Frame[] = [];
+    private _frames: Dictionary<string, Frame> = {};
 
     public get fileName(): string {
         return this._fileName;
@@ -29,9 +30,28 @@ export class Texture extends GameObject {
         super(name);
 
         this._fileName = fileName;
-        this._frames.push(new Frame()); // config this frame to take up whole texture
+
+        // config default frame to take up whole texture
+        this._frames['DEFAULT_FRAME'] = new Frame(0, 0, 1, 1);
+        this._frames['DEFAULT_FRAME'].calcTexCoords(1, 1);
 
         TextureManager.getInstance().addTexture(this);
+    }
+
+
+    /**
+     * Returns the default Frame of this Texture.
+     */
+    public getDefaultFrame(): Frame {
+        return this.getFrame('DEFAULT_FRAME');
+    }
+
+    /**
+     * Returns a Frame from this Texture.
+     * @param frameName The name of the the Frame.
+     */
+    public getFrame(frameName: string): Frame {
+        return this._frames[frameName];
     }
 
     /**
@@ -52,7 +72,7 @@ export class Texture extends GameObject {
 
     // loads texture from image
     private loadImage(): void {
-        // default image to blue pixel
+        // default image to blue 1x1 pixel
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));
 
         const img = new Image();
@@ -73,6 +93,10 @@ export class Texture extends GameObject {
                 // this MIPMAP filter used when rendering image small (create LINEAR mipmaps from original tex as largest mip)
                 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
             }
+
+            this._frames['DEFAULT_FRAME'].width = img.width;
+            this._frames['DEFAULT_FRAME'].height = img.height;
+            this._frames['DEFAULT_FRAME'].calcTexCoords(img.width, img.height);
         }
 
         img.onerror = () => {

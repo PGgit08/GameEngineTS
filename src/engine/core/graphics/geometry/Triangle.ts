@@ -15,7 +15,7 @@ export class Triangle extends Geometry {
     }
 
     public textureData(): number[] {
-        return [];
+        return []; // TODO: add the texture data
     }
 
     public positionData(): number[] {
