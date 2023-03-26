@@ -25,18 +25,32 @@ export class Texture extends GameObject {
      * Creates a new Texture.
      * @param name The GameObject name of this Texture.
      * @param fileName The file path of this Texture (IF NOTHING SUPPLIED, TEXTURE DEFAULTS TO WHITE PIXEL).
+     * @param configJson The JSON containing the Texture packing config of this Texture
+     * (IF NOTHING SUPPLIED, DEFAULT FRAME TAKING UP WHOLE TEXTURE IS CREATED AND USED).
      */
-    constructor(name: string, fileName?: string) {
+    constructor(name: string, fileName?: string, configJson?: any) {
         super(name);
 
         this._fileName = fileName;
 
+        if (configJson !== undefined) {
+            // TODO: Create type for this.
+            configJson.frames.forEach((frame: any) => {
+                const newFrame: Frame = new Frame(
+                    frame.frame.x,
+                    frame.frame.y,
+                    frame.frame.w,
+                    frame.frame.h
+                );
+
+                newFrame.calcTexCoords(configJson.meta.size.w, configJson.meta.size.h);
+                this._frames[frame.filename] = newFrame;
+            });
+        }
+
         // config default frame to take up whole texture
         this._frames['DEFAULT_FRAME'] = new Frame(0, 0, 1, 1);
         this._frames['DEFAULT_FRAME'].calcTexCoords(1, 1);
-
-        // this._frames['sprite1'] = new Frame(0, 480, 1920, 1080);
-        // this._frames['sprite1'].calcTexCoords(1920, 1560);
 
         TextureManager.getInstance().addTexture(this);
     }
@@ -100,11 +114,6 @@ export class Texture extends GameObject {
             this._frames['DEFAULT_FRAME'].width = img.width;
             this._frames['DEFAULT_FRAME'].height = img.height;
             this._frames['DEFAULT_FRAME'].calcTexCoords(img.width, img.height);
-
-            console.log(img.width, img.height);
-
-            // this._frames['sprite1'] = new Frame(0, 480, 1920, 1080);
-            // this._frames['sprite1'].calcTexCoords(img.width, img.height);
         }
 
         img.onerror = () => {

@@ -9,7 +9,7 @@ export class MyScene extends Scene {
 
         entity1.addComponents(
             new MeshComponent(
-                new Sprite('sprite1')
+                new Sprite('testJson', 'emoji.jpg')
             )
         );
 

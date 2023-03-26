@@ -1,0 +1,30 @@
+{"frames": [
+
+{
+	"filename": "emoji.jpg",
+	"frame": {"x":0,"y":0,"w":480,"h":480},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":480,"h":480},
+	"sourceSize": {"w":480,"h":480},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Sprite1.png",
+	"frame": {"x":0,"y":480,"w":1920,"h":1080},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1080},
+	"sourceSize": {"w":1920,"h":1080},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "testJson.png",
+	"format": "RGBA8888",
+	"size": {"w":1920,"h":1560},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:907722671102b0c2efd9b42a2589c885:0e63cb5ee70191e2b16b33b9bb28032f:1e9280956973038f9d4a79a2aa4c9240$"
+}
+}
