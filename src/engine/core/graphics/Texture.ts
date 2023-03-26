@@ -44,7 +44,7 @@ export class Texture extends GameObject {
                 );
 
                 newFrame.calcTexCoords(configJson.meta.size.w, configJson.meta.size.h);
-                this._frames[frame.filename] = newFrame;
+                this._frames[frame.filename.split(".")[0]] = newFrame;
             });
         }
 
