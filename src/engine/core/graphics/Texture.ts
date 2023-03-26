@@ -1,4 +1,5 @@
 import Dictionary from "../../extra/Dictionary";
+import { TexturePackerConfig, TexturePackerFrame } from "../../extra/TexturePackerConfig";
 import { GameObject } from "../ecs/GameObject";
 import { TextureManager } from "../managers/TextureManager";
 import { isPowerOf2 } from "../math/Utils";
@@ -25,17 +26,17 @@ export class Texture extends GameObject {
      * Creates a new Texture.
      * @param name The GameObject name of this Texture.
      * @param fileName The file path of this Texture (IF NOTHING SUPPLIED, TEXTURE DEFAULTS TO WHITE PIXEL).
-     * @param configJson The JSON containing the Texture packing config of this Texture
+     * @param texturePackerConfig The JSON containing the Texture packing config of this Texture
      * (IF NOTHING SUPPLIED, DEFAULT FRAME TAKING UP WHOLE TEXTURE IS CREATED AND USED).
      */
-    constructor(name: string, fileName?: string, configJson?: any) {
+    constructor(name: string, fileName?: string, texturePackerConfig?: TexturePackerConfig) {
         super(name);
 
         this._fileName = fileName;
 
-        if (configJson !== undefined) {
+        if (texturePackerConfig !== undefined) {
             // TODO: Create type for this.
-            configJson.frames.forEach((frame: any) => {
+            texturePackerConfig.frames.forEach((frame: TexturePackerFrame) => {
                 const newFrame: Frame = new Frame(
                     frame.frame.x,
                     frame.frame.y,
@@ -43,7 +44,7 @@ export class Texture extends GameObject {
                     frame.frame.h
                 );
 
-                newFrame.calcTexCoords(configJson.meta.size.w, configJson.meta.size.h);
+                newFrame.calcTexCoords(texturePackerConfig.meta.size.h, texturePackerConfig.meta.size.h);
                 this._frames[frame.filename.split(".")[0]] = newFrame;
             });
         }
