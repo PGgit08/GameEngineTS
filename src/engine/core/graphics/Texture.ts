@@ -38,8 +38,8 @@ export class Texture extends GameObject {
             // TODO: Create type for this.
             texturePackerConfig.frames.forEach((frame: TexturePackerFrame) => {
                 const newFrame: Frame = new Frame(
-                    frame.frame.x,
-                    frame.frame.y,
+                    frame.frame.x + 3, // offset to remove unwanted pixels, idk if this is good
+                    frame.frame.y + 3, // offset to remove unwanted pixels, idk if this is good
                     frame.frame.w,
                     frame.frame.h
                 );

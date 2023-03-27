@@ -1,3 +1,5 @@
+import { TexturePackerConfig } from "./TexturePackerConfig";
+
 /**
  * Basic info about a Texture for an EngineConfig.
  * @property {string} name - The name for this Texture.
@@ -8,5 +10,5 @@
 export interface TextureInfo {
     name: string;
     fileName?: string;
-    configJson?: any;
+    configJson?: TexturePackerConfig;
 }
