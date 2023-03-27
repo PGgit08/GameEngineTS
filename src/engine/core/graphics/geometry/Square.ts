@@ -1,9 +1,10 @@
+import { vec2 } from "gl-matrix";
 import { ShaderManager } from "../../managers/ShaderManager";
 import { Geometry } from "./Geometry";
 
 export class Square extends Geometry {
     constructor() {
-        super();
+        super(100, 100, vec2.fromValues(0.4, 0.5));
     }
 
     protected setAttributes(): void {
@@ -33,12 +34,12 @@ export class Square extends Geometry {
 
     public positionData(): number[] {
         return [
-            -50, -50,
-            -50, 50, 
-            50, 50,
-            50, 50,
-            50, -50,
-            -50, -50
+            this._minX, this._minY,
+            this._minX, this._maxY, 
+            this._maxX, this._maxY,
+            this._maxX, this._maxY,
+            this._maxX, this._minY,
+            this._minX, this._minY
         ];
     }
 }
