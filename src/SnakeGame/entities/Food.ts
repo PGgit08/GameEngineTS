@@ -9,7 +9,7 @@ export class Food extends Entity {
 
         this.addComponents(
             new MeshComponent(
-                new Sprite(TextureManager.getInstance().getTextureByName('emoji'))
+                new Sprite('emoji')
             )
         )
     }

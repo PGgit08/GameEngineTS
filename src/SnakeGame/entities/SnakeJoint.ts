@@ -9,7 +9,7 @@ export class SnakeJoint extends Entity {
 
         this.addComponents(
             new MeshComponent(
-                new Sprite(TextureManager.getInstance().getTextureByName('f-texture'))
+                new Sprite('f-texture')
             )
         )
     }
