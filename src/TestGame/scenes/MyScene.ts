@@ -1,4 +1,5 @@
 import { vec2 } from "gl-matrix";
+import { Triangle } from "../../engine/core/graphics/geometry/Triangle";
 import { Entity, MoveBehavior, Scene, MeshComponent, Sprite } from "../../engine/GETS";
 
 export class MyScene extends Scene {
@@ -9,7 +10,7 @@ export class MyScene extends Scene {
 
         entity1.addComponents(
             new MeshComponent(
-                new Sprite('testJson', 'Sprite1')
+                new Sprite('testJson', 'Sprite1', vec2.fromValues(0.4, 0.7), undefined)
             )
         );
 

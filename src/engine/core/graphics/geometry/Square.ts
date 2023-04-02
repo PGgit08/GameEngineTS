@@ -1,10 +1,9 @@
-import { vec2 } from "gl-matrix";
 import { ShaderManager } from "../../managers/ShaderManager";
 import { Geometry } from "./Geometry";
 
 export class Square extends Geometry {
     constructor() {
-        super(100, 100, vec2.fromValues(0.4, 0.5));
+        super(100, 100);
     }
 
     protected setAttributes(): void {

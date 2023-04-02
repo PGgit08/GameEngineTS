@@ -7,25 +7,31 @@ export abstract class Geometry {
 
     protected _width: number;
     protected _height: number;
-    protected _origin: vec2 = vec2.fromValues(0.5, 0.5);
+    public origin: vec2 = vec2.fromValues(0.5, 0.5);
 
-    protected readonly _minX: number;
-    protected readonly _minY: number;
-    protected readonly _maxX: number;
-    protected readonly _maxY: number;
+    protected _minX: number;
+    protected _minY: number;
+    protected _maxX: number;
+    protected _maxY: number;
 
-    constructor(width: number, height: number, origin: vec2 = vec2.fromValues(0.5, 0.5)) {
+    constructor(width: number, height: number) {
         this._width = width;
         this._height = height;
-        this._origin = origin;
 
-        this._minX = -(this._origin[0] * this._width);
-        this._minY = -(this._origin[1] * this._height);
-        this._maxX = (1 - this._origin[0]) * this._width;
-        this._maxY = (1 - this._origin[1]) * this._height;
+        this.calcPosXY();
 
         this._positionBuffer = new Buffer(this.positionData());
         this._textureBuffer = new Buffer(this.textureData(0, 0, 1, 1));
+    }
+
+    /**
+     * Calculates the MIN/MAX X/Y values for this Geometry's position.
+     */
+    public calcPosXY(): void {
+        this._minX = -(this.origin[0] * this._width);
+        this._minY = -(this.origin[1] * this._height);
+        this._maxX = (1 - this.origin[0]) * this._width;
+        this._maxY = (1 - this.origin[1]) * this._height;
     }
 
     /**

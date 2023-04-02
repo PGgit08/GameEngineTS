@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Entity, MeshComponent, TextureManager, Sprite } from "../../engine/GETS";
+import { Entity, MeshComponent, Sprite } from "../../engine/GETS";
 
 export class Food extends Entity {
     constructor(){
