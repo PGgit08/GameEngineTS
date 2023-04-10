@@ -68,7 +68,11 @@ export class Texture extends GameObject {
      * @param frameName The name of the the Frame.
      */
     public getFrame(frameName: string): Frame {
-        return this._frames[frameName];
+        if (this._frames[frameName] !== undefined) {
+            return this._frames[frameName];
+        } else {
+            return this.getDefaultFrame();
+        }
     }
 
     /**

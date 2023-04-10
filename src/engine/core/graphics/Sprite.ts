@@ -29,8 +29,7 @@ export class Sprite extends Mesh {
         }
 
         if (texture !== undefined) {
-            if (frameName !== undefined) { this._frame = texture.getFrame(frameName); }
-            if (frameName === undefined) { this._frame = texture.getDefaultFrame(); }
+            this._frame = texture.getFrame(frameName);
         }
 
         // set texture buffer with Frame info

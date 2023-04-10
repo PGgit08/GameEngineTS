@@ -9,7 +9,7 @@ export class MyScene extends Scene {
 
         entity1.addComponents(
             new SpriteComponent(
-                new Sprite(undefined, 'Sprite1', vec2.fromValues(0.4, 0.7))
+                new Sprite('testJson', undefined, vec2.fromValues(0.4, 0.7))
             )
         );
 
