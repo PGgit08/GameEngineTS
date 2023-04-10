@@ -9,6 +9,7 @@ import { Texture } from "./Texture";
 
 export class Sprite extends Mesh {
     private _frame: Frame = Frame.defaultFrame();
+    private _texture: Texture;
 
     /**
      * Represents any 2D Mesh that renders a Texture.
@@ -18,9 +19,11 @@ export class Sprite extends Mesh {
      * @param geometry An optional Geometry for this Sprite (default is Square).
      */
     constructor(textureName?: string, frameName?: string, origin?: vec2, geometry: Geometry = new Square()) {
-        const texture: Texture = TextureManager.getInstance().getTextureByName(textureName);
+        const texture = TextureManager.getInstance().getTextureByName(textureName);
 
         super(geometry, new StandardMaterial(texture, undefined));
+
+        this._texture = texture;
 
         if (origin !== undefined) {
             geometry.origin = origin;
@@ -28,9 +31,7 @@ export class Sprite extends Mesh {
             geometry.setPositionBuffer(geometry.positionData());
         }
 
-        if (texture !== undefined) {
-            this._frame = texture.getFrame(frameName);
-        }
+        this._frame = this._texture.getFrame(frameName);
 
         // set texture buffer with Frame info
         this._geometry.setTexBuffer(this._geometry.textureData(
@@ -39,7 +40,13 @@ export class Sprite extends Mesh {
         ));
     }
 
-    public render(model: mat3, projection: mat3): void {
+    public setFrame(frameName: string): void {
+        if (this._texture !== undefined) {
+            this._frame = this._texture.getFrame(frameName);
+        }
+    }
+
+    public override render(model: mat3, projection: mat3): void {
         super.render(model, projection);
     }
 }
