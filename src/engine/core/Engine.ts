@@ -1,5 +1,6 @@
 import { EngineConfig } from "../extra/EngineConfig";
 import { Input } from "../extra/Input";
+import { Time } from "../extra/Time";
 import { Texture } from "../GETS";
 import { Lifecycle } from "./Lifecycle";
 import { RendererManager } from "./managers/RendererManager";
@@ -36,7 +37,9 @@ export class Engine implements Lifecycle {
         Engine._isInstance = true;
     }
 
-    private cycle(): void {
+    private cycle(now: number): void {
+        Time.addLastFrameRender(now * .001);
+
         this.update();
         this.render();
 

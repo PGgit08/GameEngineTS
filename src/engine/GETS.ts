@@ -14,6 +14,7 @@ export * from './core/graphics/SpriteComponent';
 export * from './core/graphics/material/StandardMaterial';
 export * from './core/graphics/Texture';
 export * from './core/graphics/geometry/Square';
+export * from './core/graphics/geometry/Triangle';
 export * from './core/graphics/Color';
 export * from './core/graphics/Sprite';
 
@@ -28,4 +29,5 @@ export * from './core/managers/TextureManager';
 
 export * from './extra/EngineConfig';
 export * from './extra/Input';
+export * from './extra/Time';
 

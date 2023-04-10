@@ -35,7 +35,6 @@ export class Texture extends GameObject {
         this._fileName = fileName;
 
         if (texturePackerConfig !== undefined) {
-            // TODO: Create type for this.
             texturePackerConfig.frames.forEach((frame: TexturePackerFrame) => {
                 const newFrame: Frame = new Frame(
                     frame.frame.x,
