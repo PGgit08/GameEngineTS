@@ -50,8 +50,7 @@ export class Texture extends GameObject {
         }
 
         // config default frame to take up whole texture
-        this._frames['DEFAULT_FRAME'] = new Frame(0, 0, 1, 1);
-        this._frames['DEFAULT_FRAME'].calcTexCoords(1, 1);
+        this._frames['DEFAULT_FRAME'] = Frame.defaultFrame();
 
         TextureManager.getInstance().addTexture(this);
     }

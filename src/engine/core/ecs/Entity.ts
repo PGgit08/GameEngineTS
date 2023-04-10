@@ -161,27 +161,6 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     
-    /**
-     * TESTING (DONT USE)
-     */
-    public clone(): Entity {
-        const clonedEntity = new Entity(this.name + " (Clone)", this._relativeChildren);
-
-        const clonedBehaviors: Behavior[] = [];
-        const clonedComponents: Component[] = [];
-        const clonedChildren: Entity[] = [];
-
-        this._behaviors.forEach((b) => clonedBehaviors.push(b.clone() as Behavior));
-        this._components.forEach((c) => clonedComponents.push(c.clone() as Component));
-        this._children.forEach((c) => clonedChildren.push(c.clone() as Entity));
-
-        clonedEntity.addBehaviors(...clonedBehaviors);
-        clonedEntity.addComponents(...clonedComponents);
-        clonedEntity.addChildren(...clonedChildren);
-
-        return clonedEntity;
-    }
-
     public load(): void {
         if (!this._loaded) {
             this._components.forEach((c) => c.load());

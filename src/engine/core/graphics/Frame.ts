@@ -38,6 +38,16 @@ export class Frame {
     }
 
     /**
+     * Creates a new Frame that completely fills up a 1x1 texture.
+     */
+    public static defaultFrame(): Frame {
+        const defaultFrame: Frame = new Frame(0, 0, 1, 1);
+        defaultFrame.calcTexCoords(1, 1);
+
+        return defaultFrame;
+    }
+
+    /**
      * Represents individual "frames" of a Texture that can be useful for both Texture Atlases,
      * and Sprite Sheets (similar design to PhaserJS).
      * @param x The X position of this Frame in the Texture in pixels.
