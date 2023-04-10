@@ -10,7 +10,7 @@ export * from './core/ecs/Scene';
 export * from './core/math/Transform';
 
 export * from './core/graphics/Mesh';
-export * from './core/graphics/MeshComponent';
+export * from './core/graphics/SpriteComponent';
 export * from './core/graphics/material/StandardMaterial';
 export * from './core/graphics/Texture';
 export * from './core/graphics/geometry/Square';

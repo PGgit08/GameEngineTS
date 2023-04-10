@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { MeshComponent, Scene } from "../../engine/GETS";
+import { SpriteComponent, Scene } from "../../engine/GETS";
 import { HeadJointBehavior } from "../behaviors/HeadJointBehavior";
 import { SnakeJoint } from "../entities/SnakeJoint";
 
@@ -9,7 +9,7 @@ export class MainScene extends Scene {
 
         const headJoint = new SnakeJoint();
 
-        headJoint.getComponent(MeshComponent).mesh
+        headJoint.getComponent(SpriteComponent).mesh
         headJoint.transform.position = vec2.fromValues(200, 200);
 
         headJoint.addBehaviors(new HeadJointBehavior());

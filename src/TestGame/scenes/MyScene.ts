@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Entity, MoveBehavior, Scene, MeshComponent, Sprite } from "../../engine/GETS";
+import { Entity, MoveBehavior, Scene, SpriteComponent, Sprite } from "../../engine/GETS";
 
 export class MyScene extends Scene {
     constructor() {
@@ -8,7 +8,7 @@ export class MyScene extends Scene {
         const entity1: Entity = new Entity("Entity1");
 
         entity1.addComponents(
-            new MeshComponent(
+            new SpriteComponent(
                 new Sprite(undefined, 'Sprite1', vec2.fromValues(0.4, 0.7))
             )
         );
