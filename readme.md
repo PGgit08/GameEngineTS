@@ -1,21 +1,20 @@
 # GameEngineTS
 A basic 2D Game Engine written with Typescript and WebGL. (WORK IN PROGRESS)
 
+
 # Testing
 To test run -> **npm run dev**
 
+
 # Todo
 - Movement along local axis. -- DONE
-- Component/Behavior/Entity/Scene localizing -- HALF-DONE
+- Component/Behavior/Entity/Scene localizing -- ALMOST DONE
 - Entity Spawning / Despawning -- DONE
-- Sprites (+ Animated Sprites)
+- Sprites (+ Animated Sprites) -- ALMOST DONE
 - Lighting, Cameras
-- Sprites 
 - Physics (matter.js) / Collsion
-- Entity Communication
+- Entity Communication (+ Events)
 
-## Sprite Idea
-A Sprite extends Mesh, because it is a Square Geometry with a Texture Material. The Sprite can get optional Geometries (i.e. Sprite Shape in Unity), the Sprite can also use "Sprite Atlases" or "Sprite Sheets" using the Frame property of Textures. (WORK-ON)
 
 # Usage
 Projects should be structures accordingly: 
@@ -37,7 +36,7 @@ An interface that has all the Lifecycle methods the engine uses.
 - render(): void ->  called durign frame update and should be used for rendering
 
 ## Graphics
-The Mesh class is the main graphics item in the engine. It takes in a Geometry class specifying the verticies that make up the Mesh and a Material class specifying the color/texture and other material features of the Mesh. The MeshComponent class is a Component that can take in a Mesh and it can be linked to an Entity to render a Mesh that belongs to the Entity.
+The Mesh class is the main graphics item in the engine. It takes in a Geometry class specifying the verticies that make up the Mesh and a Material class specifying the color/texture and other material features of the Mesh. The Sprite class is what gets used by the user. A SpriteComponent gets fed with a Sprite which can inputs an optional Texture, rendering Frame, and other optional information such as custom Geometry and origin for pivot. The AnimatedSprite class is an extension of the Sprite class which can be used to form Sprite animations given a configuration that specifies the order of Frames to use for the animation and time per frame (config is called AnimatedSpriteConfig).  
 
 ## Managers
 A Manager is a singleton class that stores instances of GameObjects with unique names that can be retrieved and modified.

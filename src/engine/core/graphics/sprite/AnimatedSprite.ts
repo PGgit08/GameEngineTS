@@ -3,13 +3,13 @@ import { Sprite } from "./Sprite";
 import { Geometry } from "../geometry/Geometry";
 import { Square } from "../geometry/Square";
 import { Time } from "../../../extra/Time";
-import { AnimatedSpriteInfo } from "./AnimatedSpriteInfo";
+import { AnimatedSpriteConfig } from "./AnimatedSpriteConfig";
 
 export class AnimatedSprite extends Sprite {
     private _currentFrameIndex: number = 0;
     private _timeSinceLastFrame: number = 0;
 
-    private _animatedSpriteInfo: AnimatedSpriteInfo;
+    private _animatedSpriteInfo: AnimatedSpriteConfig;
 
     public isPlaying: boolean = true;
 
@@ -20,7 +20,7 @@ export class AnimatedSprite extends Sprite {
      * @param origin The origin vector for this Animated Sprite (default is (0.5, 0.5)).
      * @param geometry The geometry used for this Animated Sprite (default is Square).
      */
-    constructor(animatedSpriteInfo: AnimatedSpriteInfo, textureName?: string, origin?: vec2, geometry: Geometry = new Square()) {
+    constructor(animatedSpriteInfo: AnimatedSpriteConfig, textureName?: string, origin?: vec2, geometry: Geometry = new Square()) {
         super(textureName, animatedSpriteInfo.frameOrder[0], origin, geometry);
 
         this._animatedSpriteInfo = animatedSpriteInfo;

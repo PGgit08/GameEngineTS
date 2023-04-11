@@ -3,7 +3,7 @@ import { AnimatedSprite } from "./AnimatedSprite";
 /**
  * The information for an {@link AnimatedSprite}
  */
-export interface AnimatedSpriteInfo {
+export interface AnimatedSpriteConfig {
     frameOrder: string[];
     timePerFrame: number;
 }
