@@ -3,7 +3,7 @@ import { Sprite } from "./Sprite";
 import { Geometry } from "../geometry/Geometry";
 import { Square } from "../geometry/Square";
 import { Time } from "../../../extra/Time";
-import { AnimatedSpriteConfig } from "./AnimatedSpriteConfig";
+import { AnimatedSpriteConfig, AnimationFrameOrder } from "./AnimatedSpriteConfig";
 
 export class AnimatedSprite extends Sprite {
     private _currentFrameIndex: number = 0;
@@ -21,7 +21,7 @@ export class AnimatedSprite extends Sprite {
      * @param geometry The geometry used for this Animated Sprite (default is Square).
      */
     constructor(animatedSpriteInfo: AnimatedSpriteConfig, textureName?: string, origin?: vec2, geometry: Geometry = new Square()) {
-        super(textureName, animatedSpriteInfo.frameOrder[0], origin, geometry);
+        super(textureName, animatedSpriteInfo.customFrameOrder[0], origin, geometry);
 
         this._animatedSpriteInfo = animatedSpriteInfo;
     }
@@ -35,13 +35,13 @@ export class AnimatedSprite extends Sprite {
         }
 
         if (this._timeSinceLastFrame > this._animatedSpriteInfo.timePerFrame) {
-            if (this._currentFrameIndex + 1 > this._animatedSpriteInfo.frameOrder.length) {
+            if (this._currentFrameIndex + 1 > this._animatedSpriteInfo.customFrameOrder.length) {
                 this._currentFrameIndex = 0;
             }
 
             this._timeSinceLastFrame = 0;
 
-            this.setFrame(this._animatedSpriteInfo.frameOrder[this._currentFrameIndex]);
+            this.setFrame(this._animatedSpriteInfo.customFrameOrder[this._currentFrameIndex]);
 
             this._currentFrameIndex ++;
         }
