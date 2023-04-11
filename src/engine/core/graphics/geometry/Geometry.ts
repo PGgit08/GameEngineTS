@@ -35,6 +35,20 @@ export abstract class Geometry {
     }
 
     /**
+     * Uploads the position buffer to the GPU.
+     */
+    public uploadPositionBuffer(): void {
+        this._positionBuffer.upload();
+    }
+
+    /**
+     * Uploads the texture buffer to the GPU.
+     */
+    public uploadTextureBuffer(): void {
+        this._textureBuffer.upload();
+    }
+
+    /**
      * Sets the data of this Geometry's position Buffer.
      * @param data The data to set to.
      */
@@ -94,8 +108,8 @@ export abstract class Geometry {
     public load(): void {
         this.setAttributes();
         
-        this._positionBuffer.upload();
-        this._textureBuffer.upload();
+        this.uploadPositionBuffer();
+        this.uploadTextureBuffer();
     }
 
     /**

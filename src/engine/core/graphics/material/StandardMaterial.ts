@@ -20,7 +20,7 @@ export class StandardMaterial extends Material {
         }
     }
 
-    public applyAdditionalUniforms(): void {
+    public override applyAdditionalUniforms(): void {
         this.texture.activateAndBind();
         this._shader.setUniformVec4('u_color', this.color.toVec4());
     }

@@ -1,7 +1,7 @@
 import { vec2 } from "gl-matrix";
 import { Input } from "../../extra/Input";
 import { Behavior } from "../ecs/Behavior";
-import { Time } from "../../GETS";
+import { SpriteComponent, Time } from "../../GETS";
 
 export class MoveBehavior extends Behavior {
     public speed: number = 50; // pixels per second
@@ -14,7 +14,9 @@ export class MoveBehavior extends Behavior {
         super("MoveBehavior");
     }
     
-    public start(): void {}
+    public start(): void {
+        this.parent.getComponent(SpriteComponent).sprite.setFrame('emoji');
+    }
 
     public update(): void {
         if (Input.KeyDown("KeyW")) {

@@ -44,6 +44,7 @@ export class Texture extends GameObject {
                 );
 
                 newFrame.calcTexCoords(texturePackerConfig.meta.size.h, texturePackerConfig.meta.size.h);
+                
                 this._frames[frame.filename.split(".")[0]] = newFrame;
             });
         }
@@ -92,8 +93,8 @@ export class Texture extends GameObject {
 
     // loads texture from image
     private loadImage(): void {
-        // default image to blue 1x1 pixel
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));
+        // default image to WHITE 1x1 pixel
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([255, 255, 255, 255]));
 
         const img = new Image();
         img.src = this._fileName;
