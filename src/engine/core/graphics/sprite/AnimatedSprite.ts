@@ -11,6 +11,8 @@ export class AnimatedSprite extends Sprite {
 
     private _animatedSpriteInfo: AnimatedSpriteInfo;
 
+    public isPlaying: boolean = true;
+
     /**
      * Creates an Animated Sprite.
      * @param animatedSpriteInfo The info for this Animated Sprite.
@@ -26,6 +28,11 @@ export class AnimatedSprite extends Sprite {
 
     public override render(model: mat3, projection: mat3): void {
         this._timeSinceLastFrame += Time.deltaTime(); // Use deltaTime in case of rendering lag
+
+        if (!this.isPlaying) {
+            super.render(model, projection);
+            return;
+        }
 
         if (this._timeSinceLastFrame > this._animatedSpriteInfo.timePerFrame) {
             if (this._currentFrameIndex + 1 > this._animatedSpriteInfo.frameOrder.length) {
