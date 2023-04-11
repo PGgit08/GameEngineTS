@@ -14,11 +14,9 @@ export class MoveBehavior extends Behavior {
         super("MoveBehavior");
     }
     
-    public start(): void {
-        this.parent.getComponent(SpriteComponent).sprite.setFrame('emoji');
-    }
+    public override start(): void {}
 
-    public update(): void {
+    public override update(): void {
         if (Input.KeyDown("KeyW")) {
             const translation = vec2.create();
             vec2.scale(translation, vec2.fromValues(0, -1), this.speed * Time.deltaTime());

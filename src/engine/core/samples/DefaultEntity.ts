@@ -4,7 +4,7 @@ import { Color } from "../graphics/Color";
 import { Square } from "../graphics/geometry/Square";
 import { StandardMaterial } from "../graphics/material/StandardMaterial";
 import { Mesh } from "../graphics/Mesh";
-import { SpriteComponent } from "../graphics/SpriteComponent";
+import { SpriteComponent } from "../graphics/sprite/SpriteComponent";
 import { RendererManager } from "../managers/RendererManager";
 
 // THIS WOULD PROBABLY BE A PREFAB

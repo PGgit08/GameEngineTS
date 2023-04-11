@@ -1,11 +1,11 @@
 import { mat3, vec2 } from "gl-matrix";
-import { TextureManager } from "../managers/TextureManager";
-import { Frame } from "./Frame";
-import { Geometry } from "./geometry/Geometry";
-import { Square } from "./geometry/Square";
-import { StandardMaterial } from "./material/StandardMaterial";
-import { Mesh } from "./Mesh";
-import { Texture } from "./Texture";
+import { TextureManager } from "../../managers/TextureManager";
+import { Frame } from "../Frame";
+import { Geometry } from "../geometry/Geometry";
+import { Square } from "../geometry/Square";
+import { StandardMaterial } from "../material/StandardMaterial";
+import { Mesh } from "../Mesh";
+import { Texture } from "../Texture";
 
 export class Sprite extends Mesh {
     private _frame: Frame = Frame.defaultFrame();
@@ -40,6 +40,10 @@ export class Sprite extends Mesh {
         ));
     }
 
+    /**
+     * Sets the current Texture Frame for this Sprite.
+     * @param frameName The name of the Frame of this Sprite's Texture to render.
+     */
     public setFrame(frameName: string): void {
         this._frame = this._texture.getFrame(frameName);
 

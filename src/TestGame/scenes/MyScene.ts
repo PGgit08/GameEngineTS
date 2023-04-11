@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Entity, MoveBehavior, Scene, SpriteComponent, Sprite, Triangle } from "../../engine/GETS";
+import { Entity, MoveBehavior, Scene, SpriteComponent, AnimatedSprite } from "../../engine/GETS";
 
 export class MyScene extends Scene {
     constructor() {
@@ -9,7 +9,10 @@ export class MyScene extends Scene {
 
         entity1.addComponents(
             new SpriteComponent(
-                new Sprite('testJson', 'emoji')
+                new AnimatedSprite({
+                    frameOrder: ['emoji', 'Sprite1'],
+                    timePerFrame: 0.5
+                }, 'testJson')
             )
         );
 

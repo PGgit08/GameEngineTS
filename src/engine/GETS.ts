@@ -10,13 +10,14 @@ export * from './core/ecs/Scene';
 export * from './core/math/Transform';
 
 export * from './core/graphics/Mesh';
-export * from './core/graphics/SpriteComponent';
 export * from './core/graphics/material/StandardMaterial';
 export * from './core/graphics/Texture';
 export * from './core/graphics/geometry/Square';
 export * from './core/graphics/geometry/Triangle';
 export * from './core/graphics/Color';
-export * from './core/graphics/Sprite';
+export * from './core/graphics/sprite/SpriteComponent';
+export * from './core/graphics/sprite/Sprite';
+export * from './core/graphics/sprite/AnimatedSprite';
 
 export * from './core/samples/MoveBehavior';
 export * from './core/samples/DefaultRenderer';

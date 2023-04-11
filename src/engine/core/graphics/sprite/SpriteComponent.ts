@@ -1,5 +1,5 @@
-import { Component } from "../ecs/Component";
-import { RendererManager } from "../managers/RendererManager";
+import { Component } from "../../ecs/Component";
+import { RendererManager } from "../../managers/RendererManager";
 import { Sprite } from "./Sprite";
 
 export class SpriteComponent extends Component {

@@ -3,7 +3,7 @@
  */
 export interface Lifecycle {
     /**
-     * Called once during load period, and once during Entity Spawn (NOT MADE YET).
+     * Called once during load period, and once during Entity Spawn.
      */
     load(): void;
 
