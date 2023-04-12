@@ -1,4 +1,4 @@
-import { mat3, vec2 } from "gl-matrix";
+import { vec2 } from "gl-matrix";
 import { TextureManager } from "../../managers/TextureManager";
 import { Frame } from "../Frame";
 import { Geometry } from "../geometry/Geometry";
@@ -34,9 +34,9 @@ export class Sprite extends Mesh {
         this._texture = texture;
 
         if (origin !== undefined) {
-            geometry.origin = origin;
-            geometry.calcPosXY();
-            geometry.setPositionBuffer(geometry.positionData());
+            this._geometry.origin = origin;
+            this._geometry.calcPosXY();
+            this._geometry.setPositionBuffer(geometry.positionData());
         }
 
         this._frame = this._texture.getFrame(frameName);

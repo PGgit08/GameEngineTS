@@ -44,7 +44,7 @@ export class Texture extends GameObject {
                     frame.frame.h
                 );
 
-                newFrame.calcTexCoords(texturePackerConfig.meta.size.h, texturePackerConfig.meta.size.h);
+                newFrame.calcTexCoords(texturePackerConfig.meta.size.w, texturePackerConfig.meta.size.h);
                 
                 this._frames[newFrame.name] = newFrame;
             });

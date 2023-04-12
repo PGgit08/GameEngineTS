@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Entity, MoveBehavior, Scene, SpriteComponent, AnimatedSprite, AnimationFrameOrder } from "../../engine/GETS";
+import { Entity, MoveBehavior, Scene, SpriteComponent, AnimatedSprite, AnimationFrameOrder, Sprite } from "../../engine/GETS";
 
 export class MyScene extends Scene {
     constructor() {
@@ -10,17 +10,20 @@ export class MyScene extends Scene {
         entity1.addComponents(
             new SpriteComponent(
                 new AnimatedSprite({
-                    animationFrameOrder: AnimationFrameOrder.Custom,
-                    customFrameOrder: ['Sprite1', 'emoji', 'emoji'],
+                    animationFrameOrder: AnimationFrameOrder.Reversed,
                     timePerFrame: 0.5
-                }, 'testJson')
+                }, 'ArmsAnimation')
+                // new Sprite(
+                //     'ArmsAnimation',
+                //     'Frame3'
+                // )
             )
         );
 
         entity1.addBehaviors(new MoveBehavior());
 
         entity1.transform.position = vec2.fromValues(300, 300);
-        // entity1.transform.scale = vec2.fromValues(1.3, 1.3);
+        entity1.transform.scale = vec2.fromValues(1.3, 1.3);
 
         this.addEntities(entity1);
     }
