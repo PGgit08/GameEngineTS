@@ -11,6 +11,14 @@ export class Sprite extends Mesh {
     private _frame: Frame = Frame.defaultFrame();
     private _texture: Texture;
 
+    public get frame(): Frame {
+        return this._frame;
+    }
+
+    public get texture(): Texture {
+        return this._texture;
+    }
+
     /**
      * Represents any 2D Mesh that renders a Texture.
      * @param textureName The name of the Texture that this Sprite uses. (if nothing supplied, only tint is used)
@@ -41,10 +49,25 @@ export class Sprite extends Mesh {
     }
 
     /**
-     * Sets the current Texture Frame for this Sprite.
+     * Sets the current Texture Frame.
+     * @param frame The Frame of this Sprite's Texture to render.
+     */
+    public setFrame(frame: Frame): void {
+        this._frame = frame;
+
+        this._geometry.setTexBuffer(this._geometry.textureData(
+            this._frame.minTexX, this._frame.minTexY,
+            this._frame.maxTexX, this._frame.maxTexY
+        ));
+
+        this._geometry.uploadTextureBuffer();
+    }
+
+    /**
+     * Sets the current Texture Frame by its name for this Sprite.
      * @param frameName The name of the Frame of this Sprite's Texture to render.
      */
-    public setFrame(frameName: string): void {
+    public setFrameByName(frameName: string): void {
         this._frame = this._texture.getFrame(frameName);
 
         this._geometry.setTexBuffer(this._geometry.textureData(

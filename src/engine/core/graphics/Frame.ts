@@ -4,6 +4,8 @@ export class Frame {
     public width: number;
     public height: number;
 
+    public readonly name: string;
+
     private _minTexX: number = 0;
     private _minTexY: number = 0;
     private _maxTexX: number;
@@ -41,7 +43,7 @@ export class Frame {
      * Creates a new Frame that completely fills up a 1x1 texture.
      */
     public static defaultFrame(): Frame {
-        const defaultFrame: Frame = new Frame(0, 0, 1, 1);
+        const defaultFrame: Frame = new Frame("DEFAULT_FRAME", 0, 0, 1, 1);
         defaultFrame.calcTexCoords(1, 1);
 
         return defaultFrame;
@@ -55,7 +57,9 @@ export class Frame {
      * @param w The width this Frame in the Texture in pixels.
      * @param h The height of this Frame in the Texture in pixels.
      */
-    constructor(x: number, y: number, w: number, h: number) {
+    constructor(name: string, x: number, y: number, w: number, h: number) {
+        this.name = name;
+        
         this.x = x;
         this.y = y;
         this.width = w;

@@ -6,7 +6,12 @@ import { Time } from "../../../extra/Time";
 import { AnimatedSpriteConfig, AnimationFrameOrder } from "./AnimatedSpriteConfig";
 
 export class AnimatedSprite extends Sprite {
-    private _currentFrameIndex: number = 0;
+    private _startFrameIndex: number; // the index at which to start the animation
+    private _currentFrameIndex: number; // the current frame which is being indexed for animation
+    private _frameIndexCounter: number; // the value by which to increment the index by in each frame
+    private _resetAnimationIndex: number; // the index at which to reset the animation
+    private _animationFrames: string[]; // the frames to animate (names)
+
     private _timeSinceLastFrame: number = 0;
 
     private _animatedSpriteInfo: AnimatedSpriteConfig;
@@ -21,9 +26,39 @@ export class AnimatedSprite extends Sprite {
      * @param geometry The geometry used for this Animated Sprite (default is Square).
      */
     constructor(animatedSpriteInfo: AnimatedSpriteConfig, textureName?: string, origin?: vec2, geometry: Geometry = new Square()) {
-        super(textureName, animatedSpriteInfo.customFrameOrder[0], origin, geometry);
+        super(textureName, undefined, origin, geometry);
 
+        switch (animatedSpriteInfo.animationFrameOrder) {
+            case AnimationFrameOrder.Sequential:
+                this._startFrameIndex = 0;
+                this._frameIndexCounter = 1;
+                this._resetAnimationIndex = this.texture.frameNames().length;
+                this._animationFrames = this.texture.frameNames();
+                break;
+
+            case AnimationFrameOrder.Reversed:
+                this._startFrameIndex = this.texture.frameNames().length - 1;
+                this._frameIndexCounter = -1;
+                this._resetAnimationIndex = -1;
+                this._animationFrames = this.texture.frameNames();
+                break;
+
+            case AnimationFrameOrder.Custom:
+                if (animatedSpriteInfo.customFrameOrder === undefined) {
+                    throw new Error("Custom Frame order not supplied for Animated Sprite.");
+                }
+
+                this._startFrameIndex = 0;
+                this._frameIndexCounter = 1;
+                this._resetAnimationIndex = animatedSpriteInfo.customFrameOrder.length;
+                this._animationFrames = animatedSpriteInfo.customFrameOrder;
+                break;
+        }
+
+        this._currentFrameIndex = this._startFrameIndex;
         this._animatedSpriteInfo = animatedSpriteInfo;
+
+        this.setFrameByName(this._animationFrames[this._currentFrameIndex]); // set initial frame
     }
 
     public override render(model: mat3, projection: mat3): void {
@@ -35,15 +70,16 @@ export class AnimatedSprite extends Sprite {
         }
 
         if (this._timeSinceLastFrame > this._animatedSpriteInfo.timePerFrame) {
-            if (this._currentFrameIndex + 1 > this._animatedSpriteInfo.customFrameOrder.length) {
-                this._currentFrameIndex = 0;
-            }
-
             this._timeSinceLastFrame = 0;
 
-            this.setFrame(this._animatedSpriteInfo.customFrameOrder[this._currentFrameIndex]);
+            console.log(this._currentFrameIndex);
+            this.setFrameByName(this._animationFrames[this._currentFrameIndex]);
 
-            this._currentFrameIndex ++;
+            this._currentFrameIndex += this._frameIndexCounter; // go to next frame index 
+
+            if (this._currentFrameIndex === this._resetAnimationIndex) { // reset animation
+                this._currentFrameIndex = this._startFrameIndex;
+            }
         }
 
         super.render(model, projection);

@@ -37,6 +37,7 @@ export class Texture extends GameObject {
         if (texturePackerConfig !== undefined) {
             texturePackerConfig.frames.forEach((frame: TexturePackerFrame) => {
                 const newFrame: Frame = new Frame(
+                    frame.filename.split(".")[0],
                     frame.frame.x,
                     frame.frame.y,
                     frame.frame.w,
@@ -45,7 +46,7 @@ export class Texture extends GameObject {
 
                 newFrame.calcTexCoords(texturePackerConfig.meta.size.h, texturePackerConfig.meta.size.h);
                 
-                this._frames[frame.filename.split(".")[0]] = newFrame;
+                this._frames[newFrame.name] = newFrame;
             });
         }
 
@@ -73,6 +74,13 @@ export class Texture extends GameObject {
         } else {
             return this.getDefaultFrame();
         }
+    }
+
+    /**
+     * Returns the names of the Frames this Texture contains (DEFAULT Frame not counted). 
+     */
+    public frameNames(): string[] {
+        return Object.keys(this._frames).filter((name) => name != "DEFAULT_FRAME");
     }
 
     /**

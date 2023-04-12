@@ -11,7 +11,7 @@ export class MyScene extends Scene {
             new SpriteComponent(
                 new AnimatedSprite({
                     animationFrameOrder: AnimationFrameOrder.Custom,
-                    customFrameOrder: ['emoji', 'Sprite1'],
+                    customFrameOrder: ['Sprite1', 'emoji', 'emoji'],
                     timePerFrame: 0.5
                 }, 'testJson')
             )
