@@ -8,7 +8,7 @@ function radiansToDeg(rad: number): number {
 
 function isPowerOf2(num: number): boolean {
     if (num == 0) { return false; }
-    return (num & num - 1) == 0;
+    return (num & num - 1) === 0;
 }
 
 export { degToRadians, radiansToDeg, isPowerOf2 };
