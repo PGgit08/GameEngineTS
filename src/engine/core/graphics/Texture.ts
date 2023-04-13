@@ -108,7 +108,6 @@ export class Texture extends GameObject {
         img.src = this._fileName;
         
         img.onload = () => {
-            console.log(this._fileName);
             this.bind();
 
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
