@@ -25,7 +25,7 @@ export class Texture extends GameObject {
     /**
      * Creates a new Texture.
      * @param name The GameObject name of this Texture.
-     * @param fileName The file path of this Texture (IF NOTHING SUPPLIED, TEXTURE DEFAULTS TO WHITE PIXEL).
+     * @param fileName The file path of this Texture (IF NOTHING SUPPLIED, TEXTURE DEFAULTS TO BLACK PIXEL).
      * @param texturePackerConfig The JSON containing the Texture packing config of this Texture
      * (IF NOTHING SUPPLIED, DEFAULT FRAME TAKING UP WHOLE TEXTURE IS CREATED AND USED).
      */
@@ -94,22 +94,23 @@ export class Texture extends GameObject {
         if (this._fileName !== undefined) {
             this.loadImage();
         } else {
-            // set image to WHITE if nothing supplied
-            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([255, 255, 255, 255]));
+            // set image to BLACK if nothing supplied
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
         }
     }
 
     // loads texture from image
     private loadImage(): void {
-        // default image to WHITE 1x1 pixel
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([255, 255, 255, 255]));
+        // default image to BLACK 1x1 pixel
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
 
         const img = new Image();
         img.src = this._fileName;
         
         img.onload = () => {
+            console.log(this._fileName);
             this.bind();
-            
+
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
 
             if (isPowerOf2(img.width) && isPowerOf2(img.height)) {

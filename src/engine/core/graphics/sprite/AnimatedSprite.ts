@@ -72,7 +72,6 @@ export class AnimatedSprite extends Sprite {
         if (this._timeSinceLastFrame > this._animatedSpriteInfo.timePerFrame) {
             this._timeSinceLastFrame = 0;
 
-            console.log(this._currentFrameIndex);
             this.setFrameByName(this._animationFrames[this._currentFrameIndex]);
 
             this._currentFrameIndex += this._frameIndexCounter; // go to next frame index 

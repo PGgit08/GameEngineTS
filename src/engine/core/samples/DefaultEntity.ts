@@ -6,6 +6,7 @@ import { StandardMaterial } from "../graphics/material/StandardMaterial";
 import { Mesh } from "../graphics/Mesh";
 import { SpriteComponent } from "../graphics/sprite/SpriteComponent";
 import { RendererManager } from "../managers/RendererManager";
+import { Sprite } from "../../GETS";
 
 // THIS WOULD PROBABLY BE A PREFAB
 /**
@@ -20,6 +21,6 @@ export class DefaultEntity extends Entity {
             RendererManager.getInstance().currentRenderer.height / 2
         )
 
-        this.addComponents(new SpriteComponent(new Mesh(new Square(), new StandardMaterial(undefined, Color.WHITE))));
+        this.addComponents(new SpriteComponent(new Sprite(undefined, undefined, undefined, new Square(), Color.GREEN)));
     }
 }

@@ -4,16 +4,14 @@ import { Texture } from "../Texture";
 import { Material } from "./Material";
 
 export class StandardMaterial extends Material {
-    public texture: Texture = TextureManager.getInstance().getTextureByName('WHITE');
-    public color: Color = Color.WHITE;
+    public texture: Texture;
+    public color: Color = Color.BLACK;
 
     // A StandardMaterial that uses Textures and Colors and the Shader2D shader.
     constructor(texture?: Texture, color?: Color) {
         super("Shader2D");
 
-        if (texture !== undefined) {
-            this.texture = texture;
-        }
+        this.texture = texture;
 
         if (color !== undefined) {
             this.color = color;

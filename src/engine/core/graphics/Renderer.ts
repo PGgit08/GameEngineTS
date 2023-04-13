@@ -94,7 +94,7 @@ export class Renderer extends GameObject implements Lifecycle {
             this.createCanvas();
         }
         
-        this._gl = this._canvas.getContext("webgl", {alpha: false}) as WebGLRenderingContext;
+        this._gl = this._canvas.getContext("webgl") as WebGLRenderingContext;
 
         if (this._gl === undefined) {
             throw new Error("Browser does not support WebGL");
@@ -106,7 +106,7 @@ export class Renderer extends GameObject implements Lifecycle {
             -1, 1, 1 // column 3 (NONE)
         );
 
-        this._gl.clearColor(0.0, 0.0, 0.0, 0.0); // Set clear color to black
+        this._gl.clearColor(0.0, 0.0, 0.0, 0.0); // Set to white with transparent background
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
         this._gl.viewport(0, 0, this._gl.canvas.width, this._gl.canvas.height);
     }

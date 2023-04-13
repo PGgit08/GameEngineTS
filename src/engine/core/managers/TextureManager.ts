@@ -27,12 +27,12 @@ export class TextureManager extends Manager implements Lifecycle {
         if (this._gameTextures[texName] !== undefined) {
             return this._gameTextures[texName];
         } else {
-            return this.getTextureByName('WHITE');            
+            return this.getTextureByName('BLACK');            
         }
     }
 
     public load(): void {
-        new Texture('WHITE');
+        new Texture('BLACK');
 
         Object.values(this._gameTextures).forEach((t) => t.load());
     }

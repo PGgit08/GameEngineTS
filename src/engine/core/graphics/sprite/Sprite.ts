@@ -6,6 +6,7 @@ import { Square } from "../geometry/Square";
 import { StandardMaterial } from "../material/StandardMaterial";
 import { Mesh } from "../Mesh";
 import { Texture } from "../Texture";
+import { Color } from "../Color";
 
 export class Sprite extends Mesh {
     private _frame: Frame = Frame.defaultFrame();
@@ -25,11 +26,12 @@ export class Sprite extends Mesh {
      * @param frameName The name of the Texture Frame to use (default is full Texture).
      * @param origin An optional origin vector for this Sprite (default is (0.5, 0.5)).
      * @param geometry An optional Geometry for this Sprite (default is Square).
+     * @param color An optional Color for this Sprite (default is BLACK).
      */
-    constructor(textureName?: string, frameName?: string, origin?: vec2, geometry: Geometry = new Square()) {
+    constructor(textureName?: string, frameName?: string, origin?: vec2, geometry: Geometry = new Square(), color?: Color) {
         const texture = TextureManager.getInstance().getTextureByName(textureName);
 
-        super(geometry, new StandardMaterial(texture, undefined));
+        super(geometry, new StandardMaterial(texture, color));
 
         this._texture = texture;
 
