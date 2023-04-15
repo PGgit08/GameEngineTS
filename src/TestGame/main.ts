@@ -19,6 +19,7 @@ new Engine(
             // {name: 'testJson', fileName: new URL('./assets/testJson.png', import.meta.url).href, configJson: testJson}
             {name: 'ArmsAnimation', fileName: new URL('./assets/ArmsAnimation.png', import.meta.url).href, configJson: ArmsAnimation}
         ],
+        
         defaults: {
             renderer: "DefaultRenderer",
             scene: "MyScene"

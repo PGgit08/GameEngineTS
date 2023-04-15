@@ -1,11 +1,12 @@
 import { Shader } from "./Shader";
+import { ShaderConfig } from "./ShaderConfig";
 
 export class Shader2D extends Shader {
     public get vSource(): string {
         return `
         // an attribute will receive data from a buffer
-        attribute vec2 a_position;
-        attribute vec2 a_texcoord;
+        attribute vec2 ${ShaderConfig.POSITION_ATTRIBUTE_NAME};
+        attribute vec2 ${ShaderConfig.TEXTURE_ATTRIBUTE_NAME};
 
         // varyings will pass variables from the shader to the fragement shader
         varying vec2 v_texcoord;

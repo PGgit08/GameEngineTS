@@ -20,6 +20,8 @@ export * from './core/graphics/sprite/Sprite';
 export * from './core/graphics/sprite/AnimatedSprite';
 export * from './core/graphics/sprite/AnimatedSpriteConfig';
 
+export * from './core/gl/shader/ShaderConfig';
+
 export * from './core/samples/MoveBehavior';
 export * from './core/samples/DefaultRenderer';
 export * from './core/samples/DefaultEntity';

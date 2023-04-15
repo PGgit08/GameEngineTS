@@ -1,3 +1,4 @@
+import { ShaderConfig } from "../../gl/shader/ShaderConfig";
 import { Shader } from "../../gl/shader/Shader";
 import { Geometry } from "./Geometry";
 
@@ -8,14 +9,14 @@ export class Square extends Geometry {
 
     protected override setAttributes(shader: Shader): void {
         this._positionBuffer.addAttribute({
-            location: shader.getAttributeLocation("a_position"),
-            size: 2,
+            location: shader.getAttributeLocation(ShaderConfig.POSITION_ATTRIBUTE_NAME),
+            size: ShaderConfig.POSITION_ATTRIBUTE_SIZE,
             offset: 0
         });
 
         this._textureBuffer.addAttribute({
-            location: shader.getAttributeLocation("a_texcoord"),
-            size: 2,
+            location: shader.getAttributeLocation(ShaderConfig.TEXTURE_ATTRIBUTE_NAME),
+            size: ShaderConfig.TEXTURE_ATTRIBUTE_SIZE,
             offset: 0
         });
     }
