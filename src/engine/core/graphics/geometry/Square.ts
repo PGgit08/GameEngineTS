@@ -1,4 +1,4 @@
-import { ShaderManager } from "../../managers/ShaderManager";
+import { Shader } from "../../gl/shader/Shader";
 import { Geometry } from "./Geometry";
 
 export class Square extends Geometry {
@@ -6,15 +6,15 @@ export class Square extends Geometry {
         super(100, 100);
     }
 
-    protected setAttributes(): void {
+    protected override setAttributes(shader: Shader): void {
         this._positionBuffer.addAttribute({
-            location: ShaderManager.getInstance().getShader("Shader2D").getAttributeLocation("a_position"),
+            location: shader.getAttributeLocation("a_position"),
             size: 2,
             offset: 0
         });
 
         this._textureBuffer.addAttribute({
-            location: ShaderManager.getInstance().getShader("Shader2D").getAttributeLocation("a_texcoord"),
+            location: shader.getAttributeLocation("a_texcoord"),
             size: 2,
             offset: 0
         });

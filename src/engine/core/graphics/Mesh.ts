@@ -33,7 +33,7 @@ export class Mesh {
      * Loads the Mesh, should be called in load() of Lifecycle
      */
     public load(): void {
-        this._geometry.load();
+        this._geometry.load(this._material.shader);
     }
 
     /**

@@ -4,6 +4,10 @@ import { mat3 } from "gl-matrix";
 
 export abstract class Material {
     protected _shader: Shader;
+
+    public get shader(): Shader {
+        return this._shader;
+    }
     
     constructor(shaderName: string) {
         this._shader = ShaderManager.getInstance().getShader(shaderName);

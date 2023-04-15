@@ -1,5 +1,6 @@
 import { vec2 } from "gl-matrix";
 import { Buffer } from "../../gl/Buffer";
+import { Shader } from "../../gl/shader/Shader";
 
 export abstract class Geometry {
     protected _positionBuffer: Buffer;
@@ -80,8 +81,9 @@ export abstract class Geometry {
 
     /**
      * Set the attributes for this Geometry's Buffer
+     * @param shader The shader used with this Geometry, important for setting attributes.
      */
-    protected abstract setAttributes(): void;
+    protected abstract setAttributes(shader: Shader): void;
 
     /**
      * Returns the positions of the verticies for this Geometry's position Buffer.
@@ -105,8 +107,8 @@ export abstract class Geometry {
     /**
      * Load this Geometry and upload its Buffer
      */
-    public load(): void {
-        this.setAttributes();
+    public load(shader: Shader): void {
+        this.setAttributes(shader);
         
         this.uploadPositionBuffer();
         this.uploadTextureBuffer();

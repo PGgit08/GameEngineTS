@@ -72,11 +72,6 @@ export class Sprite extends Mesh {
     public setFrameByName(frameName: string): void {
         this._frame = this._texture.getFrame(frameName);
 
-        this._geometry.setTexBuffer(this._geometry.textureData(
-            this._frame.minTexX, this._frame.minTexY,
-            this._frame.maxTexX, this._frame.maxTexY
-        ));
-
-        this._geometry.uploadTextureBuffer();
+        this.setFrame(this._frame);
     }
 }
