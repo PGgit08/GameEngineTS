@@ -7,6 +7,7 @@ import { StandardMaterial } from "../material/StandardMaterial";
 import { Mesh } from "../Mesh";
 import { Texture } from "../Texture";
 import { Color } from "../Color";
+import { BufferConfig } from "../../gl/BufferConfig";
 
 export class Sprite extends Mesh {
     private _frame: Frame = Frame.defaultFrame();
@@ -38,13 +39,13 @@ export class Sprite extends Mesh {
         if (origin !== undefined) {
             this._geometry.origin = origin;
             this._geometry.calcPosXY();
-            this._geometry.setPositionBuffer(geometry.positionData());
+            this._geometry.setBuffer(BufferConfig.POSITION_BUFFER_NAME, geometry.positionData());
         }
 
         this._frame = this._texture.getFrame(frameName);
 
         // set texture buffer with Frame info
-        this._geometry.setTexBuffer(this._geometry.textureData(
+        this._geometry.setBuffer(BufferConfig.TEXTURE_BUFFER_NAME, this._geometry.textureData(
             this._frame.minTexX, this._frame.minTexY,
             this._frame.maxTexX, this._frame.maxTexY
         ));
@@ -57,12 +58,12 @@ export class Sprite extends Mesh {
     public setFrame(frame: Frame): void {
         this._frame = frame;
 
-        this._geometry.setTexBuffer(this._geometry.textureData(
+        this._geometry.setBuffer(BufferConfig.TEXTURE_BUFFER_NAME, this._geometry.textureData(
             this._frame.minTexX, this._frame.minTexY,
             this._frame.maxTexX, this._frame.maxTexY
         ));
 
-        this._geometry.uploadTextureBuffer();
+        this._geometry.uploadBuffer(BufferConfig.TEXTURE_BUFFER_NAME);
     }
 
     /**
