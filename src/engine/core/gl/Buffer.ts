@@ -1,9 +1,10 @@
+import { GameObject } from "../ecs/GameObject";
 import { AttributeInfo } from "./AttributeInfo";
 
 /**
  * A WebGL Buffer that uses Float data and ARRAY_BUFFER(s)
  */
-export class Buffer {
+export class Buffer extends GameObject {
     private _data: number[] = [];
     private _buffer: WebGLBuffer;
 
@@ -13,7 +14,6 @@ export class Buffer {
     private _hasAttributes: boolean = false;
 
     private _elementSize: number = 0;
-    private _stride: number = 0;
 
     public readonly TYPE_SIZE: number = 4; // FLOAT SIZE 
 
@@ -33,7 +33,9 @@ export class Buffer {
         this._mode = mode;
     }
 
-    constructor(data?: number[]) {
+    constructor(name: string, data?: number[]) {
+        super(name);
+
         if (data !== undefined) {
             this._data = data;
         }
@@ -45,13 +47,18 @@ export class Buffer {
      * Binds the Buffer to WebGL and enables all Attributes
      */
     public bind(): void {
-        gl.bindBuffer(gl.ARRAY_BUFFER, this._buffer); // sets the BUFFER global variable on WebGL
+        // How it works (probably):
+        // sets global buffer variables to this buffer and links attributes to work with those buffers.
+        // gl.drawArrays() will call the vertex shader N amount of times, in each iteration using enabled
+        // attributes that are in the shader with their corresponding buffers 
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, this._buffer);
 
         // enable all attributes
         if (this._hasAttributes) {
             this._attributes.forEach((a) => {
                 gl.enableVertexAttribArray(a.location);
-                gl.vertexAttribPointer(a.location, a.size, gl.FLOAT, false, this._stride, a.offset);
+                gl.vertexAttribPointer(a.location, a.size, gl.FLOAT, false, 0, 0); // stride is by default a.size * sizeof(gl.FLOAT)
             });
         }
     }
@@ -88,10 +95,8 @@ export class Buffer {
      * @param info The info of the Attribute
      */
     public addAttribute(info: AttributeInfo): void {
-        info.offset += this._elementSize * this.TYPE_SIZE; // increase attrib offset by the prev element size
         this._attributes.push(info);
         this._elementSize += info.size;
-        this._stride += this._elementSize * this.TYPE_SIZE; // help WebGL with a stride value
 
         this._hasAttributes = true;
     }
@@ -99,15 +104,11 @@ export class Buffer {
     /**
      * Draws the Buffer
      */
-    public draw(): void {
-        this.bind();
-        
+    public draw(): void {        
         gl.drawArrays(
             this._mode,
             0,
             this._data.length / this._elementSize
         )
-
-        this.unbind();
     }
 }

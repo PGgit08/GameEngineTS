@@ -1,10 +1,13 @@
 export interface AttributeInfo {
-    /** The location of this attribute in the shader */
-    location: number;
+    /** The name of this attribute in the shader. */
+    name: string;
 
-    /** The size of the attribute (1-4, ex: Vector2 -> 2) */
+    /** The location of this attribute in the shader (AUTOMATICALLY FOUND BY GEOMETRY). */
+    location?: number;
+
+    /** The size of the attribute (1-4, ex: Vector2 -> 2). */
     size: number;
 
-    /** The offset of the attribute from the start of the buffer */
-    offset: number;
+    /** The name of the buffer that this Attribute belongs to. */
+    buffer: string;
 }

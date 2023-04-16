@@ -1,14 +1,18 @@
 import { vec2 } from "gl-matrix";
 import { Buffer } from "../../gl/Buffer";
 import { Shader } from "../../gl/shader/Shader";
+import Dictionary from "../../../extra/Dictionary";
+import { AttributeInfo } from "../../gl/AttributeInfo";
+import { ShaderConfig } from "../../gl/shader/ShaderConfig";
+import { BufferConfig } from "../../gl/BufferConfig";
 
 export abstract class Geometry {
-    protected _positionBuffer: Buffer;
-    protected _textureBuffer: Buffer;
+    private _buffers: Dictionary<string, Buffer> = {};
+    private _attributes: AttributeInfo[] = [];
 
+    public origin: vec2 = vec2.fromValues(0.5, 0.5);
     protected _width: number;
     protected _height: number;
-    public origin: vec2 = vec2.fromValues(0.5, 0.5);
 
     protected _minX: number;
     protected _minY: number;
@@ -21,8 +25,8 @@ export abstract class Geometry {
 
         this.calcPosXY();
 
-        this._positionBuffer = new Buffer(this.positionData());
-        this._textureBuffer = new Buffer(this.textureData(0, 0, 1, 1));
+        this.addDefaultBuffers(); // adds default buffers for position, texture, etc.
+        this.addDefaultAttributes(); // adds attributes for defaults like position, texture, etc.
     }
 
     /**
@@ -35,55 +39,90 @@ export abstract class Geometry {
         this._maxY = (1 - this.origin[1]) * this._height;
     }
 
-    /**
-     * Uploads the position buffer to the GPU.
-     */
-    public uploadPositionBuffer(): void {
-        this._positionBuffer.upload();
+
+    private addDefaultAttributes(): void {
+        this.addAttribute({
+            name: ShaderConfig.POSITION_ATTRIBUTE_NAME,
+            size: ShaderConfig.POSITION_ATTRIBUTE_SIZE,
+            buffer: BufferConfig.POSITION_BUFFER_NAME
+        });
+
+        this.addAttribute({
+            name: ShaderConfig.TEXTURE_ATTRIBUTE_NAME,
+            size: ShaderConfig.TEXTURE_ATTRIBUTE_SIZE,
+            buffer: BufferConfig.TEXTURE_BUFFER_NAME
+        });
+    }
+
+    private loadAttributes(shader: Shader): void {
+        this._attributes.forEach((attrib: AttributeInfo) => {
+            attrib.location = shader.getAttributeLocation(attrib.name);
+            this.getBuffer(attrib.buffer).addAttribute(attrib);
+        });
     }
 
     /**
-     * Uploads the texture buffer to the GPU.
+     * Add an Attribute to this Geometry.
+     * @param attribute The info of the Attribute that's being added.
      */
-    public uploadTextureBuffer(): void {
-        this._textureBuffer.upload();
+    public addAttribute(attribute: AttributeInfo): void {
+        this._attributes.push(attribute);
+    }
+
+
+    private getBuffer(name: string): Buffer {
+        if (this._buffers[name] === undefined) {
+            throw new Error("Cannot find Buffer in this Geometry called " + name);
+        }
+
+        return this._buffers[name];
+    }
+
+    private addDefaultBuffers(): void {
+        this.addBuffer(new Buffer(BufferConfig.POSITION_BUFFER_NAME, this.positionData()));
+        this.addBuffer(new Buffer(BufferConfig.TEXTURE_BUFFER_NAME, this.textureData(0, 0, 1, 1)));
     }
 
     /**
-     * Sets the data of this Geometry's position Buffer.
-     * @param data The data to set to.
+     * Add a Buffer to this Geometry.
+     * @param buffer The Buffer to add to this Geometry.
      */
-    public setPositionBuffer(data: number[]): void {
-        this._positionBuffer.data = data;
+    public addBuffer(buffer: Buffer): void {
+        this._buffers[buffer.name] = buffer;
     }
 
     /**
-     * Sets the data of this Geometry's texture Buffer.
-     * @param data The data to set to.
+     * Upload a Buffer of this Geometry to the GPU.
+     * @param name 
      */
-    public setTexBuffer(data: number[]): void {
-        this._textureBuffer.data = data;
+    public uploadBuffer(name: string): void {
+        this.getBuffer(name).upload();
+    }
+
+
+    /**
+     * Set the inner data of a Buffer in this Geometry.
+     * @param name The name of the Buffer.
+     * @param data The data to set the Buffer to.
+     */
+    public setBuffer(name: string, data: number[]): void {
+        this.getBuffer(name).data = data;
     }
 
     /**
      * Sets the Buffer's drawing mode to LINE_STRIP
      */
     public enableWireframe(): void {
-        this._positionBuffer.mode = gl.LINE_STRIP;
+        this.getBuffer(BufferConfig.POSITION_BUFFER_NAME).mode = gl.LINE_STRIP;
     }
 
     /**
      * Sets the Buffer's drawing mode to default (TRIANGLES)
      */
     public disableWireframe(): void {
-        this._positionBuffer.mode = gl.TRIANGLES;
+        this.getBuffer(BufferConfig.POSITION_BUFFER_NAME).mode = gl.TRIANGLES;
     }
 
-    /**
-     * Set the attributes for this Geometry's Buffer
-     * @param shader The shader used with this Geometry, important for setting attributes.
-     */
-    protected abstract setAttributes(shader: Shader): void;
 
     /**
      * Returns the positions of the verticies for this Geometry's position Buffer.
@@ -108,19 +147,18 @@ export abstract class Geometry {
      * Load this Geometry and upload its Buffer
      */
     public load(shader: Shader): void {
-        this.setAttributes(shader);
-        
-        this.uploadPositionBuffer();
-        this.uploadTextureBuffer();
+        this.loadAttributes(shader);
+        Object.values(this._buffers).forEach((buffer) => buffer.upload());
     }
 
     /**
      * Draw the Geometry
      */
     public draw(): void {
-        this._textureBuffer.bind();
-        this._positionBuffer.draw();
+        Object.values(this._buffers).forEach((buffer) => buffer.bind());
 
-        this._textureBuffer.unbind();
+        this.getBuffer(BufferConfig.POSITION_BUFFER_NAME).draw()
+        
+        Object.values(this._buffers).forEach((buffer) => buffer.unbind());
     }
 }
