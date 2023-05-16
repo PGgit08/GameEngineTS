@@ -10,7 +10,8 @@ export class MyScene extends Scene {
         entity1.addComponents(
             new SpriteComponent(
                 new AnimatedSprite({
-                    animationFrameOrder: AnimationFrameOrder.Sequential,
+                    animationFrameOrder: AnimationFrameOrder.Reversed,
+                    customFrameOrder: ["Frame1", "Frame1e", "Frame3", "Frame2"],
                     timePerFrame: 0.5
                 }, 'ArmsAnimation')
             )
