@@ -41,7 +41,7 @@ export class Renderer extends GameObject implements Lifecycle {
         return this._projectionMat;
     }
 
-    constructor(name: string, canvasId?: string){
+    constructor(name: string, canvasId: string){
         super(name);
 
         this._canvasId = canvasId;
@@ -50,7 +50,7 @@ export class Renderer extends GameObject implements Lifecycle {
     }
 
     /**
-     * Build this Renderer if a canvas is supplied
+     * Build this Renderer from a supplied canvas.
      */
     private fromCanvas(): void {
         this._canvas = document.getElementById(this._canvasId) as HTMLCanvasElement;
@@ -63,37 +63,30 @@ export class Renderer extends GameObject implements Lifecycle {
     }
 
     /**
-     * Build this Renderer if there is no canvas supplied
+     * A method that creates a 600x800 Canvas Element and add it to the DOM.
+     * @returns The Canvas.
      */
-    private createCanvas(): void {
-        this._canvas = document.createElement("canvas") as HTMLCanvasElement;
+    public static createCanvas(id: string): HTMLCanvasElement {
+        const canvas: HTMLCanvasElement = document.createElement("canvas") as HTMLCanvasElement;
 
-        this._canvas.id = this.id;
-        this._canvasId = this._canvas.id;
+        canvas.id = id;
 
-        this._canvas.width = this._width;
-        this._canvas.height = this._height;
+        canvas.width = 800;
+        canvas.height = 600;
 
-        this._canvas.style.border = "thick solid #0000FF"; 
+        canvas.style.border = "thick solid #0000FF"; 
 
-        this._canvas.style.width = this._canvas.width.toString();
-        this._canvas.style.height = this._canvas.height.toString();
+        canvas.style.width = canvas.width.toString();
+        canvas.style.height = canvas.height.toString();
 
-        document.body.appendChild(this._canvas);
+        document.body.appendChild(canvas);
+
+        return canvas;
     }
 
     public load(): void {
-        if (this._canvasId != undefined) {
-            this.fromCanvas();
-        }
-
-        if (this._canvasId == undefined) {
-            this._width = 800;
-            this._height = 600;
-
-            this.createCanvas();
-        }
-        
+        this.fromCanvas();
+    
         this._gl = this._canvas.getContext("webgl") as WebGLRenderingContext;
 
         if (this._gl === undefined) {
