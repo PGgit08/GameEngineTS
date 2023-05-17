@@ -2,6 +2,7 @@ import Dictionary from "../../../extra/Dictionary";
 import { GameObject } from "../../ecs/GameObject";
 import { ShaderManager } from "../../managers/ShaderManager";
 import { mat3, vec2, vec4 } from "gl-matrix";
+import { ShaderConfig } from "./ShaderConfig";
 
 export abstract class Shader extends GameObject {
     private _attributes: Dictionary<string, number> = {};
@@ -88,6 +89,10 @@ export abstract class Shader extends GameObject {
 
             this._attributes[info.name] = gl.getAttribLocation(this._program, info.name);
         };
+
+        Object.values(ShaderConfig.ATTRIB_NAMES).forEach((name) => {
+            if (!Object.keys(this._attributes).includes(name)) { throw new Error("All required Shader attributes not supplied."); }
+        })
     }
 
     private detectUniforms(): void {
@@ -100,6 +105,10 @@ export abstract class Shader extends GameObject {
 
             this._uniforms[info.name] = gl.getUniformLocation(this._program, info.name);
         };
+
+        Object.values(ShaderConfig.UNIFORM_NAMES).forEach((name) => {
+            if (!Object.keys(this._uniforms).includes(name)) { throw new Error("All required Shader uniforms not supplied."); }
+        })
     }
 
     public getAttributeLocation(attributeName: string): number {
@@ -115,9 +124,10 @@ export abstract class Shader extends GameObject {
      * @param model The Model Matrix (3x3).
      * @param projection The Projection Matrix (3x3).
      */
-    public applyStandardUniforms(model: mat3, projection: mat3): void {
+    public applyStandardUniforms(model: mat3, projection: mat3, view: mat3): void {
         this.setUniformMatrix('u_model', model);
         this.setUniformMatrix('u_projection', projection);
+        this.setUniformMatrix('u_view', view);
     }
 
     /**

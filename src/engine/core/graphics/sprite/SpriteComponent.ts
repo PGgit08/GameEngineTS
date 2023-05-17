@@ -1,10 +1,12 @@
 import { Component } from "../../ecs/Component";
 import { RendererManager } from "../../managers/RendererManager";
+import { SceneManager } from "../../managers/SceneManager";
 import { Sprite } from "./Sprite";
 
 export class SpriteComponent extends Component {
     private _sprite: Sprite;
-
+    public visible: boolean = true;
+    
     public get sprite(): Sprite {
         return this._sprite;
     }
@@ -19,13 +21,16 @@ export class SpriteComponent extends Component {
         this._sprite.load();
     }
 
-    public start(): void {}
-    public update(): void {}
+    public override start(): void {}
+    public override update(): void {}
 
-    public render(): void {
-        this._sprite.render(
-            this.parent.worldMatrix,
-            RendererManager.getInstance().currentRenderer.projectionMat
-        );
+    public override render(): void {
+        if (this.visible) {
+            this._sprite.render(
+                this.parent.worldMatrix,
+                RendererManager.getInstance().currentRenderer.projectionMat,
+                SceneManager.getInstance().currentScene.currentCamera.view()
+            );
+        }
     }
 }

@@ -13,9 +13,9 @@ export abstract class Material {
         this._shader = ShaderManager.getInstance().getShader(shaderName);
     }
 
-    public applyStandardUniforms(model: mat3, projection: mat3): void {
+    public applyStandardUniforms(model: mat3, projection: mat3, view: mat3): void {
         this._shader.use();
-        this._shader.applyStandardUniforms(model, projection);
+        this._shader.applyStandardUniforms(model, projection, view);
     }
 
     /**

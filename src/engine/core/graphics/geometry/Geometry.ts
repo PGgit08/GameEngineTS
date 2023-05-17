@@ -41,16 +41,12 @@ export abstract class Geometry {
 
 
     private addDefaultAttributes(): void {
-        this.addAttribute({
-            name: ShaderConfig.POSITION_ATTRIBUTE_NAME,
-            size: ShaderConfig.POSITION_ATTRIBUTE_SIZE,
-            buffer: BufferConfig.POSITION_BUFFER_NAME
-        });
-
-        this.addAttribute({
-            name: ShaderConfig.TEXTURE_ATTRIBUTE_NAME,
-            size: ShaderConfig.TEXTURE_ATTRIBUTE_SIZE,
-            buffer: BufferConfig.TEXTURE_BUFFER_NAME
+        Object.values(BufferConfig.NAMES).forEach((buffer, index) => {
+            this.addAttribute({
+                name: Object.values(ShaderConfig.ATTRIB_NAMES)[index],
+                size: Object.values(ShaderConfig.ATTRIB_SIZES)[index],
+                buffer: buffer
+            })
         });
     }
 
@@ -79,8 +75,8 @@ export abstract class Geometry {
     }
 
     private addDefaultBuffers(): void {
-        this.addBuffer(new Buffer(BufferConfig.POSITION_BUFFER_NAME, this.positionData()));
-        this.addBuffer(new Buffer(BufferConfig.TEXTURE_BUFFER_NAME, this.textureData(0, 0, 1, 1)));
+        this.addBuffer(new Buffer(BufferConfig.NAMES.POSITION_BUFFER_NAME, this.positionData()));
+        this.addBuffer(new Buffer(BufferConfig.NAMES.TEXTURE_BUFFER_NAME, this.textureData(0, 0, 1, 1)));
     }
 
     /**
@@ -113,14 +109,14 @@ export abstract class Geometry {
      * Sets the Buffer's drawing mode to LINE_STRIP
      */
     public enableWireframe(): void {
-        this.getBuffer(BufferConfig.POSITION_BUFFER_NAME).mode = gl.LINE_STRIP;
+        this.getBuffer(BufferConfig.NAMES.POSITION_BUFFER_NAME).mode = gl.LINE_STRIP;
     }
 
     /**
      * Sets the Buffer's drawing mode to default (TRIANGLES)
      */
     public disableWireframe(): void {
-        this.getBuffer(BufferConfig.POSITION_BUFFER_NAME).mode = gl.TRIANGLES;
+        this.getBuffer(BufferConfig.NAMES.POSITION_BUFFER_NAME).mode = gl.TRIANGLES;
     }
 
 
@@ -157,7 +153,7 @@ export abstract class Geometry {
     public draw(): void {
         Object.values(this._buffers).forEach((buffer) => buffer.bind());
 
-        this.getBuffer(BufferConfig.POSITION_BUFFER_NAME).draw()
+        this.getBuffer(BufferConfig.NAMES.POSITION_BUFFER_NAME).draw()
         
         Object.values(this._buffers).forEach((buffer) => buffer.unbind());
     }

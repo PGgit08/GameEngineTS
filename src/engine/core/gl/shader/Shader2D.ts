@@ -5,8 +5,8 @@ export class Shader2D extends Shader {
     public get vSource(): string {
         return `
         // an attribute will receive data from a buffer
-        attribute vec2 ${ShaderConfig.POSITION_ATTRIBUTE_NAME};
-        attribute vec2 ${ShaderConfig.TEXTURE_ATTRIBUTE_NAME};
+        attribute vec2 ${ShaderConfig.ATTRIB_NAMES.POSITION_ATTRIBUTE_NAME};
+        attribute vec2 ${ShaderConfig.ATTRIB_NAMES.TEXTURE_ATTRIBUTE_NAME};
 
         // varyings will pass variables from the shader to the fragement shader
         varying vec2 v_texcoord;
@@ -15,6 +15,7 @@ export class Shader2D extends Shader {
         vec2 clipspace_position;
 
         // uniforms will recieve data dynamically from the code
+        uniform mat3 u_view;
         uniform mat3 u_projection;
         uniform mat3 u_model;
 
@@ -23,7 +24,7 @@ export class Shader2D extends Shader {
             v_texcoord = a_texcoord;
 
             // turn 2D position into 3D position for matrix multiplication, then turn result into 4D WebGL vector
-            clipspace_position = (u_projection * u_model * vec3(a_position, 1)).xy; // order of multiplication matters here, right to left
+            clipspace_position = (u_projection * u_view * u_model * vec3(a_position, 1)).xy; // order of multiplication matters here, right to left
             gl_Position = vec4(clipspace_position, 0.0, 1.0);
         }
         `;

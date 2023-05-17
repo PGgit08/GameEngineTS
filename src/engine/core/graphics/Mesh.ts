@@ -39,10 +39,11 @@ export class Mesh {
     /**
      * Renders the Mesh
      */
-    public render(model: mat3, projection: mat3): void {
+    public render(model: mat3, projection: mat3, view: mat3): void {
         this._material.applyStandardUniforms(
             model,
-            projection
+            projection,
+            view
         );
         this._material.applyAdditionalUniforms();
         

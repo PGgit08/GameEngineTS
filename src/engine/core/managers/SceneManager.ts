@@ -32,11 +32,7 @@ export class SceneManager extends Manager implements Lifecycle {
         return this._gameScenes[name];
     }
 
-    public setCurrentScene(scene: Scene): void {
-        this._currentScene = scene;
-    }
-
-    public setCurrentSceneByName(name: string): void {
+    public setCurrentScene(name: string): void {
         this._currentScene = this.getScene(name);
     }
 
