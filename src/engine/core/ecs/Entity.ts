@@ -5,6 +5,8 @@ import { Transform } from "../math/Transform";
 import { Behavior } from "./Behavior";
 import { Component } from "./Component";
 import { GameObject } from "./GameObject";
+import Dictionary from "../../extra/Dictionary";
+import { Scene } from "./Scene";
 
 export class Entity extends GameObject implements Lifecycle {
     private _loaded = false;
@@ -14,6 +16,9 @@ export class Entity extends GameObject implements Lifecycle {
 
     private _components: Component[] = [];
     private _behaviors: Behavior[] = [];
+
+    // private _parentScenes: string[] = [];
+    private _parentScenes: Dictionary<string, Scene> = {};
 
     public transform: Transform = new Transform();
 
@@ -47,11 +52,15 @@ export class Entity extends GameObject implements Lifecycle {
         return this._localMatrix;
     }
 
-    /** States whether the children of this Entity are relative in Transform to this Entity */
+    /** States whether the children of this Entity are relative in Transform to this Entity. */
     get relativeChildren(): boolean {
         return this._relativeChildren;
     }
 
+    /** A Dictionary containing the Scenes that this Entity belongs to. */
+    get parentScenes(): Dictionary<string, Scene> {
+        return this._parentScenes;
+    }
 
     /**
      * A Spawn function that Spawns an Entity TYPE, and loads it.
@@ -96,9 +105,22 @@ export class Entity extends GameObject implements Lifecycle {
      * @param children The children to add
      */
     public addChildren(...children: Entity[]): void {
-        children.forEach((c) => c.parent = this);
+        children.forEach((c) => { c.parent = this; c.addParentScene(...Object.values(this._parentScenes)); });
         this._children.push(...children);
     } 
+
+    /**
+     * Removes a given Entity child from this Entity.
+     * @param entity The Entity to remove.
+     */
+    public removeChild(entity: Entity): void {
+        this._children.forEach((e) => {
+            if (e.id === entity.id) {
+                entity.removeParentScene(...Object.keys(this._parentScenes));
+                this._children.splice(this._children.indexOf(e), 1);
+            }
+        });
+    }
 
     /**
      * Add components to this Entity
@@ -116,18 +138,6 @@ export class Entity extends GameObject implements Lifecycle {
     public addBehaviors(...behaviors: Behavior[]): void {
         behaviors.forEach((b) => b.parent = this);
         this._behaviors.push(...behaviors);
-    }
-
-    /**
-     * Removes a given Entity child from this Entity.
-     * @param entity The Entity to remove.
-     */
-    public removeChild(entity: Entity): void {
-        this._children.forEach((e) => {
-            if (e.id === entity.id) {
-                this._children.splice(this._children.indexOf(e), 1);
-            }
-        });
     }
 
     /**
@@ -158,6 +168,44 @@ export class Entity extends GameObject implements Lifecycle {
         }
 
         return undefined;
+    }
+
+
+    /**
+     * Checks if this Entity belongs to a Scene.
+     * @param sceneName The name of the Scene this Entity MIGHT belong to.
+     * @returns True if this Entity belongs to scene 'sceneName'.
+     */
+    public hasParentScene(sceneName: string): boolean {
+        return Object.keys(this._parentScenes).includes(sceneName);
+    }
+
+    /**
+     * Adds a Scene(s) to this Entity's Dictionary of parent Scenes that it belongs to.
+     * @param scenes The Scene(s) name(s).
+     */
+    public addParentScene(...scenes: Scene[]): void {
+        scenes.forEach((scene) => {
+            if (!this.hasParentScene(scene.name)) {
+                this._parentScenes[scene.name] = scene;
+            }
+        });
+
+        this._children.forEach((c) => c.addParentScene(...scenes));
+    }
+
+    /**
+     * Removes a Scene(s) from this Entity's Dictionart of parent Scene that it belongs to.
+     * @param scene The Scene(s) name(s).
+     */
+    public removeParentScene(...scenes: string[]): void {
+        scenes.forEach((sceneName) => {
+            if (this.hasParentScene(sceneName)) {
+                delete this._parentScenes[sceneName];
+            }
+        });
+
+        this._children.forEach((c) => c.removeParentScene(...scenes));
     }
 
     
