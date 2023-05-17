@@ -49,4 +49,5 @@ A Manager is a singleton class that stores instances of GameObjects with unique 
 - **ShaderManager** -> A Manager that stores instances of Shaders that can be used by Materials.
 - **RendererManager** -> A Manager that stores instances of Renderers.
 - **SceneManager** -> A Manager that stores Scenes and calls Lifecycle methods on the current Scene.
+- **TextureManager** -> A Manager that stores Texture GameObjects that can be used by Sprites.
 

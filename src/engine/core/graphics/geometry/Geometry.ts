@@ -41,6 +41,7 @@ export abstract class Geometry {
 
 
     private addDefaultAttributes(): void {
+        // add all required attributes
         Object.values(BufferConfig.NAMES).forEach((buffer, index) => {
             this.addAttribute({
                 name: Object.values(ShaderConfig.ATTRIB_NAMES)[index],
@@ -68,7 +69,7 @@ export abstract class Geometry {
 
     private getBuffer(name: string): Buffer {
         if (this._buffers[name] === undefined) {
-            throw new Error("Cannot find Buffer in this Geometry called " + name);
+            throw new Error(`Cannot find Buffer in this Geometry called '${name}'`);
         }
 
         return this._buffers[name];

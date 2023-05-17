@@ -93,7 +93,7 @@ export abstract class Shader extends GameObject {
         };
 
         Object.values(ShaderConfig.ATTRIB_NAMES).forEach((name) => {
-            if (!Object.keys(this._attributes).includes(name)) { throw new Error("All required Shader attributes not supplied."); }
+            if (!Object.keys(this._attributes).includes(name)) { throw new Error(`Shader missing required attribute '${name}'`); }
         });
     }
 
@@ -109,7 +109,7 @@ export abstract class Shader extends GameObject {
         };
 
         Object.values(ShaderConfig.UNIFORM_NAMES).forEach((name) => {
-            if (!Object.keys(this._uniforms).includes(name)) { throw new Error("All required Shader uniforms not supplied."); }
+            if (!Object.keys(this._uniforms).includes(name)) { throw new Error(`Shader missing required uniform '${name}'`); }
         });
     }
 
