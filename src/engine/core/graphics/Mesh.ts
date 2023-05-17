@@ -45,6 +45,7 @@ export class Mesh {
             projection,
             view
         );
+        
         this._material.applyAdditionalUniforms();
         
         this._geometry.draw();
