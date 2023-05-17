@@ -9,6 +9,7 @@ export * from './core/ecs/Scene';
 
 export * from './core/math/Transform';
 
+export * from './core/graphics/Camera';
 export * from './core/graphics/Mesh';
 export * from './core/graphics/material/StandardMaterial';
 export * from './core/graphics/Texture';

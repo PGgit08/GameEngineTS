@@ -57,9 +57,9 @@ export class Entity extends GameObject implements Lifecycle {
         return this._relativeChildren;
     }
 
-    /** A Dictionary containing the Scenes that this Entity belongs to. */
-    get parentScenes(): Dictionary<string, Scene> {
-        return this._parentScenes;
+    /** A list containing the Scenes that this Entity belongs to. */
+    get parentScenes(): Scene[] {
+        return Object.values(this._parentScenes);
     }
 
     /**
