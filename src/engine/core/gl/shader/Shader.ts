@@ -3,6 +3,8 @@ import { GameObject } from "../../ecs/GameObject";
 import { ShaderManager } from "../../managers/ShaderManager";
 import { mat3, vec2, vec4 } from "gl-matrix";
 import { ShaderConfig } from "./ShaderConfig";
+import { Texture } from "../../graphics/Texture";
+import { Color } from "../../graphics/Color";
 
 export abstract class Shader extends GameObject {
     private _attributes: Dictionary<string, number> = {};
@@ -120,14 +122,20 @@ export abstract class Shader extends GameObject {
     }
 
     /**
-     * Apply standard matrix uniforms.
+     * Apply standard uniforms.
      * @param model The Model Matrix (3x3).
      * @param projection The Projection Matrix (3x3).
+     * @param view The View Matrix (3x3).
+     * @param texture The Texture.
+     * @param color The Color.
      */
-    public applyStandardUniforms(model: mat3, projection: mat3, view: mat3): void {
+    public applyStandardUniforms(model: mat3, projection: mat3, view: mat3, texture: Texture, color: Color): void {
         this.setUniformMatrix(ShaderConfig.UNIFORM_NAMES.MODEL_MAT, model);
         this.setUniformMatrix(ShaderConfig.UNIFORM_NAMES.PROJ_MAT, projection);
         this.setUniformMatrix(ShaderConfig.UNIFORM_NAMES.VIEW_MAT, view);
+        
+        texture.activateAndBind();
+        this.setUniformVec4(ShaderConfig.UNIFORM_NAMES.COLOR, color.toVec4());
     }
 
     /**

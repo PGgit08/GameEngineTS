@@ -1,7 +1,7 @@
 import { Shader } from "./Shader";
 import { ShaderConfig } from "./ShaderConfig";
 
-export class Shader2D extends Shader {
+export class StandardShader extends Shader {
     public get vSource(): string {
         return `
         // an attribute will receive data from a buffer
@@ -54,5 +54,5 @@ export class Shader2D extends Shader {
     }
 
     // A simple 2D Shader that has color and texture support. 
-    constructor() { super("Shader2D"); }
+    constructor() { super("StandardShader"); }
 }

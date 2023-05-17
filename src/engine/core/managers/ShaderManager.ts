@@ -2,7 +2,7 @@ import Dictionary from "../../extra/Dictionary";
 import { Shader } from "../gl/shader/Shader";
 import { Lifecycle } from "../Lifecycle";
 import { Manager } from "./Manager";
-import { Shader2D } from "../gl/shader/Shader2D";
+import { StandardShader } from "../gl/shader/StandardShader";
 
 export class ShaderManager extends Manager implements Lifecycle {
     private static _instance: ShaderManager;
@@ -29,7 +29,7 @@ export class ShaderManager extends Manager implements Lifecycle {
     }
 
     public load(): void {
-        new Shader2D();
+        new StandardShader();
 
         Object.values(this._gameShaders).forEach((s) => s.load());
     }
