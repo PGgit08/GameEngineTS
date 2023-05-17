@@ -5,9 +5,10 @@ export class Camera extends Entity {
     constructor(name: string) {
         super(name);
     }
-
+    
     public view(): mat3 {
         // identity for now
-        return mat3.create();
+        // return mat3.create();
+        return this.worldMatrix;
     }
 }

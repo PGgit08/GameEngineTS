@@ -17,6 +17,8 @@ export class MyScene extends Scene {
             )
         );
 
+        this.currentCamera.transform.position = vec2.fromValues(-100, 100);
+
         entity1.addBehaviors(new MoveBehavior());
 
         entity1.transform.position = vec2.fromValues(300, 300);

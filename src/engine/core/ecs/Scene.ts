@@ -35,8 +35,14 @@ export class Scene extends GameObject implements Lifecycle {
         this._rootEntity.removeChild(enitity);
     }
 
+    /**
+     * Adds a Camera to this Scene.
+     * The Camera does not have a parent and a parent should be set by the user.
+     * @param camera The Camera to add.
+     */
     public addCamera(camera: Camera): void {
         this._sceneCameras[camera.name] = camera;
+        this.addEntities(camera);
     }
 
     public getCamera(name: string): Camera {
