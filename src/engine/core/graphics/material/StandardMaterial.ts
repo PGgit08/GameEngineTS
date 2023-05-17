@@ -1,13 +1,16 @@
-import { TextureManager } from "../../managers/TextureManager";
+import { ShaderConfig } from "../../../GETS";
 import { Color } from "../Color";
 import { Texture } from "../Texture";
 import { Material } from "./Material";
 
+/**
+ * A Standard Material for all Shaders.
+ * Any Custom Material should extend from this Material.
+ */
 export class StandardMaterial extends Material {
     public texture: Texture;
     public color: Color = Color.BLACK;
 
-    // A StandardMaterial that uses Textures and Colors and the Shader2D shader.
     constructor(texture?: Texture, color?: Color) {
         super("Shader2D");
 
@@ -20,6 +23,6 @@ export class StandardMaterial extends Material {
 
     public override applyAdditionalUniforms(): void {
         this.texture.activateAndBind();
-        this._shader.setUniformVec4('u_color', this.color.toVec4());
+        this._shader.setUniformVec4(ShaderConfig.UNIFORM_NAMES.COLOR, this.color.toVec4());
     }
 }

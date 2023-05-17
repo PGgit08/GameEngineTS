@@ -92,7 +92,7 @@ export abstract class Shader extends GameObject {
 
         Object.values(ShaderConfig.ATTRIB_NAMES).forEach((name) => {
             if (!Object.keys(this._attributes).includes(name)) { throw new Error("All required Shader attributes not supplied."); }
-        })
+        });
     }
 
     private detectUniforms(): void {
@@ -108,7 +108,7 @@ export abstract class Shader extends GameObject {
 
         Object.values(ShaderConfig.UNIFORM_NAMES).forEach((name) => {
             if (!Object.keys(this._uniforms).includes(name)) { throw new Error("All required Shader uniforms not supplied."); }
-        })
+        });
     }
 
     public getAttributeLocation(attributeName: string): number {
@@ -125,9 +125,9 @@ export abstract class Shader extends GameObject {
      * @param projection The Projection Matrix (3x3).
      */
     public applyStandardUniforms(model: mat3, projection: mat3, view: mat3): void {
-        this.setUniformMatrix('u_model', model);
-        this.setUniformMatrix('u_projection', projection);
-        this.setUniformMatrix('u_view', view);
+        this.setUniformMatrix(ShaderConfig.UNIFORM_NAMES.MODEL_MAT, model);
+        this.setUniformMatrix(ShaderConfig.UNIFORM_NAMES.PROJ_MAT, projection);
+        this.setUniformMatrix(ShaderConfig.UNIFORM_NAMES.VIEW_MAT, view);
     }
 
     /**

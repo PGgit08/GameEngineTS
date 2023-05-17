@@ -1,5 +1,5 @@
 /**
- * Contains the names and sizes of attributes in Geometries and Shaders.
+ * Contains the names and sizes of attributes and uniforms that any Shader MUST have.
  */
 export class ShaderConfig {
     public static readonly ATTRIB_NAMES = {
@@ -10,7 +10,9 @@ export class ShaderConfig {
     public static readonly UNIFORM_NAMES = {
         MODEL_MAT: "u_model",
         PROJ_MAT: "u_projection",
-        VIEW_MAT: "u_view"
+        VIEW_MAT: "u_view",
+        TEXTURE: "u_texture",
+        COLOR: "u_color"
     }
 
     public static readonly ATTRIB_SIZES = {

@@ -15,16 +15,21 @@ export class Shader2D extends Shader {
         vec2 clipspace_position;
 
         // uniforms will recieve data dynamically from the code
-        uniform mat3 u_view;
-        uniform mat3 u_projection;
-        uniform mat3 u_model;
+        uniform mat3 ${ShaderConfig.UNIFORM_NAMES.MODEL_MAT};
+        uniform mat3 ${ShaderConfig.UNIFORM_NAMES.PROJ_MAT};
+        uniform mat3 ${ShaderConfig.UNIFORM_NAMES.VIEW_MAT};
 
         // all shaders have a main function
         void main() {
-            v_texcoord = a_texcoord;
+            v_texcoord = ${ShaderConfig.ATTRIB_NAMES.TEXTURE_ATTRIBUTE_NAME};
 
             // turn 2D position into 3D position for matrix multiplication, then turn result into 4D WebGL vector
-            clipspace_position = (u_projection * u_view * u_model * vec3(a_position, 1)).xy; // order of multiplication matters here, right to left
+            // order of multiplication matters here, right to left
+            clipspace_position = (${ShaderConfig.UNIFORM_NAMES.PROJ_MAT} * 
+                ${ShaderConfig.UNIFORM_NAMES.VIEW_MAT} * 
+                ${ShaderConfig.UNIFORM_NAMES.MODEL_MAT}  * 
+                vec3(${ShaderConfig.ATTRIB_NAMES.POSITION_ATTRIBUTE_NAME}, 1)).xy; 
+            
             gl_Position = vec4(clipspace_position, 0.0, 1.0);
         }
         `;
@@ -37,13 +42,13 @@ export class Shader2D extends Shader {
         varying vec2 v_texcoord;
          
         // The texture.
-        uniform sampler2D u_texture;
+        uniform sampler2D ${ShaderConfig.UNIFORM_NAMES.TEXTURE};
 
         // The color.
-        uniform vec4 u_color;
+        uniform vec4 ${ShaderConfig.UNIFORM_NAMES.COLOR};
          
         void main() {
-            gl_FragColor = u_color * texture2D(u_texture, v_texcoord);
+            gl_FragColor = ${ShaderConfig.UNIFORM_NAMES.COLOR} * texture2D(${ShaderConfig.UNIFORM_NAMES.TEXTURE}, v_texcoord);
         }
         `;
     }
