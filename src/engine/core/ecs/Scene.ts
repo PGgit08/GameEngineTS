@@ -22,9 +22,7 @@ export class Scene extends GameObject implements Lifecycle {
         this._rootEntity.addParentScene(this);
 
         // add default camera
-        const defaultCamera: Camera = new Camera("DefaultCamera");
-
-        this.addCamera(defaultCamera);
+        this.addCamera(new Camera("DefaultCamera"));
         this.setCurrentCamera("DefaultCamera");
 
         SceneManager.getInstance().addScene(this);
