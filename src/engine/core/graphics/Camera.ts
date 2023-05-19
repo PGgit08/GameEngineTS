@@ -12,6 +12,17 @@ export class Camera extends Entity {
     /** Represents the height in pixels of this Camera (DEFAULT = Current Renderer height). */
     public height: number = RendererManager.getInstance().currentRenderer.height;
 
+    /**
+     * Returns the ratio of cam dimensions to canvas dimension.
+     * @returns Array -> [camWidth/canvasWidth, camHeight/canvasHeight] 
+     */
+    public get camToCanvasRatio(): number[] {
+        return [
+            this.width / RendererManager.getInstance().currentRenderer.width,
+            this.height / RendererManager.getInstance().currentRenderer.height
+        ];
+    }
+
     constructor(name: string) {
         super(name);
     }
@@ -68,8 +79,8 @@ export class Camera extends Entity {
         mat3.fromScaling(
             scaleMat,
             vec2.fromValues(
-                this.width / RendererManager.getInstance().currentRenderer.width,
-                this.height / RendererManager.getInstance().currentRenderer.height
+                this.camToCanvasRatio[0],
+                this.camToCanvasRatio[1]
             )
         );
 

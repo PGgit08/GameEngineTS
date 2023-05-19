@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Entity, MoveBehavior, Scene, SpriteComponent, AnimatedSprite, AnimationFrameOrder, DefaultEntity } from "../../engine/GETS";
+import { Entity, MoveBehavior, Scene, SpriteComponent, AnimatedSprite, AnimationFrameOrder, DefaultEntity, Sprite, Behavior } from "../../engine/GETS";
 
 export class MyScene extends Scene {
     constructor() {
@@ -25,11 +25,11 @@ export class MyScene extends Scene {
         this.currentCamera.height = 600;
         this.currentCamera.transform.rotation = 0;
 
-        // this.currentCamera.addComponents(
-        //     new SpriteComponent(
-        //         new Sprite()
-        //     )
-        // );
+        this.currentCamera.addComponents(
+            new SpriteComponent(
+                new Sprite()
+            )
+        );
 
         Entity.Spawn(DefaultEntity).transform.position = vec2.fromValues(0, 0);
 
