@@ -18,14 +18,21 @@ export class MyScene extends Scene {
             )
         );
 
-        this.currentCamera.transform.position = vec2.fromValues(500, 300);
-        this.currentCamera.width = 1000;
-        this.currentCamera.height = 1000;
-        this.currentCamera.transform.rotation = 0;
+        this.currentCamera.transform.position = vec2.fromValues(300, 0);
+        this.currentCamera.width = 700;
+        this.currentCamera.height = 500;
+        this.currentCamera.transform.rotation = 70;
 
-        entity1.addBehaviors(new MoveBehavior());
+        this.currentCamera.addComponents(
+            new SpriteComponent(
+                new Sprite()
+            )
+        );
 
-        entity1.transform.position = vec2.fromValues(100, 100);
+        // entity1.addBehaviors(new MoveBehavior());
+        this.currentCamera.addBehaviors(new MoveBehavior());
+
+        entity1.transform.position = vec2.fromValues(0, 0);
         entity1.transform.scale = vec2.fromValues(1.3, 1.3);
 
         this.addEntities(entity1);

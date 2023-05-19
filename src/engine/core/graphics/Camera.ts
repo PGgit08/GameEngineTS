@@ -49,7 +49,7 @@ export class Camera extends Entity {
         // create matricies for rotation
         mat3.fromTranslation(
             toOrigin,
-            vec2.fromValues(-this.transform.position[0], -this.transform.position[1])
+            vec2.fromValues(-(this.width * 0.5), -(this.height * 0.5))
         );
         mat3.invert(toOriginInv, toOrigin);
 
