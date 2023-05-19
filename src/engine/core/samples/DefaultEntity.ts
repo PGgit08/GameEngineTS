@@ -2,8 +2,6 @@ import { vec2 } from "gl-matrix";
 import { Entity } from "../ecs/Entity";
 import { Color } from "../graphics/Color";
 import { Square } from "../graphics/geometry/Square";
-import { StandardMaterial } from "../graphics/material/StandardMaterial";
-import { Mesh } from "../graphics/Mesh";
 import { SpriteComponent } from "../graphics/sprite/SpriteComponent";
 import { RendererManager } from "../managers/RendererManager";
 import { Sprite } from "../../GETS";

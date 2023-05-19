@@ -1,11 +1,13 @@
 import { vec2 } from "gl-matrix";
-import { Entity, MoveBehavior, Scene, SpriteComponent, AnimatedSprite, AnimationFrameOrder } from "../../engine/GETS";
-import { Sprite } from "../../engine/GETS";
+import { Entity, MoveBehavior, Scene, SpriteComponent, AnimatedSprite, AnimationFrameOrder, DefaultEntity } from "../../engine/GETS";
 
 export class MyScene extends Scene {
     constructor() {
         super("MyScene");
+    }
 
+    // experimenting with LOAD placement
+    public override load(): void {
         const entity1: Entity = new Entity("Entity1");
 
         entity1.addComponents(
@@ -18,23 +20,28 @@ export class MyScene extends Scene {
             )
         );
 
-        this.currentCamera.transform.position = vec2.fromValues(300, 0);
-        this.currentCamera.width = 700;
-        this.currentCamera.height = 500;
-        this.currentCamera.transform.rotation = 70;
+        this.currentCamera.transform.position = vec2.fromValues(0, 0);
+        this.currentCamera.width = 800;
+        this.currentCamera.height = 600;
+        this.currentCamera.transform.rotation = 0;
 
-        this.currentCamera.addComponents(
-            new SpriteComponent(
-                new Sprite()
-            )
-        );
+        // this.currentCamera.addComponents(
+        //     new SpriteComponent(
+        //         new Sprite()
+        //     )
+        // );
 
-        // entity1.addBehaviors(new MoveBehavior());
-        this.currentCamera.addBehaviors(new MoveBehavior());
+        Entity.Spawn(DefaultEntity).transform.position = vec2.fromValues(0, 0);
+
+        entity1.addChildren(this.currentCamera);
+        entity1.addBehaviors(new MoveBehavior());
+        // this.currentCamera.addBehaviors(new MoveBehavior());
 
         entity1.transform.position = vec2.fromValues(0, 0);
         entity1.transform.scale = vec2.fromValues(1.3, 1.3);
 
         this.addEntities(entity1);
+
+        super.load();
     }
 }
