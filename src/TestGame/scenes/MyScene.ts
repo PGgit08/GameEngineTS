@@ -14,7 +14,6 @@ export class MyScene extends Scene {
             new SpriteComponent(
                 new AnimatedSprite({
                     animationFrameOrder: AnimationFrameOrder.Reversed,
-                    customFrameOrder: ["Frame1", "Frame1", "Frame3", "Frame2"],
                     timePerFrame: 0.5
                 }, 'ArmsAnimation')
             )
