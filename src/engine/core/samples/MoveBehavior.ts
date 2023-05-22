@@ -1,10 +1,10 @@
 import { vec2 } from "gl-matrix";
 import { Input } from "../../extra/Input";
 import { Behavior } from "../ecs/Behavior";
-import { SpriteComponent, Time } from "../../GETS";
+import { Time } from "../../GETS";
 
 export class MoveBehavior extends Behavior {
-    public speed: number = 50; // pixels per second
+    public speed: number = 100; // pixels per second
 
     /**
      * Control the Entity with button presses.
