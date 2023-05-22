@@ -11,8 +11,6 @@ export class MyScene extends Scene {
         const entity1: Entity = new Entity("Entity1");
         const cam: Camera = new Camera("Example Camera");
 
-        this.addCamera(cam);
-
         entity1.addComponents(
             new SpriteComponent(
                 new AnimatedSprite({
@@ -40,8 +38,10 @@ export class MyScene extends Scene {
 
         cam.transform.scale = vec2.fromValues(0.5, 0.5);
 
-        this.setCurrentCamera("Example Camera");
         this.addEntities(entity1);
+
+        this.addCamera(cam);
+        this.setCurrentCamera("Example Camera");
 
         super.load();
     }

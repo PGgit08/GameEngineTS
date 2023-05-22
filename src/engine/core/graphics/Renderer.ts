@@ -89,6 +89,10 @@ export class Renderer extends GameObject implements Lifecycle {
     
         this._gl = this._canvas.getContext("webgl") as WebGLRenderingContext;
 
+        // some magic that recognizes transparency in a texture
+        this._gl.enable(this._gl.BLEND);
+        this._gl.blendFunc(this._gl.SRC_ALPHA, this._gl.ONE_MINUS_SRC_ALPHA);
+
         if (this._gl === undefined) {
             throw new Error("Browser does not support WebGL");
         }
