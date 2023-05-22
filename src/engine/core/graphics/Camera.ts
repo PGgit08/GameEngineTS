@@ -12,6 +12,14 @@ export class Camera extends Entity {
     /** Represents the height in pixels of this Camera (DEFAULT = Current Renderer height). */
     public height: number = RendererManager.getInstance().currentRenderer.height;
 
+
+    private _followEntity: Entity = null;
+
+    /** The Entity that this Camera is currently following. */
+    public get followEntity(): Entity {
+        return this._followEntity;
+    }
+
     /**
      * Returns the ratio of cam dimensions to canvas dimension.
      * @returns Array -> [camWidth/canvasWidth, camHeight/canvasHeight] 
@@ -38,11 +46,32 @@ export class Camera extends Entity {
     }
 
     /**
+     * Makes the Camera focus its center on an Entity causing it to follow the Entity.
+     * @param entity The Entity for this Camera to follow.
+     */
+    public startFollow(entity: Entity): void {
+        this._followEntity = entity;
+    }
+
+    public stopFollow(): void {
+        this._followEntity = null;
+    }
+
+    /**
      * Returns the View Matrix (3x3) based on this Camera's Transform and width/height.
      */
     public view(): mat3 {
-        var worldViewMat: mat3 = mat3.create();
+        if (this._followEntity !== null) {
+            this.transform.position = this._followEntity.transform.position;
+            this.transform.rotation = this._followEntity.transform.rotation;
+        }
 
+        return this._calcViewMat();
+    }
+
+    // all the matrix math for the view matrix
+    private _calcViewMat(): mat3 {
+        var worldViewMat: mat3 = mat3.create();
         const localMat: mat3 = mat3.create();
     
         // main 3 transformations
@@ -89,7 +118,7 @@ export class Camera extends Entity {
         mat3.mul(localMat, localMat, scaleMat);
 
         // mult by parent matrix if needed
-        if (this.parent && this.parent.relativeChildren) {
+        if (this.parent && this.parent.relativeChildren && this.relativeChild) {
             mat3.mul(
                 worldViewMat,
                 this.parent.worldMatrix,

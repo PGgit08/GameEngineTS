@@ -7,7 +7,7 @@ export class MoveBehavior extends Behavior {
     public speed: number = 50; // pixels per second
 
     /**
-     * Control the Entity with button pressed.
+     * Control the Entity with button presses.
      * @param speed The speed of the movable Entity.
      */
     constructor() {

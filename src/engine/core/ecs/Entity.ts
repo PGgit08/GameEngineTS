@@ -28,8 +28,16 @@ export class Entity extends GameObject implements Lifecycle {
     /** The Matrix of the Entity relative to its parent Entity. */
     private _localMatrix: mat3 = mat3.create();
 
-    private _relativeChildren: boolean;
+    /**
+     * A boolean stating whether the children of this Entity are relative to this Entity in Transform.
+     * If this is false, all children will not be non-relative to this Entity in Transform.
+     * If this is true, children will be relative to this Entity in Transform, except if they are have their
+     * "relativeChild" property as false and choose to be independent to this Entity.
+     */
+    public relativeChildren: boolean;
+    public relativeChild: boolean = true;
 
+    
     get behaviors(): Behavior[] {
         return this._behaviors;
     }
@@ -50,11 +58,6 @@ export class Entity extends GameObject implements Lifecycle {
     /** The Matrix of the Entity relative to its parent Entity. */
     get localMatrix(): mat3 {
         return this._localMatrix;
-    }
-
-    /** States whether the children of this Entity are relative in Transform to this Entity. */
-    get relativeChildren(): boolean {
-        return this._relativeChildren;
     }
 
     /** A list containing the Scenes that this Entity belongs to. */
@@ -97,8 +100,9 @@ export class Entity extends GameObject implements Lifecycle {
 
     constructor(name: string, realtiveChildren: boolean = true) {
         super(name);
-        this._relativeChildren = realtiveChildren;
+        this.relativeChildren = realtiveChildren;
     }
+
 
     /**
      * Add children to this Entity
