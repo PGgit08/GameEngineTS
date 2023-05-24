@@ -66,6 +66,24 @@ export class Transform {
 
 
     /**
+     * Takes in a given world-space vector and returns the same point in this Entity's local-space.
+     * @param point The world-space 2d vector point.
+     * @returns The same point but in this Entity's local-space.
+     */
+    public toLocalPoint(point: vec2): vec2 {
+        if (!(this.owner.parent && this.owner.parent.relativeChildren)) {
+            console.log("hi");
+            return point;
+        }
+
+        return vec2.transformMat3(
+            vec2.create(),
+            point,
+            mat3.invert(mat3.create(), this.owner.parent.transform.toWorldMat())
+        );
+    }
+
+    /**
      * Converts this Transform into a 3x3 Matrix.
      * @returns A mat3 3x3 Matrix.
      */
@@ -99,7 +117,7 @@ export class Transform {
         if (this.owner.parent && this.owner.parent.relativeChildren && this.owner.relativeChild) {
             return mat3.mul(
                 mat3.create(),
-                this.owner.transform.toWorldMat(),
+                this.owner.parent.transform.toWorldMat(),
                 this.toLocalMat()
             );
         } else {

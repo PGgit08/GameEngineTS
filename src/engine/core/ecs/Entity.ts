@@ -1,4 +1,4 @@
-import { mat3, vec2 } from "gl-matrix";
+import { vec2 } from "gl-matrix";
 import { Lifecycle } from "../Lifecycle";
 import { SceneManager } from "../managers/SceneManager";
 import { Transform } from "../math/Transform";

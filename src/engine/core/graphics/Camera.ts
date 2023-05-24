@@ -54,6 +54,9 @@ export class Camera extends Entity {
     }
 
     public stopFollow(): void {
+        this.transform.position = this.transform.toLocalPoint(this._followEntity.transform.position);
+
+        this.relativeChild = true;
         this._followEntity = null;
     }
 
@@ -62,6 +65,8 @@ export class Camera extends Entity {
      */
     public view(): mat3 {
         if (this._followEntity !== null) {
+            if (this.relativeChild) { this.relativeChild = false; }
+
             this.transform.position = this._followEntity.transform.position;
             this.transform.rotation = this._followEntity.transform.rotation;
         }

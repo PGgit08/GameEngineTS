@@ -9,6 +9,8 @@ export class MyScene extends Scene {
     // experimenting with LOAD placement
     public override load(): void {
         const entity1: Entity = new Entity("Entity1");
+        const entity2: Entity = new Entity("Entity2");
+
         const cam: Camera = new Camera("Example Camera");
 
         entity1.addComponents(
@@ -19,6 +21,8 @@ export class MyScene extends Scene {
                 }, 'ArmsAnimation')
             )
         );
+
+        entity1.addBehaviors(new MoveBehavior());
 
         entity1.transform.position = vec2.fromValues(0, 0);
         entity1.transform.scale = vec2.fromValues(1.3, 1.3);
@@ -34,16 +38,21 @@ export class MyScene extends Scene {
         );
 
         // using this to prevent zoom on Sprites belonging to Camera
-        cam.addBehaviors(new NoZoomBehavior(), new MoveBehavior());
+        cam.addBehaviors(new NoZoomBehavior());
+
+        cam.startFollow(entity1);
+
+        setTimeout(cam.stopFollow.bind(cam), 5000);
 
         cam.transform.scale = vec2.fromValues(0.5, 0.5);
+
+        entity2.addChildren(cam);
 
         // add a default entity (for camera reference)
         Entity.Spawn(DefaultEntity).transform.position[0] = 200;
 
-        this.addEntities(entity1);
+        this.addEntities(entity1, entity2);
 
-        this.addCamera(cam);
         this.setCurrentCamera("Example Camera");
 
         super.load();
