@@ -4,13 +4,13 @@ import { Entity } from "./Entity";
 import { GameObject } from "./GameObject";
 
 export abstract class Component extends GameObject implements Lifecycle {
-    public parent: Entity;
+    public owner: Entity;
 
     /**
      * The transform of the parent entity
      */
     get transform(): Transform {
-        return this.parent.transform;
+        return this.owner.transform;
     }
 
     constructor(name: string) {
