@@ -27,7 +27,7 @@ export class SpriteComponent extends Component {
     public override render(): void {
         if (this.visible) {
             this._sprite.render(
-                this.owner.worldMatrix,
+                this.owner.transform.toWorldMat(),
                 RendererManager.getInstance().currentRenderer.projectionMat,
                 SceneManager.getInstance().currentScene.currentCamera.view()
             );

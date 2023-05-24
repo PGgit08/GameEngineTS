@@ -38,6 +38,9 @@ export class MyScene extends Scene {
 
         cam.transform.scale = vec2.fromValues(0.5, 0.5);
 
+        // add a default entity (for camera reference)
+        Entity.Spawn(DefaultEntity).transform.position[0] = 200;
+
         this.addEntities(entity1);
 
         this.addCamera(cam);

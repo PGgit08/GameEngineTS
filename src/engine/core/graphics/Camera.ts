@@ -121,7 +121,7 @@ export class Camera extends Entity {
         if (this.parent && this.parent.relativeChildren && this.relativeChild) {
             mat3.mul(
                 worldViewMat,
-                this.parent.worldMatrix,
+                this.parent.transform.toWorldMat(),
                 localMat
             );
         } else {
