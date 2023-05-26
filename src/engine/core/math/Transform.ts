@@ -72,7 +72,6 @@ export class Transform {
      */
     public toLocalPoint(point: vec2): vec2 {
         if (!(this.owner.parent && this.owner.parent.relativeChildren)) {
-            console.log("hi");
             return point;
         }
 
