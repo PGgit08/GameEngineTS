@@ -13,6 +13,12 @@ export class Camera extends Entity {
     public height: number = RendererManager.getInstance().currentRenderer.height;
 
 
+    /** Use rotation when following an Entity. */
+    public followRotation: boolean = true;
+
+    /** An offset to use when following an Entity. */
+    public followOffset: vec2 = vec2.fromValues(0, 0);
+
     private _followEntity: Entity = null;
 
     /** The Entity that this Camera is currently following. */
@@ -48,15 +54,21 @@ export class Camera extends Entity {
     /**
      * Makes the Camera focus its center on an Entity causing it to follow the Entity.
      * @param entity The Entity for this Camera to follow.
+     * @param offset An optional offset to use when following the Entity (can also be set through public "followOffset") property.
      */
-    public startFollow(entity: Entity): void {
+    public startFollow(entity: Entity, offset?: vec2): void {
         this._followEntity = entity;
+        
+        if (offset !== undefined) this.followOffset = offset;
     }
 
     public stopFollow(): void {
-        this.transform.position = this.transform.toLocalPoint(this._followEntity.transform.position);
+        if (this._followEntity === null) return;
 
-        this.relativeChild = true;
+        this.transform.position = this.transform.toLocalPoint(
+            vec2.add(vec2.create(), this._followEntity.transform.position, this.followOffset)
+        );
+
         this._followEntity = null;
     }
 
@@ -65,10 +77,11 @@ export class Camera extends Entity {
      */
     public view(): mat3 {
         if (this._followEntity !== null) {
-            if (this.relativeChild) { this.relativeChild = false; }
+            if (this.followRotation) this.transform.rotation = this._followEntity.transform.rotation;
 
-            this.transform.position = this._followEntity.transform.position;
-            this.transform.rotation = this._followEntity.transform.rotation;
+            this.transform.position = this.transform.toLocalPoint(
+                vec2.add(vec2.create(), this._followEntity.transform.position, this.followOffset)
+            );
         }
 
         return this._calcViewMat();

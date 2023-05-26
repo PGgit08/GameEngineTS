@@ -2,7 +2,7 @@ import { Entity } from "../ecs/Entity";
 import { Color } from "../graphics/Color";
 import { Square } from "../graphics/geometry/Square";
 import { SpriteComponent } from "../graphics/sprite/SpriteComponent";
-import { Sprite } from "../../GETS";
+import { Sprite } from "../graphics/sprite/Sprite";
 
 // THIS WOULD PROBABLY BE A PREFAB
 /**
