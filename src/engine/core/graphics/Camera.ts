@@ -6,12 +6,8 @@ import { RendererManager } from "../managers/RendererManager";
 import { degToRadians } from "../math/Utils";
 
 export class Camera extends Entity {
-    /** Represents the width in pixels of this Camera (DEFAULT = Current Renderer width). */
-    public width: number = RendererManager.getInstance().currentRenderer.width;
-
-    /** Represents the height in pixels of this Camera (DEFAULT = Current Renderer height). */
-    public height: number = RendererManager.getInstance().currentRenderer.height;
-
+    /** A size value that scales the camera view (DEFAULT VIEW IS RendererWidth, RendererHeight). */
+    public size: number = 1;
     
     /** An offset to use when following an Entity. */
     public followOffset: vec2 = vec2.fromValues(0, 0);
@@ -24,16 +20,14 @@ export class Camera extends Entity {
         return this._followEntity;
     }
 
-    /**
-     * Returns the ratio of cam dimensions to canvas dimension.
-     * @returns Array -> [camWidth/canvasWidth, camHeight/canvasHeight] 
-     */
-    public get camToCanvasRatio(): number[] {
-        return [
-            this.width / RendererManager.getInstance().currentRenderer.width,
-            this.height / RendererManager.getInstance().currentRenderer.height
-        ];
+    public get width(): number {
+        return this.size * RendererManager.getInstance().currentRenderer.width;
     }
+
+    public get height(): number {
+        return this.size * RendererManager.getInstance().currentRenderer.height;
+    }
+
 
     constructor(name: string) {
         super(name);
@@ -127,8 +121,8 @@ export class Camera extends Entity {
         mat3.fromScaling(
             scaleMat,
             vec2.fromValues(
-                this.camToCanvasRatio[0],
-                this.camToCanvasRatio[1]
+                this.size,
+                this.size
             )
         );
 

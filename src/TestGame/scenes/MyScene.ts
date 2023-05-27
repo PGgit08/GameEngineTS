@@ -20,6 +20,8 @@ export class MyScene extends Scene {
         entity1.transform.scale = vec2.fromValues(3, 3);
         entity2.transform.scale = vec2.fromValues(1, 1);
 
+        cam.size = 0.7;
+
         entity1.addChildren(cam);
 
         entity2.addBehaviors(new MoveBehavior());

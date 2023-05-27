@@ -14,8 +14,8 @@ export class NoZoomBehavior extends Behavior {
 
     public override update(): void {
         this.transform.scale = vec2.fromValues(
-            SceneManager.getInstance().currentScene.currentCamera.camToCanvasRatio[0] * this.owner.transform.scale[0],
-            SceneManager.getInstance().currentScene.currentCamera.camToCanvasRatio[1] * this.owner.transform.scale[1]
+            SceneManager.getInstance().currentScene.currentCamera.size * this.owner.transform.scale[0],
+            SceneManager.getInstance().currentScene.currentCamera.size * this.owner.transform.scale[1]
         );
     }
 }
