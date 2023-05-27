@@ -45,8 +45,8 @@ export class Camera extends Entity {
     }
 
     public override removeParentScene(...scenes: string[]): void {
+        scenes.forEach((s) => { if (this.hasParentScene(s)) { SceneManager.getInstance().getScene(s).removeCamera(this.name); } });
         super.removeParentScene(...scenes);
-        scenes.forEach((s) => { if (this.hasParentScene(s)) { SceneManager.getInstance().getScene(s).removeCamera(s); } });
     }
 
     /**
@@ -63,17 +63,16 @@ export class Camera extends Entity {
     /**
      * Stops following an Entity if there is one being followed.
      */
-    public stopFollow(): void {
-        if (this._followEntity === null) return;
-        
+    public stopFollow(): void {        
         this._followEntity = null;
     }
+
 
     /**
      * Returns the View Matrix (3x3) based on this Camera's Transform and width/height.
      */
     public view(): mat3 {
-        if (this._followEntity !== null) {
+        if (this._followEntity && this.parent) {
             // set the position of this camera
             this.transform.position = this.parent.transform.toLocalPoint(
                 vec2.add(
@@ -84,9 +83,6 @@ export class Camera extends Entity {
             );
 
             this.transform.rotation = this._followEntity.transform.rotation;
-
-            // console.log(this._followEntity.transform.toWorldPoint(vec2.fromValues(0, 0))[0]);
-            console.log(this._followEntity.transform.toWorldPoint(vec2.fromValues(0, 0)))
         }
 
         return this._calcViewMat();
@@ -142,11 +138,11 @@ export class Camera extends Entity {
 
         // mult by parent matrix if needed
         if (this.parent && this.parent.relativeChildren && this.relativeChild) {
-            // if (this._followEntity) {
-            //     // to cancel out rotation from parent entity when following
-            //     mat3.fromRotation(this._followRotMat, degToRadians(this.parent.transform.rotation));
-            //     mat3.invert(this._followRotMat, this._followRotMat);
-            // }
+            if (this._followEntity) {
+                // to cancel out rotation from parent entity when following
+                mat3.fromRotation(this._followRotMat, degToRadians(this.parent.transform.rotation));
+                mat3.invert(this._followRotMat, this._followRotMat);
+            }
 
             mat3.mul(
                 localMat,

@@ -13,25 +13,23 @@ export class MyScene extends Scene {
         const entity1 = Entity.Spawn(DefaultEntity);
         const entity2 = Entity.Spawn(DefaultEntity);
 
+        Entity.Spawn(DefaultEntity).transform.position[0] = 300;
+
         entity2.getComponent(SpriteComponent).sprite.material.color = Color.ORANGE;
 
         entity1.transform.scale = vec2.fromValues(3, 3);
+        entity2.transform.scale = vec2.fromValues(1, 1);
 
         entity1.addChildren(cam);
-        entity2.addBehaviors(new MoveBehavior());
 
+        entity2.addBehaviors(new MoveBehavior());
         cam.startFollow(entity2);
 
         this.setCurrentCamera("Example Camera");
 
         setTimeout(() => {
-            // pretty bad user experience right here
-            // entity1.removeChild(cam);
-            // this.addCamera(cam);
-            // this.setCurrentCamera("Example Camera");
-            // cam.followRotation = false;
-            // cam.startFollow(entity1);
-        }, 1000);
+            cam.stopFollow();
+        }, 5000);
 
         super.load();
     }
