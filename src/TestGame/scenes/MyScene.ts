@@ -18,20 +18,20 @@ export class MyScene extends Scene {
         entity1.transform.scale = vec2.fromValues(3, 3);
 
         entity1.addChildren(cam);
-        entity1.addBehaviors(new MoveBehavior());
+        entity2.addBehaviors(new MoveBehavior());
+
+        cam.startFollow(entity2);
 
         this.setCurrentCamera("Example Camera");
-
-        entity2.transform.position[0] = 100;
 
         setTimeout(() => {
             // pretty bad user experience right here
             // entity1.removeChild(cam);
             // this.addCamera(cam);
             // this.setCurrentCamera("Example Camera");
-            cam.followRotation = false;
-            cam.startFollow(entity1);
-        }, 8000);
+            // cam.followRotation = false;
+            // cam.startFollow(entity1);
+        }, 1000);
 
         super.load();
     }

@@ -12,14 +12,12 @@ export class Camera extends Entity {
     /** Represents the height in pixels of this Camera (DEFAULT = Current Renderer height). */
     public height: number = RendererManager.getInstance().currentRenderer.height;
 
-
-    /** Use rotation when following an Entity. */
-    public followRotation: boolean = true;
-
+    
     /** An offset to use when following an Entity. */
     public followOffset: vec2 = vec2.fromValues(0, 0);
 
-    private _followEntity: Entity = null;
+    private _followEntity: Entity = null; // the entity that's being followed
+    private _followRotMat: mat3 = mat3.create(); // a special rotation matrix to use when following
 
     /** The Entity that this Camera is currently following. */
     public get followEntity(): Entity {
@@ -58,17 +56,16 @@ export class Camera extends Entity {
      */
     public startFollow(entity: Entity, offset?: vec2): void {
         this._followEntity = entity;
-        
+
         if (offset !== undefined) this.followOffset = offset;
     }
 
+    /**
+     * Stops following an Entity if there is one being followed.
+     */
     public stopFollow(): void {
         if (this._followEntity === null) return;
-
-        this.transform.position = this.transform.toLocalPoint(
-            vec2.add(vec2.create(), this._followEntity.transform.position, this.followOffset)
-        );
-
+        
         this._followEntity = null;
     }
 
@@ -77,11 +74,19 @@ export class Camera extends Entity {
      */
     public view(): mat3 {
         if (this._followEntity !== null) {
-            if (this.followRotation) this.transform.rotation = this._followEntity.transform.rotation;
-
-            this.transform.position = this.transform.toLocalPoint(
-                vec2.add(vec2.create(), this._followEntity.transform.position, this.followOffset)
+            // set the position of this camera
+            this.transform.position = this.parent.transform.toLocalPoint(
+                vec2.add(
+                    vec2.create(),
+                    this._followEntity.transform.toWorldPoint(vec2.fromValues(0, 0)), // get world position of follow entity
+                    this.followOffset
+                )
             );
+
+            this.transform.rotation = this._followEntity.transform.rotation;
+
+            // console.log(this._followEntity.transform.toWorldPoint(vec2.fromValues(0, 0))[0]);
+            console.log(this._followEntity.transform.toWorldPoint(vec2.fromValues(0, 0)))
         }
 
         return this._calcViewMat();
@@ -137,6 +142,18 @@ export class Camera extends Entity {
 
         // mult by parent matrix if needed
         if (this.parent && this.parent.relativeChildren && this.relativeChild) {
+            // if (this._followEntity) {
+            //     // to cancel out rotation from parent entity when following
+            //     mat3.fromRotation(this._followRotMat, degToRadians(this.parent.transform.rotation));
+            //     mat3.invert(this._followRotMat, this._followRotMat);
+            // }
+
+            mat3.mul(
+                localMat,
+                this._followRotMat,
+                localMat
+            );
+
             mat3.mul(
                 worldViewMat,
                 this.parent.transform.toWorldMat(),

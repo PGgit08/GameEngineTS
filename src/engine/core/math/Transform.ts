@@ -71,14 +71,23 @@ export class Transform {
      * @returns The same point but in this Entity's local-space.
      */
     public toLocalPoint(point: vec2): vec2 {
-        if (!(this.owner.parent && this.owner.parent.relativeChildren)) {
-            return point;
-        }
-
         return vec2.transformMat3(
             vec2.create(),
             point,
-            mat3.invert(mat3.create(), this.owner.parent.transform.toWorldMat())
+            mat3.invert(mat3.create(), this.toWorldMat())
+        );
+    }
+
+    /**
+     * Takes in a given vector in this Entity's local-space and returns the same point in world-space.
+     * @param point The local-space 2d vector point.
+     * @returns The same point but in world-space.
+     */
+    public toWorldPoint(point: vec2): vec2 {
+        return vec2.transformMat3(
+            vec2.create(),
+            point,
+            this.toWorldMat()
         );
     }
 
