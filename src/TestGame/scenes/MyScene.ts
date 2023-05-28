@@ -1,5 +1,4 @@
-import { vec2 } from "gl-matrix";
-import { Entity, MoveBehavior, Scene, SpriteComponent, DefaultEntity, Color, Camera } from "../../engine/GETS";
+import { Entity, MoveBehavior, Scene, DefaultEntity } from "../../engine/GETS";
 
 export class MyScene extends Scene {
     constructor() {
@@ -8,34 +7,18 @@ export class MyScene extends Scene {
 
     // experimenting with LOAD placement
     public override load(): void {
-        const cam: Camera = new Camera("Example Camera");
-
         const entity1 = Entity.Spawn(DefaultEntity);
         const entity2 = Entity.Spawn(DefaultEntity);
 
-        Entity.Spawn(DefaultEntity).transform.position[0] = 300;
+        entity2.transform.position[0] = 200;
 
-        entity2.getComponent(SpriteComponent).sprite.material.color = Color.ORANGE;
-
-        entity1.transform.scale = vec2.fromValues(3, 3);
-        entity2.transform.scale = vec2.fromValues(1, 1);
-
-        cam.size = 0.7;
-
-        entity1.addChildren(cam);
-
-        entity2.addBehaviors(new MoveBehavior());
-        cam.startFollow(entity2);
-
-        this.setCurrentCamera("Example Camera");
+        entity1.addChildren(entity2);
+        entity1.addBehaviors(new MoveBehavior());
+        
+        this.addEntities(entity1);
 
         setTimeout(() => {
-            cam.stopFollow();
-            
-            this.removeEntity(entity1);
-            this.addCamera(cam);
-
-            this.setCurrentCamera("Example Camera");
+            console.log(entity2.transform.parentRotation);
         }, 5000);
 
         super.load();

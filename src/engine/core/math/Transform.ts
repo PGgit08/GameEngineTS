@@ -9,6 +9,28 @@ export class Transform {
 
     public owner: Entity;
 
+    /**
+     * Gets the sum of the rotations of this Entity's parents.
+     * @returns The sum of the rotations of this Entity's parents.
+     */
+    public get parentRotation(): number {
+        let rotationSum: number = 0;
+
+        let parent: Entity = this.owner.parent;
+        let child: Entity = this.owner;
+
+        while (parent && parent.relativeChildren) {
+            if (child.relativeChild) {
+                rotationSum += parent.transform.rotation;
+
+                parent = parent.parent;
+                child = parent;
+            }
+        }
+
+        return rotationSum;
+    }
+
     constructor(owner: Entity) {
         this.owner = owner;
     }
