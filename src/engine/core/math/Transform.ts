@@ -91,9 +91,9 @@ export class Transform {
         vec2.sub(lookAt, point, this.position);
         vec2.rotate(direction, direction, vec2.fromValues(0, 0), degToRadians(this.parentRotation + this.rotation));
 
-        console.log(radiansToDeg(vec2.angle(lookAt, direction)));
+        const angle: number = radiansToDeg(vec2.angle(lookAt, direction));
 
-        // this.rotation = radiansToDeg(vec2.angle(lookAt, direction));
+        this.rotation = angle;
     }
 
 
