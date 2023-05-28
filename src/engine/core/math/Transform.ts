@@ -1,10 +1,17 @@
 import { mat3, vec2 } from "gl-matrix";
 import { degToRadians } from "./Utils";
+import { Entity } from "../ecs/Entity";
 
 export class Transform {
     public position: vec2 = vec2.create();
     public rotation: number = 0;
     public scale: vec2 = vec2.fromValues(1, 1);
+
+    public owner: Entity;
+
+    constructor(owner: Entity) {
+        this.owner = owner;
+    }
 
     /**
      * Translate the object.
@@ -49,23 +56,46 @@ export class Transform {
      * (DO NOT USE YET, BEING DEVELOPED). Rotates the transform around a point.
      * @param point The point to rotate around.
      */
-    public rotateAround(point: vec2): void {
-
-    }
+    public rotateAround(point: vec2): void {}
 
     /**
      * (DO NOT USE YET, BEING DEVELOPED). Rotate the transform so it looks at a point.
      * @param point The point to look at.
      */
-    public lookAt(point: vec2): void {
+    public lookAt(point: vec2): void {}
 
+
+    /**
+     * Takes in a given world-space vector and returns the same point in this Entity's local-space.
+     * @param point The world-space 2d vector point.
+     * @returns The same point but in this Entity's local-space.
+     */
+    public toLocalPoint(point: vec2): vec2 {
+        return vec2.transformMat3(
+            vec2.create(),
+            point,
+            mat3.invert(mat3.create(), this.toWorldMat())
+        );
+    }
+
+    /**
+     * Takes in a given vector in this Entity's local-space and returns the same point in world-space.
+     * @param point The local-space 2d vector point.
+     * @returns The same point but in world-space.
+     */
+    public toWorldPoint(point: vec2): vec2 {
+        return vec2.transformMat3(
+            vec2.create(),
+            point,
+            this.toWorldMat()
+        );
     }
 
     /**
      * Converts this Transform into a 3x3 Matrix.
      * @returns A mat3 3x3 Matrix.
      */
-    public toMatrix(): mat3 {
+    public toLocalMat(): mat3 {
         const transMat: mat3 = mat3.create();
         const rotMat: mat3 = mat3.create();
         const scaleMat: mat3 = mat3.create();
@@ -83,5 +113,23 @@ export class Transform {
         mat3.mul(outMat, outMat, scaleMat);
 
         return outMat;
+    }
+
+    /**
+     * Converts this Transform into a 3x3 Matrix taking the Entity's parent in account.
+     * Will only take the Entity's parent in account if it has "relativeChildren" property marked as true
+     * and if this Entity has its "relativeChild" property marked as true.
+     * @returns A mat3 3x3 Matrix.
+     */
+    public toWorldMat(): mat3 {
+        if (this.owner.parent && this.owner.parent.relativeChildren && this.owner.relativeChild) {
+            return mat3.mul(
+                mat3.create(),
+                this.owner.parent.transform.toWorldMat(),
+                this.toLocalMat()
+            );
+        } else {
+            return this.toLocalMat();
+        }
     }
 }

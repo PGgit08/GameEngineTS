@@ -48,7 +48,7 @@ export class StandardShader extends Shader {
         uniform vec4 ${ShaderConfig.UNIFORM_NAMES.COLOR};
          
         void main() {
-            gl_FragColor = ${ShaderConfig.UNIFORM_NAMES.COLOR} * texture2D(${ShaderConfig.UNIFORM_NAMES.TEXTURE}, v_texcoord);
+            gl_FragColor = texture2D(${ShaderConfig.UNIFORM_NAMES.TEXTURE}, v_texcoord) * ${ShaderConfig.UNIFORM_NAMES.COLOR};
         }
         `;
     }

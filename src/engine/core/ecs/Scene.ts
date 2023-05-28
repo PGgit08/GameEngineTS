@@ -9,10 +9,10 @@ export class Scene extends GameObject implements Lifecycle {
     private _rootEntity: Entity;
 
     private _sceneCameras: Dictionary<string, Camera> = {}; 
-    private _currentCamera: Camera;
+    private _currentCamera: string;
 
     get currentCamera(): Camera {
-        return this._currentCamera;
+        return this.getCamera(this._currentCamera);
     }
 
     constructor(name: string) {
@@ -55,11 +55,15 @@ export class Scene extends GameObject implements Lifecycle {
     }
 
     public getCamera(name: string): Camera {
+        if (this._sceneCameras[name] === undefined) {
+            return this.getCamera("DefaultCamera");
+        }
+
         return this._sceneCameras[name];
     }
 
     public setCurrentCamera(name: string): void {
-        this._currentCamera = this.getCamera(name);
+        this._currentCamera = name;
     }
 
 

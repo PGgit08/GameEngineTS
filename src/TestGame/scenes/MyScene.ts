@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Entity, MoveBehavior, Scene, SpriteComponent, AnimatedSprite, AnimationFrameOrder, DefaultEntity, NoZoomBehavior, Sprite, Color, Camera } from "../../engine/GETS";
+import { Entity, MoveBehavior, Scene, SpriteComponent, DefaultEntity, Color, Camera } from "../../engine/GETS";
 
 export class MyScene extends Scene {
     constructor() {
@@ -8,40 +8,35 @@ export class MyScene extends Scene {
 
     // experimenting with LOAD placement
     public override load(): void {
-        const entity1: Entity = new Entity("Entity1");
         const cam: Camera = new Camera("Example Camera");
 
-        entity1.addComponents(
-            new SpriteComponent(
-                new AnimatedSprite({
-                    animationFrameOrder: AnimationFrameOrder.Reversed,
-                    timePerFrame: 0.5
-                }, 'ArmsAnimation')
-            )
-        );
+        const entity1 = Entity.Spawn(DefaultEntity);
+        const entity2 = Entity.Spawn(DefaultEntity);
 
-        entity1.transform.position = vec2.fromValues(0, 0);
-        entity1.transform.scale = vec2.fromValues(1.3, 1.3);
+        Entity.Spawn(DefaultEntity).transform.position[0] = 300;
 
-        // create a "crosshair" sprite that belongs to the camera
-        const camSprite: Sprite = new Sprite("Crosshair");
-        camSprite.material.color = Color.GREEN;
+        entity2.getComponent(SpriteComponent).sprite.material.color = Color.ORANGE;
 
-        cam.addComponents(
-            new SpriteComponent(
-                camSprite
-            )
-        );
+        entity1.transform.scale = vec2.fromValues(3, 3);
+        entity2.transform.scale = vec2.fromValues(1, 1);
 
-        // using this to prevent zoom on Sprites belonging to Camera
-        cam.addBehaviors(new NoZoomBehavior(), new MoveBehavior());
+        cam.size = 0.7;
 
-        cam.transform.scale = vec2.fromValues(0.5, 0.5);
+        entity1.addChildren(cam);
 
-        this.addEntities(entity1);
+        entity2.addBehaviors(new MoveBehavior());
+        cam.startFollow(entity2);
 
-        this.addCamera(cam);
         this.setCurrentCamera("Example Camera");
+
+        setTimeout(() => {
+            cam.stopFollow();
+            
+            this.removeEntity(entity1);
+            this.addCamera(cam);
+
+            this.setCurrentCamera("Example Camera");
+        }, 5000);
 
         super.load();
     }

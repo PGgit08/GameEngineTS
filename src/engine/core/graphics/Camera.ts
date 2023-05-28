@@ -6,30 +6,28 @@ import { RendererManager } from "../managers/RendererManager";
 import { degToRadians } from "../math/Utils";
 
 export class Camera extends Entity {
-    /** Represents the width in pixels of this Camera (DEFAULT = Current Renderer width). */
-    public width: number = RendererManager.getInstance().currentRenderer.width;
+    /** A size value that scales the camera view (DEFAULT VIEW IS RendererWidth, RendererHeight). */
+    public size: number = 1;
+    
+    /** An offset to use when following an Entity. */
+    public followOffset: vec2 = vec2.fromValues(0, 0);
 
-    /** Represents the height in pixels of this Camera (DEFAULT = Current Renderer height). */
-    public height: number = RendererManager.getInstance().currentRenderer.height;
-
-
-    private _followEntity: Entity = null;
+    private _followEntity: Entity = null; // the entity that's being followed
+    private _followRotMat: mat3 = mat3.create(); // a special rotation matrix to use when following
 
     /** The Entity that this Camera is currently following. */
     public get followEntity(): Entity {
         return this._followEntity;
     }
 
-    /**
-     * Returns the ratio of cam dimensions to canvas dimension.
-     * @returns Array -> [camWidth/canvasWidth, camHeight/canvasHeight] 
-     */
-    public get camToCanvasRatio(): number[] {
-        return [
-            this.width / RendererManager.getInstance().currentRenderer.width,
-            this.height / RendererManager.getInstance().currentRenderer.height
-        ];
+    public get width(): number {
+        return this.size * RendererManager.getInstance().currentRenderer.width;
     }
+
+    public get height(): number {
+        return this.size * RendererManager.getInstance().currentRenderer.height;
+    }
+
 
     constructor(name: string) {
         super(name);
@@ -41,28 +39,43 @@ export class Camera extends Entity {
     }
 
     public override removeParentScene(...scenes: string[]): void {
+        scenes.forEach((s) => { if (this.hasParentScene(s)) { SceneManager.getInstance().getScene(s).removeCamera(this.name); } });
         super.removeParentScene(...scenes);
-        scenes.forEach((s) => { if (this.hasParentScene(s)) { SceneManager.getInstance().getScene(s).removeCamera(s); } });
     }
 
     /**
      * Makes the Camera focus its center on an Entity causing it to follow the Entity.
      * @param entity The Entity for this Camera to follow.
+     * @param offset An optional offset to use when following the Entity (can also be set through public "followOffset") property.
      */
-    public startFollow(entity: Entity): void {
+    public startFollow(entity: Entity, offset?: vec2): void {
         this._followEntity = entity;
+
+        if (offset !== undefined) this.followOffset = offset;
     }
 
-    public stopFollow(): void {
+    /**
+     * Stops following an Entity if there is one being followed.
+     */
+    public stopFollow(): void {        
         this._followEntity = null;
     }
+
 
     /**
      * Returns the View Matrix (3x3) based on this Camera's Transform and width/height.
      */
     public view(): mat3 {
-        if (this._followEntity !== null) {
-            this.transform.position = this._followEntity.transform.position;
+        if (this._followEntity && this.parent) {
+            // set the position of this camera
+            this.transform.position = this.parent.transform.toLocalPoint(
+                vec2.add(
+                    vec2.create(),
+                    this._followEntity.transform.toWorldPoint(vec2.fromValues(0, 0)), // get world position of follow entity
+                    this.followOffset
+                )
+            );
+
             this.transform.rotation = this._followEntity.transform.rotation;
         }
 
@@ -108,8 +121,8 @@ export class Camera extends Entity {
         mat3.fromScaling(
             scaleMat,
             vec2.fromValues(
-                this.camToCanvasRatio[0],
-                this.camToCanvasRatio[1]
+                this.size,
+                this.size
             )
         );
 
@@ -119,9 +132,21 @@ export class Camera extends Entity {
 
         // mult by parent matrix if needed
         if (this.parent && this.parent.relativeChildren && this.relativeChild) {
+            if (this._followEntity) {
+                // to cancel out rotation from parent entity when following
+                mat3.fromRotation(this._followRotMat, degToRadians(this.parent.transform.rotation));
+                mat3.invert(this._followRotMat, this._followRotMat);
+            }
+
+            mat3.mul(
+                localMat,
+                this._followRotMat,
+                localMat
+            );
+
             mat3.mul(
                 worldViewMat,
-                this.parent.worldMatrix,
+                this.parent.transform.toWorldMat(),
                 localMat
             );
         } else {
