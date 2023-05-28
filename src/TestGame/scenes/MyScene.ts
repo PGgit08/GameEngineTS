@@ -31,6 +31,11 @@ export class MyScene extends Scene {
 
         setTimeout(() => {
             cam.stopFollow();
+            
+            this.removeEntity(entity1);
+            this.addCamera(cam);
+
+            this.setCurrentCamera("Example Camera");
         }, 5000);
 
         super.load();
