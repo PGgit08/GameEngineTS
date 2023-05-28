@@ -10,8 +10,8 @@ To test run -> **npm run dev**
 - Movement along local axis. -- DONE
 - Component/Behavior/Entity/Scene localizing -- ALMOST DONE
 - Entity Spawning / Despawning -- DONE
-- Sprites (+ Animated Sprites) -- ALMOST DONE
-- Lighting, Cameras
+- Sprites (+ Animated Sprites) -- DONE
+- Lighting, Cameras -- CAMERAS DONE, LIGHTING NOW
 - Physics (matter.js) / Collsion
 - Entity Communication (+ Events)
 
@@ -36,7 +36,10 @@ An interface that has all the Lifecycle methods the engine uses.
 - render(): void ->  called durign frame update and should be used for rendering
 
 ## Graphics
-The Mesh class is the main graphics item in the engine. It takes in a Geometry class specifying the verticies that make up the Mesh and a Material class specifying the color/texture and other material features of the Mesh. The Sprite class is what gets used by the user. A SpriteComponent gets fed with a Sprite which can inputs an optional Texture, rendering Frame, and other optional information such as custom Geometry and origin for pivot. The AnimatedSprite class is an extension of the Sprite class which can be used to form Sprite animations given a configuration that specifies the order of Frames to use for the animation and time per frame (config is called AnimatedSpriteConfig).  
+The Mesh class is the main graphics item in the engine. It takes in a Geometry class specifying the verticies that make up the Mesh and a Material class specifying the color/texture and other material features of the Mesh. The Sprite class is what gets used by the user. A SpriteComponent gets fed with a Sprite which can inputs an optional Texture, rendering Frame, and other optional information such as custom Geometry and origin for pivot. The AnimatedSprite class is an extension of the Sprite class which can be used to form Sprite animations given a configuration that specifies the order of Frames to use for the animation and time per frame (config is called AnimatedSpriteConfig).
+
+## Cameras
+-- EXPLANATION TODO --
 
 ## Custom Shaders (tutorial ngl)
 Custom Shaders along with their custom Materials can be made in the engine. To create a custom Shader, it must have the required attributes and uniforms that are in the ShaderConfig class. An example Shader having these requirments exists in the engine and is called StandardShader. It has a Material linked to it called StandardMaterial which uses a Color field and a Texture field. When creating a custom Material for a custom Shader, the "applyAdditionalUniforms" abstract method should be overriden and should apply any standard uniforms to the custom Shader.
