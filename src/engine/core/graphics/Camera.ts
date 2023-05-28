@@ -15,6 +15,8 @@ export class Camera extends Entity {
     private _followEntity: Entity = null; // the entity that's being followed
     private _followRotMat: mat3 = mat3.create(); // a special rotation matrix to use when following
 
+    private _transMat: mat3 = mat3.create();
+
     /** The Entity that this Camera is currently following. */
     public get followEntity(): Entity {
         return this._followEntity;
@@ -26,6 +28,10 @@ export class Camera extends Entity {
 
     public get height(): number {
         return this.size * RendererManager.getInstance().currentRenderer.height;
+    }
+
+    public get transMat(): mat3 {
+        return this._transMat;
     }
 
 
@@ -152,6 +158,8 @@ export class Camera extends Entity {
         } else {
             worldViewMat = localMat;
         }
+
+        mat3.copy(this._transMat, transMat);
 
         // inverse cam matrix
         mat3.invert(worldViewMat, worldViewMat);

@@ -17,6 +17,8 @@ export class Renderer extends GameObject implements Lifecycle {
 
     private _gl: WebGLRenderingContext;
 
+    private _mouseOver: boolean;
+
     get width(): number {
         return this._width;
     }
@@ -41,6 +43,14 @@ export class Renderer extends GameObject implements Lifecycle {
         return this._projectionMat;
     }
 
+    get mouseOver(): boolean {
+        return this._mouseOver;
+    }
+
+    get box(): DOMRect {
+        return this._canvas.getBoundingClientRect();
+    } 
+
     constructor(name: string, canvasId: string){
         super(name);
 
@@ -60,6 +70,14 @@ export class Renderer extends GameObject implements Lifecycle {
 
         this._canvas.style.width = this._canvas.width.toString();
         this._canvas.style.height = this._canvas.height.toString();
+
+        this._canvas.onmouseover = () => {
+            this._mouseOver = true;
+        };
+
+        this._canvas.onmouseout = () => {
+            this._mouseOver = false;
+        }
     }
 
     /**

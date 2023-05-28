@@ -1,5 +1,5 @@
 import { mat3, vec2 } from "gl-matrix";
-import { degToRadians } from "./Utils";
+import { degToRadians, radiansToDeg } from "./Utils";
 import { Entity } from "../ecs/Entity";
 
 export class Transform {
@@ -81,10 +81,20 @@ export class Transform {
     public rotateAround(point: vec2): void {}
 
     /**
-     * (DO NOT USE YET, BEING DEVELOPED). Rotate the transform so it looks at a point.
+     * (DO NOT USE YET, BEING DEVELOPED). Sets the rotation so it looks at a point.
      * @param point The point to look at.
      */
-    public lookAt(point: vec2): void {}
+    public lookAt(point: vec2): void {
+        const lookAt: vec2 = vec2.create();
+        const direction: vec2 = vec2.fromValues(0, 1);
+
+        vec2.sub(lookAt, point, this.position);
+        vec2.rotate(direction, direction, vec2.fromValues(0, 0), degToRadians(this.parentRotation + this.rotation));
+
+        console.log(radiansToDeg(vec2.angle(lookAt, direction)));
+
+        // this.rotation = radiansToDeg(vec2.angle(lookAt, direction));
+    }
 
 
     /**
