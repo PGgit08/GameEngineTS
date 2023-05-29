@@ -31,6 +31,24 @@ export class Transform {
         return rotationSum;
     }
 
+    public get parentTranslation(): vec2 {
+        let translationSum: vec2 = vec2.create();
+
+        let parent: Entity = this.owner.parent;
+        let child: Entity = this.owner;
+
+        while (parent && parent.relativeChildren) {
+            if (child.relativeChild) {
+                vec2.add(translationSum, translationSum, parent.transform.position);
+
+                parent = parent.parent;
+                child = parent;
+            }
+        }
+
+        return translationSum;
+    }
+
     constructor(owner: Entity) {
         this.owner = owner;
     }
@@ -85,12 +103,20 @@ export class Transform {
      * @param point The point to look at.
      */
     public lookAt(point: vec2): void {
+        let a = vec2.create();
+        let b = vec2.create();
+        let c = vec2.create();
+
+        vec2.rotate(c, point, vec2.fromValues(0, 0), degToRadians(this.parentRotation));
+        vec2.add(b, this.position, this.parentTranslation);
+        vec2.sub(a, c, b);
+
         const angle: number = radiansToDeg(Math.atan2(
-            point[0],
-            point[1]
+            a[0],
+            a[1]
         ));
 
-        this.rotation = angle - this.parentRotation;
+        this.rotation = angle;
     }
 
 
