@@ -85,15 +85,12 @@ export class Transform {
      * @param point The point to look at.
      */
     public lookAt(point: vec2): void {
-        const lookAt: vec2 = vec2.create();
-        const direction: vec2 = vec2.fromValues(0, 1);
+        const angle: number = radiansToDeg(Math.atan2(
+            point[0],
+            point[1]
+        ));
 
-        vec2.sub(lookAt, point, this.position);
-        vec2.rotate(direction, direction, vec2.fromValues(0, 0), degToRadians(this.parentRotation + this.rotation));
-
-        const angle: number = radiansToDeg(vec2.angle(lookAt, direction));
-
-        this.rotation = angle;
+        this.rotation = angle - this.parentRotation;
     }
 
 

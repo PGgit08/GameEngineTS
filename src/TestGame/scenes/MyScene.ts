@@ -8,7 +8,14 @@ export class MyScene extends Scene {
 
     // experimenting with LOAD placement
     public override load(): void {
-        Entity.Spawn(DefaultEntity).addBehaviors(new LookAtBehavior());
+        const ent: Entity = Entity.Spawn(DefaultEntity);
+        const ent2: Entity = Entity.Spawn(DefaultEntity);
+
+        ent2.addChildren(ent);
+        ent.transform.position[0] = 300;
+
+        ent.addBehaviors(new LookAtBehavior());
+        ent.transform.rotation = 0;
 
         super.load();
     }
