@@ -103,20 +103,28 @@ export class Transform {
      * @param point The point to look at.
      */
     public lookAt(point: vec2): void {
-        let a = vec2.create();
-        let b = vec2.create();
-        let c = vec2.create();
+        const transPoint: vec2 = vec2.create();
 
-        vec2.rotate(c, point, vec2.fromValues(0, 0), degToRadians(this.parentRotation));
-        vec2.add(b, this.position, this.parentTranslation);
-        vec2.sub(a, c, b);
+        // console.log(this.toWorldMat());
 
-        const angle: number = radiansToDeg(Math.atan2(
-            a[0],
-            a[1]
+        vec2.transformMat3(
+            transPoint,
+            point,
+            mat3.invert(mat3.create(), this.toWorldMat())
+        );
+        
+        // console.log(point);
+        // console.log(transPoint);
+
+        console.log(radiansToDeg(Math.atan2(
+            transPoint[0],
+            transPoint[1]
+        )));
+
+        this.rotation += -radiansToDeg(Math.atan2(
+            transPoint[0],
+            transPoint[1]
         ));
-
-        this.rotation = angle;
     }
 
 

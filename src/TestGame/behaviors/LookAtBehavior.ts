@@ -8,6 +8,9 @@ export class LookAtBehavior extends Behavior {
     public override start(): void {}
 
     public override update(): void {
+        // this.transform.rotate(1);
+        
         this.transform.lookAt(Input.MousePos());
+        // console.log(Input.MousePos());
     }
 }
