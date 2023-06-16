@@ -10,16 +10,18 @@ export class MyScene extends Scene {
     // experimenting with LOAD placement
     public override load(): void {
         const ent: Entity = Entity.Spawn(Entity1);
-        const ent2: Entity = Entity.Spawn(DefaultEntity);
-        const ent3: Entity = Entity.Spawn(DefaultEntity);
+        // const ent2: Entity = Entity.Spawn(DefaultEntity);
+        // const ent3: Entity = Entity.Spawn(DefaultEntity);
 
-        ent2.addChildren(ent);
-        ent3.addChildren(ent2);
+        // ent2.addChildren(ent);
+        // ent3.addChildren(ent2);
 
-        ent.transform.position[0] = 300;
+        // ent.transform.position[0] = 300;
         ent.addBehaviors(new LookAtBehavior());
-        ent2.addBehaviors(new MoveBehavior());
-        ent3.addBehaviors(new MoveBehavior());
+        // ent2.addBehaviors(new MoveBehavior());
+        // ent3.addBehaviors(new MoveBehavior());
+
+        this.currentCamera.addBehaviors(new MoveBehavior());
 
         super.load();
     }

@@ -29,8 +29,6 @@ export class Input {
                     e.clientX - rendererBox.left,
                     e.clientY - rendererBox.top
                 );
-
-                vec2.transformMat3(this._mousePos, this._mousePos, SceneManager.getInstance().currentScene.currentCamera.transMat);
             }
         });
     }
@@ -58,6 +56,6 @@ export class Input {
      * Returns the position of the mouse.
      */
     public static MousePos(): vec2 {
-        return this._mousePos;
+        return vec2.transformMat3(vec2.create(), this._mousePos, SceneManager.getInstance().currentScene.currentCamera.worldMat);
     }
 }
