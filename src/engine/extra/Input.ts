@@ -31,8 +31,6 @@ export class Input {
                 );
 
                 vec2.transformMat3(this._mousePos, this._mousePos, SceneManager.getInstance().currentScene.currentCamera.transMat);
-
-                this._mousePos[1] = -this._mousePos[1];
             }
         });
     }
