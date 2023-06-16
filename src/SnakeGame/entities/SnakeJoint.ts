@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Entity, SpriteComponent, TextureManager, Sprite } from "../../engine/GETS";
+import { Entity, SpriteComponent, TextureManager, Sprite, Color } from "../../engine/GETS";
 
 export class SnakeJoint extends Entity {
     constructor() {
@@ -11,6 +11,8 @@ export class SnakeJoint extends Entity {
             new SpriteComponent(
                 new Sprite('f-texture')
             )
-        )
+        );
+
+        this.getComponent(SpriteComponent).sprite.material.color = Color.WHITE;
     }
 }

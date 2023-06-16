@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Entity, SpriteComponent, Sprite } from "../../engine/GETS";
+import { Entity, SpriteComponent, Sprite, Color } from "../../engine/GETS";
 
 export class Food extends Entity {
     constructor(){
@@ -11,6 +11,8 @@ export class Food extends Entity {
             new SpriteComponent(
                 new Sprite('emoji')
             )
-        )
+        );
+
+        this.getComponent(SpriteComponent).sprite.material.color = Color.WHITE;
     }
 }
