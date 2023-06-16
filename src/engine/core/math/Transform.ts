@@ -99,7 +99,7 @@ export class Transform {
     public rotateAround(point: vec2): void {}
 
     /**
-     * (DO NOT USE YET, BEING DEVELOPED). Sets the rotation so it looks at a point.
+     * Sets the rotation so it looks at a point.
      * @param point The point to look at.
      */
     public lookAt(point: vec2): void {
