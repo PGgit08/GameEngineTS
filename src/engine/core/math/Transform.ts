@@ -1,6 +1,7 @@
 import { mat3, vec2 } from "gl-matrix";
 import { degToRadians, radiansToDeg } from "./Utils";
 import { Entity } from "../ecs/Entity";
+import { SceneManager } from "../managers/SceneManager";
 
 export class Transform {
     public position: vec2 = vec2.create();
@@ -9,45 +10,8 @@ export class Transform {
 
     public owner: Entity;
 
-    /**
-     * Gets the sum of the rotations of this Entity's parents.
-     * @returns The sum of the rotations of this Entity's parents.
-     */
-    public get parentRotation(): number {
-        let rotationSum: number = 0;
-
-        let parent: Entity = this.owner.parent;
-        let child: Entity = this.owner;
-
-        while (parent && parent.relativeChildren) {
-            if (child.relativeChild) {
-                rotationSum += parent.transform.rotation;
-
-                parent = parent.parent;
-                child = parent;
-            }
-        }
-
-        return rotationSum;
-    }
-
-    public get parentTranslation(): vec2 {
-        let translationSum: vec2 = vec2.create();
-
-        let parent: Entity = this.owner.parent;
-        let child: Entity = this.owner;
-
-        while (parent && parent.relativeChildren) {
-            if (child.relativeChild) {
-                vec2.add(translationSum, translationSum, parent.transform.position);
-
-                parent = parent.parent;
-                child = parent;
-            }
-        }
-
-        return translationSum;
-    }
+    /** Prevents this Entity from changing in size when camera size changes. */
+    public ignoreCamSize: boolean = false;
 
     constructor(owner: Entity) {
         this.owner = owner;
@@ -99,32 +63,24 @@ export class Transform {
     public rotateAround(point: vec2): void {}
 
     /**
-     * (DO NOT USE YET, BEING DEVELOPED). Sets the rotation so it looks at a point.
+     * Sets the rotation so it looks at a point.
      * @param point The point to look at.
      */
     public lookAt(point: vec2): void {
         const transPoint: vec2 = vec2.create();
-
-        // console.log(this.toWorldMat());
 
         vec2.transformMat3(
             transPoint,
             point,
             mat3.invert(mat3.create(), this.toWorldMat())
         );
-        
-        // console.log(point);
-        // console.log(transPoint);
 
-        console.log(radiansToDeg(Math.atan2(
+        const angle: number = radiansToDeg(Math.atan2(
             transPoint[0],
-            transPoint[1]
-        )));
-
-        this.rotation += -radiansToDeg(Math.atan2(
-            transPoint[0],
-            transPoint[1]
+            -transPoint[1]
         ));
+
+        this.rotate(angle);
     }
 
 
@@ -162,12 +118,25 @@ export class Transform {
         const transMat: mat3 = mat3.create();
         const rotMat: mat3 = mat3.create();
         const scaleMat: mat3 = mat3.create();
-
         const outMat: mat3 = mat3.create();
+
+        const scale: vec2 = vec2.create();
+        vec2.copy(scale, this.scale)
+
+        if (this.ignoreCamSize) {
+            vec2.mul(
+                scale,
+                this.scale,
+                vec2.fromValues(
+                    SceneManager.getInstance().currentScene.currentCamera.size,
+                    SceneManager.getInstance().currentScene.currentCamera.size
+                )
+            )
+        }
 
         mat3.fromTranslation(transMat, this.position);
         mat3.fromRotation(rotMat, degToRadians(this.rotation));
-        mat3.fromScaling(scaleMat, this.scale);
+        mat3.fromScaling(scaleMat, scale);
 
         // ORDER OF TRANSFORMATION -> scale point, rotate scaled, translate rotated scaled
         // MATRIX MULTIPLICATION -> do it in reverse because the matrix closest to point is the "function" that's first applied

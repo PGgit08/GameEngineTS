@@ -8,19 +8,9 @@ import { degToRadians } from "../math/Utils";
 export class Camera extends Entity {
     /** A size value that scales the camera view (DEFAULT VIEW IS RendererWidth, RendererHeight). */
     public size: number = 1;
-    
-    /** An offset to use when following an Entity. */
-    public followOffset: vec2 = vec2.fromValues(0, 0);
 
-    private _followEntity: Entity = null; // the entity that's being followed
-    private _followRotMat: mat3 = mat3.create(); // a special rotation matrix to use when following
-
-    private _transMat: mat3 = mat3.create();
-
-    /** The Entity that this Camera is currently following. */
-    public get followEntity(): Entity {
-        return this._followEntity;
-    }
+    // This camera's world matrix (non-inverse).
+    private _worldMat: mat3 = mat3.create();
 
     public get width(): number {
         return this.size * RendererManager.getInstance().currentRenderer.width;
@@ -30,10 +20,10 @@ export class Camera extends Entity {
         return this.size * RendererManager.getInstance().currentRenderer.height;
     }
 
-    public get transMat(): mat3 {
-        return this._transMat;
+    /** The world matrix of this Camera pre-inversion. */
+    public get worldMat(): mat3 {
+        return this._worldMat;
     }
-
 
     constructor(name: string) {
         super(name);
@@ -50,41 +40,10 @@ export class Camera extends Entity {
     }
 
     /**
-     * Makes the Camera focus its center on an Entity causing it to follow the Entity.
-     * @param entity The Entity for this Camera to follow.
-     * @param offset An optional offset to use when following the Entity (can also be set through public "followOffset") property.
-     */
-    public startFollow(entity: Entity, offset?: vec2): void {
-        this._followEntity = entity;
-
-        if (offset !== undefined) this.followOffset = offset;
-    }
-
-    /**
-     * Stops following an Entity if there is one being followed.
-     */
-    public stopFollow(): void {        
-        this._followEntity = null;
-    }
-
-
-    /**
-     * Returns the View Matrix (3x3) based on this Camera's Transform and width/height.
+     * Returns the View Matrix (3x3) based on this Camera's Transform and size.
+     * Use this instead of Transform.toWorldMat();
      */
     public view(): mat3 {
-        if (this._followEntity && this.parent) {
-            // set the position of this camera
-            this.transform.position = this.parent.transform.toLocalPoint(
-                vec2.add(
-                    vec2.create(),
-                    this._followEntity.transform.toWorldPoint(vec2.fromValues(0, 0)), // get world position of follow entity
-                    this.followOffset
-                )
-            );
-
-            this.transform.rotation = this._followEntity.transform.rotation;
-        }
-
         return this._calcViewMat();
     }
 
@@ -138,18 +97,6 @@ export class Camera extends Entity {
 
         // mult by parent matrix if needed
         if (this.parent && this.parent.relativeChildren && this.relativeChild) {
-            if (this._followEntity) {
-                // to cancel out rotation from parent entity when following
-                mat3.fromRotation(this._followRotMat, degToRadians(this.parent.transform.rotation));
-                mat3.invert(this._followRotMat, this._followRotMat);
-            }
-
-            mat3.mul(
-                localMat,
-                this._followRotMat,
-                localMat
-            );
-
             mat3.mul(
                 worldViewMat,
                 this.parent.transform.toWorldMat(),
@@ -159,7 +106,8 @@ export class Camera extends Entity {
             worldViewMat = localMat;
         }
 
-        mat3.copy(this._transMat, transMat);
+        // reset the world matrix getter
+        mat3.copy(this._worldMat, worldViewMat);
 
         // inverse cam matrix
         mat3.invert(worldViewMat, worldViewMat);
