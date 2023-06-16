@@ -1,4 +1,4 @@
-import { DefaultEntity, Entity, MoveBehavior, Scene } from "../../engine/GETS";
+import { Camera, DefaultEntity, Entity, MoveBehavior, Scene } from "../../engine/GETS";
 import { LookAtBehavior } from "../behaviors/LookAtBehavior";
 import { Entity1 } from "../entities/Entity1";
 
@@ -10,18 +10,19 @@ export class MyScene extends Scene {
     // experimenting with LOAD placement
     public override load(): void {
         const ent: Entity = Entity.Spawn(Entity1);
-        // const ent2: Entity = Entity.Spawn(DefaultEntity);
-        // const ent3: Entity = Entity.Spawn(DefaultEntity);
+        const ent2: Entity = Entity.Spawn(DefaultEntity);
 
-        // ent2.addChildren(ent);
-        // ent3.addChildren(ent2);
+        const cam: Camera = new Camera("Cam");
 
-        // ent.transform.position[0] = 300;
+        cam.size = 5;
+
+        ent2.addBehaviors(new MoveBehavior());
         ent.addBehaviors(new LookAtBehavior());
-        // ent2.addBehaviors(new MoveBehavior());
-        // ent3.addBehaviors(new MoveBehavior());
 
-        this.currentCamera.addBehaviors(new MoveBehavior());
+        ent2.transform.ignoreCamSize = true;
+
+        this.addCamera(cam);
+        this.setCurrentCamera("Cam");
 
         super.load();
     }
