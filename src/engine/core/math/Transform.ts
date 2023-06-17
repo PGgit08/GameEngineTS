@@ -110,6 +110,8 @@ export class Transform {
         );
     }
 
+
+    
     /**
      * Converts this Transform into a 3x3 Matrix.
      * @returns A mat3 3x3 Matrix.

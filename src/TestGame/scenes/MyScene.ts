@@ -1,6 +1,4 @@
-import { Camera, DefaultEntity, Entity, MoveBehavior, Scene } from "../../engine/GETS";
-import { LookAtBehavior } from "../behaviors/LookAtBehavior";
-import { Entity1 } from "../entities/Entity1";
+import { Camera, Color, DefaultEntity, Entity, MoveBehavior, Scene, SpriteComponent } from "../../engine/GETS";
 
 export class MyScene extends Scene {
     constructor() {
@@ -15,18 +13,17 @@ export class MyScene extends Scene {
 
         const cam: Camera = new Camera("Cam");
 
-        cam.size = 3;
-
         ent3.addChildren(ent2);
-        // ent2.addChildren(ent);
 
-        // ent.addBehaviors(new LookAtBehavior());
-        ent2.addBehaviors(new MoveBehavior());
-        ent3.addBehaviors(new MoveBehavior());
+        console.log(ent2.parentScenes);
+
+        ent3.getComponent(SpriteComponent).sprite.material.color = Color.BLACK;
+
+        ent2.addBehaviors(new MoveBehavior(50));
+        ent3.addBehaviors(new MoveBehavior(50));
         
-        // ent.transform.position[0] = 200;
-        ent2.transform.position[0] = 1000;
-        ent3.transform.position[0] = -300;
+        ent3.transform.position[0] = 0;
+        ent2.transform.position[1] = 100;
 
         this.addCamera(cam);
         this.setCurrentCamera("Cam");

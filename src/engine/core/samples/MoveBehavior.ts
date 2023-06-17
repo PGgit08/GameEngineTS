@@ -4,15 +4,18 @@ import { Behavior } from "../ecs/Behavior";
 import { Time } from "../../GETS";
 
 export class MoveBehavior extends Behavior {
-    public speed: number = 100; // pixels per second
+    public speed: number = 10; // pixels per second
 
     /**
      * Control the Entity with button presses.
      * @param speed The speed of the movable Entity.
      */
-    constructor() {
+    constructor(speed?: number) {
         super("MoveBehavior");
-        this.speed = 100;
+
+        if (speed !== undefined) {
+            this.speed = speed;
+        }
     }
     
     public override start(): void {}
@@ -47,11 +50,11 @@ export class MoveBehavior extends Behavior {
         }
 
         if (Input.KeyDown("ArrowLeft")) {
-            this.transform.rotate(-10 * Time.deltaTime());
+            this.transform.rotate(-this.speed * Time.deltaTime());
         }
 
         if (Input.KeyDown("ArrowRight")) {
-            this.transform.rotate(10 * Time.deltaTime());
+            this.transform.rotate(this.speed * Time.deltaTime());
         }
     }
 }

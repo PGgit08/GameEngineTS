@@ -93,7 +93,14 @@ export class Entity extends GameObject implements Lifecycle {
      * @param children The children to add
      */
     public addChildren(...children: Entity[]): void {
-        children.forEach((c) => { c.parent = this; c.addParentScene(...Object.values(this._parentScenes)); });
+        children.forEach((c) => {
+            if (c.parent) {
+                c.parent.removeChild(c);
+            }
+
+            c.parent = this;
+            c.addParentScene(...Object.values(this._parentScenes));
+        });
         this._children.push(...children);
     } 
 
@@ -183,7 +190,7 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     /**
-     * Removes a Scene(s) from this Entity's Dictionart of parent Scene that it belongs to.
+     * Removes a Scene(s) from this Entity's Dictionary of parent Scene that it belongs to.
      * @param scene The Scene(s) name(s).
      */
     public removeParentScene(...scenes: string[]): void {
