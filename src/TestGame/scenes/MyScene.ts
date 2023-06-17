@@ -15,12 +15,13 @@ export class MyScene extends Scene {
         const cam: Camera = new Camera("Cam");
 
         ent3.addChildren(ent2);
+        ent3.addChildren(cam);
 
         console.log(ent2.parentScenes);
 
         ent3.getComponent(SpriteComponent).sprite.material.color = Color.BLACK;
 
-        ent2.addBehaviors(new MoveBehavior(50), new LookAtBehavior());
+        ent2.addBehaviors(new MoveBehavior(50));
         ent3.addBehaviors(new MoveBehavior(50));
         
         ent3.transform.position[0] = 0;
