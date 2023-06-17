@@ -1,4 +1,5 @@
 import { Camera, Color, DefaultEntity, Entity, MoveBehavior, Scene, SpriteComponent } from "../../engine/GETS";
+import { LookAtBehavior } from "../behaviors/LookAtBehavior";
 
 export class MyScene extends Scene {
     constructor() {
@@ -19,7 +20,7 @@ export class MyScene extends Scene {
 
         ent3.getComponent(SpriteComponent).sprite.material.color = Color.BLACK;
 
-        ent2.addBehaviors(new MoveBehavior(50));
+        ent2.addBehaviors(new MoveBehavior(50), new LookAtBehavior());
         ent3.addBehaviors(new MoveBehavior(50));
         
         ent3.transform.position[0] = 0;
