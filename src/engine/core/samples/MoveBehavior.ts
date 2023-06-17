@@ -12,6 +12,7 @@ export class MoveBehavior extends Behavior {
      */
     constructor() {
         super("MoveBehavior");
+        this.speed = 100;
     }
     
     public override start(): void {}
@@ -46,11 +47,11 @@ export class MoveBehavior extends Behavior {
         }
 
         if (Input.KeyDown("ArrowLeft")) {
-            this.transform.rotate(-this.speed * Time.deltaTime());
+            this.transform.rotate(-10 * Time.deltaTime());
         }
 
         if (Input.KeyDown("ArrowRight")) {
-            this.transform.rotate(this.speed * Time.deltaTime());
+            this.transform.rotate(10 * Time.deltaTime());
         }
     }
 }

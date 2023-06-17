@@ -9,17 +9,24 @@ export class MyScene extends Scene {
 
     // experimenting with LOAD placement
     public override load(): void {
-        const ent: Entity = Entity.Spawn(Entity1);
+        // const ent: Entity = Entity.Spawn(Entity1);
         const ent2: Entity = Entity.Spawn(DefaultEntity);
+        const ent3: Entity = Entity.Spawn(DefaultEntity);
 
         const cam: Camera = new Camera("Cam");
 
-        cam.size = 5;
+        cam.size = 3;
 
+        ent3.addChildren(ent2);
+        // ent2.addChildren(ent);
+
+        // ent.addBehaviors(new LookAtBehavior());
         ent2.addBehaviors(new MoveBehavior());
-        ent.addBehaviors(new LookAtBehavior());
-
-        ent2.transform.ignoreCamSize = true;
+        ent3.addBehaviors(new MoveBehavior());
+        
+        // ent.transform.position[0] = 200;
+        ent2.transform.position[0] = 1000;
+        ent3.transform.position[0] = -300;
 
         this.addCamera(cam);
         this.setCurrentCamera("Cam");
