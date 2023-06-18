@@ -1,5 +1,6 @@
-import { Camera, Color, DefaultEntity, Entity, MoveBehavior, Scene, SpriteComponent } from "../../engine/GETS";
+import { Camera, DefaultEntity, Entity, MoveBehavior, Scene } from "../../engine/GETS";
 import { LookAtBehavior } from "../behaviors/LookAtBehavior";
+import { Background } from "../entities/Background";
 
 export class MyScene extends Scene {
     constructor() {
@@ -12,7 +13,11 @@ export class MyScene extends Scene {
         const ent2: Entity = Entity.Spawn(DefaultEntity);
         const ent3: Entity = Entity.Spawn(DefaultEntity);
 
+        this.addEntities(new Background("FTEXT"));
+
         const cam: Camera = new Camera("Cam");
+
+        cam.size = 5;
 
         ent3.addChildren(ent2);
         // ent3.addChildren(cam);
@@ -27,7 +32,8 @@ export class MyScene extends Scene {
         // ent3.transform.position[0] = 0;
         // ent2.transform.position[1] = 100;
 
-        // this.setCurrentCamera("Cam");
+        this.addCamera(cam);
+        this.setCurrentCamera("Cam");
 
         super.load();
     }

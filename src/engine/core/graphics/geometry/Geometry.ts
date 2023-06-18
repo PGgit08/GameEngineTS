@@ -19,6 +19,14 @@ export abstract class Geometry {
     protected _maxX: number;
     protected _maxY: number;
 
+    public get width(): number {
+        return this._width;
+    }
+
+    public get height(): number {
+        return this._height
+    }
+
     constructor(width: number, height: number) {
         this._width = width;
         this._height = height;

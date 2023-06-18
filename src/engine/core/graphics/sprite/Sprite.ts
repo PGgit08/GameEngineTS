@@ -26,10 +26,10 @@ export class Sprite extends Mesh {
      * @param textureName The name of the Texture that this Sprite uses. (if nothing supplied, only tint is used)
      * @param frameName The name of the Texture Frame to use (default is full Texture).
      * @param origin An optional origin vector for this Sprite (default is (0.5, 0.5)).
-     * @param geometry An optional Geometry for this Sprite (default is Square).
+     * @param geometry An optional Geometry for this Sprite (default is 100x100 Square).
      * @param color An optional Color for this Sprite (default is BLACK).
      */
-    constructor(textureName?: string, frameName?: string, origin?: vec2, geometry: Geometry = new Square(), color?: Color) {
+    constructor(textureName?: string, frameName?: string, origin?: vec2, geometry: Geometry = new Square(100, 100), color?: Color) {
         const texture = TextureManager.getInstance().getTextureByName(textureName);
 
         super(geometry, new StandardMaterial(texture, color));

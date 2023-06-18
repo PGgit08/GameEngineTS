@@ -6,6 +6,14 @@ export class Mesh {
     protected _geometry: Geometry;
     protected _material: Material;
 
+    public get width(): number {
+        return this._geometry.width;
+    }
+
+    public get height(): number {
+        return this._geometry.height;
+    }
+    
     public get geometry(): Geometry {
         return this._geometry;
     }
