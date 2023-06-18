@@ -29,7 +29,7 @@ Projects should be structures accordingly:
 The core of the engine is the Entity-Component System (ECS). Entities are objects that follow the engine Lifecycle and that have Components and Behaviors, which are classes that follow the engine Lifecycle and get called by their parent Entity. Entities also have child Entities, which get called by their parent Entity. These Entities are linked to their own Scenes that are also Lifecycle objects and they get called by the Engine class. Another important class that is used in this system is the GameObject class. A GameObject is simply a base class for any object with a unique ID and a name. The GameObject base class is used by ECS for hierarchical objects such as an Entity/Component/or Scene.
 
 ### Rules
-Entity can only belong to ONE Scene, and can therefore only have ONE parent at a time.
+An Entity can only belong to ONE Scene, and can therefore only have ONE parent at a time.
 
 - p.addChildren(e) -> removes Entity e from it's previous parent Entity before adding it to Entity p, and sets parent Scene of Entity e to parent scene of Entity p
 
