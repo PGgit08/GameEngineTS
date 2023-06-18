@@ -17,17 +17,16 @@ export class MyScene extends Scene {
         ent3.addChildren(ent2);
         ent3.addChildren(cam);
 
-        console.log(ent2.parentScenes);
+        console.log(ent2.parentScene);
 
         ent3.getComponent(SpriteComponent).sprite.material.color = Color.BLACK;
 
-        ent2.addBehaviors(new MoveBehavior(50));
+        ent2.addBehaviors(new MoveBehavior(50), new LookAtBehavior());
         ent3.addBehaviors(new MoveBehavior(50));
         
         ent3.transform.position[0] = 0;
         ent2.transform.position[1] = 100;
 
-        this.addCamera(cam);
         this.setCurrentCamera("Cam");
 
         super.load();

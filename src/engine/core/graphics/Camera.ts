@@ -1,6 +1,5 @@
 import { mat3, vec2 } from "gl-matrix";
 import { Entity } from "../ecs/Entity";
-import { SceneManager } from "../managers/SceneManager";
 import { Scene } from "../ecs/Scene";
 import { RendererManager } from "../managers/RendererManager";
 import { degToRadians } from "../math/Utils";
@@ -29,14 +28,15 @@ export class Camera extends Entity {
         super(name);
     }
     
-    public override addParentScene(...scenes: Scene[]): void {
-        super.addParentScene(...scenes);
-        scenes.forEach((s) => s.addCamera(this));
-    }
+    public override setParentScene(scene: Scene): void {
+        if (scene === null) {
+            this.parentScene.removeCamera(this.name);
+            super.setParentScene(scene);
+            return;
+        }
 
-    public override removeParentScene(...scenes: string[]): void {
-        scenes.forEach((s) => { if (this.hasParentScene(s)) { SceneManager.getInstance().getScene(s).removeCamera(this.name); } });
-        super.removeParentScene(...scenes);
+        scene.addCamera(this);
+        super.setParentScene(scene);
     }
 
     /**

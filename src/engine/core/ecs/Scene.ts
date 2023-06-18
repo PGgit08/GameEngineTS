@@ -19,7 +19,7 @@ export class Scene extends GameObject implements Lifecycle {
         super(name);
 
         this._rootEntity = new Entity("ROOT_ENTITY", false);
-        this._rootEntity.addParentScene(this);
+        this._rootEntity.setParentScene(this);
 
         // add default camera
         this.addCamera(new Camera("DefaultCamera"));
@@ -38,12 +38,12 @@ export class Scene extends GameObject implements Lifecycle {
     }
 
     /**
-     * Adds a Camera to this Scene.
+     * Adds a Camera to this Scene's Camera list.
      * If the Camera does not belong to this Scene at all, it is directly added to this Scene.
      * @param camera The Camera to add.
      */
     public addCamera(camera: Camera): void {
-        if (!camera.hasParentScene(this.name)) {
+        if (!camera.isParentScene(this.name)) {
             this.addEntities(camera);
         }
 
