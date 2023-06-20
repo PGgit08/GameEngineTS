@@ -1,3 +1,4 @@
-export interface EventData {
+export interface EventData<T> {
     eventName: string;
+    data: T;
 }
