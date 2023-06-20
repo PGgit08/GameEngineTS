@@ -1,11 +1,14 @@
 import { GameObject } from "../ecs/GameObject";
+import { EventManager } from "../managers/EventManager";
 import { EventData } from "./EventData";
 
 export class Event<T> extends GameObject {
-    private _subscribers: ((data: EventData<T>) => void)[] = [];
+    private _subscribers: ((eventData: EventData<T>) => void)[] = [];
 
     constructor(name: string) {
         super(name);
+
+        EventManager.getInstance().addEvent(this);
     }
 
     public invoke(data: T): void {
@@ -19,7 +22,7 @@ export class Event<T> extends GameObject {
         });
     }
 
-    public subscribe(callback: (data: EventData<T>) => void): void {
+    public subscribe(callback: (eventData: EventData<T>) => void): void {
         this._subscribers.push(callback);
     }
 }

@@ -1,6 +1,6 @@
 import Dictionary from "../../extra/Dictionary";
-import { Event } from "../communication/Event";
-import { EventData } from "../communication/EventData";
+import { Event } from "../events/Event";
+import { EventData } from "../events/EventData";
 import { Manager } from "./Manager";
 
 export class EventManager extends Manager {
@@ -22,7 +22,7 @@ export class EventManager extends Manager {
         this._gameEvents[event.name] = event;
     }
 
-    public subscribeTo<T>(eventName: string, subscriber: (data: EventData<T>) => void): void {
+    public subscribeTo<T>(eventName: string, subscriber: (eventData: EventData<T>) => void): void {
         this._gameEvents[eventName].subscribe(subscriber);
     }
 }

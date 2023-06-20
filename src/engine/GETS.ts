@@ -7,8 +7,9 @@ export * from './core/ecs/Behavior';
 export * from '../engine/core/ecs/GameObject';
 export * from './core/ecs/Scene';
 
-export * from './core/communication/Event';
-export * from './core/communication/EventData';
+export * from './core/events/Event';
+export * from './core/events/EventData';
+export * from './core/events/Events';
 
 export * from './core/math/Transform';
 export * from './core/math/Utils';
