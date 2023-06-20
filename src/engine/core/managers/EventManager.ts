@@ -19,6 +19,7 @@ export class EventManager extends Manager {
     private constructor() { super(); }
 
     public addEvent(event: Event<any>) {
+        this.registerName(event.name);
         this._gameEvents[event.name] = event;
     }
 

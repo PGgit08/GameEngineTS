@@ -1,6 +1,8 @@
 import { vec2 } from "gl-matrix";
 import { RendererManager } from "../core/managers/RendererManager";
 import { SceneManager } from "../core/managers/SceneManager";
+import { Event } from "../core/events/Event";
+import { Events } from "../core/events/Events";
 
 export class Input {
     private static _pressedKey: string = null;
@@ -8,19 +10,30 @@ export class Input {
 
     private static _mousePos: vec2 = vec2.fromValues(0, 0);
 
+    // several events that can be accessed rather than accessing the DOM
+    private static _keyUp: Event<KeyboardEvent> = new Event(Events.KEY_UP);
+    private static _keyDown: Event<KeyboardEvent> = new Event(Events.KEY_DOWN);
+    private static _mouseMove: Event<MouseEvent> = new Event(Events.MOUSE_MOVE);
+ 
     /**
      * Adds event listeners to the browser, should be called in the loading period.
      */
     public static addListeners() {
-        document.addEventListener("keyup", () => {
+        document.addEventListener("keyup", (e) => {
+            this._keyUp.invoke(e);
+
             this._pressedKey = null;
         });
         
         document.addEventListener("keydown", (e) => {
+            this._keyDown.invoke(e);
+
             if (this._pressedKey !== e.code) { this._pressedKey = e.code; this._newKey = true; }
         });
 
         document.addEventListener("mousemove", (e) => {
+            this._mouseMove.invoke(e);
+
             if (RendererManager.getInstance().currentRenderer.mouseOver) {
                 const rendererBox: DOMRect = RendererManager.getInstance().currentRenderer.box;
 

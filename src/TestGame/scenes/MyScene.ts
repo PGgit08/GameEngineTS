@@ -13,11 +13,6 @@ export class MyScene extends Scene {
         const ent2: Entity = Entity.Spawn(DefaultEntity);
         const ent3: Entity = Entity.Spawn(DefaultEntity);
 
-        // TEST 
-        EventManager.getInstance().subscribeTo<null>(Events.SCENE_CHANGE, (eventData) => {
-            console.log(eventData.eventName);
-        });
-
         // this.addEntities(new Background("FTEXT"));
 
         const cam: Camera = new Camera("Cam");  
