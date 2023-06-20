@@ -2,12 +2,16 @@ import { Lifecycle } from "../Lifecycle";
 import Dictionary from "../../extra/Dictionary";
 import { Scene } from "../ecs/Scene";
 import { Manager } from "./Manager";
+import { Event } from "../events/Event";
+import { Events } from "../events/Events";
 
 export class SceneManager extends Manager implements Lifecycle {
     private static _instance: SceneManager;
 
     private _gameScenes: Dictionary<string, Scene> = {}; // name: Scene
     private _currentScene: Scene;
+
+    private _sceneChangeEvent: Event<null> = new Event(Events.SCENE_CHANGE);
 
     get currentScene(): Scene {
         return this._currentScene;
@@ -33,6 +37,8 @@ export class SceneManager extends Manager implements Lifecycle {
     }
 
     public setCurrentScene(name: string): void {
+        this._sceneChangeEvent.invoke(null);
+
         this._currentScene = this.getScene(name);
     }
 
