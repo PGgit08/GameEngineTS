@@ -5,13 +5,15 @@ import { Transform } from "../math/Transform";
 import { Behavior } from "./Behavior";
 import { Component } from "./Component";
 import { GameObject } from "./GameObject";
-import Dictionary from "../../extra/Dictionary";
 import { Scene } from "./Scene";
+import { EventEmmiter } from "../events/EventEmmiter";
+import { Event } from "../events/Event";
+import { Events } from "../events/Events";
 
 export class Entity extends GameObject implements Lifecycle {
     private _loaded = false;
 
-    public parent: Entity = null;
+    private _parent: Entity = null;
     private _children: Entity[] = [];
 
     private _components: Component[] = [];
@@ -20,6 +22,12 @@ export class Entity extends GameObject implements Lifecycle {
     private _parentScene: Scene = null;
 
     public transform: Transform = new Transform(this);
+
+    public readonly eventEmmiter: EventEmmiter = new EventEmmiter();
+
+    // the events belonging to this entity
+    private _PARENT_SCENE_CHANGE_EVENT: Event<Scene[]> = new Event(Events.PARENT_SCENE_CHANGE, this.eventEmmiter);
+    private _PARENT_CHANGE_EVENT: Event<Entity[]> = new Event(Events.PARENT_CHANGE, this.eventEmmiter);
 
     /**
      * A boolean stating whether the children of this Entity are relative to this Entity in Transform.
@@ -43,9 +51,28 @@ export class Entity extends GameObject implements Lifecycle {
         return this._children;
     }
 
-    /** The parent Scene of this Entity. */
+    set parentScene(parentScene: Scene) {
+        const oldParentScene = this._parentScene;
+
+        this._parentScene = parentScene;
+        this._PARENT_SCENE_CHANGE_EVENT.invoke([oldParentScene, parentScene]);
+
+        this._children.forEach((c) => c.parentScene = parentScene);
+    }
+
     get parentScene(): Scene {
         return this._parentScene;
+    }
+
+    get parent(): Entity {
+        return this._parent;
+    }
+
+    set parent(parent: Entity) {
+        const oldParent = this._parent;
+
+        this._parent = parent;
+        this._PARENT_CHANGE_EVENT.invoke([oldParent, parent]);
     }
 
     /**
@@ -98,7 +125,7 @@ export class Entity extends GameObject implements Lifecycle {
             }
 
             c.parent = this;
-            c.setParentScene(this._parentScene);
+            c.parentScene = this._parentScene;
         });
 
         this._children.push(...children);
@@ -111,7 +138,7 @@ export class Entity extends GameObject implements Lifecycle {
     public removeChild(entity: Entity): void {
         this._children.forEach((e) => {
             if (e.id === entity.id) {
-                entity.setParentScene(null);
+                entity.parentScene = null;
                 this._children.splice(this._children.indexOf(e), 1);
             }
         });
@@ -172,11 +199,6 @@ export class Entity extends GameObject implements Lifecycle {
 
         return this._parentScene.name === sceneName;
     }
-
-    public setParentScene(scene: Scene): void {
-        this._parentScene = scene;
-    }
-
     
     public load(): void {
         if (!this._loaded) {
