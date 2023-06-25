@@ -19,7 +19,7 @@ export class Scene extends GameObject implements Lifecycle {
         super(name);
 
         this._rootEntity = new Entity("ROOT_ENTITY", false);
-        this._rootEntity.setParentScene(this);
+        this._rootEntity.parentScene = this;
 
         // add default camera
         this.addCamera(new Camera("DefaultCamera"));

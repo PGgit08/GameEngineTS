@@ -28,9 +28,9 @@ export class Camera extends Entity {
         super(name);
     }
     
-    public override setParentScene(scene: Scene): void {
+    public override set parentScene(scene: Scene) {
         const oldParentScene: Scene = this.parentScene;
-        super.setParentScene(scene);
+        super.parentScene = scene;
 
         if (scene !== null) {
             scene.addCamera(this);
