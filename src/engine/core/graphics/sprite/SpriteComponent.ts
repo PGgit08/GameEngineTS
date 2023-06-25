@@ -8,8 +8,6 @@ import { Sprite } from "./Sprite";
 export class SpriteComponent extends Component {
     private _sprite: Sprite;
     
-    private _subscriptionId: string; 
-
     private _layer: string = "Default";
     private _layerOrder: number = 0;
 
@@ -22,6 +20,11 @@ export class SpriteComponent extends Component {
     }
 
     public set layer(layer: string) {
+        /**
+         * IF this.parentScene not null THEN set layer in SCENE
+         * IF this.parentScene null THEN set layer LOCALLY
+         */
+
         this._layer = layer;
     }
 
@@ -30,6 +33,11 @@ export class SpriteComponent extends Component {
     }
 
     public set layerOrder(layerOrder: number) {
+        /**
+         * IF this.parentScene not null THEN set layerOrder in SCENE
+         * IF this.parentScene null THEN set layerOrder LOCALLY
+         */
+        
         this._layerOrder = layerOrder;
     }
 
@@ -38,7 +46,14 @@ export class SpriteComponent extends Component {
         super("SpriteComponent");
 
         this.eventEmmiter.subscribeTo<Scene[]>(Events.PARENT_SCENE_CHANGE, (eventData) => {
-            console.log(eventData.data);
+            /**
+             * WHAT TO ADD HERE:
+             * 
+             * - Remove SpriteComponent from old parentScene.
+             * - Add SpriteComponent to new parentScene.
+             * 
+             * THAT'S IT!!
+             */
         });
 
         this._sprite = sprite;
