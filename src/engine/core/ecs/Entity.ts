@@ -55,6 +55,10 @@ export class Entity extends GameObject implements Lifecycle {
         return this._parentScene;
     }
 
+    /**
+     * Sets the parentScene of this Entity.
+     * !!! SHOULD NEVER BE SET DIRECTLY !!!
+     */
     set parentScene(parentScene: Scene) {
         const oldParentScene = this._parentScene;
 
@@ -71,6 +75,10 @@ export class Entity extends GameObject implements Lifecycle {
         return this._parent;
     }
 
+    /**
+     * Sets the parent of this Entity.
+     * !!! SHOULD NEVER BE SET DIRECTLY !!!
+     */
     set parent(parent: Entity) {
         const oldParent = this._parent;
 
@@ -139,7 +147,7 @@ export class Entity extends GameObject implements Lifecycle {
      * @param entity The Entity to remove.
      */
     public removeChild(entity: Entity): void {
-        this._children.splice(this._children.indexOf(entity), 1);
+        this._children.splice(this._children.indexOf(entity), 1)
     }
 
     /**
@@ -147,7 +155,15 @@ export class Entity extends GameObject implements Lifecycle {
      * @param components The Components to add.
      */
     public addComponents(...components: Component[]): void {
-        components.forEach((c) => { c.parent = this; c.parentScene = this.parentScene; });
+        components.forEach((c) => {
+            if (c.parent) {
+                c.parent.removeComponent(c);
+            }
+
+            c.parent = this;
+            c.parentScene = this._parentScene;
+        });
+
         this._components.push(...components);
     }
 
@@ -167,7 +183,15 @@ export class Entity extends GameObject implements Lifecycle {
      * @param behaviors The Behaviors to add.
      */
     public addBehaviors(...behaviors: Behavior[]): void {
-        behaviors.forEach((b) => { b.parent = this; b.parentScene = this.parentScene; });
+        behaviors.forEach((b) => {
+            if (b.parent) {
+                b.parent.removeBehavior(b);
+            }
+
+            b.parent = this;
+            b.parentScene = this._parentScene;
+        });
+
         this._behaviors.push(...behaviors);
     }
 
