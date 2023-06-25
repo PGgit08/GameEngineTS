@@ -62,6 +62,9 @@ export class Entity extends GameObject implements Lifecycle {
         this._PARENT_SCENE_CHANGE_EVENT.invoke([oldParentScene, parentScene]);
 
         this._children.forEach((c) => c.parentScene = parentScene);
+
+        this._components.forEach((c) => c.parentScene = parentScene);
+        this._behaviors.forEach((b) => b.parentScene = parentScene);
     }
 
     get parent(): Entity {
@@ -136,30 +139,47 @@ export class Entity extends GameObject implements Lifecycle {
      * @param entity The Entity to remove.
      */
     public removeChild(entity: Entity): void {
-        this._children.forEach((e) => {
-            if (e.id === entity.id) {
-                entity.parentScene = null;
-                this._children.splice(this._children.indexOf(e), 1);
-            }
-        });
+        this._children.splice(this._children.indexOf(entity), 1);
     }
 
     /**
-     * Add components to this Entity
-     * @param components The components to add
+     * Add Components to this Entity.
+     * @param components The Components to add.
      */
     public addComponents(...components: Component[]): void {
-        components.forEach((c) => c.parent = this);
+        components.forEach((c) => { c.parent = this; c.parentScene = this.parentScene; });
         this._components.push(...components);
     }
 
     /**
-     * Add behaviors to this Entity
-     * @param behaviors The behaviors to add
+     * Remove Component from this Entity.
+     * @param component The Component to remove.
+     */
+    public removeComponent(component: Component): void {
+        component.parent = null;
+        component.parentScene = null;
+
+        this._components.splice(this._components.indexOf(component), 1);
+    }
+
+    /**
+     * Add Behaviors to this Entity.
+     * @param behaviors The Behaviors to add.
      */
     public addBehaviors(...behaviors: Behavior[]): void {
-        behaviors.forEach((b) => b.parent = this);
+        behaviors.forEach((b) => { b.parent = this; b.parentScene = this.parentScene; });
         this._behaviors.push(...behaviors);
+    }
+
+    /**
+     * Remove Behavior from this Entity.
+     * @param behavior The Behavior to remove.
+     */
+    public removeBehavior(behavior: Behavior): void {
+        behavior.parent = null;
+        behavior.parentScene = null;
+
+        this._behaviors.splice(this._behaviors.indexOf(behavior), 1);
     }
 
     /**
