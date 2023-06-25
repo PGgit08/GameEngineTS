@@ -6,6 +6,8 @@ export class Mesh {
     protected _geometry: Geometry;
     protected _material: Material;
 
+    public visible: boolean = true;
+
     public get width(): number {
         return this._geometry.width;
     }
@@ -48,6 +50,8 @@ export class Mesh {
      * Renders the Mesh
      */
     public render(model: mat3, projection: mat3, view: mat3): void {
+        if (!this.visible) { return; }
+        
         this._material.applyStandardUniforms(
             model,
             projection,
