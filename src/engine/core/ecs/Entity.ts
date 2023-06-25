@@ -149,7 +149,7 @@ export class Entity extends GameObject implements Lifecycle {
      * @param components The components to add
      */
     public addComponents(...components: Component[]): void {
-        components.forEach((c) => c.owner = this);
+        components.forEach((c) => c.parent = this);
         this._components.push(...components);
     }
 
@@ -158,7 +158,7 @@ export class Entity extends GameObject implements Lifecycle {
      * @param behaviors The behaviors to add
      */
     public addBehaviors(...behaviors: Behavior[]): void {
-        behaviors.forEach((b) => b.owner = this);
+        behaviors.forEach((b) => b.parent = this);
         this._behaviors.push(...behaviors);
     }
 
