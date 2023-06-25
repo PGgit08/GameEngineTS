@@ -25,7 +25,7 @@ export class AnimatedSprite extends Sprite {
      * @param origin The origin vector for this Animated Sprite (default is (0.5, 0.5)).
      * @param geometry The geometry used for this Animated Sprite (default is Square).
      */
-    constructor(animatedSpriteInfo: AnimatedSpriteConfig, textureName?: string, origin?: vec2, geometry: Geometry = new Square()) {
+    constructor(animatedSpriteInfo: AnimatedSpriteConfig, textureName?: string, origin?: vec2, geometry: Geometry = new Square(100, 100)) {
         super(textureName, undefined, origin, geometry);
 
         switch (animatedSpriteInfo.animationFrameOrder) {

@@ -8,12 +8,13 @@ To test run -> **npm run dev**
 
 # Todo
 - Movement along local axis. -- DONE
-- Component/Behavior/Entity/Scene localizing -- ALMOST DONE
+- Component/Behavior/Entity/Scene localizing -- DONE
 - Entity Spawning / Despawning -- DONE
 - Sprites (+ Animated Sprites) -- DONE
+- Sprite Layering -- WORKING NOW
 - Lighting, Cameras -- CAMERAS DONE, LIGHTING NOW
 - Physics (matter.js) / Collsion
-- Entity Communication (+ Events)
+- Entity Communication (+ Events) -- DONE
 
 
 # Usage
