@@ -23,7 +23,7 @@ export class Layers {
 
     constructor() {
         Layers._gameLayers.forEach((layerName) => {
-            this._layers[layerName] = new Array(5);
+            this._layers[layerName] = new Array(1);
         });
     }
 
@@ -65,6 +65,10 @@ export class Layers {
         } else { returnedLayerOrder = spriteComp.layerOrder; }
 
         return returnedLayerOrder;
+    }
+
+    public getLayerOrder(spriteComp: SpriteComponent): number {
+        return this._layers[spriteComp.layer].indexOf(spriteComp);
     }
 
     /**

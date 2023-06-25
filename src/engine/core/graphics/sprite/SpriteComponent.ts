@@ -28,7 +28,9 @@ export class SpriteComponent extends Component {
     }
 
     public get layerOrder(): number {
-        return this._layerOrder;
+        if (this.parentScene !== null) {
+            return this.parentScene.layers.getLayerOrder(this);
+        }
     }
 
     public set layerOrder(layerOrder: number) {

@@ -19,7 +19,7 @@ export class MyScene extends Scene {
 
         // cam.size = 5;
 
-        // ent3.addChildren(ent2);
+        ent3.addChildren(ent2);
         // ent3.addChildren(cam);
 
         // console.log(ent2.parentScene);
