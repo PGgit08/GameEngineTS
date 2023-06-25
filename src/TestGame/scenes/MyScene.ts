@@ -33,7 +33,6 @@ export class MyScene extends Scene {
         ent2.transform.position[1] = 100;
 
         // this.removeEntity(ent3);
-        "pee"
 
         this.addCamera(cam);
         this.setCurrentCamera("Cam");
