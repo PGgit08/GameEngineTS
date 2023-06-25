@@ -51,6 +51,10 @@ export class Entity extends GameObject implements Lifecycle {
         return this._children;
     }
 
+    get parentScene(): Scene {
+        return this._parentScene;
+    }
+
     set parentScene(parentScene: Scene) {
         const oldParentScene = this._parentScene;
 
@@ -58,10 +62,6 @@ export class Entity extends GameObject implements Lifecycle {
         this._PARENT_SCENE_CHANGE_EVENT.invoke([oldParentScene, parentScene]);
 
         this._children.forEach((c) => c.parentScene = parentScene);
-    }
-
-    get parentScene(): Scene {
-        return this._parentScene;
     }
 
     get parent(): Entity {
