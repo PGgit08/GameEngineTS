@@ -20,10 +20,9 @@ export class SpriteComponent extends Component {
     }
 
     public set layer(layer: string) {
-        /**
-         * IF this.parentScene not null THEN set layer in SCENE
-         * IF this.parentScene null THEN set layer LOCALLY
-         */
+        if (this.parentScene !== null) {
+            this._layerOrder = this.parentScene.layers.setLayer(this, layer); // change layer
+        }
 
         this._layer = layer;
     }
@@ -33,11 +32,11 @@ export class SpriteComponent extends Component {
     }
 
     public set layerOrder(layerOrder: number) {
-        /**
-         * IF this.parentScene not null THEN set layerOrder in SCENE
-         * IF this.parentScene null THEN set layerOrder LOCALLY
-         */
-        
+        if (this.parentScene !== null) {
+            this._layerOrder = this.parentScene.layers.setLayerOrder(this, layerOrder); // change order
+            return;
+        }
+
         this._layerOrder = layerOrder;
     }
 
@@ -46,14 +45,13 @@ export class SpriteComponent extends Component {
         super("SpriteComponent");
 
         this.eventEmmiter.subscribeTo<Scene[]>(Events.PARENT_SCENE_CHANGE, (eventData) => {
-            /**
-             * WHAT TO ADD HERE:
-             * 
-             * - Remove SpriteComponent from old parentScene.
-             * - Add SpriteComponent to new parentScene.
-             * 
-             * THAT'S IT!!
-             */
+            const oldScene = eventData.data[0];
+            const newScene = eventData.data[1];
+
+            if (oldScene !== null) oldScene.layers.remove(this); // remove from old Layers
+            if (newScene !== null) this.layer = this._layer; this.layerOrder = this._layerOrder; // add to new Layers
+
+            console.log(this._layer, this._layerOrder);
         });
 
         this._sprite = sprite;

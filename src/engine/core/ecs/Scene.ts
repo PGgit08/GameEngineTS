@@ -4,12 +4,15 @@ import { Lifecycle } from "../Lifecycle";
 import { SceneManager } from "../managers/SceneManager";
 import Dictionary from "../../extra/Dictionary";
 import { Camera } from "../graphics/Camera";
+import { Layers } from "../graphics/sprite/Layers";
 
 export class Scene extends GameObject implements Lifecycle {
     private _rootEntity: Entity;
 
     private _sceneCameras: Dictionary<string, Camera> = {}; 
     private _currentCamera: string;
+
+    public readonly layers: Layers = new Layers();
 
     get currentCamera(): Camera {
         return this.getCamera(this._currentCamera);
