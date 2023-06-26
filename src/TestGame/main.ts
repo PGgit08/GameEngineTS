@@ -11,7 +11,9 @@ import { default as ArmsAnimation } from "./assets/ArmsAnimation.json";
 new Engine(
     {
         renderers: [DefaultRenderer],
+
         scenes: [MyScene],
+        
         textures: [
             // {name: 'f-texture', fileName: new URL('./assets/f-texture.png', import.meta.url).href},
             // {name: 'emoji', fileName: new URL('./assets/emoji.jpg', import.meta.url).href},
@@ -21,7 +23,9 @@ new Engine(
             {name: 'Crosshair', fileName: new URL('./assets/Crosshair.png', import.meta.url).href},
             {name: 'FTEXT', fileName: new URL('./assets/f-texture.png', import.meta.url).href}
         ],
-        
+
+        layers: ["Default", "Background"],
+
         defaults: {
             renderer: "DefaultRenderer",
             scene: "MyScene"

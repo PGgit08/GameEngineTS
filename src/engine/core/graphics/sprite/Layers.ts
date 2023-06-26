@@ -4,15 +4,15 @@ import { SpriteComponent } from "./SpriteComponent";
 export class Layers {
     // the game layers belonging to the whole game
     private static _gameLayersSet: boolean = false;
-    private static _gameLayers: string[] = ["Default", "Background"];
+    private static _gameLayers: string[] = ["Default"];
 
     public static setGameLayers(gameLayers: string[]): void {
-        if (!this._gameLayersSet) {
-            this._gameLayers = gameLayers;
-            this._gameLayersSet = true;
-        } else {
-            throw new Error("Cannot modify game layer order after they were set.");
-        }
+        // TODO: check for duplicates
+        if (this._gameLayersSet) throw new Error("Cannot modify game layer order after they were set.");
+        if (!gameLayers.includes("Default")) throw new Error("Game layers must contain Default layer");
+
+        this._gameLayers = gameLayers;
+        this._gameLayersSet = true;
     }
 
     public static get gameLayers(): string[] {

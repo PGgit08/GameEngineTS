@@ -24,5 +24,6 @@ export interface EngineConfig {
     renderers: { new (): Renderer }[];
     scenes: { new (): Scene }[];
     textures?: TextureInfo[];
+    layers?: string[];
     defaults: DefaultsConfig;
 }
