@@ -15,48 +15,62 @@ export class SpriteComponent extends Component {
         return this._sprite;
     }
 
-    public get layer(): string {
-        return this._layer;
-    }
-
     public set layer(layer: string) {
         if (this.parentScene !== null) {
-            this._layerOrder = this.parentScene.layers.setLayer(this, layer); // change layer
+            this.parentScene.layers.setLayer(this, layer);
         }
 
         this._layer = layer;
     }
-
-    public get layerOrder(): number {
+    
+    public get layer(): string {
         if (this.parentScene !== null) {
-            return this.parentScene.layers.getLayerOrder(this);
+            return this.parentScene.layers.getLayer(this) || "Default";
+        } else {
+            return this._layer;
         }
     }
 
     public set layerOrder(layerOrder: number) {
         if (this.parentScene !== null) {
-            this._layerOrder = this.parentScene.layers.setLayerOrder(this, layerOrder); // change order
-            return;
+            this.parentScene.layers.setLayerOrder(this, layerOrder);
         }
 
         this._layerOrder = layerOrder;
     }
 
+    public get layerOrder(): number {
+        if (this.parentScene !== null) {
+            return this.parentScene.layers.getLayerOrder(this) || 0;
+        } else {
+            return this._layerOrder;
+        }
+    }
 
     constructor(sprite: Sprite) {
         super("SpriteComponent");
 
         this.eventEmmiter.subscribeTo<Scene[]>(Events.PARENT_SCENE_CHANGE, (eventData) => {
             const oldScene = eventData.data[0];
-            const newScene = eventData.data[1];
 
             if (oldScene !== null) oldScene.layers.remove(this); // remove from old Layers
-            if (newScene !== null) this.layer = this._layer; this.layerOrder = this._layerOrder; // add to new Layers
-
-            console.log(this._layer, this._layerOrder);
+            
+            this.layer = this._layer; 
+            this.layerOrder = this._layerOrder;
         });
 
         this._sprite = sprite;
+    }
+
+    /**
+     * Draws the Sprite belonging to this SpriteComponent.
+     */
+    public draw(): void {
+        this._sprite.draw(
+            this.parent.transform.toWorldMat(),
+            RendererManager.getInstance().currentRenderer.projectionMat,
+            SceneManager.getInstance().currentScene.currentCamera.view()
+        );
     }
 
     public load(): void {
@@ -67,10 +81,6 @@ export class SpriteComponent extends Component {
     public override update(): void {}
 
     public override render(): void {
-        this._sprite.render(
-            this.parent.transform.toWorldMat(),
-            RendererManager.getInstance().currentRenderer.projectionMat,
-            SceneManager.getInstance().currentScene.currentCamera.view()
-        );
+        this.parentScene.layers.next().draw();
     }
 }
