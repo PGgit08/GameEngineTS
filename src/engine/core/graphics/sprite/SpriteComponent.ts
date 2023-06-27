@@ -15,6 +15,9 @@ export class SpriteComponent extends Component {
         return this._sprite;
     }
 
+    /**
+     * Set the layer of this SpriteComponent.
+     */
     public set layer(layer: string) {
         if (this.parentScene !== null) {
             this.parentScene.layers.setLayer(this, layer);
@@ -31,6 +34,10 @@ export class SpriteComponent extends Component {
         }
     }
 
+    /**
+     * Set the layer order of this SpriteComponent.
+     * Order 0 -> Closest to Camera.
+     */
     public set layerOrder(layerOrder: number) {
         if (this.parentScene !== null) {
             this.parentScene.layers.setLayerOrder(this, layerOrder);
