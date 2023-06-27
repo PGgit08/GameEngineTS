@@ -1,8 +1,8 @@
 import { Entity } from "../ecs/Entity";
-import { Color } from "../graphics/Color";
 import { Square } from "../graphics/geometry/Square";
 import { SpriteComponent } from "../graphics/sprite/SpriteComponent";
 import { Sprite } from "../graphics/sprite/Sprite";
+import { MoveBehavior } from "./MoveBehavior";
 
 // THIS WOULD PROBABLY BE A PREFAB
 /**
@@ -12,6 +12,7 @@ export class DefaultEntity extends Entity {
     constructor() { 
         super("DefaultEntity");
 
-        this.addComponents(new SpriteComponent(new Sprite(undefined, undefined, undefined, new Square(100, 100), Color.GREEN)));
+        this.addComponents(new SpriteComponent(new Sprite(undefined, undefined, undefined, new Square(100, 100))));
+        this.addBehaviors(new MoveBehavior(50));
     }
 }

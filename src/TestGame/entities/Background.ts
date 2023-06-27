@@ -21,11 +21,12 @@ export class Background extends Entity {
 
         this.addComponents(
             new SpriteComponent(
-                new Sprite(this._texName)
+                new Sprite("FTEXT")
             )
         );
 
         this.getComponent(SpriteComponent).sprite.material.color = Color.WHITE;
+        this.getComponent(SpriteComponent).layer = "Background";
 
         this.transform.ignoreCamSize = true;
         this.transform.scale = vec2.fromValues(

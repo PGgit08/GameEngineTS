@@ -24,7 +24,7 @@ new Engine(
             {name: 'FTEXT', fileName: new URL('./assets/f-texture.png', import.meta.url).href}
         ],
 
-        layers: ["Default"],
+        layers: ["Background", "Default"],
 
         defaults: {
             renderer: "DefaultRenderer",

@@ -28,7 +28,7 @@ export class SpriteComponent extends Component {
     
     public get layer(): string {
         if (this.parentScene !== null) {
-            return this.parentScene.layers.getLayer(this) || "Default";
+            return this.parentScene.layers.getLayer(this) || this._layer;
         } else {
             return this._layer;
         }
@@ -48,7 +48,7 @@ export class SpriteComponent extends Component {
 
     public get layerOrder(): number {
         if (this.parentScene !== null) {
-            return this.parentScene.layers.getLayerOrder(this) || 0;
+            return this.parentScene.layers.getLayerOrder(this) || this._layerOrder;
         } else {
             return this._layerOrder;
         }

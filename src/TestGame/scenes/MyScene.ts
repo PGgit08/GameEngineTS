@@ -1,13 +1,11 @@
 import {
-    Color,
+    Camera,
     DefaultEntity,
     Entity,
-    MoveBehavior,
-    Scene,
-    SpriteComponent
+    Scene
 } from "../../engine/GETS";
 
-import { LookAtBehavior } from "../behaviors/LookAtBehavior";
+import { Background } from "../entities/Background";
 
 export class MyScene extends Scene {
     constructor() {
@@ -16,15 +14,17 @@ export class MyScene extends Scene {
 
     // experimenting with LOAD placement
     public override load(): void {
-        const black = Entity.Spawn(DefaultEntity);
-        const green = Entity.Spawn(DefaultEntity);
+        const cam = new Camera("Cam");
+        const background = new Background("FTEXT");
 
-        black.getComponent(SpriteComponent).sprite.material.color = Color.BLACK;
-        green.getComponent(SpriteComponent).sprite.material.color = Color.GREEN;
+        Entity.Spawn(DefaultEntity);
 
-        black.addBehaviors(new MoveBehavior(50), new LookAtBehavior());
+        cam.addChildren(background);
 
-        green.transform.position[0] = 100;
+        cam.size = 5;
+
+        this.addCamera(cam);
+        this.setCurrentCamera("Cam");
 
         super.load();
     }
