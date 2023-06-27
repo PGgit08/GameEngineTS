@@ -1,6 +1,13 @@
-import { Camera, Color, DefaultEntity, Entity, Event, EventManager, Events, MoveBehavior, Scene, SceneManager, SpriteComponent } from "../../engine/GETS";
+import {
+    Color,
+    DefaultEntity,
+    Entity,
+    MoveBehavior,
+    Scene,
+    SpriteComponent
+} from "../../engine/GETS";
+
 import { LookAtBehavior } from "../behaviors/LookAtBehavior";
-import { Background } from "../entities/Background";
 
 export class MyScene extends Scene {
     constructor() {
@@ -9,33 +16,15 @@ export class MyScene extends Scene {
 
     // experimenting with LOAD placement
     public override load(): void {
-        // const ent: Entity = Entity.Spawn(Entity1);
-        const ent2: Entity = Entity.Spawn(DefaultEntity);
-        const ent3: Entity = Entity.Spawn(DefaultEntity);
+        const black = Entity.Spawn(DefaultEntity);
+        const green = Entity.Spawn(DefaultEntity);
 
-        // this.addEntities(new Background("FTEXT"));
+        black.getComponent(SpriteComponent).sprite.material.color = Color.BLACK;
+        green.getComponent(SpriteComponent).sprite.material.color = Color.GREEN;
 
-        const cam: Camera = new Camera("Cam");  
+        black.addBehaviors(new MoveBehavior(50), new LookAtBehavior());
 
-        // cam.size = 5;
-
-        ent3.addChildren(ent2);
-        // ent3.addChildren(cam);
-
-        // console.log(ent2.parentScene);
-
-        ent3.getComponent(SpriteComponent).sprite.material.color = Color.BLACK;
-
-        ent2.addBehaviors(new MoveBehavior(50), new LookAtBehavior());
-        ent3.addBehaviors(new MoveBehavior(50));
-        
-        // ent3.transform.position[0] = 0;
-        ent2.transform.position[1] = 100;
-
-        // this.removeEntity(ent3);
-
-        this.addCamera(cam);
-        this.setCurrentCamera("Cam");
+        green.transform.position[0] = 100;
 
         super.load();
     }

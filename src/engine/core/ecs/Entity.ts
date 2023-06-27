@@ -131,7 +131,7 @@ export class Entity extends GameObject implements Lifecycle {
      */
     public addChildren(...children: Entity[]): void {
         children.forEach((c) => {
-            if (c.parent) {
+            if (c.parent !== null) {
                 c.parent.removeChild(c);
             }
 
@@ -147,7 +147,10 @@ export class Entity extends GameObject implements Lifecycle {
      * @param entity The Entity to remove.
      */
     public removeChild(entity: Entity): void {
-        this._children.splice(this._children.indexOf(entity), 1)
+        entity.parent = null;
+        entity.parentScene = null;
+
+        this._children.splice(this._children.indexOf(entity), 1);
     }
 
     /**
@@ -156,7 +159,7 @@ export class Entity extends GameObject implements Lifecycle {
      */
     public addComponents(...components: Component[]): void {
         components.forEach((c) => {
-            if (c.parent) {
+            if (c.parent !== null) {
                 c.parent.removeComponent(c);
             }
 
@@ -184,7 +187,7 @@ export class Entity extends GameObject implements Lifecycle {
      */
     public addBehaviors(...behaviors: Behavior[]): void {
         behaviors.forEach((b) => {
-            if (b.parent) {
+            if (b.parent !== null) {
                 b.parent.removeBehavior(b);
             }
 

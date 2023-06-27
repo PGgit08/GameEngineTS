@@ -47,9 +47,9 @@ export class Mesh {
     }
 
     /**
-     * Renders the Mesh
+     * Draws the Mesh
      */
-    public render(model: mat3, projection: mat3, view: mat3): void {
+    public draw(model: mat3, projection: mat3, view: mat3): void {
         if (!this.visible) { return; }
         
         this._material.applyStandardUniforms(

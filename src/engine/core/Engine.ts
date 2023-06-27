@@ -2,6 +2,7 @@ import { EngineConfig } from "../extra/EngineConfig";
 import { Input } from "../extra/Input";
 import { Time } from "../extra/Time";
 import { Texture } from "../GETS";
+import { Layers } from "./graphics/sprite/Layers";
 import { Lifecycle } from "./Lifecycle";
 import { RendererManager } from "./managers/RendererManager";
 import { SceneManager } from "./managers/SceneManager";
@@ -48,6 +49,7 @@ export class Engine implements Lifecycle {
 
     public load(): void {
         Input.addListeners();
+        if (this._config.layers !== undefined) Layers.setGameLayers(this._config.layers);
 
         this._config.renderers.forEach((R) => new R());
         RendererManager.getInstance().setCurrentRenderer(this._config.defaults.renderer);
@@ -55,7 +57,7 @@ export class Engine implements Lifecycle {
 
         ShaderManager.getInstance().load();
 
-        if (this._config.textures !== undefined) { this._config.textures.forEach((t) => { new Texture(t.name, t.fileName, t.configJson); }) }
+        if (this._config.textures !== undefined) this._config.textures.forEach((t) => new Texture(t.name, t.fileName, t.configJson));
         TextureManager.getInstance().load();
 
         this._config.scenes.forEach((S) => new S());

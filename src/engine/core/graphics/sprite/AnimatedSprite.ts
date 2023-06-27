@@ -25,7 +25,7 @@ export class AnimatedSprite extends Sprite {
      * @param origin The origin vector for this Animated Sprite (default is (0.5, 0.5)).
      * @param geometry The geometry used for this Animated Sprite (default is Square).
      */
-    constructor(animatedSpriteInfo: AnimatedSpriteConfig, textureName?: string, origin?: vec2, geometry: Geometry = new Square()) {
+    constructor(animatedSpriteInfo: AnimatedSpriteConfig, textureName?: string, origin?: vec2, geometry: Geometry = new Square(100, 100)) {
         super(textureName, undefined, origin, geometry);
 
         switch (animatedSpriteInfo.animationFrameOrder) {
@@ -61,11 +61,11 @@ export class AnimatedSprite extends Sprite {
         this.setFrameByName(this._animationFrames[this._currentFrameIndex]); // set initial frame
     }
 
-    public override render(model: mat3, projection: mat3, view: mat3): void {
+    public override draw(model: mat3, projection: mat3, view: mat3): void {
         this._timeSinceLastFrame += Time.deltaTime(); // Use deltaTime in case of rendering lag
 
         if (!this.isPlaying) {
-            super.render(model, projection, view);
+            super.draw(model, projection, view);
             return;
         }
 
@@ -81,6 +81,6 @@ export class AnimatedSprite extends Sprite {
             }
         }
 
-        super.render(model, projection, view);
+        super.draw(model, projection, view);
     }
 }
