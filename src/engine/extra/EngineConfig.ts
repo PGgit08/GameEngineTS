@@ -29,7 +29,10 @@ export interface EngineConfig {
     /** The optional Textures belonging to the Engine instance. @type { Array<TextureInfo> }*/
     textures?: TextureInfo[];
 
-    /** The optional Layer order belonging to the Engine instance. @type { Array<string> } */
+    /** The optional Layer order belonging to the Engine instance. Layers near the front of the Array get renderered closer to 
+     * the Camera.
+     * @type { Array<string> } 
+     * */
     layers?: string[];
 
     /** The defaults for the Engien instance @type { DefaultsConfig } */

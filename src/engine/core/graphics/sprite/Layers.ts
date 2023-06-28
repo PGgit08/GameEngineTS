@@ -31,7 +31,7 @@ export class Layers {
     private _counter: number = -1;
 
     constructor() {
-        Layers._gameLayers.forEach((layerName) => {
+        Layers._gameLayers.reverse().forEach((layerName) => {
             this._layers[layerName] = new Array(1);
         });
     }
