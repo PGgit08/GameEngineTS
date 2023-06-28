@@ -33,11 +33,11 @@ export class MyScene extends Scene {
         )
 
         person.addBehaviors(new MoveBehavior(50));
+        cam.addBehaviors(new MoveBehavior(50));
 
         cam.size = 1;
 		
         this.setCurrentCamera("Cam");
-		this.addCamera(cam);
 
         this.addEntities(person);
         this.addEntities(background);

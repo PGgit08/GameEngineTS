@@ -11,28 +11,28 @@ export class Input {
     private static _mousePos: vec2 = vec2.fromValues(0, 0);
 
     // several events that can be accessed rather than accessing the DOM
-    private static _keyUp: Event<KeyboardEvent> = new Event(Events.KEY_UP);
-    private static _keyDown: Event<KeyboardEvent> = new Event(Events.KEY_DOWN);
-    private static _mouseMove: Event<MouseEvent> = new Event(Events.MOUSE_MOVE);
+    private static _KEY_UP_EVENT: Event<KeyboardEvent> = new Event(Events.KEY_UP);
+    private static _KEY_DOWN_EVENT: Event<KeyboardEvent> = new Event(Events.KEY_DOWN);
+    private static _MOUSE_MOVE_EVENT: Event<MouseEvent> = new Event(Events.MOUSE_MOVE);
  
     /**
      * Adds event listeners to the browser, should be called in the loading period.
      */
     public static addListeners() {
         document.addEventListener("keyup", (e) => {
-            this._keyUp.invoke(e);
+            this._KEY_UP_EVENT.invoke(e);
 
             this._pressedKey = null;
         });
         
         document.addEventListener("keydown", (e) => {
-            this._keyDown.invoke(e);
+            this._KEY_DOWN_EVENT.invoke(e);
 
             if (this._pressedKey !== e.code) { this._pressedKey = e.code; this._newKey = true; }
         });
 
         document.addEventListener("mousemove", (e) => {
-            this._mouseMove.invoke(e);
+            this._MOUSE_MOVE_EVENT.invoke(e);
 
             if (RendererManager.getInstance().currentRenderer.mouseOver) {
                 const rendererBox: DOMRect = RendererManager.getInstance().currentRenderer.box;
