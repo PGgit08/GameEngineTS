@@ -41,16 +41,15 @@ export class Scene extends GameObject implements Lifecycle {
     }
 
     /**
-     * Adds a Camera to this Scene's Camera list.
-     * If the Camera does not belong to this Scene at all, it is directly added to this Scene.
+     * Adds a Camera directly to this Scene.
      * @param camera The Camera to add.
      */
     public addCamera(camera: Camera): void {
         if (!camera.isParentScene(this.name)) {
             this.addEntities(camera);
+        } else {
+            this._sceneCameras[camera.name] = camera;
         }
-
-        this._sceneCameras[camera.name] = camera;
     }
 
     public removeCamera(name: string): void {

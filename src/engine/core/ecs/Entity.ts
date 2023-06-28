@@ -19,7 +19,7 @@ export class Entity extends GameObject implements Lifecycle {
     private _components: Component[] = [];
     private _behaviors: Behavior[] = [];
 
-    private _parentScene: Scene = null;
+    public _parentScene: Scene = null; // bruh
 
     public transform: Transform = new Transform(this);
 
