@@ -21,7 +21,7 @@ export class MyScene extends Scene {
 
         cam.addChildren(background);
 
-        cam.size = 5;
+        cam.size = 1;
 
         this.addCamera(cam);
         this.setCurrentCamera("Cam");

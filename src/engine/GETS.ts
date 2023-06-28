@@ -10,6 +10,7 @@ export * from './core/ecs/Scene';
 export * from './core/events/Event';
 export * from './core/events/EventData';
 export * from './core/events/Events';
+export * from './core/events/EventEmmiter';
 
 export * from './core/math/Transform';
 export * from './core/math/Utils';
