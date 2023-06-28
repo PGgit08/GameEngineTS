@@ -1,8 +1,12 @@
 import {
+    AnimatedSprite,
+    AnimationFrameOrder,
     Camera,
     DefaultEntity,
     Entity,
-    Scene
+    MoveBehavior,
+    Scene,
+    SpriteComponent
 } from "../../engine/GETS";
 
 import { Background } from "../entities/Background";
@@ -15,9 +19,20 @@ export class MyScene extends Scene {
     // experimenting with LOAD placement
     public override load(): void {
         const cam = new Camera("Cam");
-        const background = new Background("FTEXT");
+        const background = new Background("Background");
 
-        Entity.Spawn(DefaultEntity);
+        const person = new Entity("Person");
+
+        person.addComponents(
+            new SpriteComponent(
+                new AnimatedSprite(
+                    {animationFrameOrder: AnimationFrameOrder.Sequential, timePerFrame: 0.5},
+                    "ArmsAnimation"
+                )
+            )
+        )
+
+        person.addBehaviors(new MoveBehavior(50));
 
         cam.addChildren(background);
 
@@ -25,6 +40,8 @@ export class MyScene extends Scene {
 
         this.addCamera(cam);
         this.setCurrentCamera("Cam");
+
+        this.addEntities(person);
 
         super.load();
     }

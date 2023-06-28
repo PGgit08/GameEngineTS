@@ -21,7 +21,7 @@ export class Background extends Entity {
 
         this.addComponents(
             new SpriteComponent(
-                new Sprite("FTEXT")
+                new Sprite(this._texName)
             )
         );
 
