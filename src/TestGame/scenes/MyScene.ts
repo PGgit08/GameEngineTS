@@ -2,7 +2,6 @@ import {
     AnimatedSprite,
     AnimationFrameOrder,
     Camera,
-    DefaultEntity,
     Entity,
     MoveBehavior,
     Scene,
@@ -14,10 +13,7 @@ import { Background } from "../entities/Background";
 export class MyScene extends Scene {
     constructor() {
         super("MyScene");
-    }
 
-    // experimenting with LOAD placement
-    public override load(): void {
         const cam = new Camera("Cam");
         const background = new Background("Background");
 
@@ -41,7 +37,5 @@ export class MyScene extends Scene {
 
         this.addEntities(person);
         this.addEntities(background);
-
-        super.load();
     }
 }
