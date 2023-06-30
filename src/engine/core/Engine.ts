@@ -28,7 +28,6 @@ export class Engine implements Lifecycle {
         this._config = config;
 
         this.load();
-        this.start();
 
         // setInterval(this.cycle.bind(this), 30); // test loop
         this._loopId = requestAnimationFrame(this.cycle.bind(this));
@@ -63,11 +62,6 @@ export class Engine implements Lifecycle {
         this._config.scenes.forEach((S) => new S());
         SceneManager.getInstance().setCurrentScene(this._config.defaults.scene);
         SceneManager.getInstance().load();
-    }
-
-    public start(): void {
-        RendererManager.getInstance().start();
-        SceneManager.getInstance().start();
     }
     
     public update(): void {

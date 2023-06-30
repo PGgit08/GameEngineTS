@@ -34,7 +34,6 @@ export class ShaderManager extends Manager implements Lifecycle {
         Object.values(this._gameShaders).forEach((s) => s.load());
     }
 
-    public start(): void {}
     public update(): void {}
     public render(): void {}
 }

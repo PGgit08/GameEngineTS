@@ -3,14 +3,9 @@
  */
 export interface Lifecycle {
     /**
-     * Called once during load period, and once during Entity Spawn.
+     * Called after GameObject's initialization once it is added into the hierarchy. 
      */
     load(): void;
-
-    /**
-     * Called ONLY ONCE after loading period.
-     */
-    start(): void;
 
     /**
      * Called periodically, per frame update, and is used to update components and behaviors.

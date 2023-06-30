@@ -37,7 +37,6 @@ export class TextureManager extends Manager implements Lifecycle {
         Object.values(this._gameTextures).forEach((t) => t.load());
     }
 
-    public start(): void {}
     public update(): void {}
     public render(): void {}
 }

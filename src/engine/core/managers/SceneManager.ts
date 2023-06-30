@@ -47,10 +47,6 @@ export class SceneManager extends Manager implements Lifecycle {
         Object.values(this._gameScenes).forEach((s) => s.load());
     }
 
-    public start(): void {
-        this._currentScene.start();
-    }
-
     public update(): void {
         this._currentScene.update();
     }
