@@ -18,7 +18,7 @@ export class MoveBehavior extends Behavior {
         }
     }
     
-    public override start(): void {}
+    public override start() {}
 
     public override update(): void {
         if (Input.KeyDown("KeyW")) {

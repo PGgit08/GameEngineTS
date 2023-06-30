@@ -11,7 +11,7 @@ export class HeadJointBehavior extends Behavior {
         super("HeadJointBehavior");
     }
 
-    public start(): void {
+    public override start(): void {
         setInterval(this.move.bind(this), 200); // move the snake at a much slower rate compared to frame rate
         setInterval(this.spawnFood.bind(this), 2000); // spawn food periodically @2000 ms
     }
