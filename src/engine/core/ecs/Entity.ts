@@ -2,13 +2,13 @@ import { vec2 } from "gl-matrix";
 import { Lifecycle } from "../Lifecycle";
 import { SceneManager } from "../managers/SceneManager";
 import { Transform } from "../math/Transform";
-import { Behavior } from "./Behavior";
 import { Component } from "./Component";
 import { GameObject } from "./GameObject";
 import { Scene } from "./Scene";
 import { EventEmmiter } from "../events/EventEmmiter";
 import { Event } from "../events/Event";
 import { Events } from "../events/Events";
+import { Behavior } from "./Behavior";
 
 export class Entity extends GameObject implements Lifecycle {
     private _loaded = false;
@@ -17,9 +17,8 @@ export class Entity extends GameObject implements Lifecycle {
     private _children: Entity[] = [];
 
     private _components: Component[] = [];
-    private _behaviors: Behavior[] = [];
 
-    public _parentScene: Scene = null; // bruh
+    private _parentScene: Scene = null;
 
     public transform: Transform = new Transform(this);
 
@@ -37,11 +36,6 @@ export class Entity extends GameObject implements Lifecycle {
      */
     public relativeChildren: boolean;
     public relativeChild: boolean = true;
-
-    
-    get behaviors(): Behavior[] {
-        return this._behaviors;
-    }
 
     get components(): Component[] {
         return this._components;
@@ -68,7 +62,6 @@ export class Entity extends GameObject implements Lifecycle {
         this._children.forEach((c) => c.parentScene = parentScene);
 
         this._components.forEach((c) => c.parentScene = parentScene);
-        this._behaviors.forEach((b) => b.parentScene = parentScene);
     }
 
     get parent(): Entity {
@@ -181,33 +174,6 @@ export class Entity extends GameObject implements Lifecycle {
         this._components.splice(this._components.indexOf(component), 1);
     }
 
-    /**
-     * Add Behaviors to this Entity.
-     * @param behaviors The Behaviors to add.
-     */
-    public addBehaviors(...behaviors: Behavior[]): void {
-        behaviors.forEach((b) => {
-            if (b.parent !== null) {
-                b.parent.removeBehavior(b);
-            }
-
-            b.parent = this;
-            b.parentScene = this._parentScene;
-        });
-
-        this._behaviors.push(...behaviors);
-    }
-
-    /**
-     * Remove Behavior from this Entity.
-     * @param behavior The Behavior to remove.
-     */
-    public removeBehavior(behavior: Behavior): void {
-        behavior.parent = null;
-        behavior.parentScene = null;
-
-        this._behaviors.splice(this._behaviors.indexOf(behavior), 1);
-    }
 
     /**
      * Returns a Component by it's type from the Entity.
@@ -224,20 +190,6 @@ export class Entity extends GameObject implements Lifecycle {
         return undefined;
     }
 
-    /**
-     * Returns a Behavior by it's type from the Entity.
-     * @param BehaviorType The behavior Type.
-     * @returns The desired Behavior.
-     */
-    public getBehavior<T extends Behavior>(BehaviorType: new (...args: any[]) => T): T {
-        for (let b of this._behaviors) {
-            if (b instanceof BehaviorType) {
-                return b as T;
-            }
-        }
-
-        return undefined;
-    }
 
     public isParentScene(sceneName: string): boolean {
         if (this._parentScene === null) {
@@ -250,7 +202,6 @@ export class Entity extends GameObject implements Lifecycle {
     public load(): void {
         if (!this._loaded) {
             this._components.forEach((c) => c.load());
-            this._behaviors.forEach((b) => b.load());
 
             this._children.forEach((c) => c.load());
 
@@ -260,13 +211,15 @@ export class Entity extends GameObject implements Lifecycle {
 
     public update(): void {
         this._components.forEach((c) => { if (c.enabled) c.update(); });
-        this._behaviors.forEach((b) => { if (b.enabled) b.update(); });
 
         this._children.forEach((c) => c.update());
     }
     
     public render(): void {
-        this._components.forEach((c) => { if (c.enabled) c.render(); });
+        this._components.forEach((c) => {
+            if (c instanceof Behavior) return;
+            if (c.enabled) c.render();
+        });
 
         this._children.forEach((c) => c.render());
     }

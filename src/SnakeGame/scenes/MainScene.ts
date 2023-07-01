@@ -14,7 +14,7 @@ export class MainScene extends Scene {
 
         headJoint.transform.position = vec2.fromValues(200, 200);
 
-        headJoint.addBehaviors(new HeadJointBehavior());
+        headJoint.addComponents(new HeadJointBehavior());
         headJoint.addChildren(cam);
 
         this.setCurrentCamera("Cam");

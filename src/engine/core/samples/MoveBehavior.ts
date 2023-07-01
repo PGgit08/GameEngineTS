@@ -13,8 +13,6 @@ export class MoveBehavior extends Behavior {
     constructor(speed?: number) {
         super("MoveBehavior");
 
-        // console.log(this instanceof Behavior);
-
         if (speed !== undefined) {
             this.speed = speed;
         }

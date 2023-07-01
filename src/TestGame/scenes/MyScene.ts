@@ -33,7 +33,7 @@ export class MyScene extends Scene {
             )
         )
 
-        person.addBehaviors(new MoveBehavior(50));
+        person.addComponents(new MoveBehavior(50));
         // cam.addBehaviors(new MoveBehavior(50));
 
         cam.size = 1;

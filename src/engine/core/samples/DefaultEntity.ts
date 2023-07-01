@@ -11,7 +11,6 @@ export class DefaultEntity extends Entity {
     constructor() { 
         super("DefaultEntity");
 
-        this.addComponents(new SpriteComponent(new Sprite()));
-        this.addBehaviors(new MoveBehavior(50));
+        this.addComponents(new SpriteComponent(new Sprite()), new MoveBehavior(50));
     }
 }
