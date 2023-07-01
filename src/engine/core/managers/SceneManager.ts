@@ -9,12 +9,12 @@ export class SceneManager extends Manager implements Lifecycle {
     private static _instance: SceneManager;
 
     private _gameScenes: Dictionary<string, Scene> = {}; // name: Scene
-    private _currentScene: Scene;
+    private _currentScene: string;
 
-    private _sceneChangeEvent: Event<null> = new Event(Events.SCENE_CHANGE);
+    private _SCENE_CHANGE_EVENT: Event<null> = new Event(Events.SCENE_CHANGE);
 
     get currentScene(): Scene {
-        return this._currentScene;
+        return this.getScene(this._currentScene);
     }
 
     public static getInstance(): SceneManager {
@@ -37,9 +37,9 @@ export class SceneManager extends Manager implements Lifecycle {
     }
 
     public setCurrentScene(name: string): void {
-        this._sceneChangeEvent.invoke(null);
+        this._SCENE_CHANGE_EVENT.invoke(null);
 
-        this._currentScene = this.getScene(name);
+        this._currentScene = name;
     }
 
 
@@ -48,10 +48,10 @@ export class SceneManager extends Manager implements Lifecycle {
     }
 
     public update(): void {
-        this._currentScene.update();
+        this.currentScene.update();
     }
 
     public render(): void {
-        this._currentScene.render();
+        this.currentScene.render();
     }
 }
