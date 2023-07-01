@@ -39,7 +39,6 @@ An Entity can only belong to ONE Scene, and can therefore only have ONE parent a
 ## Lifecycle
 An interface that has all the Lifecycle methods the engine uses.
 - load(): void -> called ONCE during loading period and ONCE during Spawn
-- start(): void -> called ONCE in the game AFTER loading period
 - update(): void -> called during frame update and should be used for any pre-render actions
 - render(): void ->  called durign frame update and should be used for rendering
 

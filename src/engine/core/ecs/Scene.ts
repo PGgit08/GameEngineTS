@@ -73,10 +73,6 @@ export class Scene extends GameObject implements Lifecycle {
         this._rootEntity.load();
     }
 
-    public start(): void {
-        this._rootEntity.start();
-    }
-
     public update(): void {
         this._rootEntity.update();
     }

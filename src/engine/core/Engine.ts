@@ -28,7 +28,6 @@ export class Engine implements Lifecycle {
         this._config = config;
 
         this.load();
-        this.start();
 
         // setInterval(this.cycle.bind(this), 30); // test loop
         this._loopId = requestAnimationFrame(this.cycle.bind(this));
@@ -49,25 +48,22 @@ export class Engine implements Lifecycle {
 
     public load(): void {
         Input.addListeners();
+        
         if (this._config.layers !== undefined) Layers.setGameLayers(this._config.layers);
 
         this._config.renderers.forEach((R) => new R());
         RendererManager.getInstance().setCurrentRenderer(this._config.defaults.renderer);
-        RendererManager.getInstance().load();
-
-        ShaderManager.getInstance().load();
 
         if (this._config.textures !== undefined) this._config.textures.forEach((t) => new Texture(t.name, t.fileName, t.configJson));
-        TextureManager.getInstance().load();
 
         this._config.scenes.forEach((S) => new S());
         SceneManager.getInstance().setCurrentScene(this._config.defaults.scene);
-        SceneManager.getInstance().load();
-    }
 
-    public start(): void {
-        RendererManager.getInstance().start();
-        SceneManager.getInstance().start();
+        // load everything after creating instances
+        RendererManager.getInstance().load();
+        ShaderManager.getInstance().load();
+        TextureManager.getInstance().load();
+        SceneManager.getInstance().load();
     }
     
     public update(): void {

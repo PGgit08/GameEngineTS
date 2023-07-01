@@ -11,7 +11,6 @@ import { default as ArmsAnimation } from "./assets/ArmsAnimation.json";
 new Engine(
     {
         renderers: [DefaultRenderer],
-
         scenes: [MyScene],
         
         textures: [

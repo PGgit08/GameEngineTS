@@ -126,10 +126,6 @@ export class Renderer extends GameObject implements Lifecycle {
         this._gl.viewport(0, 0, this._gl.canvas.width, this._gl.canvas.height);
     }
 
-    public start(): void {
-        // console.log("Renderer Start");
-    }
-
     public update(): void {
         // console.log("Renderer Update");
     }

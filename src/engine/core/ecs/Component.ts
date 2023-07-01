@@ -8,6 +8,8 @@ import { Event } from "../events/Event";
 import { Events } from "../events/Events";
 
 export abstract class Component extends GameObject implements Lifecycle {
+    private _enabled: boolean = true;
+
     private _parent: Entity = null;
     private _parentScene: Scene = null;
 
@@ -52,16 +54,24 @@ export abstract class Component extends GameObject implements Lifecycle {
     /**
      * The Transform of the parent Entity.
      */
-    get transform(): Transform {
+    public get transform(): Transform {
         return this._parent === null ? null : this._parent.transform;
+    }
+
+    public set enabled(enabled: boolean) {
+        this.enabled = enabled;
+    }
+
+    public get enabled(): boolean {
+        return this._enabled;
     }
 
     constructor(name: string) {
         super(name, true);
     }
 
-    public abstract load(): void;
-    public abstract start(): void;
+    public load(): void {};
+
     public abstract update(): void;
     public abstract render(): void;
 }

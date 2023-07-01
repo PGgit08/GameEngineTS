@@ -13,13 +13,13 @@ export class MoveBehavior extends Behavior {
     constructor(speed?: number) {
         super("MoveBehavior");
 
+        // console.log(this instanceof Behavior);
+
         if (speed !== undefined) {
             this.speed = speed;
         }
     }
     
-    public override start(): void {}
-
     public override update(): void {
         if (Input.KeyDown("KeyW")) {
             const translation = vec2.create();

@@ -5,8 +5,6 @@ export class LookAtBehavior extends Behavior {
         super("LookAtBehavior");
     }
     
-    public override start(): void {}
-
     public override update(): void {        
         this.transform.lookAt(Input.MousePos());
     }

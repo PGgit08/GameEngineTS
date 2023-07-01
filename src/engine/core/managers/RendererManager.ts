@@ -45,10 +45,6 @@ export class RendererManager extends Manager implements Lifecycle {
         window.gl = this._currentRenderer.gl;
     }
 
-    public start(): void {
-        this._currentRenderer.start();
-    }
-
     public update(): void {
         this._currentRenderer.update();
     }

@@ -2,6 +2,7 @@ import {
     AnimatedSprite,
     AnimationFrameOrder,
     Camera,
+    DefaultEntity,
     Entity,
     MoveBehavior,
     Scene,
@@ -13,11 +14,15 @@ import { Background } from "../entities/Background";
 export class MyScene extends Scene {
     constructor() {
         super("MyScene");
+    }
 
+    public load(): void {
         const cam = new Camera("Cam");
         const background = new Background("Background");
 
         const person = new Entity("Person");
+
+        Entity.Spawn(DefaultEntity);
 
         person.addComponents(
             new SpriteComponent(
@@ -29,7 +34,7 @@ export class MyScene extends Scene {
         )
 
         person.addBehaviors(new MoveBehavior(50));
-        cam.addBehaviors(new MoveBehavior(50));
+        // cam.addBehaviors(new MoveBehavior(50));
 
         cam.size = 1;
 		
@@ -37,5 +42,7 @@ export class MyScene extends Scene {
 
         this.addEntities(person);
         this.addEntities(background);
+
+        super.load();
     }
 }
