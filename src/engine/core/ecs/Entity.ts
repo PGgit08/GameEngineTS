@@ -259,14 +259,14 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     public update(): void {
-        this._components.forEach((c) => c.update());
-        this._behaviors.forEach((b) => b.update());
+        this._components.forEach((c) => { if (c.enabled) c.update(); });
+        this._behaviors.forEach((b) => { if (b.enabled) b.update(); });
 
         this._children.forEach((c) => c.update());
     }
     
     public render(): void {
-        this._components.forEach((c) => c.render());
+        this._components.forEach((c) => { if (c.enabled) c.render(); });
 
         this._children.forEach((c) => c.render());
     }

@@ -8,9 +8,7 @@ import { Event } from "../events/Event";
 import { Events } from "../events/Events";
 
 export abstract class Component extends GameObject implements Lifecycle {
-    private _enabled: boolean;
-
-    private _started: boolean = false;
+    private _enabled: boolean = true;
 
     private _parent: Entity = null;
     private _parentScene: Scene = null;
@@ -74,8 +72,6 @@ export abstract class Component extends GameObject implements Lifecycle {
 
     public load(): void {};
 
-    /** Called once in this Component's lifetime when it is first enabled. */
-    public abstract start(): void;
     public abstract update(): void;
     public abstract render(): void;
 }

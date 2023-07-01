@@ -7,14 +7,12 @@ export class HeadJointBehavior extends Behavior {
     private _joints: SnakeJoint[] = [];
     private _displacement: vec2 = vec2.fromValues(0, -30);
 
+    private _started: boolean = false;
+
     constructor() {
         super("HeadJointBehavior");
     }
 
-    public override start(): void {
-        setInterval(this.move.bind(this), 200); // move the snake at a much slower rate compared to frame rate
-        setInterval(this.spawnFood.bind(this), 2000); // spawn food periodically @2000 ms
-    }
 
     /**
      * Moves the whole snake.
@@ -42,6 +40,13 @@ export class HeadJointBehavior extends Behavior {
     }
 
     public update(): void {
+        if (!this._started) {
+            setInterval(this.move.bind(this), 200); // move the snake at a much slower rate compared to frame rate
+            setInterval(this.spawnFood.bind(this), 2000); // spawn food periodically @2000 ms
+
+            this._started = true;
+        }
+
         if (Input.KeyPressed("ArrowLeft")) {
             this.transform.rotate(-90);
         }
