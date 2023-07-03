@@ -57,7 +57,7 @@ export class SpriteComponent extends Component {
     constructor(sprite: Sprite) {
         super("SpriteComponent");
 
-        this.eventEmmiter.subscribeTo<Scene[]>(Events.PARENT_SCENE_CHANGE, (eventData) => {
+        this.eventEmmiter.subscribe<Scene[]>(Events.PARENT_SCENE_CHANGE, (eventData) => {
             const oldScene = eventData.data[0];
 
             if (oldScene !== null) oldScene.layers.remove(this); // remove from old Layers

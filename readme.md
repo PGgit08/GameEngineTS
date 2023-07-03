@@ -7,7 +7,7 @@ To run -> **npm run dev**
 
 
 # Todo
-- Organization - DOING NOW
+- Organization - DOING NOW (ECS, EVENTS, HELPERS)
 - Lighting
 - Physics (matter.js) / Collsion
 - Storage

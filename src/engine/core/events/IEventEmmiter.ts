@@ -14,7 +14,7 @@ export interface IEventEmmiter {
      * @param subscriber The callback which is triggered whenever the Event is invoked.
      * @returns The Id of this subscriber.
      */
-    subscribeTo<T>(eventName: string, subscriber: (eventData: EventData<T>) => void): string;
+    subscribe<T>(eventName: string, subscriber: (eventData: EventData<T>) => void): string;
 
     /**
      * Unsubscribes a subscription from an Event.

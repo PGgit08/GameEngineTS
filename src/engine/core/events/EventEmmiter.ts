@@ -16,7 +16,7 @@ export class EventEmmiter extends NameRegistrar implements IEventEmmiter {
         this._events[event.name] = event;
     }
 
-    public subscribeTo<T>(eventName: string, subscriber: (eventData: EventData<T>) => void): string {
+    public subscribe<T>(eventName: string, subscriber: (eventData: EventData<T>) => void): string {
         return this._events[eventName].subscribe(subscriber);
     }
 
