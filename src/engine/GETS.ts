@@ -31,8 +31,8 @@ export * from './core/gl/shader/ShaderConfig';
 
 export * from './core/samples/MoveBehavior';
 export * from './core/samples/DefaultRenderer';
-export * from './core/samples/DefaultEntity';
-export * from './core/samples/DefaultScene';
+export * from './core/samples/SampleEntity';
+export * from './core/samples/SampleScene';
 
 export * from './core/managers/SceneManager';
 export * from './core/managers/RendererManager';

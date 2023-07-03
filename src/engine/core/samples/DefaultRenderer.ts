@@ -1,8 +1,8 @@
 import { Renderer } from "../graphics/Renderer";
 
-export class DefaultRenderer extends Renderer {
+export class SampleRenderer extends Renderer {
     /**
-     * A Default Renderer to be used by Games.
+     * A Sample Renderer to be used by Games.
      */
-    constructor() { super("DefaultRenderer", Renderer.createCanvas("default_renderer").id); }
+    constructor() { super("SampleRenderer", Renderer.createCanvas("default_renderer").id); }
 }

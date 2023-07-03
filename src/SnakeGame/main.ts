@@ -1,9 +1,9 @@
-import { DefaultRenderer, Engine } from "../engine/GETS"
+import { SampleRenderer, Engine } from "../engine/GETS"
 import { MainScene } from "./scenes/MainScene";
 
 new Engine(
     {
-        renderers: [DefaultRenderer],
+        renderers: [SampleRenderer],
         scenes: [MainScene],
         textures: [
             {name: 'f-texture', fileName: new URL('./assets/f-texture.png', import.meta.url).href},

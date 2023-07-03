@@ -1,6 +1,6 @@
 import {
     Engine,
-    DefaultRenderer
+    SampleRenderer
 } from "../engine/GETS"
 
 // Local Imports
@@ -10,7 +10,7 @@ import { default as ArmsAnimation } from "./assets/ArmsAnimation.json";
 // Create a new Engine instance
 new Engine(
     {
-        renderers: [DefaultRenderer],
+        renderers: [SampleRenderer],
         scenes: [MyScene],
         
         textures: [
@@ -23,7 +23,7 @@ new Engine(
         layers: ["Default", "Background"],
 
         defaults: {
-            renderer: "DefaultRenderer",
+            renderer: "SampleRenderer",
             scene: "MyScene"
         }
     }

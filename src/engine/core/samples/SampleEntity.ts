@@ -6,9 +6,9 @@ import { MoveBehavior } from "./MoveBehavior";
 /**
  * An Entity with a Square Sprite instantiated at the center of the screen. This Entity has a MoveBehavior added.
  */
-export class DefaultEntity extends Entity {
+export class SampleEntity extends Entity {
     constructor() { 
-        super("DefaultEntity");
+        super("SampleEntity");
 
         this.addComponents(new SpriteComponent(new Sprite()), new MoveBehavior(50));
     }
