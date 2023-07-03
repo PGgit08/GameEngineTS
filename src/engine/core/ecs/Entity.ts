@@ -20,7 +20,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     private _parentScene: Scene = null;
 
-    public transform: Transform = new Transform(this);
+    public readonly transform: Transform = new Transform(this);
 
     public readonly eventEmmiter: EventEmmiter = new EventEmmiter();
 
@@ -86,7 +86,7 @@ export class Entity extends GameObject implements Lifecycle {
      * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
      * @returns The Spawned Entity.
      */
-    public static Spawn<T extends Entity>(Spawned: new () => T, position?: vec2, parent?: Entity): T {
+    public static Spawn<T extends Entity>(Spawned: new (...args: any[]) => T, position?: vec2, parent?: Entity): T {
         const spawned: T = new Spawned();
 
         if (position) {
@@ -99,8 +99,6 @@ export class Entity extends GameObject implements Lifecycle {
             SceneManager.getInstance().currentScene.addEntities(spawned);
         }
 
-        spawned.load();
-
         return spawned;
     }
 
@@ -109,6 +107,8 @@ export class Entity extends GameObject implements Lifecycle {
      * @param entity The given Entity to despawn.
      */
     public static Despawn(entity: Entity): void {
+        if (entity.parent === null) return;
+
         entity.parent.removeChild(entity);
     }
 
@@ -130,6 +130,8 @@ export class Entity extends GameObject implements Lifecycle {
 
             c.parent = this;
             c.parentScene = this._parentScene;
+
+            if (this._loaded) c.load();
         });
 
         this._children.push(...children);
@@ -144,6 +146,8 @@ export class Entity extends GameObject implements Lifecycle {
         entity.parentScene = null;
 
         this._children.splice(this._children.indexOf(entity), 1);
+
+        // TODO: Add UNLOAD lifecycle method here
     }
 
     /**
@@ -153,27 +157,17 @@ export class Entity extends GameObject implements Lifecycle {
     public addComponents(...components: Component[]): void {
         components.forEach((c) => {
             if (c.parent !== null) {
-                c.parent.removeComponent(c);
+                throw new Error("Unable to add component as it already has a parent.");
             }
 
             c.parent = this;
             c.parentScene = this._parentScene;
+
+            if (this._loaded) c.load();
         });
 
         this._components.push(...components);
     }
-
-    /**
-     * Remove Component from this Entity.
-     * @param component The Component to remove.
-     */
-    public removeComponent(component: Component): void {
-        component.parent = null;
-        component.parentScene = null;
-
-        this._components.splice(this._components.indexOf(component), 1);
-    }
-
 
     /**
      * Returns a Component by it's type from the Entity.
@@ -190,7 +184,6 @@ export class Entity extends GameObject implements Lifecycle {
         return undefined;
     }
 
-
     public isParentScene(sceneName: string): boolean {
         if (this._parentScene === null) {
             return false;
@@ -200,13 +193,12 @@ export class Entity extends GameObject implements Lifecycle {
     }
     
     public load(): void {
-        if (!this._loaded) {
-            this._components.forEach((c) => c.load());
+        if (this._loaded) return;
+        
+        this._components.forEach((c) => c.load());
+        this._children.forEach((c) => c.load());
 
-            this._children.forEach((c) => c.load());
-
-            this._loaded = true;
-        }
+        this._loaded = true;
     }
 
     public update(): void {

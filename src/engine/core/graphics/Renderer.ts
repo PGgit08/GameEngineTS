@@ -19,6 +19,8 @@ export class Renderer extends GameObject implements Lifecycle {
 
     private _mouseOver: boolean;
 
+    private _loaded: boolean = false;
+
     get width(): number {
         return this._width;
     }
@@ -103,6 +105,8 @@ export class Renderer extends GameObject implements Lifecycle {
     }
 
     public load(): void {
+        if (this._loaded) return;
+
         this.fromCanvas();
     
         this._gl = this._canvas.getContext("webgl") as WebGLRenderingContext;
@@ -124,6 +128,8 @@ export class Renderer extends GameObject implements Lifecycle {
         this._gl.clearColor(0.0, 0.0, 0.0, 0.0); // Set to white with transparent background
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
         this._gl.viewport(0, 0, this._gl.canvas.width, this._gl.canvas.height);
+
+        this._loaded = true;
     }
 
     public update(): void {

@@ -2,12 +2,13 @@ import Dictionary from "../../extra/Dictionary";
 import { Shader } from "../gl/shader/Shader";
 import { Lifecycle } from "../Lifecycle";
 import { Manager } from "./Manager";
-import { StandardShader } from "../gl/shader/StandardShader";
 
 export class ShaderManager extends Manager implements Lifecycle {
     private static _instance: ShaderManager;
     
     private _gameShaders: Dictionary<string, Shader> = {};
+
+    private _loaded: boolean = false;
 
     public static getInstance(): ShaderManager {
         if (!this._instance) {
@@ -22,6 +23,8 @@ export class ShaderManager extends Manager implements Lifecycle {
     public addShader(shader: Shader) {
         this.registerName(shader.name);
         this._gameShaders[shader.name] = shader;
+
+        if (this._loaded) shader.load();
     }
 
     public getShader(name: string): Shader {
@@ -29,9 +32,11 @@ export class ShaderManager extends Manager implements Lifecycle {
     }
 
     public load(): void {
-        new StandardShader();
+        if (this._loaded) return;
 
         Object.values(this._gameShaders).forEach((s) => s.load());
+
+        this._loaded = true;
     }
 
     public update(): void {}
