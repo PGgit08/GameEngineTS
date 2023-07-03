@@ -86,7 +86,7 @@ export class Entity extends GameObject implements Lifecycle {
      * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
      * @returns The Spawned Entity.
      */
-    public static Spawn<T extends Entity>(Spawned: new () => T, position?: vec2, parent?: Entity): T {
+    public static Spawn<T extends Entity>(Spawned: new (...args: any[]) => T, position?: vec2, parent?: Entity): T {
         const spawned: T = new Spawned();
 
         if (position) {
@@ -157,7 +157,7 @@ export class Entity extends GameObject implements Lifecycle {
     public addComponents(...components: Component[]): void {
         components.forEach((c) => {
             if (c.parent !== null) {
-                c.parent.removeComponent(c);
+                throw new Error("Unable to add component as it already has a parent.");
             }
 
             c.parent = this;
@@ -168,20 +168,6 @@ export class Entity extends GameObject implements Lifecycle {
 
         this._components.push(...components);
     }
-
-    /**
-     * Remove Component from this Entity.
-     * @param component The Component to remove.
-     */
-
-    // TODO: Remove this?
-    public removeComponent(component: Component): void {
-        component.parent = null;
-        component.parentScene = null;
-
-        this._components.splice(this._components.indexOf(component), 1);
-    }
-
 
     /**
      * Returns a Component by it's type from the Entity.
