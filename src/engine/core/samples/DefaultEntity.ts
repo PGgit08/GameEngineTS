@@ -3,7 +3,6 @@ import { SpriteComponent } from "../graphics/sprite/SpriteComponent";
 import { Sprite } from "../graphics/sprite/Sprite";
 import { MoveBehavior } from "./MoveBehavior";
 
-// THIS WOULD PROBABLY BE A PREFAB
 /**
  * An Entity with a Square Sprite instantiated at the center of the screen. This Entity has a MoveBehavior added.
  */

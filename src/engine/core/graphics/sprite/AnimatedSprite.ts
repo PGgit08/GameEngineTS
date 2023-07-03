@@ -2,7 +2,7 @@ import { mat3, vec2 } from "gl-matrix";
 import { Sprite } from "./Sprite";
 import { Geometry } from "../geometry/Geometry";
 import { Square } from "../geometry/Square";
-import { Time } from "../../../extra/Time";
+import { Time } from "../../helpers/Time";
 import { AnimatedSpriteConfig, AnimationFrameOrder } from "./AnimatedSpriteConfig";
 
 export class AnimatedSprite extends Sprite {

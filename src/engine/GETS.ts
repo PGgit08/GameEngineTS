@@ -39,7 +39,7 @@ export * from './core/managers/RendererManager';
 export * from './core/managers/TextureManager';
 export * from './core/managers/EventManager';
 
-export * from './extra/EngineConfig';
-export * from './extra/Input';
-export * from './extra/Time';
+export * from './core/config/EngineConfig';
+export * from './core/helpers/Input';
+export * from './core/helpers/Time';
 

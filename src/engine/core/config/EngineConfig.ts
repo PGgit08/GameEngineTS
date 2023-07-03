@@ -1,5 +1,5 @@
-import { Scene } from "../core/ecs/Scene";
-import { Renderer } from "../core/graphics/Renderer";
+import { Scene } from "../ecs/Scene";
+import { Renderer } from "../graphics/Renderer";
 import { TextureInfo } from "./TextureInfo";
 
 /**

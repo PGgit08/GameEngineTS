@@ -1,5 +1,5 @@
 import { vec2 } from "gl-matrix";
-import { Input } from "../../extra/Input";
+import { Input } from "../helpers/Input";
 import { Behavior } from "../ecs/Behavior";
 import { Time } from "../../GETS";
 

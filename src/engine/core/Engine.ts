@@ -1,6 +1,6 @@
-import { EngineConfig } from "../extra/EngineConfig";
-import { Input } from "../extra/Input";
-import { Time } from "../extra/Time";
+import { EngineConfig } from "./config/EngineConfig";
+import { Input } from "./helpers/Input";
+import { Time } from "./helpers/Time";
 import { Texture } from "../GETS";
 import { StandardShader } from "./gl/shader/StandardShader";
 import { Layers } from "./graphics/sprite/Layers";

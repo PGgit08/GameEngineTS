@@ -1,8 +1,8 @@
 import { vec2 } from "gl-matrix";
-import { RendererManager } from "../core/managers/RendererManager";
-import { SceneManager } from "../core/managers/SceneManager";
-import { Event } from "../core/events/Event";
-import { Events } from "../core/events/Events";
+import { RendererManager } from "../managers/RendererManager";
+import { SceneManager } from "../managers/SceneManager";
+import { Event } from "../events/Event";
+import { Events } from "../events/Events";
 
 export class Input {
     private static _pressedKey: string = null;

@@ -1,5 +1,5 @@
 import Dictionary from "../../extra/Dictionary";
-import { TexturePackerConfig, TexturePackerFrame } from "../../extra/TexturePackerConfig";
+import { TexturePackerConfig, TexturePackerFrame } from "../config/TexturePackerConfig";
 import { GameObject } from "../ecs/GameObject";
 import { TextureManager } from "../managers/TextureManager";
 import { isPowerOf2 } from "../math/Utils";
