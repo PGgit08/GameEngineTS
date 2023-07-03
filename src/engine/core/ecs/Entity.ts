@@ -20,7 +20,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     private _parentScene: Scene = null;
 
-    public transform: Transform = new Transform(this);
+    public readonly transform: Transform = new Transform(this);
 
     public readonly eventEmmiter: EventEmmiter = new EventEmmiter();
 
@@ -99,8 +99,6 @@ export class Entity extends GameObject implements Lifecycle {
             SceneManager.getInstance().currentScene.addEntities(spawned);
         }
 
-        spawned.load();
-
         return spawned;
     }
 
@@ -109,6 +107,8 @@ export class Entity extends GameObject implements Lifecycle {
      * @param entity The given Entity to despawn.
      */
     public static Despawn(entity: Entity): void {
+        if (entity.parent === null) return;
+
         entity.parent.removeChild(entity);
     }
 
@@ -130,6 +130,8 @@ export class Entity extends GameObject implements Lifecycle {
 
             c.parent = this;
             c.parentScene = this._parentScene;
+
+            if (this._loaded) c.load();
         });
 
         this._children.push(...children);
@@ -144,6 +146,8 @@ export class Entity extends GameObject implements Lifecycle {
         entity.parentScene = null;
 
         this._children.splice(this._children.indexOf(entity), 1);
+
+        // TODO: Add UNLOAD lifecycle method here
     }
 
     /**
@@ -158,6 +162,8 @@ export class Entity extends GameObject implements Lifecycle {
 
             c.parent = this;
             c.parentScene = this._parentScene;
+
+            if (this._loaded) c.load();
         });
 
         this._components.push(...components);
@@ -167,6 +173,8 @@ export class Entity extends GameObject implements Lifecycle {
      * Remove Component from this Entity.
      * @param component The Component to remove.
      */
+
+    // TODO: Remove this?
     public removeComponent(component: Component): void {
         component.parent = null;
         component.parentScene = null;
@@ -190,7 +198,6 @@ export class Entity extends GameObject implements Lifecycle {
         return undefined;
     }
 
-
     public isParentScene(sceneName: string): boolean {
         if (this._parentScene === null) {
             return false;
@@ -200,13 +207,12 @@ export class Entity extends GameObject implements Lifecycle {
     }
     
     public load(): void {
-        if (!this._loaded) {
-            this._components.forEach((c) => c.load());
+        if (this._loaded) return;
+        
+        this._components.forEach((c) => c.load());
+        this._children.forEach((c) => c.load());
 
-            this._children.forEach((c) => c.load());
-
-            this._loaded = true;
-        }
+        this._loaded = true;
     }
 
     public update(): void {

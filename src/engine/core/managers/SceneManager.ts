@@ -12,6 +12,8 @@ export class SceneManager extends Manager implements Lifecycle {
     private _currentScene: string;
 
     private _SCENE_CHANGE_EVENT: Event<null> = new Event(Events.SCENE_CHANGE);
+    
+    private _loaded: boolean = false;
 
     get currentScene(): Scene {
         return this.getScene(this._currentScene);
@@ -30,6 +32,8 @@ export class SceneManager extends Manager implements Lifecycle {
     public addScene(scene: Scene): void {
         super.registerName(scene.name);
         this._gameScenes[scene.name] = scene;
+
+        if (this._loaded) scene.load();
     }
 
     public getScene(name: string): Scene {
@@ -45,6 +49,8 @@ export class SceneManager extends Manager implements Lifecycle {
 
     public load(): void {
         Object.values(this._gameScenes).forEach((s) => s.load());
+
+        this._loaded = true;
     }
 
     public update(): void {

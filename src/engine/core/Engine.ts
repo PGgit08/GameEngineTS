@@ -2,6 +2,7 @@ import { EngineConfig } from "../extra/EngineConfig";
 import { Input } from "../extra/Input";
 import { Time } from "../extra/Time";
 import { Texture } from "../GETS";
+import { StandardShader } from "./gl/shader/StandardShader";
 import { Layers } from "./graphics/sprite/Layers";
 import { Lifecycle } from "./Lifecycle";
 import { RendererManager } from "./managers/RendererManager";
@@ -29,7 +30,6 @@ export class Engine implements Lifecycle {
 
         this.load();
 
-        // setInterval(this.cycle.bind(this), 30); // test loop
         this._loopId = requestAnimationFrame(this.cycle.bind(this));
 
         console.log(SceneManager.getInstance(), RendererManager.getInstance());
@@ -52,17 +52,23 @@ export class Engine implements Lifecycle {
         if (this._config.layers !== undefined) Layers.setGameLayers(this._config.layers);
 
         this._config.renderers.forEach((R) => new R());
+        
         RendererManager.getInstance().setCurrentRenderer(this._config.defaults.renderer);
+        RendererManager.getInstance().load();
+
+        new StandardShader();
+        
+        ShaderManager.getInstance().load();
 
         if (this._config.textures !== undefined) this._config.textures.forEach((t) => new Texture(t.name, t.fileName, t.configJson));
+        new Texture('WHITE');
+
+        TextureManager.getInstance().load();
 
         this._config.scenes.forEach((S) => new S());
         SceneManager.getInstance().setCurrentScene(this._config.defaults.scene);
 
-        // load everything after creating instances
-        RendererManager.getInstance().load();
-        ShaderManager.getInstance().load();
-        TextureManager.getInstance().load();
+        // load everything in scenes after creating instances
         SceneManager.getInstance().load();
     }
     

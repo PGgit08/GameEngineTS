@@ -12,6 +12,8 @@ export abstract class Shader extends GameObject {
 
     private _program: WebGLProgram;
 
+    private _loaded: boolean = false;
+
     /**
      * Returns the Vertex Shader source code in GLSL
      */
@@ -36,6 +38,8 @@ export abstract class Shader extends GameObject {
      * Load this Shader
      */
     public load(): void {
+        if (this._loaded) return;
+
         const vShader: WebGLShader = this.loadShader(this.vSource, gl.VERTEX_SHADER);
         const fShader: WebGLShader = this.loadShader(this.fSource, gl.FRAGMENT_SHADER);
 
@@ -45,6 +49,8 @@ export abstract class Shader extends GameObject {
 
         this.detectAttributes();
         this.detectUniforms();
+
+        this._loaded = true;
     }
 
     /**

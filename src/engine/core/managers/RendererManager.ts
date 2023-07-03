@@ -9,6 +9,8 @@ export class RendererManager extends Manager implements Lifecycle {
     private _gameRenderers: Dictionary<string, Renderer> = {}; // name: Renderer
     private _currentRenderer: Renderer;
 
+    private _loaded: boolean = false;
+
     get currentRenderer(): Renderer {
         return this._currentRenderer;
     }
@@ -26,6 +28,8 @@ export class RendererManager extends Manager implements Lifecycle {
     public addRenderer(renderer: Renderer): void {
         super.registerName(renderer.name);
         this._gameRenderers[renderer.name] = renderer;
+
+        if (this._loaded) renderer.load();
     }
 
     public getRenderer(name: string): Renderer {
@@ -40,9 +44,12 @@ export class RendererManager extends Manager implements Lifecycle {
     }
 
     public load(): void {
-        Object.values(this._gameRenderers).forEach((r) => r.load());
+        if (this._loaded) return;
 
+        Object.values(this._gameRenderers).forEach((r) => r.load());
         window.gl = this._currentRenderer.gl;
+
+        this._loaded = true;
     }
 
     public update(): void {
