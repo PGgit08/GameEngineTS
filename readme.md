@@ -11,6 +11,7 @@ To run -> **npm run dev**
 - Custom Shader Implementation - DOING NOW
 - README Updates - DOING NOW
 
+- Async
 - Lighting
 - Physics (matter.js) / Collsion
 - Storage
