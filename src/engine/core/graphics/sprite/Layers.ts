@@ -1,7 +1,8 @@
 import Dictionary from "../../../extra/Dictionary";
+import { GameObject } from "../../ecs/GameObject";
 import { SpriteComponent } from "./SpriteComponent";
 
-export class Layers {
+export class Layers extends GameObject {
     // the game layers belonging to the whole game
     private static _gameLayersSet: boolean = false;
     private static _gameLayers: string[] = ["Default"];
@@ -31,6 +32,8 @@ export class Layers {
     private _counter: number = -1;
 
     constructor() {
+        super("Layers");
+
         Layers._gameLayers.reverse().forEach((layerName) => {
             this._layers[layerName] = new Array(1);
         });

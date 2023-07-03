@@ -9,8 +9,9 @@ import { RendererManager } from "./managers/RendererManager";
 import { SceneManager } from "./managers/SceneManager";
 import { ShaderManager } from "./managers/ShaderManager";
 import { TextureManager } from "./managers/TextureManager";
+import { GameObject } from "./ecs/GameObject";
 
-export class Engine implements Lifecycle {
+export class Engine extends GameObject implements Lifecycle {
     private static _isInstance: boolean = false;
 
     private _config: EngineConfig;
@@ -22,6 +23,8 @@ export class Engine implements Lifecycle {
      * @param config The EngineConfig for the Engine instance.
      */
     constructor(config: EngineConfig) {
+        super("Engine");
+
         if (Engine._isInstance) {
             throw new Error("Engine instance already exists!");
         }

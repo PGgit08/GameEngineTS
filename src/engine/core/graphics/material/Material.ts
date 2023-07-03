@@ -3,8 +3,9 @@ import { ShaderManager } from "../../managers/ShaderManager";
 import { mat3 } from "gl-matrix";
 import { Color } from "../Color";
 import { Texture } from "../Texture";
+import { GameObject } from "../../ecs/GameObject";
 
-export abstract class Material {
+export abstract class Material extends GameObject {
     protected _shader: Shader;
 
     public texture: Texture;
@@ -14,7 +15,9 @@ export abstract class Material {
         return this._shader;
     }
     
-    constructor(shaderName: string, texture?: Texture, color?: Color) {
+    constructor(name: string, shaderName: string, texture?: Texture, color?: Color) {
+        super(name);
+
         this._shader = ShaderManager.getInstance().getShader(shaderName);
 
         this.texture = texture;

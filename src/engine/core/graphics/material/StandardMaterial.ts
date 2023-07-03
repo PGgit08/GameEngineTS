@@ -8,7 +8,7 @@ import { Material } from "./Material";
  */
 export class StandardMaterial extends Material {
     constructor(texture?: Texture, color?: Color) {
-        super("StandardShader", texture, color);
+        super("StandardMaterial", "StandardShader", texture, color);
     }
 
     public applyAdditionalUniforms(): void {}

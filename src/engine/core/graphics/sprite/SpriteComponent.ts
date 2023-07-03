@@ -84,7 +84,6 @@ export class SpriteComponent extends Component {
         this._sprite.load();
     }
 
-    public override start(): void {}
     public override update(): void {}
 
     public override render(): void {

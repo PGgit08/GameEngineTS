@@ -29,7 +29,7 @@ export class Camera extends Entity {
     }
     
     public override set parentScene(scene: Scene) {
-        const oldParentScene: Scene = this._parentScene;
+        const oldParentScene: Scene = super.parentScene;
         super.parentScene = scene;
 
         if (scene !== null) {

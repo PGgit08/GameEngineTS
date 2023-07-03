@@ -2,8 +2,9 @@ import { mat3, vec2 } from "gl-matrix";
 import { degToRadians, radiansToDeg } from "./Utils";
 import { Entity } from "../ecs/Entity";
 import { SceneManager } from "../managers/SceneManager";
+import { GameObject } from "../ecs/GameObject";
 
-export class Transform {
+export class Transform extends GameObject {
     public position: vec2 = vec2.create();
     public rotation: number = 0;
     public scale: vec2 = vec2.fromValues(1, 1);
@@ -14,6 +15,8 @@ export class Transform {
     public ignoreCamSize: boolean = false;
 
     constructor(owner: Entity) {
+        super("Transform");
+        
         this.owner = owner;
     }
 

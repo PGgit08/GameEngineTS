@@ -1,10 +1,10 @@
-export class Frame {
+import { GameObject } from "../ecs/GameObject";
+
+export class Frame extends GameObject {
     public x: number;
     public y: number;
     public width: number;
     public height: number;
-
-    public readonly name: string;
 
     private _minTexX: number = 0;
     private _minTexY: number = 0;
@@ -58,7 +58,7 @@ export class Frame {
      * @param h The height of this Frame in the Texture in pixels.
      */
     constructor(name: string, x: number, y: number, w: number, h: number) {
-        this.name = name;
+        super(name);
         
         this.x = x;
         this.y = y;

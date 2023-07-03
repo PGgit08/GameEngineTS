@@ -5,8 +5,9 @@ import Dictionary from "../../../extra/Dictionary";
 import { AttributeInfo } from "../../gl/AttributeInfo";
 import { ShaderConfig } from "../../gl/shader/ShaderConfig";
 import { BufferConfig } from "../../gl/BufferConfig";
+import { GameObject } from "../../ecs/GameObject";
 
-export abstract class Geometry {
+export abstract class Geometry extends GameObject {
     private _buffers: Dictionary<string, Buffer> = {};
     private _attributes: AttributeInfo[] = [];
 
@@ -27,7 +28,9 @@ export abstract class Geometry {
         return this._height
     }
 
-    constructor(width: number, height: number) {
+    constructor(name: string, width: number, height: number) {
+        super(name);
+
         this._width = width;
         this._height = height;
 

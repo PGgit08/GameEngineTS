@@ -1,6 +1,7 @@
 import { vec4 } from "gl-matrix";
+import { GameObject } from "../ecs/GameObject";
 
-export class Color {
+export class Color extends GameObject {
     public readonly r: number;
     public readonly g: number;
     public readonly b: number;
@@ -22,6 +23,8 @@ export class Color {
      * @param a The A value (8-bit). (default = 255)
      */
     constructor(r: number, g: number, b: number, a: number = 255) {
+        super("Color");
+
         this.r = r;
         this.g = g;
         this.b = b;

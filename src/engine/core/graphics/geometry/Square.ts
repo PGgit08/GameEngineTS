@@ -2,7 +2,7 @@ import { Geometry } from "./Geometry";
 
 export class Square extends Geometry {
     constructor(width: number, height: number) {
-        super(width, height);
+        super("Square", width, height);
     }
 
     public textureData(minTexX: number, minTexY: number, maxTexX: number, maxTexY: number): number[] {

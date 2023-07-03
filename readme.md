@@ -7,7 +7,9 @@ To run -> **npm run dev**
 
 
 # Todo
-- Organization - DOING NOW (ECS, EVENTS, HELPERS)
+- Organization - DOING NOW (SPECIFICALLY GRAPHICS)
+- Custom Shader Implementation - DOING NOW
+
 - Lighting
 - Physics (matter.js) / Collsion
 - Storage
@@ -15,14 +17,18 @@ To run -> **npm run dev**
 
 
 # Usage
-Projects should be structures accordingly: 
-- **main.ts** -> The main file that contains the Engine instance. The Engine Instance should be supplied with a EngineConfig which can use items from the folders below or sample items from the engine.
+Projects should be structures accordingly:
+
+- **main.ts** -> The main file that contains the Engine instance. The Engine Instance should be supplied with a EngineConfig which can use items from the folders below or sample items from the Engine.
 - **behaviors** -> A folder containing all the Behaviors that will be used.
 - **entities** -> A folder containing reusable Entities.
 - **scenes** -> A folder containing the game Scenes.
 
 
 # Description
+## GameObject
+The base class for 
+
 ## ECS
 The core of the engine is the Entity-Component System (ECS). Entities are objects that follow the engine Lifecycle and that have Components and Behaviors, which are classes that follow the engine Lifecycle and get called by their parent Entity. Entities also have child Entities, which get called by their parent Entity. These Entities are linked to their own Scenes that are also Lifecycle objects and they get called by the Engine class. Another important class that is used in this system is the GameObject class. A GameObject is simply a base class for any object with a unique ID and a name. The GameObject base class is used by ECS for hierarchical objects such as an Entity/Component/or Scene.
 

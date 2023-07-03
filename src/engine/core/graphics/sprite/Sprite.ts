@@ -32,7 +32,7 @@ export class Sprite extends Mesh {
     constructor(textureName?: string, frameName?: string, origin?: vec2, geometry: Geometry = new Square(100, 100), color?: Color) {
         const texture = TextureManager.getInstance().getTextureByName(textureName);
 
-        super(geometry, new StandardMaterial(texture, color));
+        super("Sprite", geometry, new StandardMaterial(texture, color));
 
         this._texture = texture;
 

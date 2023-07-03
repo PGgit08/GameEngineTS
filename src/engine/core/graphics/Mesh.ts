@@ -1,8 +1,9 @@
+import { GameObject } from "../ecs/GameObject";
 import { Geometry } from "./geometry/Geometry";
 import { Material } from "./material/Material";
 import { mat3 } from "gl-matrix";
 
-export class Mesh {
+export class Mesh extends GameObject {
     protected _geometry: Geometry;
     protected _material: Material;
 
@@ -32,7 +33,9 @@ export class Mesh {
         this._material = m;
     }
 
-    constructor(geometry: Geometry, material: Material, wireframe?: boolean) {
+    constructor(name: string, geometry: Geometry, material: Material, wireframe?: boolean) {
+        super(name);
+
         this._geometry = geometry;
         this._material = material;
 
