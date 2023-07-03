@@ -48,6 +48,8 @@ export class SceneManager extends NameRegistrar implements Lifecycle {
 
 
     public load(): void {
+        if (this._loaded) return;
+
         Object.values(this._gameScenes).forEach((s) => s.load());
 
         this._loaded = true;

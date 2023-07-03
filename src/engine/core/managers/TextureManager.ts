@@ -8,6 +8,8 @@ export class TextureManager extends NameRegistrar implements Lifecycle {
 
     private _gameTextures: Dictionary<string, Texture> = {};
 
+    private _loaded: boolean = false;
+
     public static getInstance(): TextureManager {
         if (!this._instance) {
             this._instance = new TextureManager();
@@ -21,6 +23,8 @@ export class TextureManager extends NameRegistrar implements Lifecycle {
     public addTexture(tex: Texture): void {
         this.registerName(tex.name);
         this._gameTextures[tex.name] = tex;
+
+        if (this._loaded) tex.load();
     }
 
     public getTextureByName(texName: string): Texture {
@@ -32,7 +36,11 @@ export class TextureManager extends NameRegistrar implements Lifecycle {
     }
 
     public load(): void {
+        if (this._loaded) return;
+    
         Object.values(this._gameTextures).forEach((t) => t.load());
+
+        this._loaded = true;
     }
 
     public update(): void {}
