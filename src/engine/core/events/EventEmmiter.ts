@@ -1,14 +1,14 @@
 import Dictionary from "../../extra/Dictionary";
-import { Manager } from "../managers/Manager";
+import { NameRegistrar } from "../helpers/NameRegistrar";
 import { Event } from "./Event";
 import { EventData } from "./EventData";
 import { IEventEmmiter } from "./IEventEmmiter";
 
-export class EventEmmiter extends Manager implements IEventEmmiter {
+export class EventEmmiter extends NameRegistrar implements IEventEmmiter {
     private _events: Dictionary<string, Event<any>> = {}
 
     constructor() {
-        super();
+        super("EventEmmiter");
     }
 
     public addEvent(event: Event<any>): void {

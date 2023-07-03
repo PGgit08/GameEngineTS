@@ -1,9 +1,9 @@
 import Dictionary from "../../extra/Dictionary";
 import { Texture } from "../graphics/Texture";
 import { Lifecycle } from "../Lifecycle";
-import { Manager } from "./Manager";
+import { NameRegistrar } from "../helpers/NameRegistrar";
 
-export class TextureManager extends Manager implements Lifecycle {
+export class TextureManager extends NameRegistrar implements Lifecycle {
     private static _instance: TextureManager;
 
     private _gameTextures: Dictionary<string, Texture> = {};
@@ -16,7 +16,7 @@ export class TextureManager extends Manager implements Lifecycle {
         return this._instance;
     }
 
-    constructor() { super(); }
+    constructor() { super("TextureManager"); }
 
     public addTexture(tex: Texture): void {
         this.registerName(tex.name);

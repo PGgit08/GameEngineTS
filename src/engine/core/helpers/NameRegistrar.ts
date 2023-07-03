@@ -1,10 +1,14 @@
+import { GameObject } from "../ecs/GameObject";
+
 /**
- * A Singleton class that can register GameObjects with unique names.
+ * A class that can register GameObjects with unique names.
  */
-export class Manager {
+export class NameRegistrar extends GameObject {
     private _registeredNames: string[] = [];
 
-    protected constructor() {}
+    constructor(name: string) {
+        super(name, true);
+    }
 
     protected registerName(name: string): void {
         if (this._registeredNames.includes(name)) {

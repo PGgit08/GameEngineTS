@@ -1,11 +1,11 @@
 import { Lifecycle } from "../Lifecycle";
 import Dictionary from "../../extra/Dictionary";
 import { Scene } from "../ecs/Scene";
-import { Manager } from "./Manager";
+import { NameRegistrar } from "../helpers/NameRegistrar";
 import { Event } from "../events/Event";
 import { Events } from "../events/Events";
 
-export class SceneManager extends Manager implements Lifecycle {
+export class SceneManager extends NameRegistrar implements Lifecycle {
     private static _instance: SceneManager;
 
     private _gameScenes: Dictionary<string, Scene> = {}; // name: Scene
@@ -27,7 +27,7 @@ export class SceneManager extends Manager implements Lifecycle {
         return this._instance;
     }
 
-    private constructor() { super(); }
+    private constructor() { super("SceneManager"); }
 
     public addScene(scene: Scene): void {
         super.registerName(scene.name);

@@ -5,7 +5,6 @@ export abstract class Behavior extends Component {
         super(name);
     }
     
-
     public abstract update(): void;
     public override render(): void {}
 }

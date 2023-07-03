@@ -1,9 +1,9 @@
 import Dictionary from "../../extra/Dictionary";
 import { Renderer } from "../graphics/Renderer";
 import { Lifecycle } from "../Lifecycle";
-import { Manager } from "./Manager";
+import { NameRegistrar } from "../helpers/NameRegistrar";
 
-export class RendererManager extends Manager implements Lifecycle {
+export class RendererManager extends NameRegistrar implements Lifecycle {
     private static _instance: RendererManager;
 
     private _gameRenderers: Dictionary<string, Renderer> = {}; // name: Renderer
@@ -23,7 +23,7 @@ export class RendererManager extends Manager implements Lifecycle {
         return this._instance;
     }
 
-    private constructor() { super(); }
+    private constructor() { super("RendererManager"); }
 
     public addRenderer(renderer: Renderer): void {
         super.registerName(renderer.name);

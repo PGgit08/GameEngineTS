@@ -1,9 +1,9 @@
 import Dictionary from "../../extra/Dictionary";
 import { Shader } from "../gl/shader/Shader";
 import { Lifecycle } from "../Lifecycle";
-import { Manager } from "./Manager";
+import { NameRegistrar } from "../helpers/NameRegistrar";
 
-export class ShaderManager extends Manager implements Lifecycle {
+export class ShaderManager extends NameRegistrar implements Lifecycle {
     private static _instance: ShaderManager;
     
     private _gameShaders: Dictionary<string, Shader> = {};
@@ -18,7 +18,7 @@ export class ShaderManager extends Manager implements Lifecycle {
         return this._instance;
     }
 
-    constructor() { super(); }
+    constructor() { super("ShaderManager"); }
 
     public addShader(shader: Shader) {
         this.registerName(shader.name);

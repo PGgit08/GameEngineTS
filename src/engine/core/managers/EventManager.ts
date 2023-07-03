@@ -2,9 +2,9 @@ import Dictionary from "../../extra/Dictionary";
 import { Event } from "../events/Event";
 import { EventData } from "../events/EventData";
 import { IEventEmmiter } from "../events/IEventEmmiter";
-import { Manager } from "./Manager";
+import { NameRegistrar } from "../helpers/NameRegistrar";
 
-export class EventManager extends Manager implements IEventEmmiter {
+export class EventManager extends NameRegistrar implements IEventEmmiter {
     private static _instance: EventManager;
 
     private _gameEvents: Dictionary<string, Event<any>> = {}
@@ -17,7 +17,7 @@ export class EventManager extends Manager implements IEventEmmiter {
         return this._instance;
     }
 
-    private constructor() { super(); }
+    private constructor() { super("EventManager"); }
 
     public addEvent(event: Event<any>) {
         this.registerName(event.name);
