@@ -12,11 +12,15 @@ import { TextureManager } from "./managers/TextureManager";
 import { GameObject } from "./ecs/GameObject";
 
 export class Engine extends GameObject implements Lifecycle {
-    private static _isInstance: boolean = false;
+    private static _instance: Engine = null;
 
     private _config: EngineConfig;
 
     private _loopId: number;
+
+    public static get instance(): Engine {
+        return this._instance;
+    }
 
     /**
      * Creates the single Engine instance.
@@ -25,10 +29,12 @@ export class Engine extends GameObject implements Lifecycle {
     constructor(config: EngineConfig) {
         super("Engine");
 
-        if (Engine._isInstance) {
+        if (Engine._instance) {
             throw new Error("Engine instance already exists!");
         }
         
+        Engine._instance = this;
+
         this._config = config;
 
         this.load();
@@ -36,8 +42,6 @@ export class Engine extends GameObject implements Lifecycle {
         this._loopId = requestAnimationFrame(this.cycle.bind(this));
 
         console.log(SceneManager.getInstance(), RendererManager.getInstance());
-
-        Engine._isInstance = true;
     }
 
     private cycle(now: number): void {
