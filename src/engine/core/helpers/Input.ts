@@ -4,6 +4,11 @@ import { SceneManager } from "../managers/SceneManager";
 import { Event } from "../events/Event";
 import { Events } from "../events/Events";
 
+/**
+ * @classdesc
+ * A static singleton class that can read keyboard and mouse inputs from the user. It also invokes any events related to keyboard input.
+ * @hideconstructor
+ */
 export class Input {
     private static _pressedKey: string = null;
     private static _newKey: boolean = null; // True if a the pressed key is new
@@ -15,6 +20,8 @@ export class Input {
     private static _KEY_DOWN_EVENT: Event<KeyboardEvent> = new Event(Events.KEY_DOWN);
     private static _MOUSE_MOVE_EVENT: Event<MouseEvent> = new Event(Events.MOUSE_MOVE);
  
+    private constructor() {}; // static class
+
     /**
      * Adds event listeners to the browser, should be called in the loading period.
      */
@@ -47,7 +54,11 @@ export class Input {
     }
 
     /**
-     * Returns true if the given key is/was pressed during the frame.
+     * Checks if a key was fully pressed.
+     * 
+     * @param {string} key - The javascript name of the key.
+     * 
+     * @returns {boolean} True if the desired key was fully pressed, False if not.
      */
     public static KeyPressed(key: string): boolean {
         if (this._pressedKey === key && this._newKey) {
@@ -57,7 +68,11 @@ export class Input {
     }
 
     /**
-     * Returns true if the given key is down during the frame.
+     * Checks if a key is held down during the current frame.
+     * 
+     * @param {string} key - The javascript name of the key.
+     * 
+     * @returns {boolean} True if the desired key is held down, False if not. 
      */
     public static KeyDown(key: string): boolean {
         if (this._pressedKey === key) {
@@ -66,7 +81,7 @@ export class Input {
     }
 
     /**
-     * Returns the position of the mouse.
+     * @returns {vec2} The position of the mouse based on the Camera position.
      */
     public static MousePos(): vec2 {
         return vec2.transformMat3(vec2.create(), this._mousePos, SceneManager.getInstance().currentScene.currentCamera.worldMat);

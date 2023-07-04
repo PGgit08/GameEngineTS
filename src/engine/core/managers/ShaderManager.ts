@@ -18,7 +18,7 @@ export class ShaderManager extends NameRegistrar implements Lifecycle {
         return this._instance;
     }
 
-    constructor() { super("ShaderManager"); }
+    private constructor() { super("ShaderManager"); }
 
     public addShader(shader: Shader) {
         this.registerName(shader.name);

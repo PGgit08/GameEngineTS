@@ -18,7 +18,7 @@ export class TextureManager extends NameRegistrar implements Lifecycle {
         return this._instance;
     }
 
-    constructor() { super("TextureManager"); }
+    private constructor() { super("TextureManager"); }
 
     public addTexture(tex: Texture): void {
         this.registerName(tex.name);
