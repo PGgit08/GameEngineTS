@@ -7,12 +7,12 @@ export class RendererManager extends NameRegistrar implements Lifecycle {
     private static _instance: RendererManager;
 
     private _gameRenderers: Dictionary<string, Renderer> = {}; // name: Renderer
-    private _currentRenderer: Renderer;
+    private _currentRenderer: string;
 
     private _loaded: boolean = false;
 
     get currentRenderer(): Renderer {
-        return this._currentRenderer;
+        return this.getRenderer(this._currentRenderer);
     }
 
     public static getInstance(): RendererManager {
@@ -33,30 +33,31 @@ export class RendererManager extends NameRegistrar implements Lifecycle {
     }
 
     public getRenderer(name: string): Renderer {
+        if (this._gameRenderers[name] === undefined) throw new Error(`Desired Renderer "${name}" not found.`)
+
         return this._gameRenderers[name];
     }
 
     public setCurrentRenderer(name: string): void {
-        const renderer: Renderer = this.getRenderer(name);
-        this._currentRenderer = renderer;
+        this._currentRenderer = name;
 
-        window.gl = renderer.gl;
+        window.gl = this.currentRenderer.gl;
     }
 
     public load(): void {
         if (this._loaded) return;
 
         Object.values(this._gameRenderers).forEach((r) => r.load());
-        window.gl = this._currentRenderer.gl;
+        window.gl = this.currentRenderer.gl;
 
         this._loaded = true;
     }
 
     public update(): void {
-        this._currentRenderer.update();
+        this.currentRenderer.update();
     }
 
     public render(): void {
-        this._currentRenderer.render();
+        this.currentRenderer.render();
     }
 }

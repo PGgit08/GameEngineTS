@@ -1,4 +1,5 @@
 import { Scene } from "../ecs/Scene";
+import { Shader } from "../gl/shader/Shader";
 import { Renderer } from "../graphics/Renderer";
 import { TextureInfo } from "./TextureInfo";
 
@@ -28,6 +29,9 @@ export interface EngineConfig {
 
     /** The optional Textures belonging to the Engine instance. @type { Array<TextureInfo> }*/
     textures?: TextureInfo[];
+
+    /** The optional array containing any custom Shaders that are going to be used. @type { Array<{ new(): Shader }> } */
+    shaders?: { new (): Shader }[];
 
     /** The optional Layer order belonging to the Engine instance. Layers near the front of the Array get renderered closer to 
      * the Camera.

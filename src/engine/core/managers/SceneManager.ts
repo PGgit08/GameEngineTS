@@ -37,6 +37,8 @@ export class SceneManager extends NameRegistrar implements Lifecycle {
     }
 
     public getScene(name: string): Scene {
+        if (this._gameScenes[name] === undefined) throw new Error(`Desired Scene "${name}" not found.`);
+
         return this._gameScenes[name];
     }
 

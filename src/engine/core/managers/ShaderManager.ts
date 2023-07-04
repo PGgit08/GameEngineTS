@@ -28,6 +28,8 @@ export class ShaderManager extends NameRegistrar implements Lifecycle {
     }
 
     public getShader(name: string): Shader {
+        if (this._gameShaders[name] === undefined) return this.getShader("StandardShader");
+
         return this._gameShaders[name];
     }
 

@@ -8,13 +8,14 @@ To run -> **npm run dev**
 
 # Todo
 - Organization - DOING NOW (SPECIFICALLY GRAPHICS)
-- Custom Shader Implementation - DOING NOW
 - README Updates - DOING NOW
 
-- Lighting
+- Lifecycle Updates
 - Physics (matter.js) / Collsion
+- Lighting
 - Storage
 - Audio
+- Async (MAYBE)
 
 
 # Usage

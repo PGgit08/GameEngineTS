@@ -28,11 +28,9 @@ export class TextureManager extends NameRegistrar implements Lifecycle {
     }
 
     public getTextureByName(texName: string): Texture {
-        if (this._gameTextures[texName] !== undefined) {
-            return this._gameTextures[texName];
-        } else {
-            return this.getTextureByName('WHITE');            
-        }
+        if (this._gameTextures[texName] === undefined) return this.getTextureByName('WHITE');
+    
+        return this._gameTextures[texName];
     }
 
     public load(): void {

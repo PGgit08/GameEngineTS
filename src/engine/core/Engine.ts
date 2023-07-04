@@ -54,24 +54,22 @@ export class Engine extends GameObject implements Lifecycle {
         
         if (this._config.layers !== undefined) Layers.setGameLayers(this._config.layers);
 
+        if (this._config.renderers.length === 0) throw new Error("No Renderers exist, please supply Engine with Renderers.");
         this._config.renderers.forEach((R) => new R());
-        
         RendererManager.getInstance().setCurrentRenderer(this._config.defaults.renderer);
         RendererManager.getInstance().load();
 
+        if (this._config.shaders !== undefined) this._config.shaders.forEach((S) => new S());
         new StandardShader();
-        
         ShaderManager.getInstance().load();
 
         if (this._config.textures !== undefined) this._config.textures.forEach((t) => new Texture(t.name, t.fileName, t.configJson));
         new Texture('WHITE');
-
         TextureManager.getInstance().load();
 
+        if (this._config.scenes.length === 0) throw new Error("No Scenes exist, please supply Engine with Scenes.");
         this._config.scenes.forEach((S) => new S());
         SceneManager.getInstance().setCurrentScene(this._config.defaults.scene);
-
-        // load everything in scenes after creating instances
         SceneManager.getInstance().load();
     }
     
