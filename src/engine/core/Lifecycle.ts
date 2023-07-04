@@ -1,9 +1,9 @@
 /**
- * Defines the GETS lifecycle methods.
+ * Defines the Engine's lifecycle methods.
  */
 export interface Lifecycle {
     /**
-     * Called after GameObject's initialization once it is added into the hierarchy. 
+     * Called after GameObject's initialization during loading period or once it is added into the hierarchy. 
      */
     load(): void;
 
@@ -13,7 +13,7 @@ export interface Lifecycle {
     update(): void;
 
     /**
-     * Called periodically, per frame update, and is used render components. (SHOULD NOT BE USED BY BEHAVIORS)
+     * Called periodically, per frame update, and is used render components. (IS NOT USED BY BEHAVIORS)
      */
     render(): void;
 }

@@ -1,5 +1,6 @@
 import Dictionary from "../../../extra/Dictionary";
 import { GameObject } from "../../ecs/GameObject";
+import { NameRegistrar } from "../../helpers/NameRegistrar";
 import { SpriteComponent } from "./SpriteComponent";
 
 export class Layers extends GameObject {
@@ -14,7 +15,8 @@ export class Layers extends GameObject {
     public static setGameLayers(gameLayers: string[]): void {
         // TODO: check for duplicates
         if (this._gameLayersSet) throw new Error("Cannot modify game layer order after they were set.");
-        if (!gameLayers.includes("Default")) throw new Error("Game layers must contain Default layer");
+        if (!gameLayers.includes("Default")) throw new Error("Game layers must contain Default layer.");
+        if (NameRegistrar.FindDuplicates(gameLayers)) throw new Error("Game layers have duplicate layer.");
 
         this._gameLayers = gameLayers;
         this._gameLayersSet = true;

@@ -10,6 +10,10 @@ export class NameRegistrar extends GameObject {
         super(name, true);
     }
 
+    public static FindDuplicates(arr: any[]): boolean {
+        return arr.filter((item, index) => arr.indexOf(item) !== index).length !== 0;
+    }
+
     protected registerName(name: string): void {
         if (this._registeredNames.includes(name)) {
             throw new Error("Duplicate '" + name + "' found!");

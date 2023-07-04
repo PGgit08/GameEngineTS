@@ -6,6 +6,19 @@ import Dictionary from "../../extra/Dictionary";
 import { Camera } from "../graphics/Camera";
 import { Layers } from "../graphics/sprite/Layers";
 
+/**
+ * @classdesc
+ * A heirarchy object that has child {@link Entity} classes. When this Scene is created it is automatically added to the {@link SceneManager}.
+ * This class implements the {@link Lifecycle} interface and its Lifecycle methods are called whenever the SceneManager's Lifecycle methods
+ * are called. However, its {@link load} method is not only called during the loading period, but also whenever this Scene is added into the
+ * SceneManager. 
+ * 
+ * @class Scene
+ * @extends GameObject
+ * @implements {Lifecycle}
+ * 
+ * @param {string} name - The name of this Scene.
+ */
 export class Scene extends GameObject implements Lifecycle {
     private _rootEntity: Entity;
 
@@ -14,6 +27,7 @@ export class Scene extends GameObject implements Lifecycle {
 
     public readonly layers: Layers = new Layers();
 
+    /** @returns {Camera} The current Camera that views this Scene. */
     get currentCamera(): Camera {
         return this.getCamera(this._currentCamera);
     }
@@ -31,11 +45,18 @@ export class Scene extends GameObject implements Lifecycle {
         SceneManager.getInstance().addScene(this);
     }
 
-    
+    /**
+     * Adds entities into this Scene.
+     * @param entities The entities to add.
+     */
     public addEntities(...entities: Entity[]): void {
         this._rootEntity.addChildren(...entities);
     }
 
+    /**
+     * Removes entities from this Scene.
+     * @param enitity The entities to remove.
+     */
     public removeEntity(enitity: Entity): void {
         this._rootEntity.removeChild(enitity);
     }
@@ -52,10 +73,25 @@ export class Scene extends GameObject implements Lifecycle {
         }
     }
 
+    /**
+     * Removes a Camera directly from this Scene.
+     * @param name The name of the Camera to remove.
+     */
     public removeCamera(name: string): void {
-        delete this._sceneCameras[name];
+        const cam = this._sceneCameras[name];
+
+        if (cam.isParentScene(this.name)) {
+            cam.parent.removeChild(cam);
+        } else {
+            delete this._sceneCameras[name];
+        }
     }
 
+    /**
+     * Get a Camera from this Scene.
+     * @param name The name of the Camera to get.
+     * @returns {Camera} The returned Camera (IF NOT FOUND, DEFAULT CAMERA IS RETURNED).
+     */
     public getCamera(name: string): Camera {
         if (this._sceneCameras[name] === undefined) {
             return this.getCamera("DefaultCamera");
@@ -64,10 +100,13 @@ export class Scene extends GameObject implements Lifecycle {
         return this._sceneCameras[name];
     }
 
+    /**
+     * Sets the current Camera of this Scene by name.
+     * @param name The name of the Camera to set as current.
+     */
     public setCurrentCamera(name: string): void {
         this._currentCamera = name;
     }
-
 
     public load(): void {
         this._rootEntity.load();

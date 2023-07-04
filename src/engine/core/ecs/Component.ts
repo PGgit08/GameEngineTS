@@ -7,19 +7,33 @@ import { Scene } from "./Scene";
 import { Event } from "../events/Event";
 import { Events } from "../events/Events";
 
+/**
+ * @classdesc
+ * A heirarchy object that can be added as a child to a {@link Entity}. It is abstract and meant to be overriden. This class implements the 
+ * {@link Lifecycle} interface and its Lifecycle methods are called whenever its parent Entity's Lifecycle methods are called. However,
+ * its {@link load} method is not only called during the loading period, but also when this Component is added into the heirarchy. 
+ * 
+ * @class Component
+ * @abstract
+ * @extends GameObject
+ * @implements {Lifecycle}
+ * 
+ * @param {string} name - The name of this Component.
+ */
 export abstract class Component extends GameObject implements Lifecycle {
     private _enabled: boolean = true;
 
     private _parent: Entity = null;
     private _parentScene: Scene = null;
 
+    /** The {@link EventEmmiter} belonging to this Component. */
     public readonly eventEmmiter: EventEmmiter = new EventEmmiter();
 
     // the events belonging to this component
     private _PARENT_SCENE_CHANGE_EVENT: Event<Scene[]> = new Event(Events.PARENT_SCENE_CHANGE, this.eventEmmiter);
     private _PARENT_CHANGE_EVENT: Event<Entity[]> = new Event(Events.PARENT_CHANGE, this.eventEmmiter);
 
-    /** The parent Entity of this Component. */
+    /** @returns {Entity} The parent Entity of this Component. */
     public get parent(): Entity {
         return this._parent;
     }
@@ -35,7 +49,7 @@ export abstract class Component extends GameObject implements Lifecycle {
         this._PARENT_CHANGE_EVENT.invoke([oldParent, parent]);
     }
 
-    /** The parent Scene of this Component. */
+    /** @returns {Scene} The parent Scene of this Component. */
     public get parentScene(): Scene {
         return this._parentScene;
     }
@@ -52,7 +66,7 @@ export abstract class Component extends GameObject implements Lifecycle {
     }
 
     /**
-     * The Transform of the parent Entity.
+     * @returns {Entity} The Transform of this Component's parent Entity.
      */
     public get transform(): Transform {
         return this._parent === null ? null : this._parent.transform;
@@ -62,6 +76,9 @@ export abstract class Component extends GameObject implements Lifecycle {
         this.enabled = enabled;
     }
 
+    /**
+     * @returns {boolean} Whether this Component is enabled, if it's not, it won't be updated or rendered. 
+     */
     public get enabled(): boolean {
         return this._enabled;
     }

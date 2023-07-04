@@ -11,6 +11,17 @@ import { ShaderManager } from "./managers/ShaderManager";
 import { TextureManager } from "./managers/TextureManager";
 import { GameObject } from "./ecs/GameObject";
 
+/**
+ * @classdesc 
+ * The main class of the game that calls the Lifecycle methods on all objects. Only a single instance of this class exists (Singleton).
+ * The Engine is automatically started after its initialization.
+ * 
+ * @class Engine
+ * @extends GameObject
+ * @implements {Lifecycle}
+ * 
+ * @param {EngineConfig} config - The config for the Engine instance.
+ */
 export class Engine extends GameObject implements Lifecycle {
     private static _instance: Engine = null;
 
@@ -18,14 +29,13 @@ export class Engine extends GameObject implements Lifecycle {
 
     private _loopId: number;
 
+    /**
+     * @returns {Engine} The Engine instance.
+     */
     public static get instance(): Engine {
         return this._instance;
     }
 
-    /**
-     * Creates the single Engine instance.
-     * @param config The EngineConfig for the Engine instance.
-     */
     constructor(config: EngineConfig) {
         super("Engine");
 

@@ -4,12 +4,13 @@ import { Renderer } from "../graphics/Renderer";
 import { TextureInfo } from "./TextureInfo";
 
 /**
- * The Configuration for EngineConfig defaults.
- * @property {string} renderer - The name of the default Renderer.
- * @property {string} scene - The name of the default Scene.
+ * The Configuration for {@link EngineConfig} defaults.
  */
 interface DefaultsConfig {
+    /** The name of the default Renderer. @type {string} */
     renderer: string;
+
+    /** The name of the default Scene. @type {string} */
     scene: string;
 }
 

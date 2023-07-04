@@ -1,14 +1,18 @@
 import { TexturePackerConfig } from "./TexturePackerConfig";
 
 /**
- * Basic info about a Texture for an EngineConfig.
- * @property {string} name - The name for this Texture.
- * @property {string} fileName - The file name (path) for this Texture.
- * @property {any} configJson - The JSON containing the Texture packing config of this Texture
- * (IF NOTHING SUPPLIED, DEFAULT FRAME TAKING UP WHOLE TEXTURE IS CREATED AND USED).
+ * Info about a Texture for an EngineConfig.
  */
 export interface TextureInfo {
+    /** The name for this Texture. @type {string} */
     name: string;
+
+    /** The file name for this Texture (IF NOTHING SUPPLIED, WHITE TEXTURE IS USED). @type {string} */
     fileName?: string;
+
+    /** The TexturePacker JSON containing the TexturePacker info of this Texture
+     * (IF NOTHING IS SUPPLIED, DEFAULT FRAME TAKING UP THE WHOLE TEXTURE IS USED).
+     * @type {string}
+    */
     configJson?: TexturePackerConfig;
 }

@@ -10,6 +10,20 @@ import { Event } from "../events/Event";
 import { Events } from "../events/Events";
 import { Behavior } from "./Behavior";
 
+/**
+ * @classdesc
+ * A hierarchy object that can have child {@link Component} classes and child {@link Entity} classes. This object can also be a child of
+ * another Entity or be a child of a {@link Scene}. This class implements the {@link Lifecycle} interface and its Lifecycle methods are 
+ * called whenever its parent Entity's Lifecycle methods are called, or whenever its parent Scene's Lifecycle methods are called. However,
+ * its {@link load} method is not only called during the loading period, but also when this Entity is added into the heirarchy.
+ * 
+ * @class Entity
+ * @extends GameObject
+ * @implements {Lifecycle}
+ * 
+ * @param {string} name - The name of this Entity.
+ * @param {boolean} [relativeChildren] - A boolean that if True makes all of this Entity's children relative to it in {@link Transform}.
+ */
 export class Entity extends GameObject implements Lifecycle {
     private _loaded = false;
 
@@ -22,6 +36,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     public readonly transform: Transform = new Transform(this);
 
+    /** The {@link EventEmmiter} belonging to this Entity. */
     public readonly eventEmmiter: EventEmmiter = new EventEmmiter();
 
     // the events belonging to this entity
@@ -30,21 +45,25 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * A boolean stating whether the children of this Entity are relative to this Entity in Transform.
-     * If this is false, all children will not be non-relative to this Entity in Transform.
-     * If this is true, children will be relative to this Entity in Transform, except if they are have their
-     * "relativeChild" property as false and choose to be independent to this Entity.
      */
     public relativeChildren: boolean;
+
+    /**
+     * A boolean stating whether this Entity is a relative child to its parent Entity's in Transform.
+     */
     public relativeChild: boolean = true;
 
+    /** @returns {Component[]} The Components belonging to this Entity. */
     get components(): Component[] {
         return this._components;
     }
 
+    /** @returns {Entity[]} The child Entities belonging to this Entity. */
     get children(): Entity[] {
         return this._children;
     }
 
+    /** @returns {Scene} The Scene this Entity belongs to. */
     get parentScene(): Scene {
         return this._parentScene;
     }
@@ -64,6 +83,7 @@ export class Entity extends GameObject implements Lifecycle {
         this._components.forEach((c) => c.parentScene = parentScene);
     }
 
+    /** @returns {Entity} The parent Entity of this Entity. */
     get parent(): Entity {
         return this._parent;
     }
@@ -80,7 +100,7 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     /**
-     * A Spawn function that Spawns an Entity TYPE, and loads it.
+     * A Spawn function that Spawns an Entity TYPE.
      * @param Spawned The Entity TYPE to Spawn.
      * @param position The optional position at which to Spawn the Entity.
      * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
@@ -172,7 +192,7 @@ export class Entity extends GameObject implements Lifecycle {
     /**
      * Returns a Component by it's type from the Entity.
      * @param ComponentType The component Type.
-     * @returns The desired Component.
+     * @returns {ComponentType} The desired Component.
      */
     public getComponent<T extends Component>(ComponentType: new (...args: any[]) => T): T {
         for (let c of this._components) {
@@ -184,6 +204,11 @@ export class Entity extends GameObject implements Lifecycle {
         return undefined;
     }
 
+    /**
+     * Checks the parent Scene of this Entity.
+     * @param sceneName The name of the Scene to check this Entity's parent Scene with.
+     * @returns {boolean} True is the parent Scene's name is sceneName.
+     */
     public isParentScene(sceneName: string): boolean {
         if (this._parentScene === null) {
             return false;
