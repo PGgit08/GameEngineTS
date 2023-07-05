@@ -1,6 +1,7 @@
 import { Component } from "./Component";
 
 /**
+ * @classdesc
  * This class is very similar to it's parent class {@link Component}, however its {@link render} Lifecycle method does not get called
  * by its parent Entity.
  * 
