@@ -2,7 +2,7 @@ import { Entity } from "./Entity";
 import { GameObject } from "./GameObject";
 import { Lifecycle } from "../Lifecycle";
 import { SceneManager } from "../managers/SceneManager";
-import Dictionary from "../../extra/Dictionary";
+import Dictionary from "../../types/Dictionary";
 import { Camera } from "../graphics/Camera";
 import { Layers } from "../graphics/sprite/Layers";
 

@@ -1,4 +1,4 @@
-import Dictionary from "../../extra/Dictionary";
+import Dictionary from "../../types/Dictionary";
 import { Shader } from "../gl/shader/Shader";
 import { Lifecycle } from "../Lifecycle";
 import { NameRegistrar } from "../helpers/NameRegistrar";

@@ -6,8 +6,8 @@ import { Component } from "./Component";
  * by its parent Entity.
  * 
  * @class Behavior
- * @abstract
  * @extends Component
+ * @abstract
  * 
  * @param {string} name - The name of this Behavior. 
  */

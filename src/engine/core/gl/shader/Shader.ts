@@ -1,4 +1,4 @@
-import Dictionary from "../../../extra/Dictionary";
+import Dictionary from "../../../types/Dictionary";
 import { GameObject } from "../../ecs/GameObject";
 import { ShaderManager } from "../../managers/ShaderManager";
 import { mat3, vec2, vec4 } from "gl-matrix";

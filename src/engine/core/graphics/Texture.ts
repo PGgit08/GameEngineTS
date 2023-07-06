@@ -1,4 +1,4 @@
-import Dictionary from "../../extra/Dictionary";
+import Dictionary from "../../types/Dictionary";
 import { TexturePackerConfig, TexturePackerFrame } from "../config/TexturePackerConfig";
 import { GameObject } from "../ecs/GameObject";
 import { TextureManager } from "../managers/TextureManager";

@@ -1,14 +1,27 @@
 import { v4 } from "uuid";
-import Dictionary from "../../extra/Dictionary";
+import Dictionary from "../../types/Dictionary";
 import { GameObject } from "../ecs/GameObject";
 import { EventManager } from "../managers/EventManager";
 import { EventData } from "./EventData";
 import { EventEmmiter } from "./EventEmmiter";
 
+/**
+ * @classdesc
+ * A GameObject that represents an event which can be subscribed to and unsubscribed from by subscriber callbacks. Whenever this Event
+ * gets invoked it invokes all of its subscribers. 
+ * 
+ * @class Event
+ * @extends GameObject
+ * @template {any} T
+ * 
+ * @param {string} name - The name of this Event.
+ * @param {EventEmmiter} [eventEmmiter] - The EventEmmiter this Event belongs to (DEFAULT IS {@link EventManager}).
+ */
 export class Event<T> extends GameObject {
     // id: subscriber
     private _subscribers: Dictionary<string, ((eventData: EventData<T>) => void)> = {};
 
+    /** The {@link EventEmmiter} this Event belongs to. */
     public readonly eventEmmiter: EventEmmiter;
 
     /**
@@ -29,10 +42,17 @@ export class Event<T> extends GameObject {
         }
     }
 
+    /**
+     * Invokes this Event that if enabled, will invoke all of the subscribers of this event and pass in a {@link EventData} object
+     * into each subscriber callback when it is invoked.
+     * 
+     * @param {T} data The data to pass into the subscribers of this Event when they are invoked.
+     */
     public invoke(data: T): void {
         if (!this.enabled) return;
 
         const eventData: EventData<T> = {
+            emmiterName: this.eventEmmiter.name,
             eventName: this.name,
             data: data
         }
@@ -42,6 +62,11 @@ export class Event<T> extends GameObject {
         });
     }
 
+    /**
+     * Subscribes a subscriber callback to this Event.
+     * @param { fart } callback 
+     * @returns The id of the subscription.
+     */
     public subscribe(callback: (eventData: EventData<T>) => void): string {
         const id = v4();
         this._subscribers[id] = callback;

@@ -22,7 +22,7 @@ import { Behavior } from "./Behavior";
  * @implements {Lifecycle}
  * 
  * @param {string} name - The name of this Entity.
- * @param {boolean} [relativeChildren] - A boolean that if True makes all of this Entity's children relative to it in {@link Transform}.
+ * @param {boolean} [relativeChildren] - A boolean that if True makes all of this Entity's children relative to it in {@link Transform} (DEFAULT IS True).
  */
 export class Entity extends GameObject implements Lifecycle {
     private _loaded = false;

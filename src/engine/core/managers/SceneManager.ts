@@ -1,5 +1,5 @@
 import { Lifecycle } from "../Lifecycle";
-import Dictionary from "../../extra/Dictionary";
+import Dictionary from "../../types/Dictionary";
 import { Scene } from "../ecs/Scene";
 import { NameRegistrar } from "../helpers/NameRegistrar";
 import { Event } from "../events/Event";

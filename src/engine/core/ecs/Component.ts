@@ -14,8 +14,8 @@ import { Events } from "../events/Events";
  * its {@link load} method is not only called during the loading period, but also when this Component is added into the heirarchy. 
  * 
  * @class Component
- * @abstract
  * @extends GameObject
+ * @abstract
  * @implements {Lifecycle}
  * 
  * @param {string} name - The name of this Component.

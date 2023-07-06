@@ -1,7 +1,7 @@
 import { vec2 } from "gl-matrix";
 import { Buffer } from "../../gl/Buffer";
 import { Shader } from "../../gl/shader/Shader";
-import Dictionary from "../../../extra/Dictionary";
+import Dictionary from "../../../types/Dictionary";
 import { AttributeInfo } from "../../gl/AttributeInfo";
 import { ShaderConfig } from "../../gl/shader/ShaderConfig";
 import { BufferConfig } from "../../gl/BufferConfig";

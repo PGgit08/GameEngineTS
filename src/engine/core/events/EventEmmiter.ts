@@ -1,4 +1,4 @@
-import Dictionary from "../../extra/Dictionary";
+import Dictionary from "../../types/Dictionary";
 import { NameRegistrar } from "../helpers/NameRegistrar";
 import { Event } from "./Event";
 import { EventData } from "./EventData";

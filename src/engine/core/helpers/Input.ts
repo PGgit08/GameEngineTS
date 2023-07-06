@@ -8,6 +8,10 @@ import { Events } from "../events/Events";
  * @classdesc
  * A static singleton class that can read keyboard and mouse inputs from the user. It also invokes any events related to keyboard input.
  * @hideconstructor
+ * 
+ * @fires Events#KEY_UP
+ * @fires Events#KEY_DOWN
+ * @fires Events#MOUSE_MOVE
  */
 export class Input {
     private static _pressedKey: string = null;

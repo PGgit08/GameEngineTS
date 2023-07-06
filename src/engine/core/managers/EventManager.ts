@@ -1,4 +1,4 @@
-import Dictionary from "../../extra/Dictionary";
+import Dictionary from "../../types/Dictionary";
 import { Event } from "../events/Event";
 import { EventData } from "../events/EventData";
 import { EventEmmiter } from "../events/EventEmmiter";

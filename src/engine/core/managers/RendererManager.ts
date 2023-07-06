@@ -1,4 +1,4 @@
-import Dictionary from "../../extra/Dictionary";
+import Dictionary from "../../types/Dictionary";
 import { Renderer } from "../graphics/Renderer";
 import { Lifecycle } from "../Lifecycle";
 import { NameRegistrar } from "../helpers/NameRegistrar";
