@@ -6,6 +6,18 @@ import { ShaderConfig } from "./ShaderConfig";
 import { Texture } from "../../graphics/Texture";
 import { Color } from "../../graphics/Color";
 
+/**
+ * @classdesc
+ * A GameObject representing a WebGL shader. It is meant to be overriden by any custom shaders. When loaded (which is called during the 
+ * {@link Lifecycle} load period or when this Shader is added into the hierarchy), this Shader gets uploaded and it is also checked for
+ * all mandatory variables that exist in the {@link ShaderConfig} config class.
+ * 
+ * @class Shader
+ * @extends GameObject
+ * @abstract
+ * 
+ * @param {string} name - The name of this Shader. It is name checked and it enforces that its name and class name match.
+ */
 export abstract class Shader extends GameObject {
     private _attributes: Dictionary<string, number> = {};
     private _uniforms: Dictionary<string, WebGLUniformLocation> = {};
@@ -15,27 +27,37 @@ export abstract class Shader extends GameObject {
     private _loaded: boolean = false;
 
     /**
-     * Returns the Vertex Shader source code in GLSL
+     * @abstract
+     * @returns {string} Returns the Vertex Shader source code in GLSL.
      */
     public abstract get vSource(): string;
 
     /**
-     * Returns the Fragment Shader source code in GLSL
+     * @abstract
+     * @returns {string} Returns the Fragment Shader source code in GLSL.
      */
     public abstract get fSource(): string;
 
+
     constructor(name: string) { super(name, true); ShaderManager.getInstance().addShader(this); }
 
+    /**
+     * Tells WebGL to use this Shader.
+     */
     public use(): void {
         gl.useProgram(this._program);
     }
 
+    /**
+     * Deletes this Shader from WebGL. 
+     */
     public destroy(): void {
+        // TODO: Somehow incorporate this with a future GameObject.destroy?
         gl.deleteProgram(this._program);
     }
 
     /**
-     * Load this Shader
+     * Loads this Shader (Creates shader program and checks for mandatory variables).
      */
     public load(): void {
         if (this._loaded) return;
@@ -54,10 +76,10 @@ export abstract class Shader extends GameObject {
     }
 
     /**
-     * Compile Shader given source code.
-     * @param source Shader source code string.
-     * @param type The Shader type (vertex/fragment).
-     * @returns The compiled WebGLShader.
+     * Compile a shader program given source code.
+     * @param {string} source - Shader source code string.
+     * @param {string} type - The Shader type (vertex/fragment).
+     * @returns {WebGLShader} The compiled WebGL shader.
      */
     public loadShader(source: string, type: number): WebGLShader {
         const shader: WebGLShader = gl.createShader(type);
@@ -73,6 +95,7 @@ export abstract class Shader extends GameObject {
         return shader;
     }
 
+    // create the whole webgl shader program
     private createProgram(vShader: WebGLShader, fShader: WebGLShader): void {
         const program = gl.createProgram();
 
@@ -86,6 +109,7 @@ export abstract class Shader extends GameObject {
         this._program = program;
     }
 
+    // detect and look for mandatory attributes
     private detectAttributes(): void {
         let attributeCount = gl.getProgramParameter(this._program, gl.ACTIVE_ATTRIBUTES);
         for (let i = 0; i < attributeCount; i++) {
@@ -103,6 +127,7 @@ export abstract class Shader extends GameObject {
         });
     }
 
+    // detect and look for mandatory uniforms
     private detectUniforms(): void {
         let uniformCount = gl.getProgramParameter(this._program, gl.ACTIVE_UNIFORMS);
         for (let i = 0; i < uniformCount; i++){
@@ -119,21 +144,35 @@ export abstract class Shader extends GameObject {
         });
     }
 
+    /**
+     * Gets the location of an attribute in this Shader.
+     * @param {string} attributeName - The name of the attribute to find.
+     * @returns {number} The location of the attribute.
+     */
     public getAttributeLocation(attributeName: string): number {
+        if (this._attributes[attributeName] === undefined) throw new Error(`Attribute ${attributeName} does not exist in this program.`);
+
         return this._attributes[attributeName];
     }
 
+    /**
+     * Gets the location of a uniform in this Shader.
+     * @param {string} uniformName - The name of the uniform to find.
+     * @returns {WebGLUniformLocation} The location of the uniform.
+     */
     public getUniformLocation(uniformName: string): WebGLUniformLocation {
+        if (this._attributes[uniformName] === undefined) throw new Error(`Uniform ${uniformName} does not exist in this program.`);
+
         return this._uniforms[uniformName];
     }
 
     /**
-     * Apply standard uniforms.
-     * @param model The Model Matrix (3x3).
-     * @param projection The Projection Matrix (3x3).
-     * @param view The View Matrix (3x3).
-     * @param texture The Texture.
-     * @param color The Color.
+     * Apply standard required uniforms to this Shader.
+     * @param {mat3} model - The Model Matrix (3x3).
+     * @param {mat3} projection - The Projection Matrix (3x3).
+     * @param {mat3} view - The View Matrix (3x3).
+     * @param {Texture} texture - The Texture.
+     * @param {Color} color - The Color.
      */
     public applyStandardUniforms(model: mat3, projection: mat3, view: mat3, texture: Texture, color: Color): void {
         this.setUniformMatrix(ShaderConfig.UNIFORM_NAMES.MODEL_MAT, model);
@@ -145,9 +184,9 @@ export abstract class Shader extends GameObject {
     }
 
     /**
-     * Set a matrix uniform.
-     * @param uniformName The uniform name.
-     * @param mat3 The matrix.
+     * Set a matrix uniform for this Shader.
+     * @param {string} uniformName - The uniform name.
+     * @param {mat3} mat3 - The matrix.
      */
     public setUniformMatrix(uniformName: string, mat3: mat3): void {
         const location = this.getUniformLocation(uniformName);
@@ -159,9 +198,9 @@ export abstract class Shader extends GameObject {
     }
 
     /**
-     * Set a uniform 2D vector.
-     * @param uniformName The uniform name.
-     * @param vec The vector.
+     * Set a 2D vector uniform for this Shader.
+     * @param {string} uniformName - The uniform name.
+     * @param {vec2} vec - The vector.
      */
     public setUniformVec2(uniformName: string, vec: vec2): void {
         const location = this.getUniformLocation(uniformName);
@@ -172,9 +211,9 @@ export abstract class Shader extends GameObject {
     }
 
     /**
-     * Set a uniform 4D vector.
-     * @param uniformName The uniform name.
-     * @param vec The vector.
+     * Set a 4D vector uniform for this Shader.
+     * @param {string} uniformName - The uniform name.
+     * @param {vec2} vec - The vector.
      */
     public setUniformVec4(uniformName: string, vec: vec4): void {
         const location = this.getUniformLocation(uniformName);
@@ -185,9 +224,9 @@ export abstract class Shader extends GameObject {
     }
 
     /**
-     * Sets a uniform integer.
-     * @param uniformName The uniform name.
-     * @param int The integer.
+     * Sets a integer uniform for this Shader.
+     * @param {string} uniformName - The uniform name.
+     * @param {number} int - The integer.
      */
     public setUniformInt(uniformName: string, int: number): void {
         const location = this.getUniformLocation(uniformName);
