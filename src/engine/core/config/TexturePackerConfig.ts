@@ -1,5 +1,7 @@
 /**
  * Represents the structure of a frame from the config JSON file from the TexturePacker software.
+ * 
+ * @interface TexturePackerConfig
  */
 export interface TexturePackerFrame {
     filename: string;
@@ -8,6 +10,8 @@ export interface TexturePackerFrame {
 
 /**
  * Represents the structure of a config JSON file from the TexturePacker software.
+ * 
+ * @interface TexturePackerConfig
  */
 export interface TexturePackerConfig {
     frames: TexturePackerFrame[];

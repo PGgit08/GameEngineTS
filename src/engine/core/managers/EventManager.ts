@@ -1,10 +1,9 @@
 import Dictionary from "../../extra/Dictionary";
 import { Event } from "../events/Event";
 import { EventData } from "../events/EventData";
-import { IEventEmmiter } from "../events/IEventEmmiter";
-import { NameRegistrar } from "../helpers/NameRegistrar";
+import { EventEmmiter } from "../events/EventEmmiter";
 
-export class EventManager extends NameRegistrar implements IEventEmmiter {
+export class EventManager extends EventEmmiter {
     private static _instance: EventManager;
 
     private _gameEvents: Dictionary<string, Event<any>> = {}

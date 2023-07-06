@@ -9,7 +9,7 @@ import { Events } from "../events/Events";
 
 /**
  * @classdesc
- * A heirarchy object that can be added as a child to a {@link Entity}. It is abstract and meant to be overriden. This class implements the 
+ * A hierarchy GameObject that can be added as a child to a {@link Entity}. It is abstract and meant to be overriden. This class implements the 
  * {@link Lifecycle} interface and its Lifecycle methods are called whenever its parent Entity's Lifecycle methods are called. However,
  * its {@link load} method is not only called during the loading period, but also when this Component is added into the heirarchy. 
  * 
@@ -27,7 +27,7 @@ export abstract class Component extends GameObject implements Lifecycle {
     private _parentScene: Scene = null;
 
     /** The {@link EventEmmiter} belonging to this Component. */
-    public readonly eventEmmiter: EventEmmiter = new EventEmmiter();
+    public readonly eventEmmiter: EventEmmiter = new EventEmmiter("COMPONENT_EVENT_EMMITER");
 
     // the events belonging to this component
     private _PARENT_SCENE_CHANGE_EVENT: Event<Scene[]> = new Event(Events.PARENT_SCENE_CHANGE, this.eventEmmiter);

@@ -2,8 +2,10 @@ import { TexturePackerConfig } from "./TexturePackerConfig";
 
 /**
  * Info about a Texture for an EngineConfig.
+ * 
+ * @interface TextureConfig
  */
-export interface TextureInfo {
+export interface TextureConfig {
     /** The name for this Texture. @type {string} */
     name: string;
 

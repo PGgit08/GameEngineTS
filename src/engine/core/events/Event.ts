@@ -3,15 +3,21 @@ import Dictionary from "../../extra/Dictionary";
 import { GameObject } from "../ecs/GameObject";
 import { EventManager } from "../managers/EventManager";
 import { EventData } from "./EventData";
-import { IEventEmmiter } from "./IEventEmmiter";
+import { EventEmmiter } from "./EventEmmiter";
 
 export class Event<T> extends GameObject {
     // id: subscriber
     private _subscribers: Dictionary<string, ((eventData: EventData<T>) => void)> = {};
 
-    public readonly eventEmmiter: IEventEmmiter;
+    public readonly eventEmmiter: EventEmmiter;
 
-    constructor(name: string, eventEmmiter?: IEventEmmiter) {
+    /**
+     * A field describing whether this Event is enabled. If it is set to False, the Event will will not invoke its subscribers
+     * when it is invoked.
+     */
+    public enabled: boolean = true;
+
+    constructor(name: string, eventEmmiter?: EventEmmiter) {
         super(name);
 
         if (eventEmmiter === undefined) {
@@ -24,6 +30,8 @@ export class Event<T> extends GameObject {
     }
 
     public invoke(data: T): void {
+        if (!this.enabled) return;
+
         const eventData: EventData<T> = {
             eventName: this.name,
             data: data

@@ -1,10 +1,12 @@
 import { Scene } from "../ecs/Scene";
 import { Shader } from "../gl/shader/Shader";
 import { Renderer } from "../graphics/Renderer";
-import { TextureInfo } from "./TextureInfo";
+import { TextureConfig } from "./TextureConfig";
 
 /**
  * The Configuration for {@link EngineConfig} defaults.
+ * 
+ * @interface DefaultsConfig
  */
 interface DefaultsConfig {
     /** The name of the default Renderer. @type {string} */
@@ -16,6 +18,8 @@ interface DefaultsConfig {
 
 /**
  * The Configuration for the Engine instance.
+ * 
+ * @interface EngineConfig
  */
 export interface EngineConfig {
     // Some anonymous classes here -> new (): Type -> Described a class that returns Type when constructed (constructor returns Type).
@@ -28,8 +32,8 @@ export interface EngineConfig {
     /** The Scenes belonging to the Engine instance. @type { Array<{ new(): Scene }> } */
     scenes: { new (): Scene }[];
 
-    /** The optional Textures belonging to the Engine instance. @type { Array<TextureInfo> }*/
-    textures?: TextureInfo[];
+    /** The optional Textures belonging to the Engine instance. @type { Array<TextureConfig> }*/
+    textures?: TextureConfig[];
 
     /** The optional array containing any custom Shaders that are going to be used. @type { Array<{ new(): Shader }> } */
     shaders?: { new (): Shader }[];

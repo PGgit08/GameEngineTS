@@ -12,7 +12,7 @@ import { Behavior } from "./Behavior";
 
 /**
  * @classdesc
- * A hierarchy object that can have child {@link Component} classes and child {@link Entity} classes. This object can also be a child of
+ * A hierarchy GameObject that can have child {@link Component} classes and child {@link Entity} classes. This object can also be a child of
  * another Entity or be a child of a {@link Scene}. This class implements the {@link Lifecycle} interface and its Lifecycle methods are 
  * called whenever its parent Entity's Lifecycle methods are called, or whenever its parent Scene's Lifecycle methods are called. However,
  * its {@link load} method is not only called during the loading period, but also when this Entity is added into the heirarchy.
@@ -37,7 +37,7 @@ export class Entity extends GameObject implements Lifecycle {
     public readonly transform: Transform = new Transform(this);
 
     /** The {@link EventEmmiter} belonging to this Entity. */
-    public readonly eventEmmiter: EventEmmiter = new EventEmmiter();
+    public readonly eventEmmiter: EventEmmiter = new EventEmmiter("ENTITY_EVENT_EMMITER");
 
     // the events belonging to this entity
     private _PARENT_SCENE_CHANGE_EVENT: Event<Scene[]> = new Event(Events.PARENT_SCENE_CHANGE, this.eventEmmiter);
