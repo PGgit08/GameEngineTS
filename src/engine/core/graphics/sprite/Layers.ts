@@ -12,7 +12,7 @@ export class Layers extends GameObject {
      * Sets the names of the game layers for the game (CAN ONLY BE CALLED ONCE). 
      * @param gameLayers 
      */
-    public static setGameLayers(gameLayers: string[]): void {
+    public static SetGameLayers(gameLayers: string[]): void {
         // TODO: check for duplicates
         if (this._gameLayersSet) throw new Error("Cannot modify game layer order after they were set.");
         if (!gameLayers.includes("Default")) throw new Error("Game layers must contain Default layer.");

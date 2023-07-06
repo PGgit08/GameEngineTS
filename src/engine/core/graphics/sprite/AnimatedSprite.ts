@@ -62,7 +62,7 @@ export class AnimatedSprite extends Sprite {
     }
 
     public override draw(model: mat3, projection: mat3, view: mat3): void {
-        this._timeSinceLastFrame += Time.deltaTime(); // Use deltaTime in case of rendering lag
+        this._timeSinceLastFrame += Time.DeltaTime(); // Use deltaTime in case of rendering lag
 
         if (!this.isPlaying) {
             super.draw(model, projection, view);

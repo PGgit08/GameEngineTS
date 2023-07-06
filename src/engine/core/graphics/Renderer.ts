@@ -86,7 +86,7 @@ export class Renderer extends GameObject implements Lifecycle {
      * A method that creates a 600x800 Canvas Element and add it to the DOM.
      * @returns The Canvas.
      */
-    public static createCanvas(id: string): HTMLCanvasElement {
+    public static CreateCanvas(id: string): HTMLCanvasElement {
         const canvas: HTMLCanvasElement = document.createElement("canvas") as HTMLCanvasElement;
 
         canvas.id = id;

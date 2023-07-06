@@ -30,6 +30,7 @@ export class Engine extends GameObject implements Lifecycle {
     private _loopId: number;
 
     /**
+     * @static
      * @returns {Engine} The Engine instance.
      */
     public static get instance(): Engine {
@@ -55,7 +56,7 @@ export class Engine extends GameObject implements Lifecycle {
     }
 
     private cycle(now: number): void {
-        Time.addLastFrameRender(now * .001);
+        Time.AddLastFrameRender(now * .001);
 
         this.update();
         this.render();
@@ -66,7 +67,7 @@ export class Engine extends GameObject implements Lifecycle {
     public load(): void {
         Input.addListeners();
         
-        if (this._config.layers !== undefined) Layers.setGameLayers(this._config.layers);
+        if (this._config.layers !== undefined) Layers.SetGameLayers(this._config.layers);
 
         if (this._config.renderers.length === 0) throw new Error("No Renderers exist, please supply Engine with Renderers.");
         this._config.renderers.forEach((R) => new R());

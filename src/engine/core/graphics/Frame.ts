@@ -42,7 +42,7 @@ export class Frame extends GameObject {
     /**
      * Creates a new Frame that completely fills up a 1x1 texture.
      */
-    public static defaultFrame(): Frame {
+    public static DefaultFrame(): Frame {
         const defaultFrame: Frame = new Frame("DEFAULT_FRAME", 0, 0, 1, 1);
         defaultFrame.calcTexCoords(1, 1);
 

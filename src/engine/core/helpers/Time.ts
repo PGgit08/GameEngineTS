@@ -8,7 +8,7 @@ export class Time {
      * Supply information for when the last frame render occured.
      * @param time The time when the current frame render occured.
      */
-    public static addLastFrameRender(time: number): void {
+    public static AddLastFrameRender(time: number): void {
         this._deltaTime = time - this._lastFrameRender;
         this._lastFrameRender = time;
     }
@@ -17,18 +17,18 @@ export class Time {
      * Supply the current time.
      * @param time The current time.
      */
-    public static addCurrentTime(time: number): void {
+    public static AddCurrentTime(time: number): void {
         this._currentTime = time;
     }
 
     /**
      * @returns The time since the last frame render.
      */
-    public static deltaTime(): number {
+    public static DeltaTime(): number {
         return this._deltaTime;
     }
 
-    public static currentTime(): number {
+    public static CurrentTime(): number {
         return this._currentTime;
     }
 }

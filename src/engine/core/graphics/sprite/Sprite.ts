@@ -10,7 +10,7 @@ import { Color } from "../Color";
 import { BufferConfig } from "../../gl/BufferConfig";
 
 export class Sprite extends Mesh {
-    private _frame: Frame = Frame.defaultFrame();
+    private _frame: Frame = Frame.DefaultFrame();
     private _texture: Texture;
 
     public get frame(): Frame {
