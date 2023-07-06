@@ -1,7 +1,7 @@
 import Dictionary from "../../types/Dictionary";
+import { SubscriberCallback } from "../../types/SubscriberCallback";
 import { NameRegistrar } from "../helpers/NameRegistrar";
 import { Event } from "./Event";
-import { EventData } from "./EventData";
 
 /**
  * @classdesc
@@ -32,11 +32,11 @@ export class EventEmmiter extends NameRegistrar {
 
     /**
      * Subscribes a subscriber callback to an Event in this EventEmmiter.
-     * @param eventName The name of the Event to subscribe to.
-     * @param subscriber The subscriber callback which is invoked whenever the Event is invoked.
+     * @param {string} eventName - The name of the Event to subscribe to.
+     * @param {SubscriberCallback} subscriber - The subscriber callback which is invoked whenever the Event is invoked.
      * @returns The id of this subscription.
      */
-    public subscribe<T>(eventName: string, subscriber: (eventData: EventData<T>) => void): string {
+    public subscribe<T>(eventName: string, subscriber: SubscriberCallback<T>): string {
         if (this._events[eventName] === undefined) throw new Error(`Can not find Event ${eventName} in this EventEmmiter.`);
 
         return this._events[eventName].subscribe(subscriber);
@@ -44,8 +44,8 @@ export class EventEmmiter extends NameRegistrar {
 
     /**
      * Unsubscribes a subscriber callback from an Event.
-     * @param eventName The name of the Event.
-     * @param subscriberId The id of the subscription.
+     * @param {string} eventName - The name of the Event.
+     * @param {string} subscriberId - The id of the subscription.
      */
     public unSubscribe(eventName: string, subscriberId: string): void {
         if (this._events[eventName] === undefined) throw new Error(`Can not find Event ${eventName} in this EventEmmiter.`);
