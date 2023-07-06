@@ -4,6 +4,7 @@ import { GameObject } from "../ecs/GameObject";
 import { EventManager } from "../managers/EventManager";
 import { EventData } from "./EventData";
 import { EventEmmiter } from "./EventEmmiter";
+import { SubscriberCallback } from "../../types/SubscriberCallback";
 
 /**
  * @classdesc
@@ -19,7 +20,7 @@ import { EventEmmiter } from "./EventEmmiter";
  */
 export class Event<T> extends GameObject {
     // id: subscriber
-    private _subscribers: Dictionary<string, ((eventData: EventData<T>) => void)> = {};
+    private _subscribers: Dictionary<string, SubscriberCallback<T>> = {};
 
     /** The {@link EventEmmiter} this Event belongs to. */
     public readonly eventEmmiter: EventEmmiter;
@@ -64,16 +65,20 @@ export class Event<T> extends GameObject {
 
     /**
      * Subscribes a subscriber callback to this Event.
-     * @param { fart } callback 
+     * @param {SubscriberCallback} callback - The subscriber callback that gets subscribed to this Event.
      * @returns The id of the subscription.
      */
-    public subscribe(callback: (eventData: EventData<T>) => void): string {
+    public subscribe(callback: SubscriberCallback<T>): string {
         const id = v4();
         this._subscribers[id] = callback;
 
         return id;
     }
 
+    /**
+     * Unscribes a subscriber from this Event.
+     * @param {string} id - The id of the subscription.
+     */
     public unSubscribe(id: string): void {
         delete this._subscribers[id];
     }

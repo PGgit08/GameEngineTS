@@ -101,6 +101,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * A Spawn function that Spawns an Entity TYPE.
+     * @static
      * @param Spawned The Entity TYPE to Spawn.
      * @param position The optional position at which to Spawn the Entity.
      * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
@@ -123,7 +124,8 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     /**
-     * Despawns a given Entity instance (TO BE CHANGED TO DESPAWN BY NAME LATER).
+     * Despawns a given Entity instance.
+     * @static
      * @param entity The given Entity to despawn.
      */
     public static Despawn(entity: Entity): void {

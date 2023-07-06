@@ -3,6 +3,17 @@ import { NameRegistrar } from "../helpers/NameRegistrar";
 import { Event } from "./Event";
 import { EventData } from "./EventData";
 
+/**
+ * @classdesc
+ * A NameRegistrar which holds {@link Event} classes. Events can be added to this Event Emmiter and 
+ * any subscriber callbacks can subscribe/unsubscribe to an Event that belongs to this
+ * EventEmmiter.
+ * 
+ * @class EventEmmiter
+ * @extends NameRegistrar
+ * 
+ * @param {string} name - The name of this EventEmmiter.
+ */
 export class EventEmmiter extends NameRegistrar {
     private _events: Dictionary<string, Event<any>> = {}
 
@@ -20,21 +31,25 @@ export class EventEmmiter extends NameRegistrar {
     }
 
     /**
-     * Subscribes to an Event in this EventEmmiter.
+     * Subscribes a subscriber callback to an Event in this EventEmmiter.
      * @param eventName The name of the Event to subscribe to.
-     * @param subscriber The callback which is invoked whenever the Event is invoked.
-     * @returns The id of this subscriber.
+     * @param subscriber The subscriber callback which is invoked whenever the Event is invoked.
+     * @returns The id of this subscription.
      */
     public subscribe<T>(eventName: string, subscriber: (eventData: EventData<T>) => void): string {
+        if (this._events[eventName] === undefined) throw new Error(`Can not find Event ${eventName} in this EventEmmiter.`);
+
         return this._events[eventName].subscribe(subscriber);
     }
 
     /**
-     * Unsubscribes a subscriber from an Event.
+     * Unsubscribes a subscriber callback from an Event.
      * @param eventName The name of the Event.
-     * @param subscriberId The id of the subscriber.
+     * @param subscriberId The id of the subscription.
      */
     public unSubscribe(eventName: string, subscriberId: string): void {
+        if (this._events[eventName] === undefined) throw new Error(`Can not find Event ${eventName} in this EventEmmiter.`);
+
         this._events[eventName].unSubscribe(subscriberId);
     }
 }
