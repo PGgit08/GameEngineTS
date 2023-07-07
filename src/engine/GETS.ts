@@ -25,9 +25,9 @@ export * from './core/graphics/Color';
 export * from './core/graphics/sprite/SpriteComponent';
 export * from './core/graphics/sprite/Sprite';
 export * from './core/graphics/sprite/AnimatedSprite';
-export * from './core/graphics/sprite/AnimatedSpriteConfig';
+export * from './core/config/AnimatedSpriteConfig';
 
-export * from './core/gl/shader/ShaderConfig';
+export * from './core/config/ShaderConfig';
 
 export * from './core/samples/MoveBehavior';
 export * from './core/samples/DefaultRenderer';

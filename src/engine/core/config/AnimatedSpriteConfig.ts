@@ -1,4 +1,4 @@
-import { AnimatedSprite } from "./AnimatedSprite";
+import { AnimatedSprite } from "../graphics/sprite/AnimatedSprite";
 
 /**
  * Describes the order in which to animate the Frames in an Animated Sprite.

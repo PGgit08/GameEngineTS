@@ -3,7 +3,7 @@ import { Sprite } from "./Sprite";
 import { Geometry } from "../geometry/Geometry";
 import { Square } from "../geometry/Square";
 import { Time } from "../../helpers/Time";
-import { AnimatedSpriteConfig, AnimationFrameOrder } from "./AnimatedSpriteConfig";
+import { AnimatedSpriteConfig, AnimationFrameOrder } from "../../config/AnimatedSpriteConfig";
 
 export class AnimatedSprite extends Sprite {
     private _startFrameIndex: number; // the index at which to start the animation

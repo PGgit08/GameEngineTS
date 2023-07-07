@@ -1,5 +1,5 @@
 import { Shader } from "./Shader";
-import { ShaderConfig } from "./ShaderConfig";
+import { ShaderConfig } from "../../config/ShaderConfig";
 
 export class StandardShader extends Shader {
     public get vSource(): string {

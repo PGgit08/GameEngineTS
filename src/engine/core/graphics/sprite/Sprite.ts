@@ -7,7 +7,7 @@ import { StandardMaterial } from "../material/StandardMaterial";
 import { Mesh } from "../Mesh";
 import { Texture } from "../Texture";
 import { Color } from "../Color";
-import { BufferConfig } from "../../gl/BufferConfig";
+import { BufferConfig } from "../../config/BufferConfig";
 
 export class Sprite extends Mesh {
     private _frame: Frame = Frame.DefaultFrame();

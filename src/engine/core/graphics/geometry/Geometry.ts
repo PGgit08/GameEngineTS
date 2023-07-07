@@ -3,8 +3,8 @@ import { Buffer } from "../../gl/Buffer";
 import { Shader } from "../../gl/shader/Shader";
 import Dictionary from "../../../types/Dictionary";
 import { AttributeInfo } from "../../gl/AttributeInfo";
-import { ShaderConfig } from "../../gl/shader/ShaderConfig";
-import { BufferConfig } from "../../gl/BufferConfig";
+import { ShaderConfig } from "../../config/ShaderConfig";
+import { BufferConfig } from "../../config/BufferConfig";
 import { GameObject } from "../../ecs/GameObject";
 
 export abstract class Geometry extends GameObject {

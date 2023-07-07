@@ -2,7 +2,7 @@ import Dictionary from "../../../types/Dictionary";
 import { GameObject } from "../../ecs/GameObject";
 import { ShaderManager } from "../../managers/ShaderManager";
 import { mat3, vec2, vec4 } from "gl-matrix";
-import { ShaderConfig } from "./ShaderConfig";
+import { ShaderConfig } from "../../config/ShaderConfig";
 import { Texture } from "../../graphics/Texture";
 import { Color } from "../../graphics/Color";
 
