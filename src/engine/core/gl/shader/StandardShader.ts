@@ -1,6 +1,10 @@
 import { Shader } from "./Shader";
 import { ShaderConfig } from "../../config/ShaderConfig";
 
+/**
+ * @classdesc
+ * A simple standard Shader that contains the minimum uniforms and attributes required by the {@link ShaderConfig} namespace.
+ */
 export class StandardShader extends Shader {
     public get vSource(): string {
         return `

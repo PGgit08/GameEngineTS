@@ -1,8 +1,14 @@
+import { Buffer } from "../gl/Buffer";
+import { Geometry } from "../graphics/geometry/Geometry";
+
 /**
- * Contains the names of Buffers in Geometries.
+ * A namespace containing the config for common buffers.
+ * 
+ * @namespace BufferConfig
  */
 export namespace BufferConfig {
-    export namespace NAMES {
+    /** The names of the {@link Buffer} objects that any {@link Geometry} must have. @namespace BUFFER_NAMES*/
+    export namespace BUFFER_NAMES {
         export const POSITION_BUFFER_NAME: string = "POSITION_BUFFER";
         export const TEXTURE_BUFFER_NAME: string = "TEXTURE_BUFFER";
     }

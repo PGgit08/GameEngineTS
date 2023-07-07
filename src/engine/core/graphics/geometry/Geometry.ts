@@ -53,7 +53,7 @@ export abstract class Geometry extends GameObject {
 
     private addDefaultAttributes(): void {
         // add all required attributes
-        Object.values(BufferConfig.NAMES).forEach((buffer, index) => {
+        Object.values(BufferConfig.BUFFER_NAMES).forEach((buffer, index) => {
             this.addAttribute({
                 name: Object.values(ShaderConfig.ATTRIB_NAMES)[index],
                 size: Object.values(ShaderConfig.ATTRIB_SIZES)[index],
@@ -87,8 +87,8 @@ export abstract class Geometry extends GameObject {
     }
 
     private addDefaultBuffers(): void {
-        this.addBuffer(new Buffer(BufferConfig.NAMES.POSITION_BUFFER_NAME, this.positionData()));
-        this.addBuffer(new Buffer(BufferConfig.NAMES.TEXTURE_BUFFER_NAME, this.textureData(0, 0, 1, 1)));
+        this.addBuffer(new Buffer(BufferConfig.BUFFER_NAMES.POSITION_BUFFER_NAME, this.positionData()));
+        this.addBuffer(new Buffer(BufferConfig.BUFFER_NAMES.TEXTURE_BUFFER_NAME, this.textureData(0, 0, 1, 1)));
     }
 
     /**
@@ -121,14 +121,14 @@ export abstract class Geometry extends GameObject {
      * Sets the Buffer's drawing mode to LINE_STRIP
      */
     public enableWireframe(): void {
-        this.getBuffer(BufferConfig.NAMES.POSITION_BUFFER_NAME).mode = gl.LINE_STRIP;
+        this.getBuffer(BufferConfig.BUFFER_NAMES.POSITION_BUFFER_NAME).mode = gl.LINE_STRIP;
     }
 
     /**
      * Sets the Buffer's drawing mode to default (TRIANGLES)
      */
     public disableWireframe(): void {
-        this.getBuffer(BufferConfig.NAMES.POSITION_BUFFER_NAME).mode = gl.TRIANGLES;
+        this.getBuffer(BufferConfig.BUFFER_NAMES.POSITION_BUFFER_NAME).mode = gl.TRIANGLES;
     }
 
 
@@ -165,7 +165,7 @@ export abstract class Geometry extends GameObject {
     public draw(): void {
         Object.values(this._buffers).forEach((buffer) => buffer.bind());
 
-        this.getBuffer(BufferConfig.NAMES.POSITION_BUFFER_NAME).draw()
+        this.getBuffer(BufferConfig.BUFFER_NAMES.POSITION_BUFFER_NAME).draw()
         
         Object.values(this._buffers).forEach((buffer) => buffer.unbind());
     }

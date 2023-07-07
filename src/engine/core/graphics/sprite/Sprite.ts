@@ -39,13 +39,13 @@ export class Sprite extends Mesh {
         if (origin !== undefined) {
             this._geometry.origin = origin;
             this._geometry.calcPosXY();
-            this._geometry.setBuffer(BufferConfig.NAMES.POSITION_BUFFER_NAME, geometry.positionData());
+            this._geometry.setBuffer(BufferConfig.BUFFER_NAMES.POSITION_BUFFER_NAME, geometry.positionData());
         }
 
         this._frame = this._texture.getFrame(frameName);
 
         // set texture buffer with Frame info
-        this._geometry.setBuffer(BufferConfig.NAMES.TEXTURE_BUFFER_NAME, this._geometry.textureData(
+        this._geometry.setBuffer(BufferConfig.BUFFER_NAMES.TEXTURE_BUFFER_NAME, this._geometry.textureData(
             this._frame.minTexX, this._frame.minTexY,
             this._frame.maxTexX, this._frame.maxTexY
         ));
@@ -58,12 +58,12 @@ export class Sprite extends Mesh {
     public setFrame(frame: Frame): void {
         this._frame = frame;
 
-        this._geometry.setBuffer(BufferConfig.NAMES.TEXTURE_BUFFER_NAME, this._geometry.textureData(
+        this._geometry.setBuffer(BufferConfig.BUFFER_NAMES.TEXTURE_BUFFER_NAME, this._geometry.textureData(
             this._frame.minTexX, this._frame.minTexY,
             this._frame.maxTexX, this._frame.maxTexY
         ));
 
-        this._geometry.uploadBuffer(BufferConfig.NAMES.TEXTURE_BUFFER_NAME);
+        this._geometry.uploadBuffer(BufferConfig.BUFFER_NAMES.TEXTURE_BUFFER_NAME);
     }
 
     /**
