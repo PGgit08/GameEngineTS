@@ -23,6 +23,7 @@ export class EventEmmiter extends NameRegistrar {
 
     /**
      * Adds an Event to this EventEmmiter.
+     * 
      * @param event The Event to add to this EventEmmiter.
      */
     public addEvent(event: Event<any>): void {
@@ -32,8 +33,10 @@ export class EventEmmiter extends NameRegistrar {
 
     /**
      * Subscribes a subscriber callback to an Event in this EventEmmiter.
+     * 
      * @param {string} eventName - The name of the Event to subscribe to.
      * @param {SubscriberCallback} subscriber - The subscriber callback which is invoked whenever the Event is invoked.
+     * 
      * @returns The id of this subscription.
      */
     public subscribe<T>(eventName: string, subscriber: SubscriberCallback<T>): string {
@@ -44,6 +47,7 @@ export class EventEmmiter extends NameRegistrar {
 
     /**
      * Unsubscribes a subscriber callback from an Event.
+     * 
      * @param {string} eventName - The name of the Event.
      * @param {string} subscriberId - The id of the subscription.
      */

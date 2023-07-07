@@ -28,12 +28,14 @@ export abstract class Shader extends GameObject {
 
     /**
      * @abstract
+     * 
      * @returns {string} Returns the Vertex Shader source code in GLSL.
      */
     public abstract get vSource(): string;
 
     /**
      * @abstract
+     * 
      * @returns {string} Returns the Fragment Shader source code in GLSL.
      */
     public abstract get fSource(): string;
@@ -77,8 +79,10 @@ export abstract class Shader extends GameObject {
 
     /**
      * Compile a shader program given source code.
+     * 
      * @param {string} source - Shader source code string.
      * @param {string} type - The Shader type (vertex/fragment).
+     * 
      * @returns {WebGLShader} The compiled WebGL shader.
      */
     public loadShader(source: string, type: number): WebGLShader {
@@ -146,7 +150,9 @@ export abstract class Shader extends GameObject {
 
     /**
      * Gets the location of an attribute in this Shader.
+     * 
      * @param {string} attributeName - The name of the attribute to find.
+     * 
      * @returns {number} The location of the attribute.
      */
     public getAttributeLocation(attributeName: string): number {
@@ -168,6 +174,7 @@ export abstract class Shader extends GameObject {
 
     /**
      * Apply standard required uniforms to this Shader.
+     * 
      * @param {mat3} model - The Model Matrix (3x3).
      * @param {mat3} projection - The Projection Matrix (3x3).
      * @param {mat3} view - The View Matrix (3x3).
@@ -185,6 +192,7 @@ export abstract class Shader extends GameObject {
 
     /**
      * Set a matrix uniform for this Shader.
+     * 
      * @param {string} uniformName - The uniform name.
      * @param {mat3} mat3 - The matrix.
      */
@@ -199,6 +207,7 @@ export abstract class Shader extends GameObject {
 
     /**
      * Set a 2D vector uniform for this Shader.
+     * 
      * @param {string} uniformName - The uniform name.
      * @param {vec2} vec - The vector.
      */
@@ -212,6 +221,7 @@ export abstract class Shader extends GameObject {
 
     /**
      * Set a 4D vector uniform for this Shader.
+     * 
      * @param {string} uniformName - The uniform name.
      * @param {vec2} vec - The vector.
      */
@@ -225,6 +235,7 @@ export abstract class Shader extends GameObject {
 
     /**
      * Sets a integer uniform for this Shader.
+     * 
      * @param {string} uniformName - The uniform name.
      * @param {number} int - The integer.
      */

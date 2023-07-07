@@ -65,7 +65,9 @@ export class Event<T> extends GameObject {
 
     /**
      * Subscribes a subscriber callback to this Event.
+     * 
      * @param {SubscriberCallback} callback - The subscriber callback that gets subscribed to this Event.
+     * 
      * @returns The id of the subscription.
      */
     public subscribe(callback: SubscriberCallback<T>): string {
@@ -76,7 +78,8 @@ export class Event<T> extends GameObject {
     }
 
     /**
-     * Unscribes a subscriber from this Event.
+     * Unsubscribes a subscriber from this Event.
+     * 
      * @param {string} id - The id of the subscription.
      */
     public unSubscribe(id: string): void {

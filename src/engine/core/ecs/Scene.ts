@@ -47,6 +47,7 @@ export class Scene extends GameObject implements Lifecycle {
 
     /**
      * Adds entities into this Scene.
+     * 
      * @param entities The entities to add.
      */
     public addEntities(...entities: Entity[]): void {
@@ -55,6 +56,7 @@ export class Scene extends GameObject implements Lifecycle {
 
     /**
      * Removes entities from this Scene.
+     * 
      * @param enitity The entities to remove.
      */
     public removeEntity(enitity: Entity): void {
@@ -63,6 +65,7 @@ export class Scene extends GameObject implements Lifecycle {
 
     /**
      * Adds a Camera directly to this Scene.
+     * 
      * @param camera The Camera to add.
      */
     public addCamera(camera: Camera): void {
@@ -75,6 +78,7 @@ export class Scene extends GameObject implements Lifecycle {
 
     /**
      * Removes a Camera directly from this Scene.
+     * 
      * @param name The name of the Camera to remove.
      */
     public removeCamera(name: string): void {
@@ -89,7 +93,9 @@ export class Scene extends GameObject implements Lifecycle {
 
     /**
      * Get a Camera from this Scene.
+     * 
      * @param name The name of the Camera to get.
+     * 
      * @returns {Camera} The returned Camera (IF NOT FOUND, DEFAULT CAMERA IS RETURNED).
      */
     public getCamera(name: string): Camera {
@@ -102,6 +108,7 @@ export class Scene extends GameObject implements Lifecycle {
 
     /**
      * Sets the current Camera of this Scene by name.
+     * 
      * @param name The name of the Camera to set as current.
      */
     public setCurrentCamera(name: string): void {

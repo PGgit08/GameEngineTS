@@ -102,9 +102,11 @@ export class Entity extends GameObject implements Lifecycle {
     /**
      * A Spawn function that Spawns an Entity TYPE.
      * @static
+     * 
      * @param Spawned The Entity TYPE to Spawn.
      * @param position The optional position at which to Spawn the Entity.
      * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
+     * 
      * @returns The Spawned Entity.
      */
     public static Spawn<T extends Entity>(Spawned: new (...args: any[]) => T, position?: vec2, parent?: Entity): T {
@@ -125,7 +127,9 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * Despawns a given Entity instance.
+     * 
      * @static
+     *
      * @param entity The given Entity to despawn.
      */
     public static Despawn(entity: Entity): void {
@@ -142,6 +146,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * Add children to this Entity
+     * 
      * @param children The children to add
      */
     public addChildren(...children: Entity[]): void {
@@ -161,6 +166,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * Removes a given Entity child from this Entity.
+     * 
      * @param entity The Entity to remove.
      */
     public removeChild(entity: Entity): void {
@@ -174,6 +180,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * Add Components to this Entity.
+     * 
      * @param components The Components to add.
      */
     public addComponents(...components: Component[]): void {
@@ -193,7 +200,9 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * Returns a Component by it's type from the Entity.
+     * 
      * @param ComponentType The component Type.
+     * 
      * @returns {ComponentType} The desired Component.
      */
     public getComponent<T extends Component>(ComponentType: new (...args: any[]) => T): T {
@@ -208,7 +217,9 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * Checks the parent Scene of this Entity.
+     * 
      * @param sceneName The name of the Scene to check this Entity's parent Scene with.
+     * 
      * @returns {boolean} True is the parent Scene's name is sceneName.
      */
     public isParentScene(sceneName: string): boolean {

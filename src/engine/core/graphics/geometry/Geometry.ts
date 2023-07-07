@@ -5,9 +5,9 @@ import Dictionary from "../../../types/Dictionary";
 import { AttributeInfo } from "../../gl/AttributeInfo";
 import { ShaderConfig } from "../../config/ShaderConfig";
 import { BufferConfig } from "../../config/BufferConfig";
-import { GameObject } from "../../ecs/GameObject";
+import { NameRegistrar } from "../../helpers/NameRegistrar";
 
-export abstract class Geometry extends GameObject {
+export abstract class Geometry extends NameRegistrar {
     private _buffers: Dictionary<string, Buffer> = {};
     private _attributes: AttributeInfo[] = [];
 
@@ -70,10 +70,11 @@ export abstract class Geometry extends GameObject {
     }
 
     /**
-     * Add an Attribute to this Geometry.
+     * Add an attribute to this Geometry.
      * @param attribute The info of the Attribute that's being added.
      */
     public addAttribute(attribute: AttributeInfo): void {
+        this.registerName(attribute.name);
         this._attributes.push(attribute);
     }
 
