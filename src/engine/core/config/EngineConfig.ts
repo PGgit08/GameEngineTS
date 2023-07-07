@@ -26,24 +26,24 @@ export interface EngineConfig {
     // Variable -> a: Type = (instance of Type);
     // Variable -> b: { new(): Type } = Type;
 
-    /** The Renderers belonging to the Engine instance. @type { Array<{ new(): Renderer }> } */
+    /** The Renderers belonging to the Engine instance. @type {Array<{ new(): Renderer}> } */
     renderers: { new (): Renderer }[];
 
-    /** The Scenes belonging to the Engine instance. @type { Array<{ new(): Scene }> } */
+    /** The Scenes belonging to the Engine instance. @type {Array<{ new(): Scene }>} */
     scenes: { new (): Scene }[];
 
-    /** The optional Textures belonging to the Engine instance. @type { Array<TextureConfig> }*/
+    /** The optional Textures belonging to the Engine instance. @type {Array<TextureConfig>}*/
     textures?: TextureConfig[];
 
-    /** The optional array containing any custom Shaders that are going to be used. @type { Array<{ new(): Shader }> } */
-    shaders?: { new (): Shader }[];
+    /** The optional array containing any custom Shaders that are going to be used. @type {Array<{ new(): Shader }>} */
+    shaders?: {new (): Shader}[];
 
     /** The optional Layer order belonging to the Engine instance. Layers near the front of the Array get renderered closer to 
      * the Camera.
-     * @type { Array<string> } 
+     * @type {Array<string>} 
      * */
     layers?: string[];
 
-    /** The defaults for the Engien instance @type { DefaultsConfig } */
+    /** The defaults for the Engine instance @type {DefaultsConfig} */
     defaults: DefaultsConfig;
 }
