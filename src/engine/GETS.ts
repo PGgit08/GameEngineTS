@@ -4,7 +4,7 @@ export * from './core/Engine';
 export * from './core/ecs/Entity';
 export * from './core/ecs/Component';
 export * from './core/ecs/Behavior';
-export * from '../engine/core/ecs/GameObject';
+export * from './core/ecs/GameObject';
 export * from './core/ecs/Scene';
 
 export * from './core/events/Event';
@@ -42,4 +42,8 @@ export * from './core/managers/EventManager';
 export * from './core/config/EngineConfig';
 export * from './core/helpers/Input';
 export * from './core/helpers/Time';
+
+export * from './types/Dictionary';
+export * from './types/ReadonlyDictionary';
+export * from './types/SubscriberCallback';
 

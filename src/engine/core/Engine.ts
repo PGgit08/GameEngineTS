@@ -31,6 +31,7 @@ export class Engine extends GameObject implements Lifecycle {
 
     /**
      * @static
+     * 
      * @returns {Engine} The Engine instance.
      */
     public static get instance(): Engine {

@@ -4,6 +4,8 @@ import { SceneManager } from "../managers/SceneManager";
 import { Event } from "../events/Event";
 import { Events } from "../events/Events";
 
+import { Lifecycle } from "../Lifecycle";
+
 /**
  * @classdesc
  * A static singleton class that can read keyboard and mouse inputs from the user. It also invokes any events related to keyboard input.
@@ -27,7 +29,9 @@ export class Input {
     private constructor() {}; // static class
 
     /**
-     * Adds event listeners to the browser, should be called in the loading period.
+     * Adds event listeners to the browser, should be called in the {@link Lifecycle} loading period.
+     * 
+     * @static
      */
     public static addListeners() {
         document.addEventListener("keyup", (e) => {
@@ -60,6 +64,8 @@ export class Input {
     /**
      * Checks if a key was fully pressed.
      * 
+     * @static
+     * 
      * @param {string} key - The javascript name of the key.
      * 
      * @returns {boolean} True if the desired key was fully pressed, False if not.
@@ -74,6 +80,8 @@ export class Input {
     /**
      * Checks if a key is held down during the current frame.
      * 
+     * @static
+     * 
      * @param {string} key - The javascript name of the key.
      * 
      * @returns {boolean} True if the desired key is held down, False if not. 
@@ -85,7 +93,11 @@ export class Input {
     }
 
     /**
-     * @returns {vec2} The position of the mouse based on the Camera position.
+     * The position of the mouse based on the Camera position.
+     * 
+     * @static
+     * 
+     * @returns {vec2} A 2D vector representing the position.
      */
     public static MousePos(): vec2 {
         return vec2.transformMat3(vec2.create(), this._mousePos, SceneManager.getInstance().currentScene.currentCamera.worldMat);

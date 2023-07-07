@@ -161,7 +161,7 @@ export abstract class Shader extends GameObject {
      * @returns {WebGLUniformLocation} The location of the uniform.
      */
     public getUniformLocation(uniformName: string): WebGLUniformLocation {
-        if (this._attributes[uniformName] === undefined) throw new Error(`Uniform ${uniformName} does not exist in this program.`);
+        if (this._uniforms[uniformName] === undefined) throw new Error(`Uniform ${uniformName} does not exist in this program.`);
 
         return this._uniforms[uniformName];
     }

@@ -7,7 +7,7 @@ export class NameRegistrar extends GameObject {
     private _registeredNames: string[] = [];
 
     constructor(name: string) {
-        super(name, true);
+        super(name);
     }
 
     public static FindDuplicates(arr: any[]): boolean {
