@@ -1,19 +1,19 @@
-import { GameObject } from "../ecs/GameObject";
 import { AttributeInfo } from "./AttributeInfo";
 import { Geometry } from "../graphics/geometry/Geometry";
+import { NameRegistrar } from "../helpers/NameRegistrar";
 
 /**
  * @classdesc
- * A GameObject representing a WebGL buffer. This Buffer object holds data in the form of a number array that can be modified 
+ * A NameRegistrar representing a WebGL buffer. This Buffer object holds data in the form of a number array that can be modified 
  * and uploaded and can be drawn using any WebGL drawing mode. It is meant to be used in the {@link Geometry} class.
  * 
  * @class Buffer
- * @extends GameObject
+ * @extends NameRegistrar
  * 
  * @param {string} name - The name of this Buffer.
  * @param {number[]} [data] - The data of this Buffer (DEFAULT IS [(empty)], can be modified and reuploaded whenever).
  */
-export class Buffer extends GameObject {
+export class Buffer extends NameRegistrar {
     private _data: number[] = [];
     private _buffer: WebGLBuffer;
 
@@ -99,7 +99,7 @@ export class Buffer extends GameObject {
     }
 
     /**
-     * Uploads this Buffer's data content to WebGL.
+     * Uploads this Buffer's data content to WebGL. Should be called whenever the data of this Buffer changes.
      */
     public upload(): void {
         this.bind(); // binds this buffer to webgl
@@ -113,12 +113,17 @@ export class Buffer extends GameObject {
      * @param {AttributeInfo} info - The info of the attribute.
      */
     public addAttribute(info: AttributeInfo): void {
+        this.registerName(info.name);
+
         this._attributes.push(info);
         this._elementSize += info.size;
 
         this._hasAttributes = true;
     }
 
+    // TODO: Add attribute removal here later
+
+    
     /**
      * Draws this Buffer.
      */

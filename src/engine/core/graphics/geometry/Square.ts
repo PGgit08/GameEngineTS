@@ -1,11 +1,21 @@
 import { Geometry } from "./Geometry";
 
+/**
+ * @classdesc
+ * A {@link Geometry} of a square.
+ * 
+ * @class Square
+ * @extends Geometry
+ * 
+ * @param {number} width - The width of this square.
+ * @param {number} height - The height of this square.
+ */
 export class Square extends Geometry {
     constructor(width: number, height: number) {
         super("Square", width, height);
     }
 
-    public textureData(minTexX: number, minTexY: number, maxTexX: number, maxTexY: number): number[] {
+    public override textureData(minTexX: number, minTexY: number, maxTexX: number, maxTexY: number): number[] {
         return [
             minTexX, minTexY,
             minTexX, maxTexY,
@@ -16,7 +26,7 @@ export class Square extends Geometry {
         ];
     }
 
-    public positionData(): number[] {
+    public override positionData(): number[] {
         return [
             this._minX, this._minY,
             this._minX, this._maxY, 
