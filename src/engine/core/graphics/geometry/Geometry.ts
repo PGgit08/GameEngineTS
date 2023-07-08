@@ -200,6 +200,8 @@ export abstract class Geometry extends NameRegistrar {
      * Loads this Geometry by loading its attributes and uploading its Buffers (CALLED ONCE).
      */
     public load(shader: Shader): void {
+        if (this._loaded) return;
+
         this.loadAttributes(shader);
         Object.values(this._buffers).forEach((buffer) => buffer.upload());
 
