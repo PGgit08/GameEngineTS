@@ -4,8 +4,24 @@ import { Scene } from "../ecs/Scene";
 import { RendererManager } from "../managers/RendererManager";
 import { degToRadians } from "../math/Utils";
 
+import { Renderer } from "./Renderer";
+import { Transform } from "../math/Transform";
+
+/**
+ * @classdesc
+ * An Entity that acts as a camera which "views" the current {@link Scene} it is enabled in. This Camera acts as a 2D rectangle through
+ * which other objects are viewed. This 2D rectangle is affected by this Camera's Transform (specifically position/rotation) and its size.
+ * By default the size of this Camera fits perfectly to the current {@link Renderer}, but it's {@link size} property can scale this Camera
+ * both in the X and Y direction. Since this Camera is a {@link Entity}, it can have children and be a child, which will affect its Transform,
+ * and the way the Scene is viewed.
+ * 
+ * @class Entity
+ * @extends Entity
+ * 
+ * @param {string} name - The name of this Camera.
+ */
 export class Camera extends Entity {
-    /** A size value that scales the camera view (DEFAULT VIEW IS RendererWidth, RendererHeight). */
+    /** A size value that scales this Camera's view. (DEFAULT VIEW IS RendererWidth, RendererHeight). */
     public size: number = 1;
 
     // This camera's world matrix (non-inverse).
@@ -19,7 +35,7 @@ export class Camera extends Entity {
         return this.size * RendererManager.getInstance().currentRenderer.height;
     }
 
-    /** The world matrix of this Camera pre-inversion. */
+    /** @returns {mat3} The world matrix of this Camera pre-inversion. */
     public get worldMat(): mat3 {
         return this._worldMat;
     }
@@ -42,8 +58,7 @@ export class Camera extends Entity {
     }
 
     /**
-     * Returns the View Matrix (3x3) based on this Camera's Transform and size.
-     * Use this instead of Transform.toWorldMat();
+     * @returns {mat3} The view matrix based on this Camera's {@link Transform} and size.
      */
     public view(): mat3 {
         return this._calcViewMat();
