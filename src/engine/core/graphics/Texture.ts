@@ -1,18 +1,34 @@
 import Dictionary from "../../types/Dictionary";
 import { TexturePackerConfig, TexturePackerFrame } from "../config/TexturePackerConfig";
-import { GameObject } from "../ecs/GameObject";
+import { NameRegistrar } from "../helpers/NameRegistrar";
 import { TextureManager } from "../managers/TextureManager";
 import { isPowerOf2 } from "../math/Utils";
 import { Frame } from "./Frame";
 
+import { Material } from "./material/Material";
+
 /**
- * Represents a WebGL Texture.
+ * @classdesc
+ * A NameRegistrar that represents a WebGL texture. Is used in any {@link Material} object. When created it is automatically added into the
+ * {@link TextureManager}. This Texture is made up of {@link Frame} objects with coordinates and dimensions that 
+ * represent different "frames" of the texture. Each Texture has a default frame taking up the whole texture, but additional frames can be
+ * added through a {@link TexturePackerConfig}.
+ * 
+ * @class Texture
+ * @extends NameRegistrar
+ * 
+ * @param {string} name - The name of this Texture.
+ * @param {string} [fileName] - The name of the file of this Texture (IF NOTHING SUPPLIED, DEFAULT WHITE TEXTURE IS USED).
+ * @param {TexturePackerConfig} [texturePackerConfig] - The {@link Frame} config for this Texture, if nothing is supplied, only default Frame
+ * taking up whole Texture is created.
  */
-export class Texture extends GameObject {
+export class Texture extends NameRegistrar {
     private _fileName: string;
     private _texture: WebGLTexture;
 
     private _frames: Dictionary<string, Frame> = {};
+
+    private _loaded: boolean = false;
 
     public get fileName(): string {
         return this._fileName;
@@ -22,13 +38,6 @@ export class Texture extends GameObject {
         return this._texture;
     }
 
-    /**
-     * Creates a new Texture.
-     * @param name The GameObject name of this Texture.
-     * @param fileName The file path of this Texture (IF NOTHING SUPPLIED, TEXTURE DEFAULTS TO BLACK PIXEL).
-     * @param texturePackerConfig The JSON containing the Texture packing config of this Texture
-     * (IF NOTHING SUPPLIED, DEFAULT FRAME TAKING UP WHOLE TEXTURE IS CREATED AND USED).
-     */
     constructor(name: string, fileName?: string, texturePackerConfig?: TexturePackerConfig) {
         super(name);
 
@@ -46,6 +55,7 @@ export class Texture extends GameObject {
 
                 newFrame.calcTexCoords(texturePackerConfig.meta.size.w, texturePackerConfig.meta.size.h);
                 
+                this.registerName(newFrame.name);
                 this._frames[newFrame.name] = newFrame;
             });
         }
@@ -54,49 +64,6 @@ export class Texture extends GameObject {
         this._frames['DEFAULT_FRAME'] = Frame.DefaultFrame();
 
         TextureManager.getInstance().addTexture(this);
-    }
-
-
-    /**
-     * Returns the default Frame of this Texture.
-     */
-    public getDefaultFrame(): Frame {
-        return this.getFrame('DEFAULT_FRAME');
-    }
-
-    /**
-     * Returns a Frame from this Texture.
-     * @param frameName The name of the the Frame.
-     */
-    public getFrame(frameName: string): Frame {
-        if (this._frames[frameName] !== undefined) {
-            return this._frames[frameName];
-        } else {
-            return this.getDefaultFrame();
-        }
-    }
-
-    /**
-     * Returns the names of the Frames this Texture contains (DEFAULT Frame not counted). 
-     */
-    public frameNames(): string[] {
-        return Object.keys(this._frames).filter((name) => name != "DEFAULT_FRAME");
-    }
-
-    /**
-     * Loads this Texture from the Image.
-     */
-    public load(): void {
-        this._texture = gl.createTexture();
-
-        this.bind();
-
-        if (this._fileName !== undefined) {
-            this.loadImage();
-        } else {
-            // set image to WHITE if nothing supplied
-            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([255, 255, 255, 255]));
-        }
     }
 
     // loads texture from image
@@ -133,8 +100,58 @@ export class Texture extends GameObject {
         }
     }
 
+
     /**
-     * Activate the texture to it's unit and bind it.
+     * @returns {Frame} Returns the default Frame of this Texture.
+     */
+    public getDefaultFrame(): Frame {
+        return this.getFrame('DEFAULT_FRAME');
+    }
+
+    /**
+     * Returns a Frame from this Texture.
+     * 
+     * @param {string} frameName - The name of the the Frame.
+     * 
+     * @returns {Frame} The Frame. If it does not exist, the default Frame is returned.
+     */
+    public getFrame(frameName: string): Frame {
+        if (this._frames[frameName] !== undefined) {
+            return this._frames[frameName];
+        } else {
+            return this.getDefaultFrame();
+        }
+    }
+
+    /**
+     * @returns {string[]} Returns the names of the Frames this Texture contains (DEFAULT Frame not counted).
+     */
+    public frameNames(): string[] {
+        return Object.keys(this._frames).filter((name) => name != "DEFAULT_FRAME");
+    }
+
+    /**
+     * Loads this Texture. Should be called ONCE.
+     */
+    public load(): void {
+        if (this._loaded) return;
+
+        this._texture = gl.createTexture();
+
+        this.bind();
+
+        if (this._fileName !== undefined) {
+            this.loadImage();
+        } else {
+            // set image to WHITE if nothing supplied
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([255, 255, 255, 255]));
+        }
+
+        this._loaded = true;
+    }
+
+    /**
+     * Activates this Texture to it's unit and binds it.
      */
     public activateAndBind() {
         gl.activeTexture(gl.TEXTURE0);
@@ -143,7 +160,7 @@ export class Texture extends GameObject {
     }
 
     /**
-     * Binds the texture.
+     * Binds this Texture.
      */
     public bind(): void {
         // this binds the texture to the unit (called in activateAndBind())
@@ -151,7 +168,7 @@ export class Texture extends GameObject {
     }
 
     /**
-     * Unbinds the texture.
+     * Unbinds this Texture.
      */
     public unbind(): void {
         gl.bindTexture(gl.TEXTURE_2D, undefined);
