@@ -36,33 +36,38 @@ export class Transform extends GameObject {
     }
 
     /**
-     * Translate the object.
-     * @param v The vec2 to translate the object by.
+     * Translate this Transform.
+     * 
+     * @param {vec2} v - The vector to translate this Transform by.
      */
     public translate(v: vec2): void {
         this.position = vec2.fromValues(this.position[0] + v[0], this.position[1] + v[1]);
     }
 
     /**
-     * Translate the object along its local X/Y axis.
-     * @param v The vec2 to translate the object by.
+     * Translate this Transform along its local X/Y axis.
+     * 
+     * @param {vec2} v - The vector to translate this Transform by.
      */
     public localTranslate(v: vec2): void {
         this.translate(this.localDirection(v));
     }
 
     /**
-     * Rotate the object.
-     * @param d The degrees to rotate the object by.
+     * Rotate this Transform.
+     * 
+     * @param {number} d - The degrees to rotate this Transform by.
      */
     public rotate(d: number): void {
         this.rotation += d;
     }
 
     /**
-     * Changes a vector from world-space to local-space.
-     * @param directionVector The world-space vector.
-     * @returns The world-space vector in the Entity's local-space.
+     * Changes the direction of a vector based on this Transform's rotation.
+     * 
+     * @param {vec2} directionVector - The vector.
+     * 
+     * @returns {vec2} The vector with a new direction.
      */
     public localDirection(directionVector: vec2): vec2 {
         const localDirection: vec2 = vec2.create();
@@ -76,13 +81,15 @@ export class Transform extends GameObject {
 
     /**
      * (DO NOT USE YET, BEING DEVELOPED). Rotates the transform around a point.
-     * @param point The point to rotate around.
+     * 
+     * @param {vec2} point - The point to rotate around.
      */
     public rotateAround(point: vec2): void {}
 
     /**
-     * Sets the rotation so it looks at a point.
-     * @param point The point to look at.
+     * Sets the rotation of this Transform so it looks at a point.
+     * 
+     * @param {vec2} point - The point to look at (VECTOR).
      */
     public lookAt(point: vec2): void {
         const transPoint: vec2 = vec2.create();
@@ -101,11 +108,12 @@ export class Transform extends GameObject {
         this.rotate(angle);
     }
 
-
     /**
-     * Takes in a given world-space vector and returns the same point in this Entity's local-space.
-     * @param point The world-space 2d vector point.
-     * @returns The same point but in this Entity's local-space.
+     * Takes in a given world-space vector and returns the same vector but in this Transforms's local-space.
+     * 
+     * @param {vec2} point - The world-space 2D vector point.
+     * 
+     * @returns {vec2} The same vector but in this Transforms's local-space.
      */
     public toLocalPoint(point: vec2): vec2 {
         return vec2.transformMat3(
@@ -116,9 +124,11 @@ export class Transform extends GameObject {
     }
 
     /**
-     * Takes in a given vector in this Entity's local-space and returns the same point in world-space.
-     * @param point The local-space 2d vector point.
-     * @returns The same point but in world-space.
+     * Takes in a given vector in this Transforms's local-space and returns the same point in world-space.
+     * 
+     * @param {vec2} point - The local-space 2D vector point.
+     * 
+     * @returns {vec2} The same vector but in world-space.
      */
     public toWorldPoint(point: vec2): vec2 {
         return vec2.transformMat3(
@@ -129,10 +139,10 @@ export class Transform extends GameObject {
     }
 
 
-    
     /**
-     * Converts this Transform into a 3x3 Matrix.
-     * @returns A mat3 3x3 Matrix.
+     * Converts this Transform into a 3x3 matrix.
+     * 
+     * @returns {mat3} A 3x3 matrix.
      */
     public toLocalMat(): mat3 {
         const transMat: mat3 = mat3.create();
@@ -168,10 +178,11 @@ export class Transform extends GameObject {
     }
 
     /**
-     * Converts this Transform into a 3x3 Matrix taking the Entity's parent in account.
-     * Will only take the Entity's parent in account if it has "relativeChildren" property marked as true
-     * and if this Entity has its "relativeChild" property marked as true.
-     * @returns A mat3 3x3 Matrix.
+     * Converts this Transform into a 3x3 matrix taking this Transform's owner's parent in account.
+     * Will only take the owner's parent in account if it has "relativeChildren" property marked as true
+     * and if the owner has its "relativeChild" property marked as true.
+     * 
+     * @returns {mat3} A 3x3 matrix.
      */
     public toWorldMat(): mat3 {
         if (this.owner.parent && this.owner.parent.relativeChildren && this.owner.relativeChild) {
