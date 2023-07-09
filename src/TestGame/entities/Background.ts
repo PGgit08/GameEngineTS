@@ -7,7 +7,7 @@ export class Background extends Entity {
     public set texName(texName: string) {
         this._texName = texName;
 
-        this.getComponent(SpriteComponent).sprite.material.texture = TextureManager.getInstance().getTextureByName(this._texName);
+        this.getComponent(SpriteComponent).sprite.material.texture = TextureManager.getInstance().getTexture(this._texName);
     }
 
     public get texName(): string {

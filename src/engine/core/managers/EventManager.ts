@@ -3,11 +3,24 @@ import { Event } from "../events/Event";
 import { EventData } from "../events/EventData";
 import { EventEmmiter } from "../events/EventEmmiter";
 
+/**
+ * @classdesc
+ * A {@link EventEmmiter} singleton class that holds {@link Event} classes. 
+ * If an Event is created without a given parent EventEmmiter, they are automatically added to this manager.
+ * 
+ * @class EventManager
+ * @extends EventEmmiter
+ * 
+ * @hideconstructor
+ */
 export class EventManager extends EventEmmiter {
     private static _instance: EventManager;
 
     private _gameEvents: Dictionary<string, Event<any>> = {}
 
+    /**
+     * @returns {EventManager} The single instance of the {@link EventManager}. 
+     */
     public static getInstance(): EventManager {
         if (!this._instance) {
             this._instance = new EventManager();
