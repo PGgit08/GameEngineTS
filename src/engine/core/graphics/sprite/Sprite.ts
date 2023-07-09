@@ -9,26 +9,36 @@ import { Texture } from "../Texture";
 import { Color } from "../Color";
 import { BufferConfig } from "../../config/BufferConfig";
 
+
+/**
+ * @classdesc
+ * This object is a {@link Mesh} that specifically focuses on rendering {@link Texture} objects. 
+ * It is similar to a Mesh and it has built in functions for easily setting the {@link Frame} of the Texture it is using and for setting
+ * the origin of the Sprite.
+ * 
+ * @class Sprite
+ * @extends Mesh
+ * 
+ * @param {string} [textureName] - The name of the Texture this Sprite uses (DEFAULT IS WHITE TEXTURE).
+ * @param {string} [frameName] - The name of the Frame of the Texture to use (DEFAULT IS FULL TEXTURE FRAME).
+ * @param {vec2} [origin] - The origin of this Sprite (DEFAULT IS (0.5, 0.5)).
+ * @param {Geometry} [geometry] - The Geometry of this Sprite (DEFAULT IS 100x100 {@link Square}).
+ * @param {Color} [color] - The Color of this Sprite (DEFAULT IS BLACK).
+ */
 export class Sprite extends Mesh {
     private _frame: Frame = Frame.DefaultFrame();
     private _texture: Texture;
 
+    /** The Frame that this Sprite is currently using. @type {Frame} */
     public get frame(): Frame {
         return this._frame;
     }
 
+    /** The Texture that this Sprite is currently using. @type {Texture} */
     public get texture(): Texture {
         return this._texture;
     }
 
-    /**
-     * Represents any 2D Mesh that renders a Texture.
-     * @param textureName The name of the Texture that this Sprite uses. (if nothing supplied, only tint is used)
-     * @param frameName The name of the Texture Frame to use (default is full Texture).
-     * @param origin An optional origin vector for this Sprite (default is (0.5, 0.5)).
-     * @param geometry An optional Geometry for this Sprite (default is 100x100 Square).
-     * @param color An optional Color for this Sprite (default is BLACK).
-     */
     constructor(textureName?: string, frameName?: string, origin?: vec2, geometry: Geometry = new Square(100, 100), color?: Color) {
         const texture = TextureManager.getInstance().getTextureByName(textureName);
 
@@ -51,11 +61,8 @@ export class Sprite extends Mesh {
         ));
     }
 
-    /**
-     * Sets the current Texture Frame.
-     * @param frame The Frame of this Sprite's Texture to render.
-     */
-    public setFrame(frame: Frame): void {
+    // sets the frame used by this Sprite's Texture
+    private setFrame(frame: Frame): void {
         this._frame = frame;
 
         this._geometry.setBuffer(BufferConfig.BUFFER_NAMES.TEXTURE_BUFFER_NAME, this._geometry.textureData(
@@ -67,8 +74,9 @@ export class Sprite extends Mesh {
     }
 
     /**
-     * Sets the current Texture Frame by its name for this Sprite.
-     * @param frameName The name of the Frame of this Sprite's Texture to render.
+     * Sets the current Frame of this Sprite's Texture by its name.
+     * 
+     * @param {string} frameName - The name of the Frame of this Sprite's Texture to render.
      */
     public setFrameByName(frameName: string): void {
         this._frame = this._texture.getFrame(frameName);

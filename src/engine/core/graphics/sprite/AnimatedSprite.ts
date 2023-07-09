@@ -5,6 +5,19 @@ import { Square } from "../geometry/Square";
 import { Time } from "../../helpers/Time";
 import { AnimatedSpriteConfig, AnimationFrameOrder } from "../../config/AnimatedSpriteConfig";
 
+import { Frame } from "../Frame";
+
+/**
+ * A {@link Sprite} that get animated through changing the {@link Frame} belonging to the Sprite periodically.
+ * 
+ * @class AnimatedSprite
+ * @extends Sprite
+ * 
+ * @param {AnimatedSpriteConfig} animatedSpriteConfig - The config for this Animated Sprite.
+ * @param {string} [textureName] - The Texture used by this Animated Sprite (DEFAULT IS WHITE TEXTURE).
+ * @param {vec2} [origin] - The origin vector used by this Animated Sprite (DEFAULT IS (0.5, 0.5)).
+ * @param {Geometry} [geometry] - The Geometry used by this Animated Sprite (DEFAULT IS {@link Square}).
+ */
 export class AnimatedSprite extends Sprite {
     private _startFrameIndex: number; // the index at which to start the animation
     private _currentFrameIndex: number; // the current frame which is being indexed for animation
@@ -14,21 +27,15 @@ export class AnimatedSprite extends Sprite {
 
     private _timeSinceLastFrame: number = 0;
 
-    private _animatedSpriteInfo: AnimatedSpriteConfig;
+    private _animatedSpriteConfig: AnimatedSpriteConfig;
 
+    /** A boolean controlling whether this Sprite's animation is being played or not. @type {boolean} */
     public isPlaying: boolean = true;
 
-    /**
-     * Creates an Animated Sprite.
-     * @param animatedSpriteInfo The info for this Animated Sprite.
-     * @param textureName The Texture used by this Animated Sprite.
-     * @param origin The origin vector for this Animated Sprite (default is (0.5, 0.5)).
-     * @param geometry The geometry used for this Animated Sprite (default is Square).
-     */
-    constructor(animatedSpriteInfo: AnimatedSpriteConfig, textureName?: string, origin?: vec2, geometry: Geometry = new Square(100, 100)) {
+    constructor(animatedSpriteConfig: AnimatedSpriteConfig, textureName?: string, origin?: vec2, geometry: Geometry = new Square(100, 100)) {
         super(textureName, undefined, origin, geometry);
 
-        switch (animatedSpriteInfo.animationFrameOrder) {
+        switch (animatedSpriteConfig.animationFrameOrder) {
             case AnimationFrameOrder.Sequential:
                 this._startFrameIndex = 0;
                 this._frameIndexCounter = 1;
@@ -44,19 +51,19 @@ export class AnimatedSprite extends Sprite {
                 break;
 
             case AnimationFrameOrder.Custom:
-                if (animatedSpriteInfo.customFrameOrder === undefined) {
+                if (animatedSpriteConfig.customFrameOrder === undefined) {
                     throw new Error("Custom Frame order not supplied for Animated Sprite.");
                 }
 
                 this._startFrameIndex = 0;
                 this._frameIndexCounter = 1;
-                this._resetAnimationIndex = animatedSpriteInfo.customFrameOrder.length;
-                this._animationFrames = animatedSpriteInfo.customFrameOrder;
+                this._resetAnimationIndex = animatedSpriteConfig.customFrameOrder.length;
+                this._animationFrames = animatedSpriteConfig.customFrameOrder;
                 break;
         }
 
         this._currentFrameIndex = this._startFrameIndex;
-        this._animatedSpriteInfo = animatedSpriteInfo;
+        this._animatedSpriteConfig = animatedSpriteConfig;
 
         this.setFrameByName(this._animationFrames[this._currentFrameIndex]); // set initial frame
     }
@@ -69,7 +76,7 @@ export class AnimatedSprite extends Sprite {
             return;
         }
 
-        if (this._timeSinceLastFrame > this._animatedSpriteInfo.timePerFrame) {
+        if (this._timeSinceLastFrame > this._animatedSpriteConfig.timePerFrame) {
             this._timeSinceLastFrame = 0;
 
             this.setFrameByName(this._animationFrames[this._currentFrameIndex]);

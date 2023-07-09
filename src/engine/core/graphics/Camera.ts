@@ -15,7 +15,7 @@ import { Transform } from "../math/Transform";
  * both in the X and Y direction. Since this Camera is a {@link Entity}, it can have children and be a child, which will affect its Transform,
  * and the way the Scene is viewed.
  * 
- * @class Entity
+ * @class Camera
  * @extends Entity
  * 
  * @param {string} name - The name of this Camera.
@@ -27,10 +27,12 @@ export class Camera extends Entity {
     // This camera's world matrix (non-inverse).
     private _worldMat: mat3 = mat3.create();
 
+    /** @returns {number} The width of this Camera in pixels. */
     public get width(): number {
         return this.size * RendererManager.getInstance().currentRenderer.width;
     }
 
+    /** @returns {number} The height of this Camera in pixels. */
     public get height(): number {
         return this.size * RendererManager.getInstance().currentRenderer.height;
     }

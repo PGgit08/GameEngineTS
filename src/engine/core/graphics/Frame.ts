@@ -26,28 +26,28 @@ export class Frame extends GameObject {
     private _maxTexY: number;
 
     /**
-     * The top left corner X coord of this Frame in its Texture (in WebGL coordinates).
+     * @returns {number} The top left corner X coord of this Frame in its Texture (in WebGL coordinates).
      */
     public get minTexX(): number {
         return this._minTexX;
     }
 
     /**
-     * The top left corner Y coord of this Frame in its Texture (in WebGL coordinates).
+     * @returns {number} The top left corner Y coord of this Frame in its Texture (in WebGL coordinates).
      */
     public get minTexY(): number {
         return this._minTexY;
     }
 
     /**
-     * The bottom right corner X coord of this Frame in its Texture (in WebGL coordinates).
+     * @returns {number} The bottom right corner X coord of this Frame in its Texture (in WebGL coordinates).
      */
     public get maxTexX(): number {
         return this._maxTexX;
     }
 
     /**
-     * The bottom right corner Y coord of this Frame in its Texture (in WebGL coordinates).
+     * @returns {number} The bottom right corner Y coord of this Frame in its Texture (in WebGL coordinates).
      */
     public get maxTexY(): number {
         return this._maxTexY;
@@ -55,6 +55,10 @@ export class Frame extends GameObject {
 
     /**
      * Creates a new Frame that completely fills up a 1x1 texture.
+     * 
+     * @static 
+     * 
+     * @returns {Frame} A default Frame.
      */
     public static DefaultFrame(): Frame {
         const defaultFrame: Frame = new Frame("DEFAULT_FRAME", 0, 0, 1, 1);

@@ -5,19 +5,29 @@ import { RendererManager } from "../../managers/RendererManager";
 import { SceneManager } from "../../managers/SceneManager";
 import { Sprite } from "./Sprite";
 
+import { Layers } from "./Layers";
+import { Camera } from "../Camera";
+
+/**
+ * @classdesc
+ * A {@link Component} that is used to render a {@link Sprite} for an {@link Entity}.
+ * 
+ * @class SpriteComponent
+ * @extends Component
+ * 
+ * @param {Sprite} sprite - The Sprite object this Component will render.
+ */
 export class SpriteComponent extends Component {
     private _sprite: Sprite;
     
     private _layer: string = "Default";
     private _layerOrder: number = 0;
 
+    /** @returns {Sprite} The Sprite this Component is rendering. */
     public get sprite(): Sprite {
         return this._sprite;
     }
 
-    /**
-     * Set the layer of this SpriteComponent.
-     */
     public set layer(layer: string) {
         if (this.parentScene !== null) {
             this.parentScene.layers.setLayer(this, layer);
@@ -26,6 +36,7 @@ export class SpriteComponent extends Component {
         this._layer = layer;
     }
     
+    /** @returns {string} The layer of this SpriteComponent in the {@link Layers} object. */
     public get layer(): string {
         if (this.parentScene !== null) {
             return this.parentScene.layers.getLayer(this) || this._layer;
@@ -34,10 +45,6 @@ export class SpriteComponent extends Component {
         }
     }
 
-    /**
-     * Set the layer order of this SpriteComponent.
-     * Order 0 -> Closest to Camera.
-     */
     public set layerOrder(layerOrder: number) {
         if (this.parentScene !== null) {
             this.parentScene.layers.setLayerOrder(this, layerOrder);
@@ -46,6 +53,9 @@ export class SpriteComponent extends Component {
         this._layerOrder = layerOrder;
     }
 
+    /**
+     * @returns {number} The layerOrder of this SpriteComponent in the {@link Layers} object (order 0 -> Closest to {@link Camera}).
+     */
     public get layerOrder(): number {
         if (this.parentScene !== null) {
             return this.parentScene.layers.getLayerOrder(this) || this._layerOrder;
@@ -57,11 +67,7 @@ export class SpriteComponent extends Component {
     constructor(sprite: Sprite) {
         super("SpriteComponent");
 
-        this.eventEmmiter.subscribe<Scene[]>(Events.PARENT_SCENE_CHANGE, (eventData) => {
-            const oldScene = eventData.data[0];
-
-            if (oldScene !== null) oldScene.layers.remove(this); // remove from old Layers
-            
+        this.eventEmmiter.subscribe<Scene[]>(Events.PARENT_SCENE_CHANGE, () => {    
             this.layer = this._layer; 
             this.layerOrder = this._layerOrder;
         });

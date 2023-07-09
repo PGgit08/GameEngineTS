@@ -30,6 +30,7 @@ export abstract class Geometry extends NameRegistrar {
     private _buffers: Dictionary<string, Buffer> = {};
     private _attributes: AttributeInfo[] = [];
 
+    /** The "rotation" origin for this Geometry (DEFAULT IS CENTER -> (0.5, 0.5)) @type {vec2} */
     public origin: vec2 = vec2.fromValues(0.5, 0.5);
 
     private _loaded: boolean = false;
@@ -42,10 +43,12 @@ export abstract class Geometry extends NameRegistrar {
     protected _maxX: number;
     protected _maxY: number;
 
+    /** @returns {number} The width of this Geometry. */
     public get width(): number {
         return this._width;
     }
 
+    /** @returns {number} The height of this Geometry. */
     public get height(): number {
         return this._height
     }

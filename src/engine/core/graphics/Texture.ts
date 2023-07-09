@@ -30,10 +30,12 @@ export class Texture extends NameRegistrar {
 
     private _loaded: boolean = false;
 
+    /** @returns {string} The name of the file that is used by this Texture. */
     public get fileName(): string {
         return this._fileName;
     }
 
+    /** @returns {WebGLTexture} The WebGL texture object that belongs to this Texture. */
     public get texture(): WebGLTexture {
         return this._texture;
     }
