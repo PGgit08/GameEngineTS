@@ -4,12 +4,27 @@ import { Entity } from "../ecs/Entity";
 import { SceneManager } from "../managers/SceneManager";
 import { GameObject } from "../ecs/GameObject";
 
+/**
+ * @classdesc
+ * A GameObject part of all {@link Entity} objects. It defines the Entity's transform in space through position, rotation, and scale.
+ * 
+ * @class Transform
+ * @extends GameObject
+ * 
+ * @param {Entity} owner - The owner Entity of this Transform.
+ */
 export class Transform extends GameObject {
+    /** The position vector of this Transform (DEFAULT IS (0, 0)). @type {vec2} */
     public position: vec2 = vec2.create();
+
+    /** The rotation in degrees of this Transform (DEFAULT IS 0). @type {number} */
     public rotation: number = 0;
+
+    /** The scale of this Transforms (DEFAULT IS (1, 1)). @type {vec2} */
     public scale: vec2 = vec2.fromValues(1, 1);
 
-    public owner: Entity;
+    /** The owner of this Transform. @type {Entity} @readonly */
+    public readonly owner: Entity;
 
     /** Prevents this Entity from changing in size when camera size changes. */
     public ignoreCamSize: boolean = false;
