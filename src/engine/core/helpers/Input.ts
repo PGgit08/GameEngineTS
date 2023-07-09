@@ -9,6 +9,7 @@ import { Lifecycle } from "../Lifecycle";
 /**
  * @classdesc
  * A static singleton class that can read keyboard and mouse inputs from the user. It also invokes any events related to keyboard input.
+ * 
  * @hideconstructor
  * 
  * @fires Events#KEY_UP
@@ -26,14 +27,14 @@ export class Input {
     private static _KEY_DOWN_EVENT: Event<KeyboardEvent> = new Event(Events.KEY_DOWN);
     private static _MOUSE_MOVE_EVENT: Event<MouseEvent> = new Event(Events.MOUSE_MOVE);
  
-    private constructor() {}; // static class
+    private constructor() {}; // static class, hidden constructor
 
     /**
      * Adds event listeners to the browser, should be called in the {@link Lifecycle} loading period.
      * 
      * @static
      */
-    public static addListeners() {
+    public static addListeners(): void {
         document.addEventListener("keyup", (e) => {
             this._KEY_UP_EVENT.invoke(e);
 

@@ -1,34 +1,35 @@
+/**
+ * @classdesc 
+ * A static singleton class that contains information about time such as the delta time since the last frame render.
+ * 
+ * @hideconstructor
+ */
 export class Time {
     private static _lastFrameRender: number = 0;
+
     private static _deltaTime: number;
 
-    private static _currentTime: number; 
+    private constructor() {} // static class, hidden constructor
 
     /**
-     * Supply information for when the last frame render occured.
-     * @param time The time when the current frame render occured.
+     * Supply the class with when the last frame render occured.
+     * 
+     * @static
+     * 
+     * @param {number} time - The time in seconds when the last frame render occured.
      */
     public static AddLastFrameRender(time: number): void {
         this._deltaTime = time - this._lastFrameRender;
+
         this._lastFrameRender = time;
     }
 
     /**
-     * Supply the current time.
-     * @param time The current time.
-     */
-    public static AddCurrentTime(time: number): void {
-        this._currentTime = time;
-    }
-
-    /**
-     * @returns The time since the last frame render.
+     * @static
+     * 
+     * @returns {number} The time since the last frame render in seconds.
      */
     public static DeltaTime(): number {
         return this._deltaTime;
-    }
-
-    public static CurrentTime(): number {
-        return this._currentTime;
     }
 }
