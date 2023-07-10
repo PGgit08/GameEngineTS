@@ -7,12 +7,12 @@ import { mat3 } from "gl-matrix";
  * @classdesc
  * A GameObject that acts like a "canvas" through which the game is rendered. When created it is automatically added to the 
  * {@link RendererManager}. It implements the {@link Lifecycle} interface and its Lifecycle methods are called when the RendererManager's
- * Lifecycle methods are called. However, its {@link load} method is not only called during the loading period, but also whenever this Renderer 
+ * Lifecycle methods are called. However, its {@link load} method is not only called during the LOAD period, but also whenever this Renderer 
  * is added into the RendererManager. The Renderer creates the {@link gl} context when loaded or seletected as current by the RendererManager.
  * 
  * @class Renderer
  * @extends GameObject
- * @implements Lifecycle
+ * @implements {Lifecycle}
  * 
  * @param {string} name - The name of this Renderer.
  * @param {string} canvasId - The DOM id of this Renderer's canvas.

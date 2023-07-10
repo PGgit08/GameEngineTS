@@ -9,7 +9,7 @@ import { Color } from "../../graphics/Color";
 /**
  * @classdesc
  * A GameObject representing a WebGL shader. It is meant to be overriden by any custom shaders. When loaded (which is called during the 
- * {@link Lifecycle} load period or when this Shader is added into the hierarchy), this Shader gets uploaded and it is also checked for
+ * {@link Lifecycle} LOAD period or when this Shader is added into the hierarchy), this Shader gets uploaded and it is also checked for
  * all mandatory variables that exist in the {@link ShaderConfig} config class.
  * 
  * @class Shader

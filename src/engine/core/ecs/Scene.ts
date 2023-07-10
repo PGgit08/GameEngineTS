@@ -10,7 +10,7 @@ import { Layers } from "../graphics/sprite/Layers";
  * @classdesc
  * A hierarchy GameObject that has child {@link Entity} classes. When this Scene is created it is automatically added to the {@link SceneManager}.
  * This class implements the {@link Lifecycle} interface and its Lifecycle methods are called whenever the SceneManager's Lifecycle methods
- * are called. However, its {@link load} method is not only called during the loading period, but also whenever this Scene is added into the
+ * are called. However, its {@link load} method is not only called during the LOAD period, but also whenever this Scene is added into the
  * SceneManager. 
  * 
  * @class Scene

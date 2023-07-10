@@ -15,7 +15,7 @@ import { Behavior } from "./Behavior";
  * A hierarchy GameObject that can have child {@link Component} classes and child {@link Entity} classes. This object can also be a child of
  * another Entity or be a child of a {@link Scene}. This class implements the {@link Lifecycle} interface and its Lifecycle methods are 
  * called whenever its parent Entity's Lifecycle methods are called, or whenever its parent Scene's Lifecycle methods are called. However,
- * its {@link load} method is not only called during the loading period, but also when this Entity is added into the heirarchy.
+ * its {@link load} method is not only called during the LOAD period, but also when this Entity is added into the heirarchy.
  * 
  * @class Entity
  * @extends GameObject

@@ -1,19 +1,27 @@
+import { Engine } from "./Engine";
+import { GameObject } from "../core/ecs/GameObject";
+
 /**
- * Defines the Engine's lifecycle methods.
+ * Defines the {@link Engine} lifecycle methods. {@link GameObject} classes that implement this interface have their Lifecycle methods
+ * called either when their parent/owner GameObject has their Lifecycle methods called, or when the Engine has its Lifecycle methods called.
+ * The {@link load} method however can be called either during the LOAD period or when the GameObject is being loaded.
+ * 
+ * @interface Lifecycle
  */
 export interface Lifecycle {
     /**
-     * Called after GameObject's initialization during loading period or once it is added into the hierarchy. 
+     * Called after GameObject's creating during the LOAD period, OR after the GameObject's initialization once
+     * it is added into the hierarchy. 
      */
     load(): void;
 
     /**
-     * Called periodically, per frame update, and is used to update components and behaviors.
+     * Called ONCE per loop frame UPDATE.
      */
     update(): void;
 
     /**
-     * Called periodically, per frame update, and is used render components. (IS NOT USED BY BEHAVIORS)
+     * Called ONCE per loop frame RENDER (IS NOT TO BE USED BY {@link Behavior} classes).
      */
     render(): void;
 }

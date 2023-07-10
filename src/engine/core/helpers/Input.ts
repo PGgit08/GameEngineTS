@@ -30,7 +30,7 @@ export class Input {
     private constructor() {}; // static class, hidden constructor
 
     /**
-     * Adds event listeners to the browser, should be called in the {@link Lifecycle} loading period.
+     * Adds event listeners to the browser, should be called in the {@link Lifecycle} LOAD period.
      * 
      * @static
      */

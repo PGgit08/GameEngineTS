@@ -11,7 +11,7 @@ import { Events } from "../events/Events";
  * @classdesc
  * A hierarchy GameObject that can be added as a child to a {@link Entity}. It is abstract and meant to be overriden. This class implements the 
  * {@link Lifecycle} interface and its Lifecycle methods are called whenever its parent Entity's Lifecycle methods are called. However,
- * its {@link load} method is not only called during the loading period, but also when this Component is added into the heirarchy. 
+ * its {@link load} method is not only called during the LOAD period, but also when this Component is added into the heirarchy. 
  * 
  * @class Component
  * @extends GameObject

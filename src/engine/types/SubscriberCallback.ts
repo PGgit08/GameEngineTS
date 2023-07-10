@@ -11,4 +11,6 @@ import { Event } from "../core/events/Event";
  * 
  * @returns {any} Anything the user desires.
  */
-export type SubscriberCallback<T> = (eventData: EventData<T>) => any;
+type SubscriberCallback<T> = (eventData: EventData<T>) => any;
+
+export default SubscriberCallback;

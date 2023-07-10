@@ -1,5 +1,5 @@
 import Dictionary from "../../types/Dictionary";
-import { SubscriberCallback } from "../../types/SubscriberCallback";
+import SubscriberCallback from "../../types/SubscriberCallback";
 import { NameRegistrar } from "../helpers/NameRegistrar";
 import { Event } from "./Event";
 

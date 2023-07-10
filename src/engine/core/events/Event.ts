@@ -4,7 +4,7 @@ import { GameObject } from "../ecs/GameObject";
 import { EventManager } from "../managers/EventManager";
 import { EventData } from "./EventData";
 import { EventEmmiter } from "./EventEmmiter";
-import { SubscriberCallback } from "../../types/SubscriberCallback";
+import SubscriberCallback from "../../types/SubscriberCallback";
 
 /**
  * @classdesc
