@@ -4,7 +4,11 @@ import { Sprite } from "../graphics/sprite/Sprite";
 import { MoveBehavior } from "./MoveBehavior";
 
 /**
- * An Entity with a Square Sprite instantiated at the center of the screen. This Entity has a MoveBehavior added.
+ * @classdesc
+ * A {@link Entity} with a Square Sprite. This Entity has a MoveBehavior added.
+ * 
+ * @class SampleEntity
+ * @extends Entity
  */
 export class SampleEntity extends Entity {
     constructor() { 

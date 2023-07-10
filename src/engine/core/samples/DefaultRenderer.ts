@@ -1,8 +1,12 @@
 import { Renderer } from "../graphics/Renderer";
 
+/**
+ * @classdesc
+ * A sample {@link Renderer} to be used by games. It uses the {@link Renderer.CreateCanvas} to create the canvas object.
+ * 
+ * @class SampleRenderer
+ * @extends Renderer
+ */
 export class SampleRenderer extends Renderer {
-    /**
-     * A Sample Renderer to be used by Games.
-     */
-    constructor() { super("SampleRenderer", Renderer.CreateCanvas("default_renderer").id); }
+    constructor() { super("SampleRenderer", Renderer.CreateCanvas("sampleRenderer").id); }
 }

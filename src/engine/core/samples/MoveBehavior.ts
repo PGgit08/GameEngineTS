@@ -1,8 +1,17 @@
 import { vec2 } from "gl-matrix";
 import { Input } from "../helpers/Input";
 import { Behavior } from "../ecs/Behavior";
-import { Time } from "../../GETS";
+import { Time } from "../helpers/Time";
 
+import { Entity } from "../ecs/Entity";
+
+/**
+ * A {@link Behavior} that allows for input control of a {@link Entity}. It moved the Entity on its local axis with WASD keys and
+ * spins it with the left and right arrow keys.
+ * 
+ * @class MoveBeheavior
+ * @extends Behavior
+ */
 export class MoveBehavior extends Behavior {
     public speed: number = 10; // pixels per second
 
