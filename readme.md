@@ -26,6 +26,7 @@ Projects should be structures accordingly:
 - **behaviors** -> A folder containing all the Behaviors that will be used.
 - **entities** -> A folder containing reusable Entities.
 - **scenes** -> A folder containing the game Scenes.
+- **shaders** -> A folder containing custom Shaders.
 
 
 # Docs (TODO)

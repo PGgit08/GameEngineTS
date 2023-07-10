@@ -34,7 +34,6 @@ export class MyScene extends Scene {
 		
         this.setCurrentCamera("Cam");
 
-        this.addEntities(person);
-        this.addEntities(background);
+        this.addEntities(person, background);
     }
 }

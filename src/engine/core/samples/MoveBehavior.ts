@@ -15,10 +15,6 @@ import { Entity } from "../ecs/Entity";
 export class MoveBehavior extends Behavior {
     public speed: number = 10; // pixels per second
 
-    /**
-     * Control the Entity with button presses.
-     * @param speed The speed of the movable Entity.
-     */
     constructor(speed?: number) {
         super("MoveBehavior");
 
