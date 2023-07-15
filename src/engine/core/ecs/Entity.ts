@@ -34,6 +34,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     private _parentScene: Scene = null;
 
+    /** This Entity's Transform @type {Transform} */
     public readonly transform: Transform = new Transform(this);
 
     /** The {@link EventEmmiter} belonging to this Entity. */
@@ -45,11 +46,13 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * A boolean stating whether the children of this Entity are relative to this Entity in Transform.
+     * @type {boolean}
      */
     public relativeChildren: boolean;
 
     /**
      * A boolean stating whether this Entity is a relative child to its parent Entity's in Transform.
+     * @type {boolean}
      */
     public relativeChild: boolean = true;
 

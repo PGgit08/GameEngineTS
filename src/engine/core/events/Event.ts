@@ -27,7 +27,7 @@ export class Event<T> extends GameObject {
 
     /**
      * A field describing whether this Event is enabled. If it is set to False, the Event will will not invoke its subscribers
-     * when it is invoked.
+     * when it is invoked. @type {boolean}
      */
     public enabled: boolean = true;
 
@@ -47,7 +47,7 @@ export class Event<T> extends GameObject {
      * Invokes this Event that if enabled, will invoke all of the subscribers of this event and pass in a {@link EventData} object
      * into each subscriber callback when it is invoked.
      * 
-     * @param {T} data The data to pass into the subscribers of this Event when they are invoked.
+     * @param {T} data - The data to pass into the subscribers of this Event when they are invoked.
      */
     public invoke(data: T): void {
         if (!this.enabled) return;

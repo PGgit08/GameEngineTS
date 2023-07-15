@@ -48,7 +48,7 @@ export class Scene extends GameObject implements Lifecycle {
     /**
      * Adds entities into this Scene.
      * 
-     * @param entities The entities to add.
+     * @param {Entity[]} entities - The entities to add.
      */
     public addEntities(...entities: Entity[]): void {
         this._rootEntity.addChildren(...entities);
@@ -57,7 +57,7 @@ export class Scene extends GameObject implements Lifecycle {
     /**
      * Removes entities from this Scene.
      * 
-     * @param enitity The entities to remove.
+     * @param {Entity} enitity - The entity to remove.
      */
     public removeEntity(enitity: Entity): void {
         this._rootEntity.removeChild(enitity);
@@ -66,7 +66,7 @@ export class Scene extends GameObject implements Lifecycle {
     /**
      * Adds a Camera directly to this Scene.
      * 
-     * @param camera The Camera to add.
+     * @param {Camera} camera - The Camera to add.
      */
     public addCamera(camera: Camera): void {
         if (!camera.isParentScene(this.name)) {
@@ -79,7 +79,7 @@ export class Scene extends GameObject implements Lifecycle {
     /**
      * Removes a Camera directly from this Scene.
      * 
-     * @param name The name of the Camera to remove.
+     * @param {string} name - The name of the Camera to remove.
      */
     public removeCamera(name: string): void {
         const cam = this._sceneCameras[name];
@@ -94,7 +94,7 @@ export class Scene extends GameObject implements Lifecycle {
     /**
      * Get a Camera from this Scene.
      * 
-     * @param name The name of the Camera to get.
+     * @param {string} name - The name of the Camera to get.
      * 
      * @returns {Camera} The returned Camera (IF NOT FOUND, DEFAULT CAMERA IS RETURNED).
      */
@@ -109,7 +109,7 @@ export class Scene extends GameObject implements Lifecycle {
     /**
      * Sets the current Camera of this Scene by name.
      * 
-     * @param name The name of the Camera to set as current.
+     * @param {string} name - The name of the Camera to set as current.
      */
     public setCurrentCamera(name: string): void {
         this._currentCamera = name;

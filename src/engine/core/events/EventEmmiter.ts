@@ -24,7 +24,7 @@ export class EventEmmiter extends NameRegistrar {
     /**
      * Adds an Event to this EventEmmiter.
      * 
-     * @param event The Event to add to this EventEmmiter.
+     * @param {Event} event - The Event to add to this EventEmmiter.
      */
     public addEvent(event: Event<any>): void {
         this.registerName(event.name);

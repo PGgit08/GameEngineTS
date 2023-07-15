@@ -124,7 +124,7 @@ export class Layers extends GameObject {
     /**
      * Returns the layer of the given SpriteComponent. If the SpriteComponent can't be found at all, then null is returned.
      * 
-     * @param {SpriteComponent} spriteComp The given SpriteComponent.
+     * @param {SpriteComponent} spriteComp - The given SpriteComponent.
      */
     public getLayer(spriteComp: SpriteComponent): string {
         const layer: string = Object.keys(this._layers).find(layer => this._layers[layer].indexOf(spriteComp) !== -1);

@@ -184,10 +184,10 @@ export abstract class Geometry extends NameRegistrar {
      * 
      * @abstract
      * 
-     * @param minTexX The top left corner X coord of the {@link Frame} in its {@link Texture} (in WebGL coordinates).
-     * @param minTexY The top left corner Y coord of this {@link Frame} in its {@link Texture} (in WebGL coordinates).
-     * @param maxTexX The bottom right corner X coord of this {@link Frame} in its {@link Texture} (in WebGL coordinates).
-     * @param maxTexY The bottom right corner Y coord of this {@link Frame} in its {@link Texture} (in WebGL coordinates).
+     * @param {number} minTexX - The top left corner X coord of the {@link Frame} in its {@link Texture} (in WebGL coordinates).
+     * @param {number} minTexY - The top left corner Y coord of this {@link Frame} in its {@link Texture} (in WebGL coordinates).
+     * @param {number} maxTexX - The bottom right corner X coord of this {@link Frame} in its {@link Texture} (in WebGL coordinates).
+     * @param {number} maxTexY - The bottom right corner Y coord of this {@link Frame} in its {@link Texture} (in WebGL coordinates).
      * 
      * @returns {number[]} The texture positions of this Geometry's texture Buffer.
      */
