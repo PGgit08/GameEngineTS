@@ -22,44 +22,71 @@ export class Input {
 
     private static _mousePos: vec2 = vec2.fromValues(0, 0);
 
+    private static _listening: boolean = false;
+
     // several events that can be accessed rather than accessing the DOM
     private static _KEY_UP_EVENT: Event<KeyboardEvent> = new Event(Events.KEY_UP);
     private static _KEY_DOWN_EVENT: Event<KeyboardEvent> = new Event(Events.KEY_DOWN);
     private static _MOUSE_MOVE_EVENT: Event<MouseEvent> = new Event(Events.MOUSE_MOVE);
  
+
     private constructor() {}; // static class, hidden constructor
+
+
+    // ALL THE EVENT HANDLER FUNCTIONS //
+    private static _ON_KEY_UP(e: KeyboardEvent): void {
+        this._KEY_UP_EVENT.invoke(e);
+
+        this._pressedKey = null;
+    }
+
+    private static _ON_KEY_DOWN(e: KeyboardEvent): void {
+        this._KEY_DOWN_EVENT.invoke(e);
+
+        if (this._pressedKey !== e.code) { this._pressedKey = e.code; this._newKey = true; }
+    }
+
+    private static _ON_MOUSE_MOVE(e: MouseEvent): void {
+        this._MOUSE_MOVE_EVENT.invoke(e);
+
+        if (RendererManager.getInstance().currentRenderer.mouseOver) {
+            const rendererBox: DOMRect = RendererManager.getInstance().currentRenderer.box;
+
+            vec2.set(
+                this._mousePos,
+                e.clientX - rendererBox.left,
+                e.clientY - rendererBox.top
+            );
+        }
+    }
+
 
     /**
      * Adds event listeners to the browser, should be called in the {@link Lifecycle} LOAD period.
      * 
      * @static
      */
-    public static addListeners(): void {
-        document.addEventListener("keyup", (e) => {
-            this._KEY_UP_EVENT.invoke(e);
+    public static AddListeners(): void {
+        document.addEventListener("keyup", this._ON_KEY_UP.bind(Input));
+        document.addEventListener("keydown", this._ON_KEY_DOWN.bind(Input));
+        document.addEventListener("mousemove", this._ON_MOUSE_MOVE.bind(Input));
 
-            this._pressedKey = null;
-        });
-        
-        document.addEventListener("keydown", (e) => {
-            this._KEY_DOWN_EVENT.invoke(e);
+        this._listening = true;
+    }
 
-            if (this._pressedKey !== e.code) { this._pressedKey = e.code; this._newKey = true; }
-        });
+    /**
+     * Removes listeners from the browser, should be called in the {@link Lifecycle} UNLOAD period.
+     * 
+     * @static
+     */
+    public static RemoveListeners(): void {
+        if (!this._listening) return;
 
-        document.addEventListener("mousemove", (e) => {
-            this._MOUSE_MOVE_EVENT.invoke(e);
+        document.removeEventListener("keyup", this._ON_KEY_UP.bind(Input));
+        document.removeEventListener("keydown", this._ON_KEY_DOWN.bind(Input));
+        document.removeEventListener("mousemove", this._ON_MOUSE_MOVE.bind(Input));
 
-            if (RendererManager.getInstance().currentRenderer.mouseOver) {
-                const rendererBox: DOMRect = RendererManager.getInstance().currentRenderer.box;
-
-                vec2.set(
-                    this._mousePos,
-                    e.clientX - rendererBox.left,
-                    e.clientY - rendererBox.top
-                );
-            }
-        });
+        this._listening = false;
     }
 
     /**

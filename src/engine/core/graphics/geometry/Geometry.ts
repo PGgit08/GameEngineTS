@@ -212,6 +212,17 @@ export abstract class Geometry extends NameRegistrar {
     }
 
     /**
+     * Unloads this Geometry by destroying its Buffers.
+     */
+    public unload(): void {
+        if (!this._loaded) return;
+
+        Object.values(this._buffers).forEach((buffer) => buffer.destroy());
+
+        this._loaded = false;
+    }
+
+    /**
      * Draws the Geometry.
      */
     public draw(): void {

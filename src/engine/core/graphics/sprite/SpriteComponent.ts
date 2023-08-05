@@ -67,9 +67,11 @@ export class SpriteComponent extends Component {
     constructor(sprite: Sprite) {
         super("SpriteComponent");
 
-        this.eventEmmiter.subscribe<Scene[]>(Events.PARENT_SCENE_CHANGE, () => {    
+        this.eventEmmiter.subscribe<Scene[]>(Events.PARENT_SCENE_CHANGE, (eventData) => {    
             this.layer = this._layer; 
             this.layerOrder = this._layerOrder;
+
+            if (eventData.data[0] !== null) eventData.data[0].layers.remove(this);
         });
 
         this._sprite = sprite;
@@ -94,5 +96,9 @@ export class SpriteComponent extends Component {
 
     public override render(): void {
         this.parentScene.layers.next().draw();
+    }
+
+    public unload(): void {
+        this._sprite.unload();
     }
 }

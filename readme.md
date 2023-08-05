@@ -7,12 +7,16 @@ To run -> **npm run dev**
 
 
 # Todo
-- Lifecycle Updates (unloading)
+MUST DO:
+- Lifecycle Updates (unloading) - DOING NOW
+- Set up testing
+
+MIGHT DO:
 - Physics (matter.js) / Collsion
 - Lighting
 - Audio
 - Storage
-- Async (MAYBE)
+- Async (PROBABLY NOT)
 
 
 # Usage

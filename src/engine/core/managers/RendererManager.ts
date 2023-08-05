@@ -93,4 +93,13 @@ export class RendererManager extends NameRegistrar implements Lifecycle {
     public render(): void {
         this.currentRenderer.render();
     }
+
+    public unload(): void {
+        if (!this._loaded) return;
+
+        Object.values(this._gameRenderers).forEach((r) => r.unload());
+        window.gl = null;
+
+        this._loaded = false;
+    }
 }

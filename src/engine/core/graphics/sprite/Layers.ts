@@ -51,7 +51,7 @@ export class Layers extends GameObject {
         super("Layers");
 
         Layers._gameLayers.reverse().forEach((layerName) => {
-            this._layers[layerName] = new Array(1);
+            this._layers[layerName] = [];
         });
     }
 
@@ -64,7 +64,7 @@ export class Layers extends GameObject {
      * @returns {SpriteComponent} Returns the next SpriteComponent in this Layers instance.
      */
     public next(): SpriteComponent {
-        if (this._counter === Object.values(this._layers).flat(1).length - 1) {
+        if (this._counter >= Object.values(this._layers).flat(1).length - 1) {
             this._counter = -1
         }
         

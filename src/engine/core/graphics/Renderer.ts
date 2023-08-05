@@ -159,4 +159,13 @@ export class Renderer extends GameObject implements Lifecycle {
     public render(): void {
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
     }
+
+    public unload(): void {
+        if (!this._loaded) return;
+
+        this._gl.clear(this._gl.COLOR_BUFFER_BIT);
+        this.canvas.remove();
+
+        this._loaded = false;
+    }
 }

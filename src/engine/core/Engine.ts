@@ -25,9 +25,9 @@ import { GameObject } from "./ecs/GameObject";
 export class Engine extends GameObject implements Lifecycle {
     private static _instance: Engine = null;
 
-    private _config: EngineConfig;
-
     private _loopId: number;
+
+    private _config: EngineConfig;
 
     /**
      * Creates a new Engine instance and starts it.
@@ -51,6 +51,8 @@ export class Engine extends GameObject implements Lifecycle {
         if (!Engine._instance) throw new Error("No Engine instance exists.");
 
         this._instance.unload();
+
+        console.log("ENGINE INSTANCE WAS ENDED");
     }
 
 
@@ -76,7 +78,7 @@ export class Engine extends GameObject implements Lifecycle {
     }
 
     public load(): void {
-        Input.addListeners();
+        Input.AddListeners();
         
         if (this._config.layers !== undefined) Layers.SetGameLayers(this._config.layers);
 
@@ -109,9 +111,16 @@ export class Engine extends GameObject implements Lifecycle {
         SceneManager.getInstance().render();
     }
 
-    // TODO: Add this later to Lifecycle interface
     public unload(): void {
-        // **Add unloading code here**
+        // unload everything in reverse
+
+        SceneManager.getInstance().unload();
+        TextureManager.getInstance().unload();
+        ShaderManager.getInstance().unload();
+        RendererManager.getInstance().unload();
+        
+        Input.RemoveListeners();
+
         cancelAnimationFrame(this._loopId);
     }
 }

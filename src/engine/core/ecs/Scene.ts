@@ -57,10 +57,10 @@ export class Scene extends GameObject implements Lifecycle {
     /**
      * Removes entities from this Scene.
      * 
-     * @param {Entity} enitity - The entity to remove.
+     * @param {Entity} entity - The entity to remove.
      */
-    public removeEntity(enitity: Entity): void {
-        this._rootEntity.removeChild(enitity);
+    public removeEntity(entity: Entity): void {
+        this._rootEntity.removeChild(entity);
     }
 
     /**
@@ -125,5 +125,9 @@ export class Scene extends GameObject implements Lifecycle {
 
     public render(): void {
         this._rootEntity.render();
+    }
+
+    public unload(): void {
+        this._rootEntity.unload();
     }
 }

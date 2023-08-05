@@ -70,4 +70,12 @@ export class ShaderManager extends NameRegistrar implements Lifecycle {
 
     public update(): void {}
     public render(): void {}
+
+    public unload(): void {
+        if (!this._loaded) return;
+
+        Object.values(this._gameShaders).forEach((s) => s.unload());
+
+        this._loaded = false;
+    }
 }
