@@ -7,7 +7,7 @@ To run -> **npm run dev**
 
 
 # Todo
-- Organization - DOING NOW (SPECIFICALLY GRAPHICS)
+- Organization - DOING NOW
 - README Updates - DOING NOW
 
 - Lifecycle Updates

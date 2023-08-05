@@ -29,6 +29,7 @@ export class Background extends Entity {
         this.getComponent(SpriteComponent).layer = "Background";
 
         this.transform.ignoreCamSize = true;
+        
         this.transform.scale = vec2.fromValues(
             RendererManager.getInstance().currentRenderer.width / this.getComponent(SpriteComponent).sprite.width,
             RendererManager.getInstance().currentRenderer.height / this.getComponent(SpriteComponent).sprite.height,
