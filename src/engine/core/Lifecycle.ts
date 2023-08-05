@@ -26,7 +26,7 @@ export interface Lifecycle {
     render(): void;
 
     /**
-     * **TODO**
+     * Called during UNLOAD period, OR after GameObject's removal from the hierarchy.
      */
     unload(): void;
 }
