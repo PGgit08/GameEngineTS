@@ -8,7 +8,7 @@ import { MyScene } from "./scenes/MyScene";
 import { default as ArmsAnimation } from "./assets/ArmsAnimation.json";
 
 // Create a new Engine instance
-new Engine(
+Engine.Start(
     {
         renderers: [SampleRenderer],
         scenes: [MyScene],

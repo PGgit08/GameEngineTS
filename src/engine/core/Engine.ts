@@ -20,7 +20,7 @@ import { GameObject } from "./ecs/GameObject";
  * @extends GameObject
  * @implements {Lifecycle}
  * 
- * @param {EngineConfig} config - The config for the Engine instance.
+ * @hideconstructor
  */
 export class Engine extends GameObject implements Lifecycle {
     private static _instance: Engine = null;
@@ -30,22 +30,32 @@ export class Engine extends GameObject implements Lifecycle {
     private _loopId: number;
 
     /**
-     * @static
+     * Creates a new Engine instance and starts it.
      * 
-     * @returns {Engine} The Engine instance.
+     * @static 
+     * 
+     * @param {EngineConfig} config - The config for the Engine instance.
      */
-    public static get instance(): Engine {
-        return this._instance;
+    public static Start(config: EngineConfig): void {
+        if (Engine._instance) throw new Error("Engine instance already exists.");
+        
+        Engine._instance = new Engine(config);
     }
 
-    constructor(config: EngineConfig) {
-        super("Engine");
+    /**
+     * Ends the currently running Engine instance.
+     * 
+     * @static
+     */
+    public static End(): void {
+        if (!Engine._instance) throw new Error("No Engine instance exists.");
 
-        if (Engine._instance) {
-            throw new Error("Engine instance already exists!");
-        }
-        
-        Engine._instance = this;
+        this._instance.unload();
+    }
+
+
+    private constructor(config: EngineConfig) {
+        super("Engine");
 
         this._config = config;
 
@@ -100,7 +110,8 @@ export class Engine extends GameObject implements Lifecycle {
     }
 
     // TODO: Add this later to Lifecycle interface
-    public end(): void {
+    public unload(): void {
+        // **Add unloading code here**
         cancelAnimationFrame(this._loopId);
     }
 }

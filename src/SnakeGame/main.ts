@@ -1,7 +1,7 @@
 import { SampleRenderer, Engine } from "../engine/GETS"
 import { MainScene } from "./scenes/MainScene";
 
-new Engine(
+Engine.Start(
     {
         renderers: [SampleRenderer],
         scenes: [MainScene],
