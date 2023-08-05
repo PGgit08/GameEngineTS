@@ -211,6 +211,8 @@ export abstract class Geometry extends NameRegistrar {
         this._loaded = true;
     }
 
+    public unload(): void {}
+
     /**
      * Draws the Geometry.
      */

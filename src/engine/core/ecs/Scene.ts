@@ -126,4 +126,8 @@ export class Scene extends GameObject implements Lifecycle {
     public render(): void {
         this._rootEntity.render();
     }
+
+    public unload(): void {
+        this._rootEntity.unload();
+    }
 }

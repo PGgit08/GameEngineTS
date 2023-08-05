@@ -109,7 +109,6 @@ export class Engine extends GameObject implements Lifecycle {
         SceneManager.getInstance().render();
     }
 
-    // TODO: Add this later to Lifecycle interface
     public unload(): void {
         // **Add unloading code here**
         cancelAnimationFrame(this._loopId);

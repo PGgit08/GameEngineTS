@@ -99,4 +99,8 @@ export class SceneManager extends NameRegistrar implements Lifecycle {
     public render(): void {
         this.currentScene.render();
     }
+
+    public unload(): void {
+        
+    }
 }

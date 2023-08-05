@@ -91,4 +91,6 @@ export abstract class Component extends GameObject implements Lifecycle {
 
     public abstract update(): void;
     public abstract render(): void;
+
+    public unload(): void {};
 }

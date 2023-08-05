@@ -77,6 +77,8 @@ export abstract class Shader extends GameObject {
         this._loaded = true;
     }
 
+    public unload(): void {}
+
     /**
      * Compile a shader program given source code.
      * 

@@ -70,4 +70,8 @@ export class ShaderManager extends NameRegistrar implements Lifecycle {
 
     public update(): void {}
     public render(): void {}
+
+    public unload(): void {
+        
+    }
 }

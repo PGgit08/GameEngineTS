@@ -95,4 +95,8 @@ export class SpriteComponent extends Component {
     public override render(): void {
         this.parentScene.layers.next().draw();
     }
+
+    public unload(): void {
+        
+    }
 }

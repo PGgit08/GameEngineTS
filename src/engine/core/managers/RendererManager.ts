@@ -93,4 +93,8 @@ export class RendererManager extends NameRegistrar implements Lifecycle {
     public render(): void {
         this.currentRenderer.render();
     }
+
+    public unload(): void {
+
+    }
 }

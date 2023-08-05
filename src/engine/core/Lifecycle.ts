@@ -24,4 +24,9 @@ export interface Lifecycle {
      * Called ONCE per loop frame RENDER (IS NOT TO BE USED BY {@link Behavior} classes).
      */
     render(): void;
+
+    /**
+     * **TODO**
+     */
+    unload(): void;
 }

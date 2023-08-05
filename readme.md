@@ -7,7 +7,7 @@ To run -> **npm run dev**
 
 
 # Todo
-- Lifecycle Updates (unloading)
+- Lifecycle Updates (unloading) - DOING NOW
 - Physics (matter.js) / Collsion
 - Lighting
 - Audio

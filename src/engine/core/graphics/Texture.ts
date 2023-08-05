@@ -102,6 +102,14 @@ export class Texture extends NameRegistrar {
         }
     }
 
+    /**
+     * Destroys this Texture from WebGL.
+     */
+    public destroy(): void {
+        if (!this._texture) return;
+
+        gl.deleteTexture(this._texture);
+    }
 
     /**
      * @returns {Frame} Returns the default Frame of this Texture.
@@ -151,6 +159,9 @@ export class Texture extends NameRegistrar {
 
         this._loaded = true;
     }
+
+    /** Unloads this Texture. */
+    public unload(): void {}
 
     /**
      * Activates this Texture to it's unit and binds it.
