@@ -58,7 +58,9 @@ export class Mesh extends GameObject {
     }
 
     /** Unloads this Mesh. */
-    public unload(): void {}
+    public unload(): void {
+        this._geometry.unload();
+    }
 
     /**
      * Draws this Mesh by first drawing the Geometry and "painting" over it with the Material.

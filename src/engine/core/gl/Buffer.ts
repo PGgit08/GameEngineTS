@@ -94,7 +94,6 @@ export class Buffer extends NameRegistrar {
      * Deletes this Buffer from WebGL.
      */
     public destroy(): void {
-        // TODO: Somehow incorporate this with a future GameObject.destroy?
         gl.deleteBuffer(this._buffer);
     }
 

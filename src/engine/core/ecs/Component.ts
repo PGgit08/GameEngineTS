@@ -40,7 +40,7 @@ export abstract class Component extends GameObject implements Lifecycle {
 
     /**
      * Sets the parent of this Component.
-     * !!! SHOULD NEVER BE SET DIRECTLY !!!
+     * !!! **SHOULD NEVER BE SET DIRECTLY** !!!
      */
     public set parent(parent: Entity) {
         const oldParent = this._parent;
@@ -56,7 +56,7 @@ export abstract class Component extends GameObject implements Lifecycle {
 
     /**
      * Sets the parentScene of this Component.
-     * !!! SHOULD NEVER BE SET DIRECTLY !!!
+     * !!! **SHOULD NEVER BE SET DIRECTLY** !!!
      */
     public set parentScene(parentScene: Scene) {
         const oldParentScene = this._parentScene;

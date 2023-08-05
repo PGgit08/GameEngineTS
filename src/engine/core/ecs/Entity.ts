@@ -73,7 +73,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * Sets the parentScene of this Entity.
-     * !!! SHOULD NEVER BE SET DIRECTLY !!!
+     * !!! **SHOULD NEVER BE SET DIRECTLY** !!!
      */
     set parentScene(parentScene: Scene) {
         const oldParentScene = this._parentScene;
@@ -93,7 +93,7 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * Sets the parent of this Entity.
-     * !!! SHOULD NEVER BE SET DIRECTLY !!!
+     * !!! **SHOULD NEVER BE SET DIRECTLY** !!!
      */
     set parent(parent: Entity) {
         const oldParent = this._parent;
@@ -104,11 +104,12 @@ export class Entity extends GameObject implements Lifecycle {
 
     /**
      * A Spawn function that Spawns an Entity TYPE.
+     * 
      * @static
      * 
-     * @param Spawned The Entity TYPE to Spawn.
-     * @param position The optional position at which to Spawn the Entity.
-     * @param parent The optional parent of this Entity (if none, then Entity is added directly to current Scene).
+     * @param {Entity} Spawned - The Entity TYPE to Spawn.
+     * @param {vec2} [position] - The optional position at which to Spawn the Entity.
+     * @param {Entity} [parent] - The optional parent of this Entity (if none, then Entity is added directly to current Scene).
      * 
      * @returns The Spawned Entity.
      */
@@ -133,7 +134,7 @@ export class Entity extends GameObject implements Lifecycle {
      * 
      * @static
      *
-     * @param entity The given Entity to despawn.
+     * @param {Entity} entity - The given Entity to despawn.
      */
     public static Despawn(entity: Entity): void {
         if (entity.parent === null) return;
@@ -150,7 +151,7 @@ export class Entity extends GameObject implements Lifecycle {
     /**
      * Add children to this Entity
      * 
-     * @param children The children to add
+     * @param {Entity[]} children - The children to add
      */
     public addChildren(...children: Entity[]): void {
         children.forEach((c) => {
@@ -175,7 +176,7 @@ export class Entity extends GameObject implements Lifecycle {
     public removeChild(entity: Entity): void {
         entity.parent = null;
         entity.parentScene = null;
-
+        
         this.children[this._children.indexOf(entity)].unload();
 
         this._children.splice(this._children.indexOf(entity), 1);
@@ -204,7 +205,9 @@ export class Entity extends GameObject implements Lifecycle {
     /**
      * Returns a Component by it's type from the Entity.
      * 
-     * @param ComponentType The component Type.
+     * @template {Component} T
+     * 
+     * @param { {new (...args: any[]): T} } ComponentType - The Component type.
      * 
      * @returns {ComponentType} The desired Component.
      */
@@ -221,7 +224,7 @@ export class Entity extends GameObject implements Lifecycle {
     /**
      * Checks the parent Scene of this Entity.
      * 
-     * @param sceneName The name of the Scene to check this Entity's parent Scene with.
+     * @param {string} sceneName - The name of the Scene to check this Entity's parent Scene with.
      * 
      * @returns {boolean} True is the parent Scene's name is sceneName.
      */
@@ -260,8 +263,8 @@ export class Entity extends GameObject implements Lifecycle {
     public unload(): void {
         if (!this._loaded) return;
 
-        this._components.forEach((c) => c.unload());
         this._children.forEach((c) => c.unload());
+        this._components.forEach((c) => c.unload());
 
         this._loaded = false;
     }
