@@ -52,7 +52,7 @@ export class Engine extends GameObject implements Lifecycle {
 
         this._instance.unload();
 
-        console.log("ENGINE INSTANCE WAS ENDED");
+        throw 'ENGINE INSTANCE ENDED'; // use throw to interrupt everything
     }
 
 
@@ -113,14 +113,13 @@ export class Engine extends GameObject implements Lifecycle {
 
     public unload(): void {
         // unload everything in reverse
-
-        cancelAnimationFrame(this._loopId);
-
         SceneManager.getInstance().unload();
         TextureManager.getInstance().unload();
         ShaderManager.getInstance().unload();
         RendererManager.getInstance().unload();
-        
+
         Input.RemoveListeners();
+
+        cancelAnimationFrame(this._loopId);
     }
 }

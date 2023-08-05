@@ -263,8 +263,8 @@ export class Entity extends GameObject implements Lifecycle {
     public unload(): void {
         if (!this._loaded) return;
 
-        this._children.forEach((c) => c.unload());
         this._components.forEach((c) => c.unload());
+        this._children.forEach((c) => c.unload());
 
         this._loaded = false;
     }

@@ -163,8 +163,6 @@ export class Renderer extends GameObject implements Lifecycle {
     public unload(): void {
         if (!this._loaded) return;
 
-        console.log("YOO");
-
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
         this.canvas.remove();
 
