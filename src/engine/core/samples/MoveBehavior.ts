@@ -4,6 +4,7 @@ import { Behavior } from "../ecs/Behavior";
 import { Time } from "../helpers/Time";
 
 import { Entity } from "../ecs/Entity";
+import { Engine } from "../../GETS";
 
 /**
  * A {@link Behavior} that allows for input control of a {@link Entity}. It moved the Entity on its local axis with WASD keys and
@@ -25,6 +26,8 @@ export class MoveBehavior extends Behavior {
     
     public override update(): void {
         if (Input.KeyDown("KeyW")) {
+            Engine.End();
+
             const translation = vec2.create();
             vec2.scale(translation, vec2.fromValues(0, -1), this.speed * Time.DeltaTime());
 

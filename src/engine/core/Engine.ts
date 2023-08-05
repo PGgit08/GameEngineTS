@@ -114,13 +114,13 @@ export class Engine extends GameObject implements Lifecycle {
     public unload(): void {
         // unload everything in reverse
 
+        cancelAnimationFrame(this._loopId);
+
         SceneManager.getInstance().unload();
         TextureManager.getInstance().unload();
         ShaderManager.getInstance().unload();
         RendererManager.getInstance().unload();
         
         Input.RemoveListeners();
-
-        cancelAnimationFrame(this._loopId);
     }
 }
