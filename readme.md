@@ -7,15 +7,11 @@ To run -> **npm run dev**
 
 
 # Todo
-- Organization - DOING NOW
-- README Updates - DOING NOW
-
-- Lifecycle Updates
-- GameObject Destruction
+- Lifecycle Updates (unloading)
 - Physics (matter.js) / Collsion
 - Lighting
-- Storage
 - Audio
+- Storage
 - Async (MAYBE)
 
 
