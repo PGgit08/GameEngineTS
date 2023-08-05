@@ -8,12 +8,11 @@ To run -> **npm run dev**
 
 # Todo
 MUST DO:
-- Lifecycle Updates (unloading) - DOING NOW
 - Set up testing
+- Lighting
 
 MIGHT DO:
 - Physics (matter.js) / Collsion
-- Lighting
 - Audio
 - Storage
 - Async (PROBABLY NOT)
