@@ -68,6 +68,10 @@ export class TextureManager extends NameRegistrar implements Lifecycle {
     public render(): void {}
 
     public unload(): void {
-        
+        if (!this._loaded) return;
+
+        Object.values(this._gameTextures).forEach((t) => t.unload());
+
+        this._loaded = false;
     }
 }

@@ -77,6 +77,8 @@ export class Texture extends NameRegistrar {
         img.src = this._fileName;
         
         img.onload = () => {
+            if (!this._loaded) return; // Since this function is async, it needs to check whether the Texture has been unloaded yet or not
+
             this.bind();
 
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
@@ -98,6 +100,8 @@ export class Texture extends NameRegistrar {
         }
 
         img.onerror = () => {
+            if (!this._loaded) return;
+
             throw new Error("Unable to load Texture image.");
         }
     }
@@ -141,7 +145,7 @@ export class Texture extends NameRegistrar {
     }
 
     /**
-     * Loads this Texture. Should be called ONCE.
+     * Loads this Texture.
      */
     public load(): void {
         if (this._loaded) return;
@@ -160,8 +164,16 @@ export class Texture extends NameRegistrar {
         this._loaded = true;
     }
 
-    /** Unloads this Texture. */
-    public unload(): void {}
+    /** 
+     * Unloads this Texture. 
+     */
+    public unload(): void {
+        if(!this._loaded) return;
+
+        this.destroy();
+
+        this._loaded = false;
+    }
 
     /**
      * Activates this Texture to it's unit and binds it.

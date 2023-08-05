@@ -176,9 +176,9 @@ export class Entity extends GameObject implements Lifecycle {
         entity.parent = null;
         entity.parentScene = null;
 
-        this._children.splice(this._children.indexOf(entity), 1);
+        this.children[this._children.indexOf(entity)].unload();
 
-        // TODO: Add UNLOAD lifecycle method here
+        this._children.splice(this._children.indexOf(entity), 1);
     }
 
     /**
@@ -258,8 +258,11 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     public unload(): void {
-        this._components.forEach((c) => c.unload());
+        if (!this._loaded) return;
 
+        this._components.forEach((c) => c.unload());
         this._children.forEach((c) => c.unload());
+
+        this._loaded = false;
     }
 }

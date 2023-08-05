@@ -101,6 +101,10 @@ export class SceneManager extends NameRegistrar implements Lifecycle {
     }
 
     public unload(): void {
-        
+        if (!this._loaded) return;
+
+        Object.values(this._gameScenes).forEach((s) => s.unload());
+
+        this._loaded = false;
     }
 }

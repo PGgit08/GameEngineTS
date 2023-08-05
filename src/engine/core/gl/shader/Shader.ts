@@ -54,7 +54,6 @@ export abstract class Shader extends GameObject {
      * Deletes this Shader from WebGL. 
      */
     public destroy(): void {
-        // TODO: Somehow incorporate this with a future GameObject.destroy?
         gl.deleteProgram(this._program);
     }
 
@@ -77,7 +76,16 @@ export abstract class Shader extends GameObject {
         this._loaded = true;
     }
 
-    public unload(): void {}
+    /**
+     * Unloads this Shader.
+     */
+    public unload(): void {
+        if (!this._loaded) return;
+
+        this.destroy();
+
+        this._loaded = false;
+    }
 
     /**
      * Compile a shader program given source code.
