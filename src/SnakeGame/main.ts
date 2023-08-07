@@ -1,4 +1,4 @@
-import { SampleRenderer, Engine } from "../engine/GETS"
+import { SampleRenderer, Engine } from "../engine/GETS";
 import { MainScene } from "./scenes/MainScene";
 
 Engine.Start(
