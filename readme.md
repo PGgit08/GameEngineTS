@@ -9,9 +9,13 @@ To run -> **npm run dev**
 # Todo
 MUST DO:
 - Set up testing
-- Lighting
+- Organize
+- Add a couple of small things
+- Document
+- FLAPPY BIRD
 
-MIGHT DO:
+MIGHT DO (IS OPTIONAL):
+- Lighting
 - Physics (matter.js) / Collsion
 - Audio
 - Storage
