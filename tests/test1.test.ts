@@ -1,5 +1,5 @@
 test("Test 1", () => {
-    expect(true).toBeTruthy();
+    expect(typeof "hello").toBe("string");
 });
 
 export {}
