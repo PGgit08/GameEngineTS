@@ -147,6 +147,37 @@ export class Entity extends GameObject implements Lifecycle {
         this.relativeChildren = realtiveChildren;
     }
 
+    /**
+     * Returns child(ren) of this Entity by its name if it is found.
+     * 
+     * 
+     * @param {string} name - The name of the child. 
+     * 
+     * @returns {Entity[]} The desired child(ren).
+     */
+    public getChildByName(name: string): Entity[] {
+        const filteredChildren: Entity[] = this._children.filter((c) => c.name === name);
+
+        if (filteredChildren.length === 0) return null;
+
+        return filteredChildren;
+    }
+
+    /**
+     * Returns a child of this Entity by its id if it is found.
+     * 
+     * @param {string} id - The id of the child.
+     * 
+     * @returns {Entity} The desired child.
+     */
+    public getChildById(id: string): Entity {
+        const filteredChildren: Entity[] = this._children.filter((c) => c.id === id);
+
+        if (filteredChildren.length === 0) return null;
+
+        return filteredChildren[0];
+    }
+
 
     /**
      * Add children to this Entity
@@ -155,6 +186,8 @@ export class Entity extends GameObject implements Lifecycle {
      */
     public addChildren(...children: Entity[]): void {
         children.forEach((c) => {
+            if (this.getChildById(c.id) !== null) { return; }
+
             if (c.parent !== null) {
                 c.parent.removeChild(c);
             }
@@ -171,9 +204,11 @@ export class Entity extends GameObject implements Lifecycle {
     /**
      * Removes a given Entity child from this Entity.
      * 
-     * @param entity The Entity to remove.
+     * @param {Entity} entity - The Entity to remove.
      */
     public removeChild(entity: Entity): void {
+        if (this.getChildById(entity.id) === null) return;
+
         entity.parent = null;
         entity.parentScene = null;
         
@@ -185,7 +220,7 @@ export class Entity extends GameObject implements Lifecycle {
     /**
      * Add Components to this Entity.
      * 
-     * @param components The Components to add.
+     * @param {Component[]} components - The Components to add.
      */
     public addComponents(...components: Component[]): void {
         components.forEach((c) => {
