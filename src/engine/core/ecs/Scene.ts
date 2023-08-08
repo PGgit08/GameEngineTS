@@ -25,6 +25,10 @@ export class Scene extends GameObject implements Lifecycle {
     private _sceneCameras: Dictionary<string, Camera> = {}; 
     private _currentCamera: string;
 
+    /** A boolean that controls whether this Scene is paused or not. @type {boolean} */
+    public paused: boolean = false;
+
+    /** The {@link Layers} object belonging to this Scene. @type {Layers} */
     public readonly layers: Layers = new Layers();
 
     /** @returns {Camera} The current Camera that views this Scene. */
@@ -43,6 +47,28 @@ export class Scene extends GameObject implements Lifecycle {
         this.setCurrentCamera("DefaultCamera");
 
         SceneManager.getInstance().addScene(this);
+    }
+
+    /**
+     * Looks through this whole entire Scene to try to find the desired Entity(s) by its name.
+     *  
+     * @param {string} name - The name of the desired Entity.
+     *
+     * @returns {Entity[]} The desired Entity(s).
+     */
+    public getEntityByName(name: string): Entity[] {
+        return this._rootEntity.getChildByName(name, true);
+    }
+
+    /**
+     * Looks through this whole entire Scene to try to find the desired Entity by its id.
+     * 
+     * @param {string} id - The id of the Entity.
+     * 
+     * @returns {Entity} The desired Entity.
+     */
+    public getEntityById(id: string): Entity {
+        return this._rootEntity.getChildById(id);
     }
 
     /**
@@ -120,10 +146,14 @@ export class Scene extends GameObject implements Lifecycle {
     }
 
     public update(): void {
+        if (this.paused) return;
+
         this._rootEntity.update();
     }
 
     public render(): void {
+        if (this.paused) return;
+
         this._rootEntity.render();
     }
 

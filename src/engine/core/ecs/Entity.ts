@@ -152,30 +152,42 @@ export class Entity extends GameObject implements Lifecycle {
      * 
      * 
      * @param {string} name - The name of the child. 
+     * @param {boolean} [all] - If this boolean is true, then the Entity will additionally look through 
+     * its children and their children as well and so on to find the desired Entity (DEFAULT IS False).
      * 
      * @returns {Entity[]} The desired child(ren).
      */
-    public getChildByName(name: string): Entity[] {
-        const filteredChildren: Entity[] = this._children.filter((c) => c.name === name);
+    public getChildByName(name: string, all: boolean = false): Entity[] {
+        const matchingChildren: Entity[] = [];
 
-        if (filteredChildren.length === 0) return null;
+        this._children.forEach((c) => {
+            if (c.name === name) matchingChildren.push(c);
+            else if (all) matchingChildren.push(...c.getChildByName(name, all));
+        })
 
-        return filteredChildren;
+        if (matchingChildren.length === 0) return null;
+
+        return matchingChildren;
     }
 
     /**
      * Returns a child of this Entity by its id if it is found.
      * 
      * @param {string} id - The id of the child.
+     * @param {boolean} [all] - If this boolean is true, then the Entity will additionally look through 
+     * its children and their children as well and so on to find the desired Entity (DEFAULT IS False).
      * 
      * @returns {Entity} The desired child.
      */
-    public getChildById(id: string): Entity {
-        const filteredChildren: Entity[] = this._children.filter((c) => c.id === id);
+    public getChildById(id: string, all: boolean = false): Entity {
+        let matchingChild: Entity = null;
 
-        if (filteredChildren.length === 0) return null;
+        this._children.forEach((c) => {
+            if (c.id === id) matchingChild = c;
+            else if (all) matchingChild = c.getChildById(id, all);
+        })
 
-        return filteredChildren[0];
+        return matchingChild;
     }
 
 
