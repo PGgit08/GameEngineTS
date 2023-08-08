@@ -39,6 +39,8 @@ export class Engine extends GameObject implements Lifecycle {
     public static Start(config: EngineConfig): void {
         if (Engine._instance) throw new Error("Engine instance already exists.");
         
+        console.log('--- ENGINE INSTANCE STARTED ---');
+
         Engine._instance = new Engine(config);
     }
 
@@ -52,7 +54,7 @@ export class Engine extends GameObject implements Lifecycle {
 
         this._instance.unload();
 
-        throw 'ENGINE INSTANCE ENDED'; // use throw to interrupt everything
+        throw '--- ENGINE INSTANCE ENDED ---'; // use throw to interrupt everything
     }
 
 
