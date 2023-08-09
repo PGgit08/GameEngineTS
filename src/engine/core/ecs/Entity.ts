@@ -130,7 +130,7 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     /**
-     * Despawns a given Entity instance.
+     * Despawns a given Entity instance by removing it from its parent.
      * 
      * @static
      *
@@ -163,9 +163,7 @@ export class Entity extends GameObject implements Lifecycle {
         this._children.forEach((c) => {
             if (c.name === name) matchingChildren.push(c);
             else if (all) matchingChildren.push(...c.getChildByName(name, all));
-        })
-
-        if (matchingChildren.length === 0) return null;
+        });
 
         return matchingChildren;
     }
@@ -185,7 +183,7 @@ export class Entity extends GameObject implements Lifecycle {
         this._children.forEach((c) => {
             if (c.id === id) matchingChild = c;
             else if (all) matchingChild = c.getChildById(id, all);
-        })
+        });
 
         return matchingChild;
     }

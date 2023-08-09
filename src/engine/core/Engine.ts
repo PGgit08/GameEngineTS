@@ -38,8 +38,6 @@ export class Engine extends GameObject implements Lifecycle {
      */
     public static Start(config: EngineConfig): void {
         if (Engine._instance) throw new Error("Engine instance already exists.");
-        
-        console.log('--- ENGINE INSTANCE STARTED ---');
 
         Engine._instance = new Engine(config);
     }
@@ -67,7 +65,7 @@ export class Engine extends GameObject implements Lifecycle {
 
         this._loopId = requestAnimationFrame(this.cycle.bind(this));
 
-        console.log(SceneManager.getInstance(), RendererManager.getInstance());
+        console.log('--- ENGINE INSTANCE STARTED ---', SceneManager.getInstance(), RendererManager.getInstance());
     }
 
     private cycle(now: number): void {
