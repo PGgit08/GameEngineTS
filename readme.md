@@ -7,19 +7,10 @@ To run -> **npm run dev**
 
 
 # Todo
-MUST DO:
-- Set up testing
-- Organize
-- Add a couple of small things
-- Document
+- Testing + any additions
 - FLAPPY BIRD
-
-MIGHT DO (IS OPTIONAL):
-- Lighting
-- Physics (matter.js) / Collsion
-- Audio
-- Storage
-- Async (PROBABLY NOT)
+- Documentation 
+- Release 
 
 
 # Usage
