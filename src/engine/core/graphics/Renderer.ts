@@ -2,6 +2,7 @@ import { GameObject } from "../ecs/GameObject";
 import { Lifecycle } from "../Lifecycle";
 import { RendererManager } from "../managers/RendererManager";
 import { mat3 } from "gl-matrix";
+import { SceneManager } from "../managers/SceneManager";
 
 /**
  * @classdesc
@@ -157,6 +158,8 @@ export class Renderer extends GameObject implements Lifecycle {
     public update(): void {}
 
     public render(): void {
+        if (SceneManager.getInstance().currentScene.paused) return;
+
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
     }
 
