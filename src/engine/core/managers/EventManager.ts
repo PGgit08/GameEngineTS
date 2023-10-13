@@ -31,16 +31,16 @@ export class EventManager extends EventEmmiter {
 
     private constructor() { super("EventManager"); }
 
-    public addEvent(event: Event<any>) {
+    public override addEvent(event: Event<any>) {
         this.registerName(event.name);
         this._gameEvents[event.name] = event;
     }
 
-    public subscribe<T>(eventName: string, subscriber: (eventData: EventData<T>) => void): string {
+    public override subscribe<T>(eventName: string, subscriber: (eventData: EventData<T>) => void): string {
         return this._gameEvents[eventName].subscribe(subscriber);
     }
 
-    public unSubscribe(eventName: string, subscriberId: string): void {
+    public override unSubscribe(eventName: string, subscriberId: string): void {
         this._gameEvents[eventName].unSubscribe(subscriberId);
     }
 }
