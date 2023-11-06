@@ -6,7 +6,7 @@ import { ShaderConfig } from "../../config/ShaderConfig";
  * A simple standard Shader that contains the minimum uniforms and attributes required by the {@link ShaderConfig} namespace.
  */
 export class StandardShader extends Shader {
-    public get vSource(): string {
+    public override get vSource(): string {
         return `
         // an attribute will receive data from a buffer
         attribute vec2 ${ShaderConfig.ATTRIB_NAMES.POSITION_ATTRIBUTE_NAME};
@@ -38,7 +38,7 @@ export class StandardShader extends Shader {
         }
         `;
     }
-    public get fSource(): string {
+    public override get fSource(): string {
         return `
         precision mediump float;
  

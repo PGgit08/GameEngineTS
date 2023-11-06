@@ -1,5 +1,6 @@
 import { Engine } from "./Engine";
 import { GameObject } from "../core/ecs/GameObject";
+import { Behavior } from "../core/ecs/Behavior";
 
 /**
  * Defines the {@link Engine} lifecycle methods. {@link GameObject} classes that implement this interface have their Lifecycle methods
