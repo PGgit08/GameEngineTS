@@ -25,9 +25,6 @@ export class Scene extends GameObject implements Lifecycle {
     private _sceneCameras: Dictionary<string, Camera> = {}; 
     private _currentCamera: string;
 
-    /** A boolean that controls whether this Scene is paused or not. @type {boolean} */
-    public paused: boolean = false;
-
     /** The {@link Layers} object belonging to this Scene. @type {Layers} */
     public readonly layers: Layers = new Layers();
 
@@ -146,14 +143,10 @@ export class Scene extends GameObject implements Lifecycle {
     }
 
     public update(): void {
-        if (this.paused) return;
-
         this._rootEntity.update();
     }
 
     public render(): void {
-        if (this.paused) return;
-
         this._rootEntity.render();
     }
 

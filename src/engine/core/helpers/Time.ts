@@ -6,8 +6,13 @@
  */
 export class Time {
     private static _lastFrameRender: number = 0;
-
+    
     private static _deltaTime: number;
+
+    /**
+     * Creates an effect of "time-stopping" by setting the time between frames to 0. 
+     */
+    public static stopTime: boolean = false;
 
     private constructor() {} // static class, hidden constructor
 
@@ -30,6 +35,10 @@ export class Time {
      * @returns {number} The time since the last frame render in seconds.
      */
     public static DeltaTime(): number {
+        if (this.stopTime) {
+            return 0;
+        }
+
         return this._deltaTime;
     }
 }

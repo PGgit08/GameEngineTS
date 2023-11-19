@@ -158,8 +158,6 @@ export class Renderer extends GameObject implements Lifecycle {
     public update(): void {}
 
     public render(): void {
-        if (SceneManager.getInstance().currentScene.paused) return;
-
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
     }
 
