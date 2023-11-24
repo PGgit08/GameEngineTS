@@ -21,7 +21,7 @@ import { Transform } from "../math/Transform";
  * @param {string} name - The name of this Camera.
  */
 export class Camera extends Entity {
-    /** A size value that scales this Camera's view. (DEFAULT VIEW IS RendererWidth, RendererHeight). */
+    /** A size value that scales this Camera's view. (DEFAULT VIEW IS RendererWidth, RendererHeight). @type {number} */
     public size: number = 1;
 
     // This camera's world matrix (non-inverse).

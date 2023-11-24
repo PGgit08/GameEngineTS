@@ -13,11 +13,11 @@ import { StandardShader } from "../../gl/shader/StandardShader";
  * @class StandardMaterial
  * @extends Material
  * 
- * @param {Texture} [texture] - The Texture of this Material (DEFAULT IS WHITE).
+ * @param {Texture} [texture] - The Texture of this Material.
  * @param {Color} [color] - The Color of this Material (DEFAULT IS BLACK).
  */
 export class StandardMaterial extends Material {
-    constructor(texture?: Texture, color?: Color) {
+    constructor(texture: Texture, color?: Color) {
         super("StandardMaterial", "StandardShader", texture, color);
     }
 

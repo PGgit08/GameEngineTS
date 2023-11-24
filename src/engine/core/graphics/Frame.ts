@@ -15,9 +15,17 @@ import { Texture } from "./Texture";
  * @param {number} h - The height of this Frame in the Texture in pixels.
  */
 export class Frame extends GameObject {
+
+    /** @type {number} The X position of this Frame in the Texture in pixels. */
     public x: number;
+
+    /** @type {number} The Y position of this Frame in the Texture in pixels. */
     public y: number;
+
+    /** @type {number} The width of this Frame in the Texture in pixels.*/
     public width: number;
+
+    /** @type {number} The height of this Frame in the Texture in pixels. */
     public height: number;
 
     private _minTexX: number = 0;

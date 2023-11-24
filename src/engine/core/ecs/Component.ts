@@ -26,7 +26,7 @@ export abstract class Component extends GameObject implements Lifecycle {
     private _parent: Entity = null;
     private _parentScene: Scene = null;
 
-    /** The {@link EventEmmiter} belonging to this Component. */
+    /** The {@link EventEmmiter} belonging to this Component. @type {EventEmmiter} */
     public readonly eventEmmiter: EventEmmiter = new EventEmmiter("COMPONENT_EVENT_EMMITER");
 
     // the events belonging to this component

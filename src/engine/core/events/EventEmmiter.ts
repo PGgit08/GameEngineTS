@@ -37,7 +37,7 @@ export class EventEmmiter extends NameRegistrar {
      * @param {string} eventName - The name of the Event to subscribe to.
      * @param {SubscriberCallback} subscriber - The subscriber callback which is invoked whenever the Event is invoked.
      * 
-     * @returns The id of this subscription.
+     * @returns {string} The id of this subscription.
      */
     public subscribe<T>(eventName: string, subscriber: SubscriberCallback<T>): string {
         if (this._events[eventName] === undefined) throw new Error(`Can not find Event ${eventName} in this EventEmmiter.`);

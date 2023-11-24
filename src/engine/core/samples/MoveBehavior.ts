@@ -24,10 +24,6 @@ export class MoveBehavior extends Behavior {
     }
     
     public override update(): void {
-        if (Input.KeyPressed("Space")) {
-            Time.stopTime = !Time.stopTime;
-        }
-
         if (Input.KeyDown("KeyW")) {
             const translation = vec2.create();
             vec2.scale(translation, vec2.fromValues(0, -1), this.speed * Time.DeltaTime());

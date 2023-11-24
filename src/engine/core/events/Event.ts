@@ -22,7 +22,7 @@ export class Event<T> extends GameObject {
     // id: subscriber
     private _subscribers: Dictionary<string, SubscriberCallback<T>> = {};
 
-    /** The {@link EventEmmiter} this Event belongs to. */
+    /** The {@link EventEmmiter} this Event belongs to. @type {EventEmmiter} */
     public readonly eventEmmiter: EventEmmiter;
 
     /**
@@ -68,7 +68,7 @@ export class Event<T> extends GameObject {
      * 
      * @param {SubscriberCallback} callback - The subscriber callback that gets subscribed to this Event.
      * 
-     * @returns The id of the subscription.
+     * @returns {string} The id of the subscription.
      */
     public subscribe(callback: SubscriberCallback<T>): string {
         const id = v4();

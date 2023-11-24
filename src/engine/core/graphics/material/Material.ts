@@ -4,7 +4,6 @@ import { mat3 } from "gl-matrix";
 import { Color } from "../Color";
 import { Texture } from "../Texture";
 import { GameObject } from "../../ecs/GameObject";
-
 import { Mesh } from "../Mesh";
 import { Geometry } from "../geometry/Geometry";
 import { ShaderConfig } from "../../config/ShaderConfig";
@@ -22,20 +21,23 @@ import { ShaderConfig } from "../../config/ShaderConfig";
  * 
  * @param {string} name - The name of this Material.
  * @param {string} shaderName - The name of the {@link Shader} used by this Material.
- * @param {Texture} [texture] - The Texture used by this Material (DEFAULT IS WHITE).
+ * @param {Texture} [texture] - The Texture used by this Material.
  * @param {Color} [color] - The Color used by this Material (DEFAULT IS BLACK).
  */
 export abstract class Material extends GameObject {
     protected _shader: Shader;
 
+    /** The Texture used by this Material @type {Texture} */
     public texture: Texture;
+    
+    /** The Color used by this Material (DEFAULT IS BLACK) @type {Color} */
     public color: Color = Color.BLACK;
 
     public get shader(): Shader {
         return this._shader;
     }
     
-    constructor(name: string, shaderName: string, texture?: Texture, color?: Color) {
+    constructor(name: string, shaderName: string, texture: Texture, color?: Color) {
         super(name);
 
         this._shader = ShaderManager.getInstance().getShader(shaderName);

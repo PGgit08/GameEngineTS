@@ -13,21 +13,29 @@ export interface Lifecycle {
     /**
      * Called after GameObject's creating during the LOAD period, OR after the GameObject's initialization once
      * it is added into the hierarchy. 
+     * 
+     * @returns {void}
      */
     load(): void;
 
     /**
      * Called ONCE per loop frame UPDATE.
+     * 
+     * @returns {void}
      */
     update(): void;
 
     /**
      * Called ONCE per loop frame RENDER (IS NOT TO BE USED BY {@link Behavior} classes).
+     * 
+     * @returns {void}
      */
     render(): void;
 
     /**
      * Called during UNLOAD period, OR after GameObject's removal from the hierarchy.
+     * 
+     * @returns {void}
      */
     unload(): void;
 }

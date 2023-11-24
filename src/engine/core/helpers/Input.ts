@@ -67,6 +67,8 @@ export class Input {
      * @static
      */
     public static AddListeners(): void {
+        if (this._listening) return;
+
         document.addEventListener("keyup", this._ON_KEY_UP.bind(Input));
         document.addEventListener("keydown", this._ON_KEY_DOWN.bind(Input));
         document.addEventListener("mousemove", this._ON_MOUSE_MOVE.bind(Input));

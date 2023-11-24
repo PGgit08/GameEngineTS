@@ -6,11 +6,14 @@
  */
 export class Time {
     private static _lastFrameRender: number = 0;
-    
     private static _deltaTime: number;
 
     /**
-     * Creates an effect of "time-stopping" by setting the time between frames to 0. 
+     * "Pauses" Time in the Engine by setting the delta time to 0 if true.
+     * 
+     * @static
+     * 
+     * @type {boolean}  
      */
     public static stopTime: boolean = false;
 

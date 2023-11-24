@@ -37,7 +37,7 @@ export class Entity extends GameObject implements Lifecycle {
     /** This Entity's Transform @type {Transform} */
     public readonly transform: Transform = new Transform(this);
 
-    /** The {@link EventEmmiter} belonging to this Entity. */
+    /** The {@link EventEmmiter} belonging to this Entity. @type {EventEmmiter} */
     public readonly eventEmmiter: EventEmmiter = new EventEmmiter("ENTITY_EVENT_EMMITER");
 
     // the events belonging to this entity

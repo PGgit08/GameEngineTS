@@ -7,7 +7,7 @@ import { Geometry } from "../graphics/geometry/Geometry";
  * @namespace BufferConfig
  */
 export namespace BufferConfig {
-    /** The names of the {@link Buffer} objects that any {@link Geometry} must have. @namespace BUFFER_NAMES*/
+    /** The names of the {@link Buffer} objects that any {@link Geometry} must have. @namespace BUFFER_NAMES */
     export namespace BUFFER_NAMES {
         export const POSITION_BUFFER_NAME: string = "POSITION_BUFFER";
         export const TEXTURE_BUFFER_NAME: string = "TEXTURE_BUFFER";

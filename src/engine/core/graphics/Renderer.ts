@@ -2,7 +2,6 @@ import { GameObject } from "../ecs/GameObject";
 import { Lifecycle } from "../Lifecycle";
 import { RendererManager } from "../managers/RendererManager";
 import { mat3 } from "gl-matrix";
-import { SceneManager } from "../managers/SceneManager";
 
 /**
  * @classdesc
