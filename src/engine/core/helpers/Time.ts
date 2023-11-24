@@ -2,6 +2,8 @@
  * @classdesc 
  * A static singleton class that contains information about time such as the delta time since the last frame render.
  * 
+ * @static 
+ *
  * @hideconstructor
  */
 export class Time {

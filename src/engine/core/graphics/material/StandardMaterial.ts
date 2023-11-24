@@ -21,5 +21,5 @@ export class StandardMaterial extends Material {
         super("StandardMaterial", "StandardShader", texture, color);
     }
 
-    public applyAdditionalUniforms(): void {} // empty, nothing custom created
+    public override applyAdditionalUniforms(): void {} // empty, nothing custom created
 }

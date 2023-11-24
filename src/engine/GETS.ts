@@ -42,7 +42,6 @@ export * from './core/managers/EventManager';
 export * from './core/config/EngineConfig';
 export * from './core/helpers/Input';
 export * from './core/helpers/Time';
-export * from './core/helpers/testEngine';
 
 export * from './types/Dictionary';
 export * from './types/ReadonlyDictionary';
