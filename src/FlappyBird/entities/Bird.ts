@@ -1,12 +1,17 @@
 import { Camera, Entity, MoveBehavior } from "../../engine/GETS";
+import { Background } from "./Background";
 
 export class Bird extends Entity {
     constructor() {
         super("Bird");
 
-        let e: Camera = new Camera("E")
+        let birdCam = new Camera("BirdCam");
 
-        this.addChildren(e);
+        birdCam.addChildren(
+            new Background("background"),
+        );
+
+        this.addChildren(birdCam);
         this.addComponents(new MoveBehavior());
     }
 }
