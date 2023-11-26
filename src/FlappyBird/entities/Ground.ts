@@ -16,6 +16,8 @@ export class Ground extends Entity implements Poolable {
 
         this.transform.position[0] = 30;
 
+        this.enabled = false;
+
         const spriteComponent = new SpriteComponent(new Sprite());
 
         spriteComponent.sprite.material.color = Color.GREEN;

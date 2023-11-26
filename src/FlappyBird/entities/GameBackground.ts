@@ -7,7 +7,7 @@ export class GameBackground extends Entity {
 
         this.addChildren(
             new Ground(),
-            new Background("background"),
+            // new Background("background"),
         )
     }
 }

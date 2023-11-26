@@ -77,6 +77,16 @@ export class SpriteComponent extends Component {
         this._sprite = sprite;
     }
 
+    private toDraw(): SpriteComponent {
+        const to_draw: SpriteComponent = this.parentScene.layers.next(); 
+
+        if (!to_draw.parent.enabled) {
+            this.toDraw();
+        }
+
+        return to_draw;
+    } 
+
     /**
      * Draws the Sprite belonging to this SpriteComponent.
      */
@@ -95,7 +105,7 @@ export class SpriteComponent extends Component {
     public override update(): void {}
 
     public override render(): void {
-        this.parentScene.layers.next().draw();
+        this.toDraw().draw();
     }
 
     public unload(): void {
