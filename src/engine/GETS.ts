@@ -25,23 +25,26 @@ export * from './core/graphics/Color';
 export * from './core/graphics/sprite/SpriteComponent';
 export * from './core/graphics/sprite/Sprite';
 export * from './core/graphics/sprite/AnimatedSprite';
-export * from './core/config/AnimatedSpriteConfig';
-
-export * from './core/config/ShaderConfig';
 
 export * from './core/samples/MoveBehavior';
 export * from './core/samples/DefaultRenderer';
 export * from './core/samples/SampleEntity';
 export * from './core/samples/SampleScene';
+export * from './core/samples/Background';
 
 export * from './core/managers/SceneManager';
 export * from './core/managers/RendererManager';
 export * from './core/managers/TextureManager';
 export * from './core/managers/EventManager';
 
+export * from './core/config/AnimatedSpriteConfig';
+export * from './core/config/ShaderConfig';
 export * from './core/config/EngineConfig';
+
 export * from './core/helpers/Input';
 export * from './core/helpers/Time';
+export * from './core/helpers/Poolable';
+export * from './core/helpers/Pool';
 
 export * from './types/Dictionary';
 export * from './types/ReadonlyDictionary';

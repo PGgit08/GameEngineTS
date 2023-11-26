@@ -40,6 +40,9 @@ export class Entity extends GameObject implements Lifecycle {
     /** The {@link EventEmmiter} belonging to this Entity. @type {EventEmmiter} */
     public readonly eventEmmiter: EventEmmiter = new EventEmmiter("ENTITY_EVENT_EMMITER");
 
+    /** Whether this Entity is enabled or not, if it's not, it won't be updated / rendered. @type {boolean} */
+    public enabled: boolean = true;
+
     // the events belonging to this entity
     private _PARENT_SCENE_CHANGE_EVENT: Event<Scene[]> = new Event(Events.PARENT_SCENE_CHANGE, this.eventEmmiter);
     private _PARENT_CHANGE_EVENT: Event<Entity[]> = new Event(Events.PARENT_CHANGE, this.eventEmmiter);
@@ -291,12 +294,16 @@ export class Entity extends GameObject implements Lifecycle {
     }
 
     public update(): void {
+        if (!this.enabled) return;
+
         this._components.forEach((c) => { if (c.enabled) c.update(); });
 
         this._children.forEach((c) => c.update());
     }
     
     public render(): void {
+        if (!this.enabled) return;
+
         this._components.forEach((c) => {
             if (c instanceof Behavior) return;
             if (c.enabled) c.render();

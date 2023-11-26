@@ -1,6 +1,19 @@
 import { vec2 } from "gl-matrix";
-import { Color, Entity, RendererManager, Sprite, SpriteComponent, TextureManager } from "../../engine/GETS";
+import { Entity } from "../ecs/Entity";
+import { SpriteComponent } from "../graphics/sprite/SpriteComponent";
+import { TextureManager } from "../managers/TextureManager";
+import { Color } from "../graphics/Color";
+import { RendererManager } from "../managers/RendererManager";
+import { Sprite } from "../graphics/sprite/Sprite";
 
+/**
+ * Represents a game background by setting a Texture to Camera-ignore and to the size of the Renderer.
+ * 
+ * @class Background
+ * @extends Entity
+ * 
+ * @param {string} texName - The name of the Texture to use (DEFAULT IS WHITE).
+ */
 export class Background extends Entity {
     private _texName: string;
 
