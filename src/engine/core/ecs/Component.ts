@@ -21,8 +21,6 @@ import { Events } from "../events/Events";
  * @param {string} name - The name of this Component.
  */
 export abstract class Component extends GameObject implements Lifecycle {
-    private _enabled: boolean = true;
-
     private _parent: Entity = null;
     private _parentScene: Scene = null;
 
@@ -70,17 +68,6 @@ export abstract class Component extends GameObject implements Lifecycle {
      */
     public get transform(): Transform {
         return this._parent === null ? null : this._parent.transform;
-    }
-
-    public set enabled(enabled: boolean) {
-        this._enabled = enabled;
-    }
-
-    /**
-     * @returns {boolean} Whether this Component is enabled, if it's not, it won't be updated or rendered. 
-     */
-    public get enabled(): boolean {
-        return this._enabled;
     }
 
     constructor(name: string) {

@@ -12,6 +12,8 @@ import { Component } from "./Component";
  * @param {string} name - The name of this Behavior. 
  */
 export abstract class Behavior extends Component {
+    public enabled: boolean = true;
+
     constructor(name: string) {
         super(name);
     }
