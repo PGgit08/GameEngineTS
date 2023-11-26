@@ -1,5 +1,4 @@
-import { Entity, Poolable, Sprite, SpriteComponent } from "../../engine/GETS";
-import { GroundBehavior } from "../behaviors/GroundBehavior";
+import { Color, Entity, Poolable, Sprite, SpriteComponent } from "../../engine/GETS";
 
 export class Ground extends Entity implements Poolable {
     private _active: boolean = false;
@@ -15,13 +14,16 @@ export class Ground extends Entity implements Poolable {
     constructor() {
         super("Ground");
 
-        this.enabled = false;
-        
-        this.transform.position[0] = 10;
+        this.transform.position[0] = 30;
+
+        const spriteComponent = new SpriteComponent(new Sprite());
+
+        spriteComponent.sprite.material.color = Color.GREEN;
+        spriteComponent.layer = "Background";
+        spriteComponent.layerOrder = 0;
 
         this.addComponents(
-            new GroundBehavior(),
-            new SpriteComponent(new Sprite())
+            spriteComponent
         )
     }
 }
