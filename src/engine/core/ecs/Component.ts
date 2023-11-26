@@ -73,7 +73,7 @@ export abstract class Component extends GameObject implements Lifecycle {
     }
 
     public set enabled(enabled: boolean) {
-        this.enabled = enabled;
+        this._enabled = enabled;
     }
 
     /**
