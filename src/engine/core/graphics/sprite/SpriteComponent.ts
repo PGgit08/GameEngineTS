@@ -81,10 +81,12 @@ export class SpriteComponent extends Component {
         const to_draw: SpriteComponent = this.parentScene.layers.next(); 
 
         if (!to_draw.parent.enabled) {
-            this.toDraw();
+            return this.toDraw();
         }
 
-        return to_draw;
+        else {
+            return to_draw;
+        }
     } 
 
     /**

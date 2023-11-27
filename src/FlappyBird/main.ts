@@ -9,7 +9,8 @@ Engine.Start({
     scenes: [MainScene],
 
     textures: [
-        {name: 'background', fileName: new URL('./assets/flappy_background.png', import.meta.url).href}
+        {name: 'background', fileName: new URL('./assets/flappy_background.png', import.meta.url).href},
+        {name: 'ground', fileName: new URL('./assets/flappy_ground.png', import.meta.url).href}
     ],
 
     layers: ["Default", "Background"],
