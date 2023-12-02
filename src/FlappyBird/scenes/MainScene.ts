@@ -15,9 +15,9 @@ export class MainScene extends Scene {
         this.setCurrentCamera("GameCam");
 
         this.addEntities(
-            new Bird(),
+            // new Bird(),
             new GameBackground(),
-            background2
+            // background2
         );
 
         this.layers.e()
