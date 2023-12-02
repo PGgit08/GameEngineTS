@@ -19,5 +19,7 @@ export class MainScene extends Scene {
             new GameBackground(),
             background2
         );
+
+        this.layers.e()
     }
 }

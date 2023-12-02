@@ -38,11 +38,7 @@ export class SpriteComponent extends Component {
     
     /** @returns {string} The layer of this SpriteComponent in the {@link Layers} object. */
     public get layer(): string {
-        if (this.parentScene !== null) {
-            return this.parentScene.layers.getLayer(this) || this._layer;
-        } else {
-            return this._layer;
-        }
+        return this._layer;
     }
 
     public set layerOrder(layerOrder: number) {
@@ -57,11 +53,7 @@ export class SpriteComponent extends Component {
      * @returns {number} The layerOrder of this SpriteComponent in the {@link Layers} object (order 0 -> Closest to {@link Camera}).
      */
     public get layerOrder(): number {
-        if (this.parentScene !== null) {
-            return this.parentScene.layers.getLayerOrder(this) || this._layerOrder;
-        } else {
-            return this._layerOrder;
-        }
+        return this._layerOrder;
     }
 
     constructor(sprite: Sprite) {
