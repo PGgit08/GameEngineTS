@@ -29,6 +29,8 @@ export class SpriteComponent extends Component {
     }
 
     public set layer(layer: string) {
+        if (!Layers.CheckLayer(layer)) throw new Error(`LAYER "${layer}" DOES NOT EXIST`);
+
         if (this.parentScene !== null) {
             this.parentScene.layers.setLayer(this, layer);
         }
@@ -42,6 +44,8 @@ export class SpriteComponent extends Component {
     }
 
     public set layerOrder(layerOrder: number) {
+        if (layerOrder < 0) throw new Error(`LAYER ORDER MUST BE GREATER THAN / EQUAL TO 0`);
+
         if (this.parentScene !== null) {
             this.parentScene.layers.setLayerOrder(this, layerOrder);
         }
@@ -61,7 +65,6 @@ export class SpriteComponent extends Component {
 
         this.eventEmmiter.subscribe<Scene[]>(Events.PARENT_SCENE_CHANGE, (eventData) => {    
             this.layer = this._layer; 
-            this.layerOrder = this._layerOrder;
 
             if (eventData.data[0] !== null) eventData.data[0].layers.remove(this);
         });

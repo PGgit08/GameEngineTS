@@ -16,10 +16,10 @@ export class GameBackground extends Entity {
 
 
         this.addChildren(
+            city,
             ground,
-            city
         )
 
-        // this.addComponents(new BackgroundBehavior());
+        this.addComponents(new BackgroundBehavior());
     }
 }

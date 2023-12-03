@@ -12,6 +12,6 @@ export class BackgroundBehavior extends Behavior {
             this.transform.position[0] += 2 * screenWidth;
         }
 
-        this.transform.position[0] -= 80 * Time.DeltaTime();
+        this.transform.position[0] -= 150 * Time.DeltaTime();
     }
 }
