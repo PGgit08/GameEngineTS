@@ -29,6 +29,8 @@ export class SpriteComponent extends Component {
     }
 
     public set layer(layer: string) {
+        if (!Layers.CheckLayer(layer)) throw new Error(`LAYER "${layer}" DOES NOT EXIST`);
+
         if (this.parentScene !== null) {
             this.parentScene.layers.setLayer(this, layer);
         }
@@ -38,14 +40,12 @@ export class SpriteComponent extends Component {
     
     /** @returns {string} The layer of this SpriteComponent in the {@link Layers} object. */
     public get layer(): string {
-        if (this.parentScene !== null) {
-            return this.parentScene.layers.getLayer(this) || this._layer;
-        } else {
-            return this._layer;
-        }
+        return this._layer;
     }
 
     public set layerOrder(layerOrder: number) {
+        if (layerOrder < 0) throw new Error(`LAYER ORDER MUST BE GREATER THAN / EQUAL TO 0`);
+
         if (this.parentScene !== null) {
             this.parentScene.layers.setLayerOrder(this, layerOrder);
         }
@@ -57,11 +57,7 @@ export class SpriteComponent extends Component {
      * @returns {number} The layerOrder of this SpriteComponent in the {@link Layers} object (order 0 -> Closest to {@link Camera}).
      */
     public get layerOrder(): number {
-        if (this.parentScene !== null) {
-            return this.parentScene.layers.getLayerOrder(this) || this._layerOrder;
-        } else {
-            return this._layerOrder;
-        }
+        return this._layerOrder;
     }
 
     constructor(sprite: Sprite) {
@@ -69,13 +65,24 @@ export class SpriteComponent extends Component {
 
         this.eventEmmiter.subscribe<Scene[]>(Events.PARENT_SCENE_CHANGE, (eventData) => {    
             this.layer = this._layer; 
-            this.layerOrder = this._layerOrder;
 
             if (eventData.data[0] !== null) eventData.data[0].layers.remove(this);
         });
 
         this._sprite = sprite;
     }
+
+    private toDraw(): SpriteComponent {
+        const to_draw: SpriteComponent = this.parentScene.layers.next(); 
+
+        if (!to_draw.parent.enabled) {
+            return this.toDraw();
+        }
+
+        else {
+            return to_draw;
+        }
+    } 
 
     /**
      * Draws the Sprite belonging to this SpriteComponent.
@@ -95,7 +102,7 @@ export class SpriteComponent extends Component {
     public override update(): void {}
 
     public override render(): void {
-        this.parentScene.layers.next().draw();
+        this.toDraw().draw();
     }
 
     public unload(): void {

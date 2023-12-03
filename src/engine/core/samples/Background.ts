@@ -27,8 +27,8 @@ export class Background extends Entity {
         return this._texName;
     }
 
-    constructor(texName: string) {
-        super("Background");
+    constructor(name: string, texName: string) {
+        super(name);
 
         this._texName = texName;
 

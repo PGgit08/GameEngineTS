@@ -36,6 +36,18 @@ export class Layers extends GameObject {
     }
 
     /**
+     * Checks whether a given layer exists in the game's layers.
+     * 
+     * @static
+     * 
+     * @param {string} layer - The layer to check.
+     * @returns {boolean} True if the layer is found, False if not.
+     */
+    public static CheckLayer(layer: string): boolean {
+        return this._gameLayers.includes(layer);
+    }
+
+    /**
      * @static
      * 
      * @returns {string[]} The game layers in the game.
@@ -44,21 +56,18 @@ export class Layers extends GameObject {
         return this._gameLayers;
     }
 
+    // EACH LAYER GETS DISPLAYED IN REVERSE
     private _layers: Dictionary<string, SpriteComponent[]> = {};
     private _counter: number = -1;
 
     constructor() {
         super("Layers");
 
-        Layers._gameLayers.reverse().forEach((layerName) => {
+        Layers._gameLayers.forEach((layerName) => {
             this._layers[layerName] = [];
         });
     }
 
-    // private method that turns a layer order into an index
-    private layerOrderToIndex(layerName: string, layerOrder: number): number {
-        return (this._layers[layerName].length - layerOrder) - 1;
-    }
 
     /**
      * @returns {SpriteComponent} Returns the next SpriteComponent in this Layers instance.
@@ -70,7 +79,9 @@ export class Layers extends GameObject {
         
         this._counter ++;
 
-        return Object.values(this._layers).flat(1)[this._counter];
+        const reversed = Object.values(this._layers).flat(1).reverse();
+
+        return reversed[this._counter];
     }
 
     /**
@@ -78,23 +89,12 @@ export class Layers extends GameObject {
      * to the front of the layer.
      * 
      * @param {SpriteComponent} spriteComp - The given SpriteComponent.
-     * @param {string} newLayer - The new layer of the SpriteComponent.
+     * @param {string} newLayer - The new layer of the SpriteComponent. (MUST BE A VALID LAYER, CHECK WITH {@link Layers.CheckLayer})
      */
     public setLayer(spriteComp: SpriteComponent, newLayer: string): void {
-        if (!Object.keys(this._layers).includes(newLayer)) throw new Error("Layer does not exist.");
+        this.remove(spriteComp);
 
-        if (this._layers[spriteComp.layer][this.layerOrderToIndex(spriteComp.layer, spriteComp.layerOrder)] === spriteComp) {
-            // first remove this SpriteComponent from its old position
-            this._layers[spriteComp.layer].splice(this.layerOrderToIndex(spriteComp.layer, spriteComp.layerOrder), 1);
-        }
-
-        if (spriteComp.layerOrder < this._layers[newLayer].length) {
-            // push into new layer with old layer order
-            this._layers[newLayer].splice(this.layerOrderToIndex(newLayer, spriteComp.layerOrder), 0, spriteComp);
-        } else {
-            // push into front of new layer
-            this._layers[newLayer].splice(this.layerOrderToIndex(newLayer, 0), 0, spriteComp);
-        }
+        this._layers[newLayer].splice(spriteComp.layerOrder, 0, spriteComp);
     }
 
     /**
@@ -102,49 +102,12 @@ export class Layers extends GameObject {
      * layer.
      * 
      * @param {SpriteComponent} spriteComp - The given SpriteComponent.
-     * @param {number} newLayerOrder - The new layer order of the SpriteComponent.
+     * @param {number} newLayerOrder - The new layer order of the SpriteComponent. (MUST BE A VALID LAYER ORDER, MUST BE > 0)
      */
     public setLayerOrder(spriteComp: SpriteComponent, newLayerOrder: number): void {
-        if (newLayerOrder < 0) throw new Error("New layer order does not work.");
+        this.remove(spriteComp);
 
-        if (this._layers[spriteComp.layer][this.layerOrderToIndex(spriteComp.layer, spriteComp.layerOrder)] === spriteComp) {
-            // first remove this SpriteComponent from its old position
-            this._layers[spriteComp.layer].splice(this.layerOrderToIndex(spriteComp.layer, spriteComp.layerOrder), 1);
-        }
-
-        if (newLayerOrder < this._layers[spriteComp.layer].length) {
-            // push into new layerOrder
-            this._layers[spriteComp.layer].splice(this.layerOrderToIndex(spriteComp.layer, newLayerOrder), 0, spriteComp);
-        } else {
-            // if layer order is too big, pushed to the end of the layer 
-            this._layers[spriteComp.layer].splice(this.layerOrderToIndex(spriteComp.layer, 0), 0, spriteComp);
-        }
-    }
-
-    /**
-     * Returns the layer of the given SpriteComponent. If the SpriteComponent can't be found at all, then null is returned.
-     * 
-     * @param {SpriteComponent} spriteComp - The given SpriteComponent.
-     */
-    public getLayer(spriteComp: SpriteComponent): string {
-        const layer: string = Object.keys(this._layers).find(layer => this._layers[layer].indexOf(spriteComp) !== -1);
-        
-        if (layer === undefined) return null;
-
-        return layer;
-    }
-
-    /**
-     * Returns the layer order of the given SpriteComponent. If the SpriteComponent can't be found in its Layer,
-     * then null is returned.
-     * 
-     * @param {SpriteComponent} spriteComp - The given SpriteComponent.
-     */
-    public getLayerOrder(spriteComp: SpriteComponent): number {
-        if(this._layers[spriteComp.layer].indexOf(spriteComp) === -1) return null;
-
-        // convert index into layer order
-        return this.layerOrderToIndex(spriteComp.layer, this._layers[spriteComp.layer].indexOf(spriteComp));
+        this._layers[spriteComp.layer].splice(newLayerOrder, 0, spriteComp);
     }
 
     /**
@@ -153,15 +116,9 @@ export class Layers extends GameObject {
      * @param {SpriteComponent} spriteComp - The given SpriteComponent.
      */
     public remove(spriteComp: SpriteComponent): void {
-        const layer = this.getLayer(spriteComp);
-        const layerOrder = this.getLayerOrder(spriteComp);
-
-        const index = this.layerOrderToIndex(layer, layerOrder);
-
-        if (layer === null || layerOrder === null) return;
-
-        if (this._layers[layer][index] === spriteComp) {
-            this._layers[layer].splice(index, 1);
+        if (this._layers[spriteComp.layer].indexOf(spriteComp) > -1) {
+            // remove this SpriteComponent from its old position (IF FOUND)
+            this._layers[spriteComp.layer].splice(this._layers[spriteComp.layer].indexOf(spriteComp), 1);
         }
     }
 }
