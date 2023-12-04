@@ -12,7 +12,7 @@ export class Pool<T extends Poolable> extends NameRegistrar {
         this._pool = pool;
     }
 
-    public getObject(): T {
+    public getInactive(): T {
         for (var o of this._pool) {
             if (!o.active) {
                 return o;

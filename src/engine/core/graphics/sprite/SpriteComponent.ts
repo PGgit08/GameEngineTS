@@ -16,12 +16,14 @@ import { Camera } from "../Camera";
  * @extends Component
  * 
  * @param {Sprite} sprite - The Sprite object this Component will render.
+ * @param {string} [layer] - The layer of this SpriteComponent. (DEFAULT IS "Default")
+ * @param {string} [layerOrder] - The layerOrder of this SpriteComponent. (DEFAULT IS 0).
  */
 export class SpriteComponent extends Component {
     private _sprite: Sprite;
     
-    private _layer: string = "Default";
-    private _layerOrder: number = 0;
+    private _layer: string;
+    private _layerOrder: number;
 
     /** @returns {Sprite} The Sprite this Component is rendering. */
     public get sprite(): Sprite {
@@ -60,8 +62,11 @@ export class SpriteComponent extends Component {
         return this._layerOrder;
     }
 
-    constructor(sprite: Sprite) {
+    constructor(sprite: Sprite, layer: string = "Default", layerOrder: number = 0) {
         super("SpriteComponent");
+
+        this.layer = layer;
+        this.layerOrder = layerOrder;
 
         this.eventEmmiter.subscribe<Scene[]>(Events.PARENT_SCENE_CHANGE, (eventData) => {    
             this.layer = this._layer; 

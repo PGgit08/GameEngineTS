@@ -12,7 +12,9 @@ import { Sprite } from "../graphics/sprite/Sprite";
  * @class Background
  * @extends Entity
  * 
+ * @param {string} name - The name of this background.
  * @param {string} texName - The name of the Texture to use (DEFAULT IS WHITE).
+ * @param {string} layer - The layer of this background.
  */
 export class Background extends Entity {
     private _texName: string;
@@ -27,7 +29,7 @@ export class Background extends Entity {
         return this._texName;
     }
 
-    constructor(name: string, texName: string) {
+    constructor(name: string, texName: string, layer: string) {
         super(name);
 
         this._texName = texName;
@@ -39,7 +41,7 @@ export class Background extends Entity {
         );
 
         this.getComponent(SpriteComponent).sprite.material.color = Color.WHITE;
-        this.getComponent(SpriteComponent).layer = "Background";
+        this.getComponent(SpriteComponent).layer = layer;
 
         this.transform.ignoreCamSize = true;
         

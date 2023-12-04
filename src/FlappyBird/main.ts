@@ -10,10 +10,11 @@ Engine.Start({
 
     textures: [
         {name: 'background', fileName: new URL('./assets/flappy_background.png', import.meta.url).href},
-        {name: 'ground', fileName: new URL('./assets/flappy_ground.png', import.meta.url).href}
+        {name: 'ground', fileName: new URL('./assets/flappy_ground.png', import.meta.url).href},
+        {name: 'column', fileName: new URL('./assets/flappy_column.png', import.meta.url).href}
     ],
 
-    layers: ["Default", "Background"],
+    layers: ["Default", "Ground", "Background"],
 
     defaults: {
         scene: "MainScene",

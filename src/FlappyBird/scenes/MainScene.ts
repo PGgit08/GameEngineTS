@@ -17,7 +17,7 @@ export class MainScene extends Scene {
         this.addEntities(
             new Bird(),
             new GameBackground(),
-            background2
+            background2,
         );
     }
 }

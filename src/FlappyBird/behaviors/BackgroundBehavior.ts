@@ -5,7 +5,7 @@ export class BackgroundBehavior extends Behavior {
         super("BackgroundBehavior");
     }
 
-    update(): void {
+    public override update(): void {
         const screenWidth: number = RendererManager.getInstance().currentRenderer.width;
 
         if (this.transform.position[0] <= -screenWidth) {
