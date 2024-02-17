@@ -30,6 +30,7 @@ export class SpriteComponent extends Component {
         return this._sprite;
     }
 
+    /** Set the layer of this SpriteComponent in the {@link Layers} object. */
     public set layer(layer: string) {
         if (!Layers.CheckLayer(layer)) throw new Error(`LAYER "${layer}" DOES NOT EXIST`);
 
@@ -45,6 +46,7 @@ export class SpriteComponent extends Component {
         return this._layer;
     }
 
+    /** Set the layerOrder of this SpriteComponent in the {@link Layers} object. */
     public set layerOrder(layerOrder: number) {
         if (layerOrder < 0) throw new Error(`LAYER ORDER MUST BE GREATER THAN / EQUAL TO 0`);
 
