@@ -11,7 +11,8 @@ Engine.Start({
     textures: [
         {name: 'background', fileName: new URL('./assets/flappy_background.png', import.meta.url).href},
         {name: 'ground', fileName: new URL('./assets/flappy_ground.png', import.meta.url).href},
-        {name: 'column', fileName: new URL('./assets/flappy_column.png', import.meta.url).href}
+        {name: 'column', fileName: new URL('./assets/flappy_column.png', import.meta.url).href},
+        {name: 'bird', fileName: new URL('./assets/bird2.jpg', import.meta.url).href}
     ],
 
     layers: ["Default", "Ground", "Background"],
