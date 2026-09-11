@@ -7,3 +7,4 @@ A basic 2D game engine made with TypeScript and WebGL. (WORK IN PROGRESS)
 - **entities** -> A folder containing reusable Entities.
 - **scenes** -> A folder containing the game Scenes.
 - **shaders** -> A folder containing custom Shaders.
+- **assets** -> A folder containing assets.
